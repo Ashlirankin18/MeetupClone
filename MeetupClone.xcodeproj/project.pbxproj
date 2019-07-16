@@ -3,16 +3,16 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		5B1AD6B922DE22900008E4EC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1AD6B822DE22900008E4EC /* AppDelegate.swift */; };
-		5B1AD6BB22DE22900008E4EC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1AD6BA22DE22900008E4EC /* ViewController.swift */; };
 		5B1AD6BE22DE22900008E4EC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B1AD6BC22DE22900008E4EC /* Main.storyboard */; };
 		5B1AD6C022DE22910008E4EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B1AD6BF22DE22910008E4EC /* Assets.xcassets */; };
 		5B1AD6C322DE22910008E4EC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B1AD6C122DE22910008E4EC /* LaunchScreen.storyboard */; };
 		5B1AD6CE22DE22910008E4EC /* MeetupCloneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1AD6CD22DE22910008E4EC /* MeetupCloneTests.swift */; };
+		5B1AD6DA22DE62BC0008E4EC /* UserProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1AD6D922DE62BC0008E4EC /* UserProfileController.swift */; };
 		95CE358F26FE5165A213AC67 /* Pods_MeetupCloneTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B41BA8B7029CB385E59D13A /* Pods_MeetupCloneTests.framework */; };
 		B9419F700C1808BFF856A11F /* Pods_MeetupClone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B518EDBF6D4332407F3B1FA8 /* Pods_MeetupClone.framework */; };
 /* End PBXBuildFile section */
@@ -32,7 +32,6 @@
 		2B41BA8B7029CB385E59D13A /* Pods_MeetupCloneTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MeetupCloneTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B1AD6B522DE22900008E4EC /* MeetupClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeetupClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B1AD6B822DE22900008E4EC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		5B1AD6BA22DE22900008E4EC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		5B1AD6BD22DE22900008E4EC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5B1AD6BF22DE22910008E4EC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5B1AD6C222DE22910008E4EC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -40,6 +39,7 @@
 		5B1AD6C922DE22910008E4EC /* MeetupCloneTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MeetupCloneTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B1AD6CD22DE22910008E4EC /* MeetupCloneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetupCloneTests.swift; sourceTree = "<group>"; };
 		5B1AD6CF22DE22910008E4EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5B1AD6D922DE62BC0008E4EC /* UserProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileController.swift; sourceTree = "<group>"; };
 		622C179736F7CA6D760C53F3 /* Pods-MeetupClone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeetupClone.release.xcconfig"; path = "Target Support Files/Pods-MeetupClone/Pods-MeetupClone.release.xcconfig"; sourceTree = "<group>"; };
 		8AFEC4441C79D6176E60CC0A /* Pods-MeetupClone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeetupClone.debug.xcconfig"; path = "Target Support Files/Pods-MeetupClone/Pods-MeetupClone.debug.xcconfig"; sourceTree = "<group>"; };
 		9ACB2DD2B3E134D76A9E651D /* Pods-MeetupCloneTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeetupCloneTests.release.xcconfig"; path = "Target Support Files/Pods-MeetupCloneTests/Pods-MeetupCloneTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -74,7 +74,6 @@
 				11E3F33B96CDE1C0213D648C /* Pods-MeetupCloneTests.debug.xcconfig */,
 				9ACB2DD2B3E134D76A9E651D /* Pods-MeetupCloneTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -102,8 +101,8 @@
 			isa = PBXGroup;
 			children = (
 				5B1AD6B822DE22900008E4EC /* AppDelegate.swift */,
-				5B1AD6BA22DE22900008E4EC /* ViewController.swift */,
 				5B1AD6BC22DE22900008E4EC /* Main.storyboard */,
+				5B1AD6D922DE62BC0008E4EC /* UserProfileController.swift */,
 				5B1AD6BF22DE22910008E4EC /* Assets.xcassets */,
 				5B1AD6C122DE22910008E4EC /* LaunchScreen.storyboard */,
 				5B1AD6C422DE22910008E4EC /* Info.plist */,
@@ -141,6 +140,7 @@
 				5B1AD6B222DE22900008E4EC /* Frameworks */,
 				5B1AD6B322DE22900008E4EC /* Resources */,
 				5B229DF46AD4694EB4215C29 /* [CP] Embed Pods Frameworks */,
+				5B1AD6D822DE62530008E4EC /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -159,7 +159,6 @@
 				5B1AD6C522DE22910008E4EC /* Sources */,
 				5B1AD6C622DE22910008E4EC /* Frameworks */,
 				5B1AD6C722DE22910008E4EC /* Resources */,
-				CC42CAD6E4B68D21B8B1C302 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -252,6 +251,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		5B1AD6D822DE62530008E4EC /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint\n";
+		};
 		5B229DF46AD4694EB4215C29 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -291,23 +307,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		CC42CAD6E4B68D21B8B1C302 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MeetupCloneTests/Pods-MeetupCloneTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MeetupCloneTests/Pods-MeetupCloneTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MeetupCloneTests/Pods-MeetupCloneTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -315,7 +314,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5B1AD6BB22DE22900008E4EC /* ViewController.swift in Sources */,
+				5B1AD6DA22DE62BC0008E4EC /* UserProfileController.swift in Sources */,
 				5B1AD6B922DE22900008E4EC /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
