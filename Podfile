@@ -12,7 +12,8 @@ target 'MeetupClone' do
   target 'MeetupCloneTests' do
     inherit! :search_paths
     # Pods for testing
-	
+	pod 'SwiftLint'
+	pod 'Kingfisher'
   end
 
 end
