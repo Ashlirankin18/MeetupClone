@@ -1,0 +1,6 @@
+framework module Pods_MeetupCloneTests {
+  umbrella header "Pods-MeetupCloneTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
