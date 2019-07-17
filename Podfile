@@ -4,16 +4,14 @@
 target 'MeetupClone' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
-
+  
   # Pods for MeetupClone
-	pod 'SwiftLint'
-	pod 'Kingfisher'
-
+  pod 'SwiftLint'
+  pod 'Kingfisher'
+  
   target 'MeetupCloneTests' do
     inherit! :search_paths
     # Pods for testing
-	pod 'SwiftLint'
-	pod 'Kingfisher'
   end
-
+  
 end
