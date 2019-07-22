@@ -10,6 +10,7 @@ import UIKit
 import SafariServices
 
 class MeetupAuthenticationHandler {
+    
     private init() {}
     
     static let shared = MeetupAuthenticationHandler()
@@ -32,7 +33,7 @@ class MeetupAuthenticationHandler {
         return false
     }
     
-    func startOAuth2Login() {
+    func startAuthorizationLogin() {
         let authPath = "https://secure.meetup.com/oauth2/authorize?client_id=\(clientId)&response_type=code&redirect_uri=\(redirectURI)"
         
         if let authURL = URL(string: authPath) {
@@ -42,7 +43,7 @@ class MeetupAuthenticationHandler {
         }
     }
     
-    func processOAuthStep1Response(url: URL) {
+    func processAuthorizationResponse(url: URL) {
         let components = URLComponents(url: url, resolvingAgainstBaseURL: false)
         var code: String?
         if let qureyItems = components?.queryItems {
