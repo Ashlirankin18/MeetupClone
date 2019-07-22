@@ -18,6 +18,7 @@
 		5B8932C722E645C200BF9876 /* MeetupUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8932C622E645C200BF9876 /* MeetupUserModel.swift */; };
 		5B8932C922E645EC00BF9876 /* MeetupGroupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8932C822E645EC00BF9876 /* MeetupGroupModel.swift */; };
 		5B8932CB22E64BB800BF9876 /* UserRSVPModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8932CA22E64BB800BF9876 /* UserRSVPModel.swift */; };
+		5B8932CF22E64E5800BF9876 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8932CE22E64E5800BF9876 /* AppError.swift */; };
 		95CE358F26FE5165A213AC67 /* Pods_MeetupCloneTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B41BA8B7029CB385E59D13A /* Pods_MeetupCloneTests.framework */; };
 		B9419F700C1808BFF856A11F /* Pods_MeetupClone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B518EDBF6D4332407F3B1FA8 /* Pods_MeetupClone.framework */; };
 /* End PBXBuildFile section */
@@ -50,6 +51,7 @@
 		5B8932C622E645C200BF9876 /* MeetupUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetupUserModel.swift; sourceTree = "<group>"; };
 		5B8932C822E645EC00BF9876 /* MeetupGroupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetupGroupModel.swift; sourceTree = "<group>"; };
 		5B8932CA22E64BB800BF9876 /* UserRSVPModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRSVPModel.swift; sourceTree = "<group>"; };
+		5B8932CE22E64E5800BF9876 /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
 		622C179736F7CA6D760C53F3 /* Pods-MeetupClone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeetupClone.release.xcconfig"; path = "Target Support Files/Pods-MeetupClone/Pods-MeetupClone.release.xcconfig"; sourceTree = "<group>"; };
 		8AFEC4441C79D6176E60CC0A /* Pods-MeetupClone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeetupClone.debug.xcconfig"; path = "Target Support Files/Pods-MeetupClone/Pods-MeetupClone.debug.xcconfig"; sourceTree = "<group>"; };
 		9ACB2DD2B3E134D76A9E651D /* Pods-MeetupCloneTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeetupCloneTests.release.xcconfig"; path = "Target Support Files/Pods-MeetupCloneTests/Pods-MeetupCloneTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				5B8932C322E643F700BF9876 /* Models */,
+				5B8932D022E64E6100BF9876 /* Networking */,
 				5B8932C022E643C400BF9876 /* Views */,
 				5B8932BF22E643BC00BF9876 /* Controllers */,
 				5B8932BE22E643B200BF9876 /* Supporting Files */,
@@ -166,6 +169,14 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		5B8932D022E64E6100BF9876 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				5B8932CE22E64E5800BF9876 /* AppError.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
 		D01D74E7E5D159581638386A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -187,6 +198,7 @@
 				5B1AD6B222DE22900008E4EC /* Frameworks */,
 				5B1AD6B322DE22900008E4EC /* Resources */,
 				5B229DF46AD4694EB4215C29 /* [CP] Embed Pods Frameworks */,
+				5B8932CD22E64D7300BF9876 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -314,6 +326,23 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MeetupClone/Pods-MeetupClone-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		5B8932CD22E64D7300BF9876 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint\n";
+		};
 		60E538812D8434A29C743D88 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -347,6 +376,7 @@
 				5B8932C922E645EC00BF9876 /* MeetupGroupModel.swift in Sources */,
 				5B8932CB22E64BB800BF9876 /* UserRSVPModel.swift in Sources */,
 				5B8932C722E645C200BF9876 /* MeetupUserModel.swift in Sources */,
+				5B8932CF22E64E5800BF9876 /* AppError.swift in Sources */,
 				5B8932C222E643E400BF9876 /* AccessTokenSuccessModel.swift in Sources */,
 				5B1AD6BB22DE22900008E4EC /* ViewController.swift in Sources */,
 				5B1AD6B922DE22900008E4EC /* AppDelegate.swift in Sources */,

@@ -10,9 +10,9 @@ import Foundation
 
 struct AccessTokenSucessModel: Codable {
     let accessToken: String
-    let tokenType:String
-    let expiresIn:Int
-    let refreshToken:String
+    let tokenType: String
+    let expiresIn: Int
+    let refreshToken: String
     
     private enum CodingKeys: String, CodingKey {
         case accessToken = "access_token"
@@ -20,5 +20,4 @@ struct AccessTokenSucessModel: Codable {
         case expiresIn = "expires_in"
         case refreshToken = "refresh_token"
     }
-    
 }

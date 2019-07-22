@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct MeetupUserModel: Codable{
+struct MeetupUserModel: Codable {
     let bio: String?
     let city: String?
     let country: String?
@@ -25,7 +25,6 @@ struct MeetupUserModel: Codable{
         case joinedDate = "joined"
         case userName = "name"
         case photo = "photo"
-        
     }
 }
 struct Photo: Codable {
@@ -39,4 +38,3 @@ struct Photo: Codable {
         case thumbnailLink = "thumb_link"
     }
 }
-

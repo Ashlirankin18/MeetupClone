@@ -19,9 +19,9 @@ struct UserRSVPModel: Codable {
         case response = "response"
     }
 }
-struct Member:Codable {
+struct Member: Codable {
     let id: Int
-    let userName:String
+    let userName: String
     let photo: Photo
     
     private enum CodingKeys: String, CodingKey {
@@ -30,4 +30,3 @@ struct Member:Codable {
         case photo = "photo"
     }
 }
-

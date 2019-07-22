@@ -9,7 +9,7 @@
 import Foundation
 
 struct MeetupGroupModel: Codable {
-    let id:String
+    let id: String
     let groupName: String
     let link: URL
     let description: String
