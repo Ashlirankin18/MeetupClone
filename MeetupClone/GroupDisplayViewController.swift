@@ -1,5 +1,5 @@
 //
-//  FavortiesController.swift
+//  GroupDisplayViewController.swift
 //  MeetupClone
 //
 //  Created by Ashli Rankin on 7/23/19.
@@ -8,12 +8,9 @@
 
 import UIKit
 
-class FavortiesController: UIViewController {
+class GroupDisplayViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-      
     }
-
 }

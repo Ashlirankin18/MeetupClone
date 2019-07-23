@@ -1,5 +1,5 @@
 //
-//  ProfileController.swift
+//  FavoritesViewController.swift
 //  MeetupClone
 //
 //  Created by Ashli Rankin on 7/23/19.
@@ -8,10 +8,9 @@
 
 import UIKit
 
-class ProfileController: UIViewController {
+class FavoritesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-       
     }
 }

@@ -12,12 +12,9 @@ class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-      
     }
 
-    @IBAction func loginButtonPressed(_ sender: UIButton) {
-        
+    @IBAction private func loginButtonPressed(_ sender: UIButton) {
     }
-    
 }
 

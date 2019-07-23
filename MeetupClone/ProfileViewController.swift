@@ -1,5 +1,5 @@
 //
-//  GroupDisplayController.swift
+//  ProfileViewController.swift
 //  MeetupClone
 //
 //  Created by Ashli Rankin on 7/23/19.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GroupDisplayController: UIViewController {
+class ProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
