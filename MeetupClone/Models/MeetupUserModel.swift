@@ -27,14 +27,3 @@ struct MeetupUserModel: Codable {
         case photo = "photo"
     }
 }
-struct Photo: Codable {
-    let baseURL: URL?
-    let highresLink: URL?
-    let thumbnailLink: URL?
-    
-    private enum CodingKeys: String, CodingKey {
-        case baseURL = "base_url"
-        case highresLink = "highres_link"
-        case thumbnailLink = "thumb_link"
-    }
-}
