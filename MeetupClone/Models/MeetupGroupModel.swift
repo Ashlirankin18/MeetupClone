@@ -18,6 +18,7 @@ struct MeetupGroupModel: Codable {
     let longitude: Double
     let photo: Photo
     
+    
     private enum CodingKeys: String, CodingKey {
         case id = "id"
         case groupName = "name"

@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Represents a RSVP model
 struct UserRSVPModel: Codable {
     let createdDate: Int
     let member: Member

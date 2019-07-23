@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// JSON response of a request for an access token.
 struct AccessTokenSucessModel: Codable {
     let accessToken: String
     let tokenType: String

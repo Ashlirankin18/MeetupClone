@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Representation of Member of a Group
 struct Member: Codable {
     let id: Int
     let userName: String
