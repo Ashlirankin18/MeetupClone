@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Represents a MeetupGroup model.
 struct MeetupGroupModel: Codable {
     let id: String
     let groupName: String

@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Represents a Photo model
 struct Photo: Codable {
     let baseURL: URL?
     let highresLink: URL?
