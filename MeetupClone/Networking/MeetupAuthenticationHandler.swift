@@ -11,22 +11,26 @@ import SafariServices
 
 class MeetupAuthenticationHandler {
     
-    private init() {}
+    private var networkHelper: NetworkHelper
     
-    static let shared = MeetupAuthenticationHandler()
+    private var userDefaults = UserDefaults.standard
     
-    var clientId = "pl35cjq6c05lqdjujqhb3tcggt"
+    private let clientId = "pl35cjq6c05lqdjujqhb3tcggt"
     
-    let clientSecret = "aj1bqb98cjk521h8t4il2473sr"
+    private let clientSecret = "aj1bqb98cjk521h8t4il2473sr"
     
     var OAuthToken: String?
     
-    let redirectURI = "deeplink://entry"
+    private let redirectURI = "deeplink://entry"
     
-    var OAutTokenCompletionHandler: ((Error?) -> Void)?
+    private var oAutTokenCompletionHandler: ((Error?) -> Void)?
     
+    init(userDefaults: UserDefaults, networkHelper: NetworkHelper) {
+        self.networkHelper = networkHelper
+        self.userDefaults = userDefaults
+    }
     func hasOAuthToken() -> Bool {
-        if let accessToken = UserDefaults.standard.object(forKey: "accessToken") as? String {
+        if let accessToken = userDefaults.object(forKey: "accessToken") as? String {
             self.OAuthToken = accessToken
             return true
         }
@@ -37,7 +41,7 @@ class MeetupAuthenticationHandler {
         let authPath = "https://secure.meetup.com/oauth2/authorize?client_id=\(clientId)&response_type=code&redirect_uri=\(redirectURI)"
         
         if let authURL = URL(string: authPath) {
-            let defaults = UserDefaults.standard
+            let defaults = userDefaults
             defaults.set(true, forKey: "loadingOAuthToken")
             UIApplication.shared.open(authURL, options: [:], completionHandler: nil)
         }
@@ -58,7 +62,7 @@ class MeetupAuthenticationHandler {
             let getTokenPath = "https://secure.meetup.com/oauth2/access"
             let dataBody = "client_id=\(clientId)&client_secret=\(clientSecret)&grant_type=authorization_code&redirect_uri=\(redirectURI)&code=\(receivedCode)"
             let data = dataBody.data(using: .utf8)
-            NetworkHelper.shared.performDataTask(URLEndpoint: getTokenPath, httpMethod: "POST", httpBody: data, httpHeader: ("application/x-www-form-urlencoded", "Content-Type")) { (results) in
+            networkHelper.performDataTask(URLEndpoint: getTokenPath, httpMethod: "POST", httpBody: data, httpHeader: ("application/x-www-form-urlencoded", "Content-Type")) { (results) in
                 switch results {
                 case .failure(let error):
                     let defaults = UserDefaults.standard
@@ -70,21 +74,21 @@ class MeetupAuthenticationHandler {
                         let userDefaults = UserDefaults.standard
                         userDefaults.set(success.accessToken, forKey: "accessToken")
                         if self.hasOAuthToken() {
-                            if let handler = self.OAutTokenCompletionHandler {
+                            if let handler = self.oAutTokenCompletionHandler {
                                 handler(nil)
                             }
                         }
-                        let defaults = UserDefaults.standard
-                        defaults.set(false, forKey: "loadingOAuthToken")
+                        let defaults = userDefaults
+                        defaults.set(false, forKey: UserDefaultConstants .lodaingToken )
                     } catch {
                         do {
                             let failure = try JSONDecoder().decode(AccessTokenFailureModel.self, from: data)
                             print(failure)
                             let defaults = UserDefaults.standard
-                            defaults.set(false, forKey: "loadingOAuthToken")
+                            defaults.set(false, forKey: UserDefaultConstants .lodaingToken)
                         } catch {
                             let defaults = UserDefaults.standard
-                            defaults.set(false, forKey: "loadingOAuthToken")
+                            defaults.set(false, forKey: UserDefaultConstants .lodaingToken)
                             return
                         }
                     }
