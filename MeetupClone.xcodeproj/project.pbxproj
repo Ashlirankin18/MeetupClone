@@ -22,6 +22,9 @@
 		5B8932D222E650C000BF9876 /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8932D122E650C000BF9876 /* NetworkHelper.swift */; };
 		5B8932D422E651C100BF9876 /* MeetupDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8932D322E651C100BF9876 /* MeetupDataHandler.swift */; };
 		5B8932D622E653E800BF9876 /* MeetupAuthenticationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8932D522E653E800BF9876 /* MeetupAuthenticationHandler.swift */; };
+		5BE8470D22E75DC700B8E8FC /* PhotoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE8470C22E75DC700B8E8FC /* PhotoModel.swift */; };
+		5BF41FF322E7609500ECA928 /* MemberModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF41FF222E7609500ECA928 /* MemberModel.swift */; };
+		5BF41FF522E7637D00ECA928 /* UserDefaultConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF41FF422E7637D00ECA928 /* UserDefaultConstants.swift */; };
 		95CE358F26FE5165A213AC67 /* Pods_MeetupCloneTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B41BA8B7029CB385E59D13A /* Pods_MeetupCloneTests.framework */; };
 		B9419F700C1808BFF856A11F /* Pods_MeetupClone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B518EDBF6D4332407F3B1FA8 /* Pods_MeetupClone.framework */; };
 /* End PBXBuildFile section */
@@ -58,6 +61,9 @@
 		5B8932D122E650C000BF9876 /* NetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
 		5B8932D322E651C100BF9876 /* MeetupDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetupDataHandler.swift; sourceTree = "<group>"; };
 		5B8932D522E653E800BF9876 /* MeetupAuthenticationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetupAuthenticationHandler.swift; sourceTree = "<group>"; };
+		5BE8470C22E75DC700B8E8FC /* PhotoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoModel.swift; sourceTree = "<group>"; };
+		5BF41FF222E7609500ECA928 /* MemberModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberModel.swift; sourceTree = "<group>"; };
+		5BF41FF422E7637D00ECA928 /* UserDefaultConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultConstants.swift; sourceTree = "<group>"; };
 		622C179736F7CA6D760C53F3 /* Pods-MeetupClone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeetupClone.release.xcconfig"; path = "Target Support Files/Pods-MeetupClone/Pods-MeetupClone.release.xcconfig"; sourceTree = "<group>"; };
 		8AFEC4441C79D6176E60CC0A /* Pods-MeetupClone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeetupClone.debug.xcconfig"; path = "Target Support Files/Pods-MeetupClone/Pods-MeetupClone.debug.xcconfig"; sourceTree = "<group>"; };
 		9ACB2DD2B3E134D76A9E651D /* Pods-MeetupCloneTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeetupCloneTests.release.xcconfig"; path = "Target Support Files/Pods-MeetupCloneTests/Pods-MeetupCloneTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -169,8 +175,11 @@
 				5B8932C122E643E400BF9876 /* AccessTokenSuccessModel.swift */,
 				5B8932C422E6450F00BF9876 /* AccessTokenFailureModel.swift */,
 				5B8932C622E645C200BF9876 /* MeetupUserModel.swift */,
+				5BE8470C22E75DC700B8E8FC /* PhotoModel.swift */,
 				5B8932C822E645EC00BF9876 /* MeetupGroupModel.swift */,
 				5B8932CA22E64BB800BF9876 /* UserRSVPModel.swift */,
+				5BF41FF222E7609500ECA928 /* MemberModel.swift */,
+				5BF41FF422E7637D00ECA928 /* UserDefaultConstants.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -387,11 +396,14 @@
 				5B8932C922E645EC00BF9876 /* MeetupGroupModel.swift in Sources */,
 				5B8932D622E653E800BF9876 /* MeetupAuthenticationHandler.swift in Sources */,
 				5B8932CB22E64BB800BF9876 /* UserRSVPModel.swift in Sources */,
+				5BE8470D22E75DC700B8E8FC /* PhotoModel.swift in Sources */,
 				5B8932C722E645C200BF9876 /* MeetupUserModel.swift in Sources */,
 				5B8932CF22E64E5800BF9876 /* AppError.swift in Sources */,
 				5B8932C222E643E400BF9876 /* AccessTokenSuccessModel.swift in Sources */,
+				5BF41FF522E7637D00ECA928 /* UserDefaultConstants.swift in Sources */,
 				5B1AD6BB22DE22900008E4EC /* ViewController.swift in Sources */,
 				5B1AD6B922DE22900008E4EC /* AppDelegate.swift in Sources */,
+				5BF41FF322E7609500ECA928 /* MemberModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -555,6 +567,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ASLRJLYD2S;
 				INFOPLIST_FILE = MeetupClone/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -573,6 +586,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ASLRJLYD2S;
 				INFOPLIST_FILE = MeetupClone/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

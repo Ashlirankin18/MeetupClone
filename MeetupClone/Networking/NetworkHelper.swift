@@ -9,13 +9,10 @@
 import Foundation
 
 class NetworkHelper {
-    private init() {}
-    
-    static let shared = NetworkHelper()
     
     typealias Handler = (Result<Data, AppError>) -> Void
     
-    func performDataTask(URLEndpoint: String, httpMethod: String, httpBody: Data?, httpHeader:  (value: String, headerProperty: String)?, completionHandler: @escaping Handler) {
+    func performDataTask(URLEndpoint: String, httpMethod: String, httpBody: Data?, httpHeader: (value: String, headerProperty: String)?, completionHandler: @escaping Handler) {
         guard let url = URL(string: URLEndpoint) else {
             completionHandler(.failure(.badURL("Could not create URL from String")))
             return
@@ -29,9 +26,7 @@ class NetworkHelper {
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let error = error {
                 completionHandler(.failure(.networkError(error)))
-            }
-            if let data = data {
-                completionHandler(.success(data))
+                return
             }
             guard let httpResponse = response as? HTTPURLResponse,
                 (200...299).contains(httpResponse.statusCode)
@@ -39,6 +34,10 @@ class NetworkHelper {
                     let statusCode = (response as? HTTPURLResponse)?.statusCode ?? -999
                     completionHandler(.failure(.badStatusCode(statusCode.description)))
                     return
+            }
+            if let data = data {
+                completionHandler(.success(data))
+                return
             }
         }
         task.resume()
