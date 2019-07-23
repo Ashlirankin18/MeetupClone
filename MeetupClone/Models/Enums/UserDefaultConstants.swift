@@ -11,7 +11,7 @@ import Foundation
 /// Represents the UserDefaults constants of the application
 enum UserDefaultConstants: String {
     /// stores if oAuth token methods are loading.
-    case lodaingToken = "loadingOAuthToken"
+    case loadingToken = "loadingOAuthToken"
     /// stores the accessToken.
     case accessToken = "accessToken"
 }
