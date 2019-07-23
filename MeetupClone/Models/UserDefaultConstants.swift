@@ -9,6 +9,6 @@
 import Foundation
 
 struct UserDefaultConstants {
-     static let lodaingToken = "loadingOAuthToken"
+     static let loadingToken = "loadingOAuthToken"
      static let accessToke = "accessToken"
 }
