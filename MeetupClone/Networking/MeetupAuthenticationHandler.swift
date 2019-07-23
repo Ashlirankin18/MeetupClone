@@ -64,7 +64,7 @@ class MeetupAuthenticationHandler {
         }
     }
     
-    /// Takes accessToken that was extracted from processAuthorizationResponse and requests an accesToken from the server.
+    /// Takes accessToken that was extracted from processAuthorizationResponse and requests an accessToken from the server.
     /// - Parameter accessCode: Code extracted from the URL returned from the URL.
     private func retrievesAccessToken(from accessCode: URLQueryItem) {
         let getTokenPath = "https://secure.meetup.com/oauth2/access"
