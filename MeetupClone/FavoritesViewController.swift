@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// Shows the groups that the user has favorited 
 class FavoritesViewController: UIViewController {
 
     override func viewDidLoad() {

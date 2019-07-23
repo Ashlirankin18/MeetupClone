@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// Displays the users profile information.
 class ProfileViewController: UIViewController {
 
     override func viewDidLoad() {
