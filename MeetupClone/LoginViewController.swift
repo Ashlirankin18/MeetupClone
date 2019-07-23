@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  LoginViewController.swift
 //  MeetupClone
 //
 //  Created by Ashli Rankin on 7/16/19.
@@ -8,13 +8,16 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+      
     }
 
-
+    @IBAction func loginButtonPressed(_ sender: UIButton) {
+        
+    }
+    
 }
 
