@@ -24,7 +24,7 @@ class MeetupAuthenticationHandler {
     
     private var oAutTokenCompletionHandler: ((Error?) -> Void)?
     
-    /// Initializes UserDefaults and Network Helper which preforms network request.
+    /// Initializes UserDefaults and Network Helper which performs network request.
     init(userDefaults: UserDefaults, networkHelper: NetworkHelper) {
         self.networkHelper = networkHelper
         self.userDefaults = userDefaults
