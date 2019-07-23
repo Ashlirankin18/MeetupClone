@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// Model of Appication user
+/// Model of Application user
 struct MeetupUserModel: Codable {
     let bio: String?
     let city: String?
