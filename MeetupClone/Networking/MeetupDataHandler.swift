@@ -23,7 +23,7 @@ class MeetupDataHandler {
     
     /// Retrieves the user data from the server.
     /// - Parameter accessToken: Access token that was returned from the server.
-    /// - Parameter completionHandler: receives informationt(expected type) when asynchronous call completes.
+    /// - Parameter completionHandler: receives information (expected type) when asynchronous call completes.
     func retrieveUserData(accessToken: String, completionHandler: @escaping Handler) {
         
         let url = "https://api.meetup.com/2/member/self"
