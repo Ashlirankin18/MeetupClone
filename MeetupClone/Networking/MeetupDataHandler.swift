@@ -9,15 +9,20 @@
 import Foundation
 
 class MeetupDataHandler {
+    
     var accessToken: String?
     
+    var networkHelper: NetworkHelper
+    
+    init(networkHelper: NetworkHelper) {
+        self.networkHelper = networkHelper
+    }
     typealias Handler = (Result<MeetupUserModel, AppError>) -> Void
     
     func retrieveUserData(accessToken: String, completionHandler: @escaping Handler) {
         let url = "https://api.meetup.com/2/member/self"
         
-        NetworkHelper.shared.performDataTask(URLEndpoint: url, httpMethod: "GET", httpBody: nil,
-                                             httpHeader: ("Bearer \(accessToken)", "Authorization")) { (results) in
+        networkHelper.performDataTask(URLEndpoint: url, httpMethod: "GET", httpBody: nil, httpHeader: ("Bearer \(accessToken)", "Authorization")) { (results) in
                                                 switch results {
                                                 case .failure(let error):
                                                     print(error)
