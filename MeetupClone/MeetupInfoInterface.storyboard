@@ -1,7 +1,111 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13142" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="tcf-Lm-u6o">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12042"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <scenes/>
+    <scenes>
+        <!--Groups-->
+        <scene sceneID="Gld-JO-yes">
+            <objects>
+                <viewController id="lM0-ys-K5t" customClass="GroupDisplayController" customModule="MeetupClone" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Sb1-BW-qNq">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="5dh-uy-7Gr"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Groups" largeTitleDisplayMode="always" id="L6c-pj-WlY"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="n7q-dg-Vll" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1968.1159420289857" y="170.75892857142856"/>
+        </scene>
+        <!--Favorites-->
+        <scene sceneID="vMd-3Y-wNy">
+            <objects>
+                <viewController id="Yvz-8U-RUz" customClass="FavortiesController" customModule="MeetupClone" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="UhU-5x-Wcr">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="hzz-ec-t5N"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Favorites" image="icons8-star-26" id="3QO-F7-EZ6"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FBY-Ig-aVT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="148" y="-482"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="iv8-qX-00B">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="tcf-Lm-u6o" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="9Cq-Vg-LYe">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="selectedImageTintColor" red="0.99800962209701538" green="0.0051934742368757725" blue="0.13274317979812622" alpha="0.92407570419999996" colorSpace="custom" customColorSpace="sRGB"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="yxr-mK-uvH" kind="relationship" relationship="viewControllers" id="mxA-pJ-xWq"/>
+                        <segue destination="Yvz-8U-RUz" kind="relationship" relationship="viewControllers" id="1RX-0T-SZg"/>
+                        <segue destination="chX-NL-VLc" kind="relationship" relationship="viewControllers" id="gdX-mz-z7y"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eRh-PT-DVA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="147.82608695652175" y="170.75892857142856"/>
+        </scene>
+        <!--Profile-->
+        <scene sceneID="j9t-EL-w9W">
+            <objects>
+                <viewController id="chX-NL-VLc" customClass="ProfileController" customModule="MeetupClone" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="FfD-iP-Crp">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="qfJ-8E-eJR"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Profile" image="icons8-customer-25" id="4ZS-mu-Kcd"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="etl-gT-v6e" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="148" y="842"/>
+        </scene>
+        <!--Groups-->
+        <scene sceneID="1DD-V4-urM">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="yxr-mK-uvH" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Groups" image="icons8-user-groups-25" id="Tbe-b8-s7S"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="aeT-PL-IkS">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.99800962209701538" green="0.0051934742368757725" blue="0.13274317979812622" alpha="0.92407570419999996" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="lM0-ys-K5t" kind="relationship" relationship="rootViewController" id="xou-ie-nvS"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sfB-We-fHS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1057.9710144927537" y="170.75892857142856"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="icons8-customer-25" width="25" height="25"/>
+        <image name="icons8-star-26" width="25" height="25"/>
+        <image name="icons8-user-groups-25" width="25" height="25"/>
+    </resources>
 </document>
