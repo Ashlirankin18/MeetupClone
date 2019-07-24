@@ -40,14 +40,13 @@ class NetworkHelper {
                 return
             }
             
-            guard let httpResponse = response as? HTTPURLResponse,
+   guard let httpResponse = response as? HTTPURLResponse,
                 (200...299).contains(httpResponse.statusCode)
                 else {
-                    let statusCode = (response as? HTTPURLResponse)?.statusCode ?? -999
+                   let statusCode = (response as? HTTPURLResponse)?.statusCode ?? -999
                     completionHandler(.failure(.badStatusCode(statusCode.description)))
                     return
             }
-            
             if let data = data {
                 completionHandler(.success(data))
                 return

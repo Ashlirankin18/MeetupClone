@@ -10,7 +10,7 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
     var window: UIWindow?
     
     private let apiManager = MeetupAuthenticationHandler(userDefaults: UserDefaults.standard, networkHelper: NetworkHelper())
@@ -19,10 +19,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if !apiManager.hasOAuthToken() {
             guard let loginViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController else {
                 return false }
+            loginViewController.apiManager = apiManager
             window?.rootViewController = loginViewController
             window?.makeKeyAndVisible()
         } else {
-            guard let meetupUserInterface = UIStoryboard(name: "MeetupInfoInterface", bundle: nil).instantiateViewController(withIdentifier: "ProfileViewController") as? ProfileViewController else {
+            guard let meetupUserInterface = UIStoryboard(name: "MeetupInfoInterface", bundle: nil).instantiateViewController(withIdentifier: "MeetupInfoTabbarController") as? UITabBarController else {
                 return false }
             window?.rootViewController = meetupUserInterface
             window?.makeKeyAndVisible()
