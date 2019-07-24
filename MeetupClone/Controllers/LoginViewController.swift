@@ -37,7 +37,6 @@ class LoginViewController: UIViewController {
                     DispatchQueue.main.async {
                         self.setUpAlertController(title: "", message: "Could not authenticate you account try again \(error.localizedDescription)")
                     }
-                    
                 } else {
                     self.presentsUserInterfaceOnSuccess()
                 }

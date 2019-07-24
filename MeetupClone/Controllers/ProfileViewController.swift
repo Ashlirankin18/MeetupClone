@@ -9,7 +9,7 @@
 import UIKit
 
 /// Displays the users profile information.
-class ProfileViewController: UIViewController {
+class ProfileViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
