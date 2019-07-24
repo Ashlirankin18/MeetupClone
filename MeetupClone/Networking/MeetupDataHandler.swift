@@ -31,13 +31,16 @@ class MeetupDataHandler {
         networkHelper.performDataTask(URLEndpoint: url, httpMethod: .Post, httpBody: nil, httpHeader: ("Bearer \(accessToken)", "Authorization")) { (results) in
             switch results {
             case .failure(let error):
-                print(error)
+                completionHandler(.failure(.networkError(error)))
+                return
             case .success(let data):
                 do {
                     let user = try JSONDecoder().decode(MeetupUserModel.self, from: data)
                     completionHandler(.success(user))
+                    return
                 } catch {
                     completionHandler(.failure(.decodingError("Could not decode UserModel from data")))
+                    return
                 }
             }
         }
