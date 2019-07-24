@@ -47,7 +47,7 @@ class MeetupAuthenticationHandler {
         
         if let authURL = URL(string: authPath) {
             let defaults = userDefaults
-            defaults.set(true, forKey: UserDefaultConstants .lodaingToken.rawValue)
+            defaults.set(true, forKey: UserDefaultConstants .loadingToken.rawValue)
             UIApplication.shared.open(authURL, options: [:], completionHandler: nil)
         }
     }
@@ -78,7 +78,7 @@ class MeetupAuthenticationHandler {
             switch results {
                 
             case .failure(let error):
-                self.userDefaults.set(false, forKey: UserDefaultConstants .lodaingToken.rawValue)
+                self.userDefaults.set(false, forKey: UserDefaultConstants .loadingToken.rawValue)
                 print(error)
                 
             case .success(let data):
@@ -92,15 +92,15 @@ class MeetupAuthenticationHandler {
                             handler(nil)
                         }
                     }
-                    self.userDefaults.set(false, forKey: UserDefaultConstants .lodaingToken.rawValue )
+                    self.userDefaults.set(false, forKey: UserDefaultConstants .loadingToken.rawValue )
                 } catch {
                     
                     do {
                         let failure = try JSONDecoder().decode(AccessTokenFailureModel.self, from: data)
                         print(failure)
-                        self.userDefaults.set(false, forKey: UserDefaultConstants .lodaingToken.rawValue)
+                        self.userDefaults.set(false, forKey: UserDefaultConstants .loadingToken.rawValue)
                     } catch {
-                        self.userDefaults.set(false, forKey: UserDefaultConstants .lodaingToken.rawValue)
+                        self.userDefaults.set(false, forKey: UserDefaultConstants .loadingToken.rawValue)
                         return
                     }
                 }
