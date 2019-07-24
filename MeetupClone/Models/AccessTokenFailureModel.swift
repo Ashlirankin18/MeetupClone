@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// JSON response of a requesrt for an access token.
+/// JSON response of a request for an access token.
 struct AccessTokenFailureModel: Codable {
     let error: String
 }

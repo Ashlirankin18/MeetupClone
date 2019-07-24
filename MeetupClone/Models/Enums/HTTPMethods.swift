@@ -12,7 +12,8 @@ import Foundation
 ///
 /// - Post: Sending a POST Request to the server
 /// - Get: Sending a GET Request to the server
-enum HTTPMethods: String {
-    case Post = "Post"
-    case Get = "Get"
+enum HTTPMethods:String {
+    case Post =  "POST"
+    case Get = "GET"
+    
 }
