@@ -18,4 +18,3 @@ class LoginViewController: UIViewController {
     @IBAction private func loginButtonPressed(_ sender: UIButton) {
     }
 }
-
