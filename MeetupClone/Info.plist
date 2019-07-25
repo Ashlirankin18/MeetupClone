@@ -22,7 +22,7 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>groupviewerentryurl://entry</string>
+			<string>Group Viewer Entry URL</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>groupviewerentryurl</string>

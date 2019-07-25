@@ -78,12 +78,9 @@ class MeetupAuthenticationHandler {
         
         networkHelper.performDataTask(URLEndpoint: getTokenPath, httpMethod: .Post, httpBody: data, httpHeader: ("application/x-www-form-urlencoded", "Content-Type")) { (results) in
             switch results {
-                
             case .failure(let error):
-                DispatchQueue.main.async {
-                     print(error)
-                }
-                 self.userDefaults.set(false, forKey: UserDefaultConstants.isLoggedIn.rawValue)
+                print(error)
+                self.userDefaults.set(false, forKey: UserDefaultConstants.isLoggedIn.rawValue)
                 return
             case .success(let data):
                 
@@ -93,20 +90,18 @@ class MeetupAuthenticationHandler {
                     self.userDefaults.set(success.accessToken, forKey: UserDefaultConstants.accessToken.rawValue)
                     if self.hasOAuthToken() {
                         if let handler = self.oAuthTokenCompletionHandler {
-                            DispatchQueue.main.async {
-                                handler(nil)
-                            }
+                            handler(nil)
                         }
                     }
                     self.userDefaults.set(true, forKey: UserDefaultConstants.isLoggedIn.rawValue)
                     self.accessToken = success.accessToken
                     return
                 } catch {
-    
+                    
                     do {
                         let failure = try JSONDecoder().decode(AccessTokenFailureModel.self, from: data)
                         print(failure)
-                         self.userDefaults.set(false, forKey: UserDefaultConstants.isLoggedIn.rawValue)
+                        self.userDefaults.set(false, forKey: UserDefaultConstants.isLoggedIn.rawValue)
                         return
                     } catch {
                         return

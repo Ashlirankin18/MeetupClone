@@ -16,7 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private let meetupAuthenticationHandler = MeetupAuthenticationHandler(userDefaults: UserDefaults.standard, networkHelper: NetworkHelper())
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        if (UserDefaults.standard.object(forKey: UserDefaultConstants.isLoggedIn.rawValue) as? Bool) != nil {
+        let userLoggedIn = UserDefaults.standard.object(forKey: UserDefaultConstants.isLoggedIn.rawValue) as? Bool ?? false
+        if userLoggedIn {
                 guard let meetupUserInterface = UIStoryboard(name: "MeetupInfoInterface", bundle: nil).instantiateViewController(withIdentifier: "MeetupInfoTabbarController") as? UITabBarController else {
                     return false }
                 window?.rootViewController = meetupUserInterface
