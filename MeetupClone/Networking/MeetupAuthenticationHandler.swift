@@ -20,7 +20,7 @@ class MeetupAuthenticationHandler {
     
     private let clientSecret = "kh32q1hlal6jvc8j3tdv1809rp"
     
-    private let redirectURI = "GroupViewerEntryURL://entry"
+    private let redirectURI = "groupviewerentryurl://entry"
     
     var oAuthTokenCompletionHandler: ((Error?) -> Void)?
     
