@@ -9,22 +9,10 @@
 import UIKit
 
 class UserImageView: UIView {
-
-    @IBOutlet private var userImageViewContainerView: UIView!
+    
     @IBOutlet private weak var userImageView: UIImageView!
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        commonInit()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-       super.init(coder: aDecoder)
-        commonInit()
-    }
-    
-   private func commonInit() {
-        Bundle.main.loadNibNamed("UserImageView", owner: self, options: [:])
-        addSubview(userImageViewContainerView)
+    func configureCell(userImage: UIImage) {
+        userImageView.image = userImage
     }
 }

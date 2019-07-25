@@ -17,8 +17,20 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        profileControllerTableView.delegate = self
         profileControllerTableView.dataSource = dataSource
         profileControllerTableView.rowHeight = UITableView.automaticDimension
         profileControllerTableView.estimatedRowHeight = 6000
+    }
+}
+extension ProfileViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let headerView = Bundle.main.loadNibNamed("UserImageView", owner: self, options: nil)?.first as? UserImageView else {
+            return UIView() }
+        headerView.backgroundColor = .black
+        return headerView
+    }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 250
     }
 }
