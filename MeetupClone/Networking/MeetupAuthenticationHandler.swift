@@ -16,14 +16,15 @@ class MeetupAuthenticationHandler {
     
     private let userDefaults: UserDefaults
     
-    private let clientId = "pl35cjq6c05lqdjujqhb3tcggt"
+    private let clientId = "v72nhfu0f9khu3i2bf1t6h87md"
     
-    private let clientSecret = "aj1bqb98cjk521h8t4il2473sr"
+    private let clientSecret = "kh32q1hlal6jvc8j3tdv1809rp"
     
-    private let redirectURI = "deeplink://entry"
+    private let redirectURI = "groupViewer://entry"
     
-    private var oAutTokenCompletionHandler: ((Error?) -> Void)?
+    var oAutTokenCompletionHandler: ((Error?) -> Void)?
     
+    var accessToken = ""
     /// Initializes UserDefaults and Network Helper which performs network request.
     init(userDefaults: UserDefaults, networkHelper: NetworkHelper) {
         self.networkHelper = networkHelper
@@ -32,10 +33,11 @@ class MeetupAuthenticationHandler {
     
     /// Checks userDefaults for an accessToken returns a bool value based on the findings.
     func hasOAuthToken() -> Bool {
-        
-        if (userDefaults.object(forKey: UserDefaultConstants.accessToken.rawValue) as? String) != nil {
+        if let accessToken = userDefaults.object(forKey: UserDefaultConstants.accessToken.rawValue) as? String {
+            self.accessToken = accessToken
             return true
         }
+        
         return false
     }
     
@@ -59,14 +61,14 @@ class MeetupAuthenticationHandler {
         
         let code = components?.queryItems?.first { $0.name.lowercased() == "code" }
         
-        if let receivedCode = code {
+        if let receivedCode = code?.value {
             retrievesAccessToken(from: receivedCode)
         }
     }
     
     /// Takes accessToken that was extracted from processAuthorizationResponse and requests an accessToken from the server.
     /// - Parameter accessCode: Code extracted from the URL returned from the URL.
-    private func retrievesAccessToken(from accessCode: URLQueryItem) {
+    private func retrievesAccessToken(from accessCode: String) {
         let getTokenPath = "https://secure.meetup.com/oauth2/access"
         
         /// Converted to data that will be the Body of the request.
@@ -92,6 +94,7 @@ class MeetupAuthenticationHandler {
                             handler(nil)
                         }
                     }
+                    self.accessToken = success.accessToken
                     self.userDefaults.set(false, forKey: UserDefaultConstants .loadingToken.rawValue )
                 } catch {
                     

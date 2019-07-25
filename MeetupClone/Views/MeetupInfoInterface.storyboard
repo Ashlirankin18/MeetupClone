@@ -45,7 +45,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="iv8-qX-00B">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="tcf-Lm-u6o" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="MeetupInfoTabbarController" automaticallyAdjustsScrollViewInsets="NO" id="tcf-Lm-u6o" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="9Cq-Vg-LYe">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
@@ -66,7 +66,7 @@
         <!--Profile-->
         <scene sceneID="j9t-EL-w9W">
             <objects>
-                <viewController id="chX-NL-VLc" customClass="ProfileViewController" customModule="MeetupClone" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProfileViewController" id="chX-NL-VLc" customClass="ProfileViewController" customModule="MeetupClone" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FfD-iP-Crp">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -86,6 +86,7 @@
                     <tabBarItem key="tabBarItem" title="Groups" image="icons8-user-groups-25" id="Tbe-b8-s7S"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="aeT-PL-IkS">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.99800962209701538" green="0.0051934742368757725" blue="0.13274317979812622" alpha="0.92407570419999996" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
