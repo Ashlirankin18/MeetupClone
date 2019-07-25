@@ -10,12 +10,42 @@ import UIKit
 
 /// Allows the user to authenticate their account with meetup.
 class LoginViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
+    
+    var meetupAuthenticationHandler: MeetupAuthenticationHandler?
     
     @IBAction private func loginButtonPressed(_ sender: UIButton) {
+        initiateLoginFlow()
+    }
+    
+    private func presentAlertController() {
+        let alertController = UIAlertController(title: NSLocalizedString("Error", comment: "Error occured"), message: NSLocalizedString("Could not authenticate you account try again.", comment: "Tell the user the was a problem signing them in."), preferredStyle: .alert)
+        let tryAgainAction = UIAlertAction(title: NSLocalizedString("Try Again", comment: "Prompts the user to try thier request again"), style: .default) { _ in
+            self.meetupAuthenticationHandler?.startAuthorizationLogin()
+        }
+        alertController.addAction(tryAgainAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    private func initiateLoginFlow() {
+        guard let meetupAuthenticationHandler = meetupAuthenticationHandler else {
+            assertionFailure("The meetupAuthenticationHandler is nil")
+            return }
+        if !meetupAuthenticationHandler.hasOAuthToken() {
+            meetupAuthenticationHandler.oAuthTokenCompletionHandler = { error in
+                if error != nil {
+                    self.presentAlertController()
+                } else {
+                    self.presentsUserInterfaceOnSuccess()
+                }
+            }
+            meetupAuthenticationHandler.startAuthorizationLogin()
+        }
+    }
+    
+    private func presentsUserInterfaceOnSuccess() {
+        guard let interfaceController = UIStoryboard(name: "MeetupInfoInterface", bundle: nil).instantiateViewController(withIdentifier: "MeetupInfoTabbarController") as? UITabBarController else {
+            return }
+        interfaceController.modalTransitionStyle = .crossDissolve
+        present(interfaceController, animated: true, completion: nil)
     }
 }
-
