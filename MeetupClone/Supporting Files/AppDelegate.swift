@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if !apiManager.hasOAuthToken() {
             guard let loginViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController else {
                 return false }
-            loginViewController.apiManager = apiManager
+            loginViewController.meetupAuthenticationHandler = apiManager
             window?.rootViewController = loginViewController
             window?.makeKeyAndVisible()
         } else {

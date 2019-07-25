@@ -11,7 +11,7 @@ import UIKit
 /// Allows the user to authenticate their account with meetup.
 class LoginViewController: UIViewController {
 
-     var apiManager: MeetupAuthenticationHandler?
+     var meetupAuthenticationHandler: MeetupAuthenticationHandler?
     private var alertController: UIAlertController?
     
     override func viewDidLoad() {
@@ -25,13 +25,13 @@ class LoginViewController: UIViewController {
     private func setUpAlertController(title: String, message: String) {
         alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let tryAgainAction = UIAlertAction(title: "TryAgain", style: .default) { _ in
-            self.apiManager?.startAuthorizationLogin()
+            self.meetupAuthenticationHandler?.startAuthorizationLogin()
         }
         alertController?.addAction(tryAgainAction)
     }
     
     private func initiateLoginFlow() {
-        guard let apiManager = apiManager else {
+        guard let apiManager = meetupAuthenticationHandler else {
             return }
         if !apiManager.hasOAuthToken() {
             apiManager.oAutTokenCompletionHandler = { error in
