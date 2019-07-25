@@ -25,7 +25,7 @@
 			<string>GroupViewerEntryURL://entry</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>groupviewerentryuRL</string>
+				<string>groupviewerentryurl</string>
 			</array>
 		</dict>
 	</array>
