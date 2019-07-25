@@ -13,15 +13,20 @@ class ProfileViewController: UIViewController {
     
     @IBOutlet private weak var profileControllerTableView: UITableView!
     
-    let dataSource = MeetUpCloneDataSource()
+    private let meetupCloneDataSource = MeetUpCloneDataSource()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpProfileTableView()
+    }
+    
+    private func setUpProfileTableView() {
         profileControllerTableView.delegate = self
-        profileControllerTableView.dataSource = dataSource
+        profileControllerTableView.dataSource = meetupCloneDataSource
         profileControllerTableView.rowHeight = UITableView.automaticDimension
         profileControllerTableView.estimatedRowHeight = 6000
     }
+    
 }
 extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
