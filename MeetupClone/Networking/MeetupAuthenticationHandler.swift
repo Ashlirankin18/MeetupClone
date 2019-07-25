@@ -81,8 +81,10 @@ class MeetupAuthenticationHandler {
                 
             case .failure(let error):
                 self.userDefaults.set(false, forKey: UserDefaultConstants .loadingToken.rawValue)
-                print(error)
-                
+                DispatchQueue.main.async {
+                     print(error)
+                }
+                return
             case .success(let data):
                 
                 do {
@@ -91,17 +93,21 @@ class MeetupAuthenticationHandler {
                     self.userDefaults.set(success.accessToken, forKey: UserDefaultConstants.accessToken.rawValue)
                     if self.hasOAuthToken() {
                         if let handler = self.oAutTokenCompletionHandler {
-                            handler(nil)
+                            DispatchQueue.main.async {
+                                handler(nil)
+                            }
                         }
                     }
                     self.accessToken = success.accessToken
                     self.userDefaults.set(false, forKey: UserDefaultConstants .loadingToken.rawValue )
+                    return
                 } catch {
-                    
+    
                     do {
                         let failure = try JSONDecoder().decode(AccessTokenFailureModel.self, from: data)
                         print(failure)
                         self.userDefaults.set(false, forKey: UserDefaultConstants .loadingToken.rawValue)
+                        return
                     } catch {
                         self.userDefaults.set(false, forKey: UserDefaultConstants .loadingToken.rawValue)
                         return

@@ -12,48 +12,40 @@ import UIKit
 class LoginViewController: UIViewController {
 
      var meetupAuthenticationHandler: MeetupAuthenticationHandler?
-    private var alertController: UIAlertController?
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
     
     @IBAction private func loginButtonPressed(_ sender: UIButton) {
         initiateLoginFlow()
     }
     
-    private func setUpAlertController(title: String, message: String) {
-        alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+    private func setUpAlertController() {
+        let alertController = UIAlertController(title: NSLocalizedString("Error", comment: "Error occured"), message: NSLocalizedString("Could not authenticate you account try again.", comment: "Tell the user the was a problem signing them in."), preferredStyle: .alert)
         let tryAgainAction = UIAlertAction(title: "TryAgain", style: .default) { _ in
             self.meetupAuthenticationHandler?.startAuthorizationLogin()
         }
-        alertController?.addAction(tryAgainAction)
+        alertController.addAction(tryAgainAction)
     }
     
     private func initiateLoginFlow() {
-        guard let apiManager = meetupAuthenticationHandler else {
+        guard let meetupAuthenticationHandler = meetupAuthenticationHandler else {
+            assertionFailure("The meetupAuthenticationHandler is nil")
             return }
-        if !apiManager.hasOAuthToken() {
-            apiManager.oAutTokenCompletionHandler = { error in
-                if let error = error {
-                    DispatchQueue.main.async {
-                        self.setUpAlertController(title: "", message: "Could not authenticate you account try again \(error.localizedDescription)")
-                    }
+        if !meetupAuthenticationHandler.hasOAuthToken() {
+            meetupAuthenticationHandler.oAutTokenCompletionHandler = { error in
+                if error != nil {
+                 
+                        self.setUpAlertController()
                 } else {
                     self.presentsUserInterfaceOnSuccess()
                 }
             }
-            apiManager.startAuthorizationLogin()
+            meetupAuthenticationHandler.startAuthorizationLogin()
         }
     }
     
     private func presentsUserInterfaceOnSuccess() {
-        DispatchQueue.main.async {
             guard let interfaceController = UIStoryboard(name: "MeetupInfoInterface", bundle: nil).instantiateViewController(withIdentifier: "MeetupInfoTabbarController") as? UITabBarController else {
                 return }
-            interfaceController.selectedViewController = interfaceController.viewControllers?[2]
-            UIApplication.shared.keyWindow?.rootViewController = interfaceController
-            UIApplication.shared.keyWindow?.makeKeyAndVisible()
+           interfaceController.modalTransitionStyle = .crossDissolve
+            present(interfaceController, animated: true, completion: nil)
         }
     }
-}
