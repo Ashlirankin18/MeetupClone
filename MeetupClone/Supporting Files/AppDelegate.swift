@@ -12,10 +12,9 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-    
-    private let apiManager = MeetupAuthenticationHandler(userDefaults: UserDefaults.standard, networkHelper: NetworkHelper())
-    
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+<<<<<<< HEAD
         if !apiManager.hasOAuthToken() {
             guard let loginViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController else {
                 return false }
@@ -33,6 +32,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
         apiManager.processAuthorizationResponse(url: url)
+=======
+       
+>>>>>>> parent of 3c3034e... Added code to the a--delegate which check for a OAuthToken. Based on this result the root viewController of the window is set
         return true
     }
 }
