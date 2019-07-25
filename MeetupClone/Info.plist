@@ -22,10 +22,10 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>groupViewer://entry</string>
+			<string>GroupViewerEntryURL://entry</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>groupViewer</string>
+				<string>GroupViewerEntryURL</string>
 			</array>
 		</dict>
 	</array>

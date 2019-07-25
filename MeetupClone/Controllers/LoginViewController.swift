@@ -10,8 +10,8 @@ import UIKit
 
 /// Allows the user to authenticate their account with meetup.
 class LoginViewController: UIViewController {
-
-     var meetupAuthenticationHandler: MeetupAuthenticationHandler?
+    
+    var meetupAuthenticationHandler: MeetupAuthenticationHandler?
     
     @IBAction private func loginButtonPressed(_ sender: UIButton) {
         initiateLoginFlow()
@@ -30,10 +30,9 @@ class LoginViewController: UIViewController {
             assertionFailure("The meetupAuthenticationHandler is nil")
             return }
         if !meetupAuthenticationHandler.hasOAuthToken() {
-            meetupAuthenticationHandler.oAutTokenCompletionHandler = { error in
+            meetupAuthenticationHandler.oAuthTokenCompletionHandler = { error in
                 if error != nil {
-                 
-                        self.setUpAlertController()
+                    self.setUpAlertController()
                 } else {
                     self.presentsUserInterfaceOnSuccess()
                 }
@@ -43,9 +42,9 @@ class LoginViewController: UIViewController {
     }
     
     private func presentsUserInterfaceOnSuccess() {
-            guard let interfaceController = UIStoryboard(name: "MeetupInfoInterface", bundle: nil).instantiateViewController(withIdentifier: "MeetupInfoTabbarController") as? UITabBarController else {
-                return }
-           interfaceController.modalTransitionStyle = .crossDissolve
-            present(interfaceController, animated: true, completion: nil)
-        }
+        guard let interfaceController = UIStoryboard(name: "MeetupInfoInterface", bundle: nil).instantiateViewController(withIdentifier: "MeetupInfoTabbarController") as? UITabBarController else {
+            return }
+        interfaceController.modalTransitionStyle = .crossDissolve
+        present(interfaceController, animated: true, completion: nil)
     }
+}

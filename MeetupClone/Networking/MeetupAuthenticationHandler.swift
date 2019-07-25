@@ -20,9 +20,9 @@ class MeetupAuthenticationHandler {
     
     private let clientSecret = "kh32q1hlal6jvc8j3tdv1809rp"
     
-    private let redirectURI = "groupViewer://entry"
+    private let redirectURI = "GroupViewerEntryURL://entry"
     
-    var oAutTokenCompletionHandler: ((Error?) -> Void)?
+    var oAuthTokenCompletionHandler: ((Error?) -> Void)?
     
     var accessToken = ""
     /// Initializes UserDefaults and Network Helper which performs network request.
@@ -48,8 +48,6 @@ class MeetupAuthenticationHandler {
         let authPath = "https://secure.meetup.com/oauth2/authorize?client_id=\(clientId)&response_type=code&redirect_uri=\(redirectURI)"
         
         if let authURL = URL(string: authPath) {
-            let defaults = userDefaults
-            defaults.set(true, forKey: UserDefaultConstants .loadingToken.rawValue)
             UIApplication.shared.open(authURL, options: [:], completionHandler: nil)
         }
     }
@@ -63,6 +61,8 @@ class MeetupAuthenticationHandler {
         
         if let receivedCode = code?.value {
             retrievesAccessToken(from: receivedCode)
+        } else {
+            assertionFailure("could not retrieve authorization code")
         }
     }
     
@@ -80,7 +80,6 @@ class MeetupAuthenticationHandler {
             switch results {
                 
             case .failure(let error):
-                self.userDefaults.set(false, forKey: UserDefaultConstants .loadingToken.rawValue)
                 DispatchQueue.main.async {
                      print(error)
                 }
@@ -92,24 +91,21 @@ class MeetupAuthenticationHandler {
                     
                     self.userDefaults.set(success.accessToken, forKey: UserDefaultConstants.accessToken.rawValue)
                     if self.hasOAuthToken() {
-                        if let handler = self.oAutTokenCompletionHandler {
+                        if let handler = self.oAuthTokenCompletionHandler {
                             DispatchQueue.main.async {
                                 handler(nil)
                             }
                         }
                     }
                     self.accessToken = success.accessToken
-                    self.userDefaults.set(false, forKey: UserDefaultConstants .loadingToken.rawValue )
                     return
                 } catch {
     
                     do {
                         let failure = try JSONDecoder().decode(AccessTokenFailureModel.self, from: data)
                         print(failure)
-                        self.userDefaults.set(false, forKey: UserDefaultConstants .loadingToken.rawValue)
                         return
                     } catch {
-                        self.userDefaults.set(false, forKey: UserDefaultConstants .loadingToken.rawValue)
                         return
                     }
                 }
