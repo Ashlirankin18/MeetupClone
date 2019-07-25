@@ -83,6 +83,7 @@ class MeetupAuthenticationHandler {
                 DispatchQueue.main.async {
                      print(error)
                 }
+                 self.userDefaults.set(false, forKey: UserDefaultConstants.isLoggedIn.rawValue)
                 return
             case .success(let data):
                 
@@ -97,6 +98,7 @@ class MeetupAuthenticationHandler {
                             }
                         }
                     }
+                    self.userDefaults.set(true, forKey: UserDefaultConstants.isLoggedIn.rawValue)
                     self.accessToken = success.accessToken
                     return
                 } catch {
@@ -104,6 +106,7 @@ class MeetupAuthenticationHandler {
                     do {
                         let failure = try JSONDecoder().decode(AccessTokenFailureModel.self, from: data)
                         print(failure)
+                         self.userDefaults.set(false, forKey: UserDefaultConstants.isLoggedIn.rawValue)
                         return
                     } catch {
                         return

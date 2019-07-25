@@ -26,9 +26,9 @@ class MeetupDataHandler {
     /// - Parameter completionHandler: receives information (expected type) when asynchronous call completes.
     func retrieveUserData(accessToken: String, completionHandler: @escaping Handler) {
         
-        let url = "https://api.meetup.com/2/member/self"
+        let urlString = "https://api.meetup.com/2/member/self"
         
-        networkHelper.performDataTask(URLEndpoint: url, httpMethod: .Post, httpBody: nil, httpHeader: ("Bearer \(accessToken)", "Authorization")) { (results) in
+        networkHelper.performDataTask(URLEndpoint: urlString, httpMethod: .Post, httpBody: nil, httpHeader: ("Bearer \(accessToken)", "Authorization")) { (results) in
             switch results {
             case .failure(let error):
                 completionHandler(.failure(.networkError(error)))
