@@ -12,7 +12,7 @@ import UIKit
 class UserProfileDataSource: NSObject, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -20,17 +20,13 @@ class UserProfileDataSource: NSObject, UITableViewDataSource {
         switch indexPath.row {
         case 0, 1 :
             let cell = UITableViewCell(style: .value1, reuseIdentifier: "UserInfoCell")
-            cell.textLabel?.text = "Ashli"
-            cell.detailTextLabel?.text = "Hello"
+            cell.textLabel?.text = NSLocalizedString("Name", comment: "Username")
+            cell.detailTextLabel?.text = NSLocalizedString("Ashli", comment: "Actual Name")
             return cell
-        case 2 :
-            let cell = UITableViewCell(style: .default, reuseIdentifier: "BioDisplayCell")
-            cell.textLabel?.text = "Bio:"
-            return cell
+
         default:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "UserBioCell", for: indexPath) as? UserBioTableViewCell else {
                 return UITableViewCell() }
-            cell.configureCell()
             return cell
         }
     }

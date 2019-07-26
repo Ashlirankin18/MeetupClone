@@ -85,9 +85,9 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UYm-dc-gp7">
-                                                    <rect key="frame" x="15" y="19" width="33.5" height="20.5"/>
+                                                    <rect key="frame" x="15" y="19" width="36.5" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -101,47 +101,42 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="BioDisplayCell" textLabel="ai2-iM-JVk" rowHeight="59" style="IBUITableViewCellStyleDefault" id="zFX-NF-Jxl">
-                                        <rect key="frame" x="0.0" y="114.5" width="414" height="59"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="UserBioCell" rowHeight="293" id="j0n-Ly-3jT" customClass="UserBioTableViewCell" customModule="MeetupClone" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="114.5" width="414" height="293"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zFX-NF-Jxl" id="mBZ-vO-NG8">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="58.5"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="j0n-Ly-3jT" id="tOb-g6-8IM">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="292.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Bio" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ai2-iM-JVk">
-                                                    <rect key="frame" x="15" y="0.0" width="379" height="58.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Bio:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GBT-b1-I3r">
+                                                    <rect key="frame" x="15" y="8" width="384" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="7qF-8O-CT7"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="UserBioCell" rowHeight="44" id="j0n-Ly-3jT" customClass="UserBioTableViewCell" customModule="MeetupClone" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="173.5" width="414" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="j0n-Ly-3jT" id="tOb-g6-8IM">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="znn-IA-1pH">
-                                                    <rect key="frame" x="13" y="8" width="388" height="35"/>
+                                                    <rect key="frame" x="20" y="29" width="374" height="263.5"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                                    <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="znn-IA-1pH" firstAttribute="top" secondItem="tOb-g6-8IM" secondAttribute="top" constant="8" id="78z-fS-Y1d"/>
-                                                <constraint firstAttribute="trailing" secondItem="znn-IA-1pH" secondAttribute="trailing" constant="13" id="Kgc-Wz-b5X"/>
-                                                <constraint firstAttribute="bottom" secondItem="znn-IA-1pH" secondAttribute="bottom" constant="0.5" id="Mgn-e8-G28"/>
-                                                <constraint firstItem="znn-IA-1pH" firstAttribute="leading" secondItem="tOb-g6-8IM" secondAttribute="leading" constant="13" id="pWJ-xg-BG8"/>
+                                                <constraint firstItem="GBT-b1-I3r" firstAttribute="leading" secondItem="tOb-g6-8IM" secondAttribute="leading" constant="15" id="31V-Wo-0uw"/>
+                                                <constraint firstItem="znn-IA-1pH" firstAttribute="top" secondItem="GBT-b1-I3r" secondAttribute="bottom" id="LS7-RU-BxX"/>
+                                                <constraint firstItem="znn-IA-1pH" firstAttribute="bottom" secondItem="tOb-g6-8IM" secondAttribute="bottom" id="Q8Z-oM-OQo"/>
+                                                <constraint firstItem="GBT-b1-I3r" firstAttribute="top" secondItem="tOb-g6-8IM" secondAttribute="top" constant="8" id="RfS-RM-luv"/>
+                                                <constraint firstItem="znn-IA-1pH" firstAttribute="trailing" secondItem="GBT-b1-I3r" secondAttribute="trailing" constant="-5" id="gXr-9O-3QB"/>
+                                                <constraint firstAttribute="trailing" secondItem="GBT-b1-I3r" secondAttribute="trailing" constant="15" id="h0K-3n-DXP"/>
+                                                <constraint firstItem="znn-IA-1pH" firstAttribute="leading" secondItem="GBT-b1-I3r" secondAttribute="leading" constant="5" id="kVB-9K-i6S"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="bioDisplayTextVIew" destination="znn-IA-1pH" id="OcE-B3-pHz"/>
+                                            <outlet property="bioDisplayTextView" destination="znn-IA-1pH" id="OcE-B3-pHz"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

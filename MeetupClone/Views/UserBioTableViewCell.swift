@@ -8,16 +8,13 @@
 
 import UIKit
 
+/// Represents the cell that will display the user's bio information.
 class UserBioTableViewCell: UITableViewCell {
 
-    @IBOutlet private weak var bioDisplayTextVIew: UITextView!
+    @IBOutlet private weak var bioDisplayTextView: UITextView!
     
-    func configureCell() {
-        self.bioDisplayTextVIew.text = """
-        Hello my name is Ashli Hello my name is Ashli Hello my name is Ashli
-         Hello my name is Ashli Hello my name is Ashli Hello my name is Ashli
-         Hello my name is Ashli Hello my name is Ashli Hello my name is Ashli
-         Hello my name is Ashli Hello my name is Ashli Hello my name is Ashli Hello my name is Ashli
-        """
+    /// Configure the textView with text.
+    func configureCell(userBio: String) {
+        self.bioDisplayTextView.text = userBio
     }
 }

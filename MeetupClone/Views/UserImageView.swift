@@ -8,11 +8,21 @@
 
 import UIKit
 
+/// Represent the users Profile Image.
 class UserImageView: UIView {
     
     @IBOutlet private weak var userImageView: UIImageView!
     
-    func configureCell(userImage: UIImage) {
+    /// Configure the user's profileImage on the imageView
+    ///
+    /// - Parameter userImage:  The UIImage representing the users's Image
+    func configureCell(userImage: UIImage?) {
         userImageView.image = userImage
+    }
+   
+    override func layoutSubviews() {
+        super.layoutSubviews()
+         userImageView.layer.cornerRadius = userImageView.frame.width / 2
+        userImageView.layer.masksToBounds = true
     }
 }
