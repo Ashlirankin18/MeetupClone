@@ -13,9 +13,9 @@ class EmptyStateViewController: UIViewController {
 
     @IBOutlet private weak var promptButton: UIButton!
     
-    /// View Controller initilizer
+    /// Initilizes the EmptyStateViewController with a tilte for the emptyState prompt.
     ///
-    /// - Parameter primaryTitle: The title which will be given to the prompt button
+    /// - Parameter primaryTitle: The title which will be given to the prompt button.
     init(primaryTitle: String) {
         super.init(nibName: nil, bundle: nil)
         promptButton.setTitle(primaryTitle, for: .normal)
