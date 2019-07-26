@@ -13,7 +13,7 @@ class ProfileViewController: UIViewController {
     
     @IBOutlet private weak var profileControllerTableView: UITableView!
     
-    private let meetupCloneDataSource = MeetUpCloneDataSource()
+    private let meetupCloneDataSource = UserProfileDataSource()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,18 +24,16 @@ class ProfileViewController: UIViewController {
         profileControllerTableView.delegate = self
         profileControllerTableView.dataSource = meetupCloneDataSource
         profileControllerTableView.rowHeight = UITableView.automaticDimension
-        profileControllerTableView.estimatedRowHeight = 6000
+        profileControllerTableView.estimatedRowHeight = 44
     }
-    
 }
 extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let headerView = Bundle.main.loadNibNamed("UserImageView", owner: self, options: nil)?.first as? UserImageView else {
             return UIView() }
-        headerView.backgroundColor = .black
         return headerView
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 250
+        return CGFloat(300)
     }
 }

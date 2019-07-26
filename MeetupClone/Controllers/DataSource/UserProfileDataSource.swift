@@ -1,5 +1,5 @@
 //
-//  MeetUpCloneDataSource.swift
+//  UserProfileDataSource.swift
 //  MeetupClone
 //
 //  Created by Ashli Rankin on 7/24/19.
@@ -8,7 +8,8 @@
 
 import UIKit
 
-class MeetUpCloneDataSource: NSObject, UITableViewDataSource {
+/// Represents the dataSource used to configure the tableView in the ProfileViewController 
+class UserProfileDataSource: NSObject, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 4
@@ -33,7 +34,4 @@ class MeetUpCloneDataSource: NSObject, UITableViewDataSource {
             return cell
         }
     }
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }    
 }
