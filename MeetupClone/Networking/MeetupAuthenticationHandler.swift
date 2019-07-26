@@ -19,15 +19,12 @@ class MeetupAuthenticationHandler {
     private let clientId = "v72nhfu0f9khu3i2bf1t6h87md"
     
     private let clientSecret = "kh32q1hlal6jvc8j3tdv1809rp"
+  
+    private let redirectURI = "groupviewerentryurl://entry"
     
-    private let redirectURI = "groupViewer://entry"
+    var oAuthTokenCompletionHandler: ((Error?) -> Void)?
     
-    /// Handles the completion of the authorization call
-    var oAutTokenCompletionHandler: ((Error?) -> Void)?
-    
-    /// AccessToken return from the Authentication call.
     var accessToken = ""
-    
     /// Initializes UserDefaults and Network Helper which performs network request.
     init(userDefaults: UserDefaults, networkHelper: NetworkHelper) {
         self.networkHelper = networkHelper
@@ -51,8 +48,6 @@ class MeetupAuthenticationHandler {
         let authPath = "https://secure.meetup.com/oauth2/authorize?client_id=\(clientId)&response_type=code&redirect_uri=\(redirectURI)"
         
         if let authURL = URL(string: authPath) {
-            let defaults = userDefaults
-            defaults.set(true, forKey: UserDefaultConstants .loadingToken.rawValue)
             UIApplication.shared.open(authURL, options: [:], completionHandler: nil)
         }
     }
@@ -63,9 +58,11 @@ class MeetupAuthenticationHandler {
         let components = URLComponents(url: url, resolvingAgainstBaseURL: false)
         
         let code = components?.queryItems?.first { $0.name.lowercased() == "code" }
-    
+      
         if let receivedCode = code?.value {
             retrievesAccessToken(from: receivedCode)
+        } else {
+            assertionFailure("could not retrieve authorization code")
         }
     }
     
@@ -82,8 +79,8 @@ class MeetupAuthenticationHandler {
         networkHelper.performDataTask(URLEndpoint: getTokenPath, httpMethod: .Post, httpBody: data, httpHeader: ("application/x-www-form-urlencoded", "Content-Type")) { (results) in
             switch results {
             case .failure(let error):
-                self.userDefaults.set(false, forKey: UserDefaultConstants .loadingToken.rawValue)
                 print(error)
+                self.userDefaults.set(false, forKey: UserDefaultConstants.isLoggedIn.rawValue)
                 return
             case .success(let data):
                 
@@ -92,19 +89,20 @@ class MeetupAuthenticationHandler {
                     self.accessToken = success.accessToken
                     self.userDefaults.set(success.accessToken, forKey: UserDefaultConstants.accessToken.rawValue)
                     if self.hasOAuthToken() {
-                        if let handler = self.oAutTokenCompletionHandler {
+                        if let handler = self.oAuthTokenCompletionHandler {
                             handler(nil)
                         }
                     }
-                    self.userDefaults.set(false, forKey: UserDefaultConstants .loadingToken.rawValue )
+                    self.userDefaults.set(true, forKey: UserDefaultConstants.isLoggedIn.rawValue)
+                    self.accessToken = success.accessToken
+                    return
                 } catch {
                     do {
                         let failure = try JSONDecoder().decode(AccessTokenFailureModel.self, from: data)
                         print(failure)
-                        self.userDefaults.set(false, forKey: UserDefaultConstants .loadingToken.rawValue)
+                        self.userDefaults.set(false, forKey: UserDefaultConstants.isLoggedIn.rawValue)
                         return
                     } catch {
-                        self.userDefaults.set(false, forKey: UserDefaultConstants .loadingToken.rawValue)
                         return
                     }
                 }

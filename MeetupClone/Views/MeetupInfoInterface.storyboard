@@ -66,8 +66,8 @@
         <!--Profile-->
         <scene sceneID="ts7-7a-q05">
             <objects>
-                <viewController id="ice-C6-ibr" customClass="ProfileViewController" customModule="MeetupClone" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="p5K-XT-cN7">
+                <viewController storyboardIdentifier="ProfileViewController" id="chX-NL-VLc" customClass="ProfileViewController" customModule="MeetupClone" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="FfD-iP-Crp">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>

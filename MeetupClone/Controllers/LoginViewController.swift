@@ -11,47 +11,42 @@ import UIKit
 /// Allows the user to authenticate their account with meetup.
 class LoginViewController: UIViewController {
     
-    /// Manages the authentication flow
-    var apiManager: MeetupAuthenticationHandler?
-    
-    private var alertController: UIAlertController?
+    var meetupAuthenticationHandler: MeetupAuthenticationHandler?
     
     @IBAction private func loginButtonPressed(_ sender: UIButton) {
         initiateLoginFlow()
     }
     
-    private func setUpAlertController(title: String, message: String) {
-        alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let tryAgainAction = UIAlertAction(title: "TryAgain", style: .default) { _ in
-            self.apiManager?.startAuthorizationLogin()
+    private func presentAlertController() {
+        let alertController = UIAlertController(title: NSLocalizedString("Error", comment: "Error occured"), message: NSLocalizedString("Could not authenticate you account try again.", comment: "Tell the user the was a problem signing them in."), preferredStyle: .alert)
+        let tryAgainAction = UIAlertAction(title: NSLocalizedString("Try Again", comment: "Prompts the user to try thier request again"), style: .default) { _ in
+            self.meetupAuthenticationHandler?.startAuthorizationLogin()
         }
-        alertController?.addAction(tryAgainAction)
+        alertController.addAction(tryAgainAction)
+        self.present(alertController, animated: true, completion: nil)
     }
     
     private func initiateLoginFlow() {
-        guard let apiManager = apiManager else {
+        guard let meetupAuthenticationHandler = meetupAuthenticationHandler else {
+            assertionFailure("The meetupAuthenticationHandler is nil")
             return }
-        if !apiManager.hasOAuthToken() {
-            apiManager.oAutTokenCompletionHandler = { error in
-                if let error = error {
-                    DispatchQueue.main.async {
-                        self.setUpAlertController(title: "", message: "Could not authenticate you account try again \(error.localizedDescription)")
-                    }
+        if !meetupAuthenticationHandler.hasOAuthToken() {
+            meetupAuthenticationHandler.oAuthTokenCompletionHandler = { error in
+                if error != nil {
+                    self.presentAlertController()
                 } else {
                     self.presentsUserInterfaceOnSuccess()
                 }
             }
-            apiManager.startAuthorizationLogin()
+            meetupAuthenticationHandler.startAuthorizationLogin()
         }
     }
     
     private func presentsUserInterfaceOnSuccess() {
-        DispatchQueue.main.async {
-            guard let interfaceController = UIStoryboard(name: "MeetupInfoInterface", bundle: nil).instantiateViewController(withIdentifier: "MeetupInfoTabbarController") as? UITabBarController else {
-                return }
-            interfaceController.selectedViewController = interfaceController.viewControllers?[2]
-            UIApplication.shared.keyWindow?.rootViewController = interfaceController
-            UIApplication.shared.keyWindow?.makeKeyAndVisible()
-        }
+      
+        guard let interfaceController = UIStoryboard(name: "MeetupInfoInterface", bundle: nil).instantiateViewController(withIdentifier: "MeetupInfoTabbarController") as? UITabBarController else {
+            return }
+        interfaceController.modalTransitionStyle = .crossDissolve
+        present(interfaceController, animated: true, completion: nil)
     }
 }

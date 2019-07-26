@@ -35,21 +35,25 @@ class NetworkHelper {
         }
         
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-            if let error = error {
-                completionHandler(.failure(.networkError(error)))
-                return
-            }
-            
-   guard let httpResponse = response as? HTTPURLResponse,
-                (200...299).contains(httpResponse.statusCode)
-                else {
-                   let statusCode = (response as? HTTPURLResponse)?.statusCode ?? -999
-                    completionHandler(.failure(.badStatusCode(statusCode.description)))
+            DispatchQueue.main.async {
+                
+                if let error = error {
+                    completionHandler(.failure(.networkError(error)))
                     return
-            }
-            if let data = data {
-                completionHandler(.success(data))
-                return
+                }
+                
+                guard let httpResponse = response as? HTTPURLResponse,
+                    (200...299).contains(httpResponse.statusCode)
+                    else {
+                        let statusCode = (response as? HTTPURLResponse)?.statusCode ?? -999
+                        completionHandler(.failure(.badStatusCode(statusCode.description)))
+                        return
+                }
+
+                if let data = data {
+                        completionHandler(.success(data))
+                    return
+                }
             }
         }
         task.resume()
