@@ -10,6 +10,8 @@
 		5B1AD6BB22DE22900008E4EC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1AD6BA22DE22900008E4EC /* LoginViewController.swift */; };
 		5B1AD6C022DE22910008E4EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B1AD6BF22DE22910008E4EC /* Assets.xcassets */; };
 		5B1AD6CE22DE22910008E4EC /* MeetupCloneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1AD6CD22DE22910008E4EC /* MeetupCloneTests.swift */; };
+		5B884C7D22EB3AD30062F4AF /* EmptyStateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B884C7B22EB3AD30062F4AF /* EmptyStateViewController.swift */; };
+		5B884C7E22EB3AD30062F4AF /* EmptyStateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B884C7C22EB3AD30062F4AF /* EmptyStateViewController.xib */; };
 		5B8932C222E643E400BF9876 /* AccessTokenSuccessModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8932C122E643E400BF9876 /* AccessTokenSuccessModel.swift */; };
 		5B8932C522E6450F00BF9876 /* AccessTokenFailureModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8932C422E6450F00BF9876 /* AccessTokenFailureModel.swift */; };
 		5B8932C722E645C200BF9876 /* MeetupUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8932C622E645C200BF9876 /* MeetupUserModel.swift */; };
@@ -54,6 +56,8 @@
 		5B1AD6C922DE22910008E4EC /* MeetupCloneTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MeetupCloneTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B1AD6CD22DE22910008E4EC /* MeetupCloneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetupCloneTests.swift; sourceTree = "<group>"; };
 		5B1AD6CF22DE22910008E4EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5B884C7B22EB3AD30062F4AF /* EmptyStateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateViewController.swift; sourceTree = "<group>"; };
+		5B884C7C22EB3AD30062F4AF /* EmptyStateViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyStateViewController.xib; sourceTree = "<group>"; };
 		5B8932C122E643E400BF9876 /* AccessTokenSuccessModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenSuccessModel.swift; sourceTree = "<group>"; };
 		5B8932C422E6450F00BF9876 /* AccessTokenFailureModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenFailureModel.swift; sourceTree = "<group>"; };
 		5B8932C622E645C200BF9876 /* MeetupUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetupUserModel.swift; sourceTree = "<group>"; };
@@ -166,6 +170,8 @@
 		5B8932BF22E643BC00BF9876 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				5B884C7B22EB3AD30062F4AF /* EmptyStateViewController.swift */,
+				5B884C7C22EB3AD30062F4AF /* EmptyStateViewController.xib */,
 				5BB02FED22E749E300283272 /* FavoritesViewController.swift */,
 				5B8E5D6422E74458008BE588 /* GroupDisplayViewController.swift */,
 				5BB02FEB22E7499800283272 /* ProfileViewController.swift */,
@@ -313,6 +319,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B884C7E22EB3AD30062F4AF /* EmptyStateViewController.xib in Resources */,
 				5B9DECC922E89FF600321359 /* Main.storyboard in Resources */,
 				5B9DECC622E89FCE00321359 /* LaunchScreen.storyboard in Resources */,
 				5B1AD6C022DE22910008E4EC /* Assets.xcassets in Resources */,
@@ -431,6 +438,7 @@
 				5B8932C722E645C200BF9876 /* MeetupUserModel.swift in Sources */,
 				5B8932CF22E64E5800BF9876 /* AppError.swift in Sources */,
 				5B8932C222E643E400BF9876 /* AccessTokenSuccessModel.swift in Sources */,
+				5B884C7D22EB3AD30062F4AF /* EmptyStateViewController.swift in Sources */,
 				5BF41FF522E7637D00ECA928 /* UserDefaultConstants.swift in Sources */,
 				5B1AD6BB22DE22900008E4EC /* LoginViewController.swift in Sources */,
 				5BF41FF322E7609500ECA928 /* MemberModel.swift in Sources */,
