@@ -16,7 +16,7 @@ class EmptyStateViewController: UIViewController {
     /// View Controller initilizer
     ///
     /// - Parameter primaryTitle: The title which will be given to the prompt button
-    init(primaryTitle:String) {
+    init(primaryTitle: String) {
         super.init(nibName: nil, bundle: nil)
         promptButton.setTitle(primaryTitle, for: .normal)
     }
@@ -28,5 +28,4 @@ class EmptyStateViewController: UIViewController {
     @IBAction private func promptedButtonTapped(_ sender: UIButton) {
         sender.backgroundColor = .black
     }
-    
 }
