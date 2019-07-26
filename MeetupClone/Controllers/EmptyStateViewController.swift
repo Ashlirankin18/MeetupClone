@@ -8,9 +8,8 @@
 
 import UIKit
 
-/// A 'UIViewController' subclass that represents the empty states the application may have
+/// A 'UIViewController' subclass that represents the empty states the application may have.
 class EmptyStateViewController: UIViewController {
-
     @IBOutlet private weak var promptButton: UIButton!
     
     /// Initilizes the EmptyStateViewController with a tilte for the emptyState prompt.
@@ -23,9 +22,5 @@ class EmptyStateViewController: UIViewController {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-    }
-    
-    @IBAction private func promptedButtonTapped(_ sender: UIButton) {
-        sender.backgroundColor = .black
     }
 }

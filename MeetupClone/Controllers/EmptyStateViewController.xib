@@ -38,9 +38,6 @@
                                     </fragment>
                                 </attributedString>
                             </state>
-                            <connections>
-                                <action selector="promptedButtonTapped:" destination="-1" eventType="touchUpInside" id="eqs-is-S0z"/>
-                            </connections>
                         </button>
                     </subviews>
                 </stackView>
