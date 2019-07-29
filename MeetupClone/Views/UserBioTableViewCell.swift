@@ -14,6 +14,8 @@ class UserBioTableViewCell: UITableViewCell {
     @IBOutlet private weak var bioDisplayTextView: UITextView!
     
     /// Configure the textView with text.
+    ///
+    /// - Parameter userBio: The text representing the user's bio.
     func configureCell(userBio: String) {
         self.bioDisplayTextView.text = userBio
     }

@@ -34,6 +34,6 @@ extension ProfileViewController: UITableViewDelegate {
         return headerView
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return CGFloat(300)
+        return 300
     }
 }
