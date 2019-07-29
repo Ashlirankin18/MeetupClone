@@ -59,9 +59,11 @@ class MeetupDataHandler {
     ///   - zipCode: User provided zipcode. If there is not zipcode meetup provides similar groupos based on the location that was given when the account was created
     ///   - completionHandler: receives information (expected type) when asynchronous call completes.
     func retrieveMeetupGroups(zipCode: Int?, completionHandler: @escaping GroupHandler) {
+        guard let accessCode = accessToken else {assertionFailure("AccessToken maybe nil")
+            return }
         var urlString = ""
         urlString = zipCode == nil ? "https://api.meetup.com/find/groups?&sign=true&photo-host=public&page=20" : "https://api.meetup.com/find/groups?&sign=true&photo-host=public&zip=\(11429))&page=20"
-        networkHelper.performDataTask(URLEndpoint: urlString, httpMethod: .Get, httpBody: nil, httpHeader: ("Bearer \(String(describing: accessToken))", "Authorization")) { (results) in
+        networkHelper.performDataTask(URLEndpoint: urlString, httpMethod: .Get, httpBody: nil, httpHeader: ("Bearer \(accessCode)", "Authorization")) { (results) in
             switch results {
             case .failure(let error):
                 completionHandler(.failure(.networkError(error)))
@@ -84,8 +86,10 @@ class MeetupDataHandler {
     ///   - groupURLName: The URLName of the group
     ///   - completionHandler: receives information (expected type) when asynchronous call completes.
     func retrieveEvents(with groupURLName: String, completionHandler: @escaping EventHandler) {
+        guard let accessCode = accessToken else {assertionFailure("AccessToken maybe nil")
+            return }
         let urlString = "https://api.meetup.com/\(groupURLName)/events?&sign=true&photo-host=public&page=20"
-        networkHelper.performDataTask(URLEndpoint: urlString, httpMethod: .Get, httpBody: nil, httpHeader: ("Bearer \(String(describing: accessToken))", "Authorization")) { (results) in
+        networkHelper.performDataTask(URLEndpoint: urlString, httpMethod: .Get, httpBody: nil, httpHeader: ("Bearer \(accessCode)", "Authorization")) { (results) in
             switch results {
             case .failure(let error):
                 completionHandler(.failure(.networkError(error)))

@@ -13,7 +13,7 @@
         <!--Groups-->
         <scene sceneID="Gld-JO-yes">
             <objects>
-                <viewController id="lM0-ys-K5t" customClass="GroupDisplayViewController" customModule="MeetupClone" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="lM0-ys-K5t" customClass="EventsDisplayViewController" customModule="MeetupClone" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Sb1-BW-qNq">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

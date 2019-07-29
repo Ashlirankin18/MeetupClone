@@ -10,7 +10,7 @@ import Foundation
 
 /// Represents a MeetupGroup model.
 struct MeetupGroupModel: Codable {
-    let id: Int
+    let id: String
     let name: String
     let link: URL
     let urlname: String?
