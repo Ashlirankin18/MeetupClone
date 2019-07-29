@@ -13,13 +13,17 @@ import Foundation
 class MeetupDataHandler {
     
     private var networkHelper: NetworkHelper
-    var meetupAuthenticatiorHandler = MeetupAuthenticationHandler(userDefaults: UserDefaults.standard, networkHelper: NetworkHelper())
+    private var meetupAuthenticatiorHandler = MeetupAuthenticationHandler(userDefaults: UserDefaults.standard, networkHelper: NetworkHelper())
+    
     /// Initializes the class with networkHelper.
     init(networkHelper: NetworkHelper) {
         self.networkHelper = networkHelper
     }
     
+    /// Represent the types that are expected to escape when the asynchrnous func completes.
     typealias UserHandler = (Result<MeetupUserModel, AppError>) -> Void
+    
+    /// Represent the types that are expected to escape when the asynchrnous func completes.
     typealias GroupHandler = (Result<[MeetupGroupModel], AppError>) -> Void
     
     /// Retrieves the user data from the server.
@@ -47,6 +51,11 @@ class MeetupDataHandler {
         }
     }
     
+    /// Retrives groups from the server.
+    ///
+    /// - Parameters:
+    ///   - zipCode: User provided zipcode. If there is not zipcode meetup provides similar groupos based on the location that was given when the account was created
+    ///   - completionHandler: receives information (expected type) when asynchronous call completes.
     func retrieveMeetupGroups(zipCode: Int?, completionHandler: @escaping GroupHandler) {
         let accessToken = UserDefaults.standard.object(forKey: UserDefaultConstants.accessToken.rawValue) ?? ""
         var urlString = ""
