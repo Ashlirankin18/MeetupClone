@@ -17,4 +17,5 @@ struct MeetupGroupModel: Codable {
     let created: Int
     let group_photo: Photo?
     let next_event: NextEvent?
+    let description: String
 }
