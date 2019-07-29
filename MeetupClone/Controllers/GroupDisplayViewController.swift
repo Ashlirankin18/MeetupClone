@@ -18,7 +18,7 @@ class GroupDisplayViewController: UIViewController {
         retrieveGroups()
     }
     
-    private func retrieveGroups(){
+    private func retrieveGroups() {
         meetUpDataHandler.retrieveMeetupGroups(zipCode: 11429) { (result) in
             switch result {
             case .failure(let error):
