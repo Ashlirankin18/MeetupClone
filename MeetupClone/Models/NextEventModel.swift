@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Represents a Next Event Model
 struct NextEvent: Codable {
     let id: String
     let name: String
