@@ -19,12 +19,11 @@ class MeetupAuthenticationHandler {
     private let clientId = "v72nhfu0f9khu3i2bf1t6h87md"
     
     private let clientSecret = "kh32q1hlal6jvc8j3tdv1809rp"
-    
+  
     private let redirectURI = "groupviewerentryurl://entry"
     
     var oAuthTokenCompletionHandler: ((Error?) -> Void)?
     
-    var accessToken = ""
     /// Initializes UserDefaults and Network Helper which performs network request.
     init(userDefaults: UserDefaults, networkHelper: NetworkHelper) {
         self.networkHelper = networkHelper
@@ -33,11 +32,9 @@ class MeetupAuthenticationHandler {
     
     /// Checks userDefaults for an accessToken returns a bool value based on the findings.
     func hasOAuthToken() -> Bool {
-        if let accessToken = userDefaults.object(forKey: UserDefaultConstants.accessToken.rawValue) as? String {
-            self.accessToken = accessToken
+        if (userDefaults.object(forKey: UserDefaultConstants.accessToken.rawValue) as? String) != nil {
             return true
         }
-        
         return false
     }
     
@@ -58,7 +55,7 @@ class MeetupAuthenticationHandler {
         let components = URLComponents(url: url, resolvingAgainstBaseURL: false)
         
         let code = components?.queryItems?.first { $0.name.lowercased() == "code" }
-        
+      
         if let receivedCode = code?.value {
             retrievesAccessToken(from: receivedCode)
         } else {
@@ -86,7 +83,6 @@ class MeetupAuthenticationHandler {
                 
                 do {
                     let success = try JSONDecoder().decode(AccessTokenSucessModel.self, from: data)
-                    
                     self.userDefaults.set(success.accessToken, forKey: UserDefaultConstants.accessToken.rawValue)
                     if self.hasOAuthToken() {
                         if let handler = self.oAuthTokenCompletionHandler {
@@ -94,10 +90,8 @@ class MeetupAuthenticationHandler {
                         }
                     }
                     self.userDefaults.set(true, forKey: UserDefaultConstants.isLoggedIn.rawValue)
-                    self.accessToken = success.accessToken
                     return
                 } catch {
-                    
                     do {
                         let failure = try JSONDecoder().decode(AccessTokenFailureModel.self, from: data)
                         print(failure)
