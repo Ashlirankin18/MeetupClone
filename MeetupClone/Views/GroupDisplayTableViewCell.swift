@@ -25,7 +25,7 @@ final class GroupDisplayTableViewCell: UITableViewCell {
     var viewModel: ViewModel? {
         didSet {
             groupNameLabel.text = viewModel?.groupName
-            groupImageView.kf.setImage(with: viewModel?.groupImage,placeholder: UIImage(named: "placeholder"))
+            groupImageView.kf.setImage(with: viewModel?.groupImage, placeholder: UIImage(named: "placeholder"))
         }
     }
     
@@ -33,8 +33,4 @@ final class GroupDisplayTableViewCell: UITableViewCell {
     @IBOutlet private  weak var groupImageView: UIImageView!
     @IBOutlet private weak var groupCapacityLabel: UILabel!
     @IBOutlet private weak var upcomingEventLabel: UILabel!
-    
-    
-    
-    
 }
