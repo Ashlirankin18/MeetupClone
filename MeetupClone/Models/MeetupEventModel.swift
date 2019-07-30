@@ -15,5 +15,5 @@ struct MeetupEventModel: Codable {
     let name: String
     let link: String
     let description: String
-    let venue: VenueModel?
+    let venue: MeetupVenueModel?
 }

@@ -1,5 +1,5 @@
 //
-//  VenueModel.swift
+//  MeetupVenueModel.swift
 //  MeetupClone
 //
 //  Created by Ashli Rankin on 7/30/19.
@@ -9,7 +9,7 @@
 import Foundation
 
 /// Model representing a venue where an event will be held.
-struct VenueModel: Codable {
+struct MeetupVenueModel: Codable {
     let id: Int
     let name: String
     let lat: Double

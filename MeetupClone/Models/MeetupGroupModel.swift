@@ -15,7 +15,7 @@ struct MeetupGroupModel: Codable {
     let link: URL
     let urlname: String?
     let created: Int
-    let group_photo: Photo?
-    let next_event: NextEvent?
+    let group_photo: MeetupPhotoModel?
+    let next_event: MeetupNextEventModel?
     let description: String
 }

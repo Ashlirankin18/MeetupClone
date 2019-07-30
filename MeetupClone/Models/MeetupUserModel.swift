@@ -14,17 +14,7 @@ struct MeetupUserModel: Codable {
     let city: String?
     let country: String?
     let id: Int?
-    let joinedDate: Int
-    let userName: String
-    let photo: Photo?
-    
-    private enum CodingKeys: String, CodingKey {
-        case bio = "bio"
-        case city = "city"
-        case country = "country"
-        case id = "id"
-        case joinedDate = "joined"
-        case userName = "name"
-        case photo = "photo"
-    }
+    let joined: Int
+    let name: String
+    let photo: MeetupPhotoModel?
 }

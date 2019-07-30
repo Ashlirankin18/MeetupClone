@@ -1,5 +1,5 @@
 //
-//  NextEventModel.swift
+//  MeetupNextEventModel.swift
 //  MeetupClone
 //
 //  Created by Ashli Rankin on 7/29/19.
@@ -9,7 +9,7 @@
 import Foundation
 
 /// Represents a Next Event Model
-struct NextEvent: Codable {
+struct MeetupNextEventModel: Codable {
     let id: String
     let name: String
     let yes_rsvp_count: Int

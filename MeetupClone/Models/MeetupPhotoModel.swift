@@ -1,5 +1,5 @@
 //
-//  PhotoModel.swift
+//  MeetupPhotoModel.swift
 //  MeetupClone
 //
 //  Created by Ashli Rankin on 7/23/19.
@@ -9,7 +9,7 @@
 import Foundation
 
 /// Represents a Photo model
-struct Photo: Codable {
+struct MeetupPhotoModel: Codable {
     let highres_link: String
     let thumb_link: String
     let id: Int
