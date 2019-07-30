@@ -27,7 +27,7 @@ class MeetupDataHandler {
     typealias GroupHandler = (Result<[MeetupGroupModel], AppError>) -> Void
    
     /// Represent the types that are expected to escape when the asynchrnous func completes.
-    typealias EventHandler = (Result<[MeetupGroupModel], AppError>) -> Void
+    typealias EventHandler = (Result<[MeetupEventModel], AppError>) -> Void
     
     /// Retrieves the user data from the server.
     /// - Parameter accessToken: Access token that was returned from the server.
@@ -96,7 +96,7 @@ class MeetupDataHandler {
                 return
             case .success(let data):
                 do {
-                    let events = try JSONDecoder().decode([MeetupGroupModel].self, from: data)
+                    let events = try JSONDecoder().decode([MeetupEventModel].self, from: data)
                     print(events)
                 } catch {
                     print(error.localizedDescription)
