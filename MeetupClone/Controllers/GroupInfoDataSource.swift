@@ -9,7 +9,7 @@
 import UIKit
 
 /// DataSource which will be used to mage data for the groupDisplayTableView.
-class GroupInfoDataSource: NSObject, UITableViewDataSource {
+final class GroupInfoDataSource: NSObject, UITableViewDataSource {
     
     private let groups = [MeetupGroupModel]() 
     
@@ -19,15 +19,11 @@ class GroupInfoDataSource: NSObject, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "GroupDisplayCell", for: indexPath) as? GroupDisplayTableViewCell else {
-            fatalError("Could not dequeue cell at indexPath")
-             }
-        guard groups.isEmpty  else {
-            let cell = UITableViewCell()
-            cell.backgroundColor = .red
-            return cell
+            fatalError("Could not dequeue cell at indexPath.")
         }
+        guard groups.isEmpty else { fatalError("No groups could be found.") }
         let group = groups[indexPath.row]
-        cell.configureView(meetupGroup: group)
+        cell.viewModel = GroupDisplayTableViewCell.ViewModel(groupName: group.groupName, groupImage: group.photo.baseURL)
         return cell
     }
 }
