@@ -15,10 +15,17 @@ final class GroupsDisplayViewController: UIViewController {
     
     private let groupInfoDataSource = GroupInfoDataSource()
     
+    private var meetupGroups = [MeetupGroupModel]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureTableViewProperties()
+    }
+    
+    private func configureTableViewProperties() {
         groupDisplayTableView.dataSource = groupInfoDataSource
         groupDisplayTableView.rowHeight = UITableView.automaticDimension
-        groupDisplayTableView.estimatedRowHeight = 44
+        groupDisplayTableView.register(UINib(nibName: "GroupDisplayTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "GroupDisplayCell")
+        groupInfoDataSource.groups = meetupGroups
     }
 }

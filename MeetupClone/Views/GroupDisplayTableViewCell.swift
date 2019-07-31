@@ -24,13 +24,8 @@ final class GroupDisplayTableViewCell: UITableViewCell {
     /// Represents the `GroupDisplayTableViewCell` Model
     var viewModel: ViewModel? {
         didSet {
-            groupNameLabel.text = viewModel?.groupName
-            groupImageView.kf.setImage(with: viewModel?.groupImage, placeholder: UIImage(named: "placeholder"))
+            groupImageView.kf.setImage(with: viewModel?.groupImage)
         }
     }
-    
-    @IBOutlet private weak var groupNameLabel: UILabel!
-    @IBOutlet private  weak var groupImageView: UIImageView!
-    @IBOutlet private weak var groupCapacityLabel: UILabel!
-    @IBOutlet private weak var upcomingEventLabel: UILabel!
+    @IBOutlet private weak var groupImageView: UIImageView!
 }
