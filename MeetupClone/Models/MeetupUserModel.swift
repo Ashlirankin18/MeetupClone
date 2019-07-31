@@ -10,11 +10,25 @@ import Foundation
 
 /// Model of Application user
 struct MeetupUserModel: Codable {
+    
+    /// The user's bio
     let bio: String?
+    
+    /// The city the user is located in
     let city: String?
+    
+    /// The country the user is located
     let country: String?
+    
+    /// the user's id
     let id: Int?
-    let joined: Int
+    
+    /// the date the user joined meetup
+    let joined: Date
+    
+    /// The user's name
     let name: String
+    
+    /// The user's image on file
     let photo: MeetupPhotoModel?
 }

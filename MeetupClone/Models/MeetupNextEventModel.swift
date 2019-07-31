@@ -10,7 +10,19 @@ import Foundation
 
 /// Represents a Next Event Model
 struct MeetupNextEventModel: Codable {
-    let id: String
-    let name: String
-    let yes_rsvp_count: Int
+    
+    /// The event id
+    let eventId: String
+    
+    /// The name of sn event
+    let eventName: String
+    
+    /// The number of RSVP 
+    let rsvpCount: Int
+    
+    private enum CodingKeys: String, CodingKey {
+        case eventId = "id"
+        case eventName = "name"
+        case rsvpCount = "yes_rsvp_count"
+    }
 }

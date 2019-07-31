@@ -10,6 +10,10 @@ import Foundation
 
 /// Represents a RSVP model
 struct MeetupRSVPModel: Codable {
+    
+    /// The member who RSVP
     let member: MeetupMemberModel
+    
+    /// The member's response
     let response: String
 }

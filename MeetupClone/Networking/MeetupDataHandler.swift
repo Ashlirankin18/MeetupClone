@@ -32,21 +32,16 @@ class MeetupDataHandler {
     ///  Represent the types that are expected to escape when the asynchrnous func completes.
     typealias RSVPHandler = (Result<[MeetupRSVPModel], AppError>) -> Void
     
-    private typealias GenericHandler = (Result<Codable, AppError>) -> Void
     /// Retrieves the user data from the server.
-    /// - Parameter accessToken: Access token that was returned from the server.
     /// - Parameter completionHandler: receives information (expected type) when asynchronous call completes.
     func retrieveUserData(completionHandler: @escaping UserHandler) {
         let urlString = "https://api.meetup.com/2/member/self"
-        genericRetrievalFunc(urlString: urlString, decodingType: MeetupUserModel.self) { (results) in
+        genericRetrievalFunc(urlString: urlString) { (results: Result<MeetupUserModel, AppError>) in
             switch results {
             case .failure(let error):
                 completionHandler(.failure(.networkError(error)))
                 return
-            case .success(let object):
-                guard let user = object as? MeetupUserModel else {
-                    assertionFailure("Could not cast object as MeetupUserModel")
-                    return }
+            case .success(let user):
                 completionHandler(.success(user))
                 return
             }
@@ -59,17 +54,13 @@ class MeetupDataHandler {
     ///   - zipCode: User provided zipcode. If there is not zipcode meetup provides similar groupos based on the location that was given when the account was created
     ///   - completionHandler: receives information (expected type) when asynchronous call completes.
     func retrieveMeetupGroups(zipCode: Int?, completionHandler: @escaping GroupHandler) {
-        var urlString = ""
-        urlString = zipCode == nil ? "https://api.meetup.com/find/groups?&sign=true&photo-host=public&page=20" : "https://api.meetup.com/find/groups?&sign=true&photo-host=public&zip=\(11429))&page=20"
-        genericRetrievalFunc(urlString: urlString, decodingType: [MeetupGroupModel].self) { (results) in
+       let urlString = zipCode == nil ? "https://api.meetup.com/find/groups?&sign=true&photo-host=public&page=20" : "https://api.meetup.com/find/groups?&sign=true&photo-host=public&zip=\(11429))&page=20"
+        genericRetrievalFunc(urlString: urlString) { (results: Result<[MeetupGroupModel], AppError>) in
             switch results {
             case .failure(let error):
                 completionHandler(.failure(.networkError(error)))
                 return
-            case .success(let object):
-                guard let groups = object as? [MeetupGroupModel] else {
-                    assertionFailure("Could not cast object as MeetupGroupModel")
-                    return }
+            case .success(let groups):
                 completionHandler(.success(groups))
                 return
             }
@@ -83,18 +74,14 @@ class MeetupDataHandler {
     ///   - completionHandler: receives information (expected type) when asynchronous call completes.
     func retrieveEvents(with groupURLName: String, completionHandler: @escaping EventHandler) {
         let urlString = "https://api.meetup.com/\(groupURLName)/events?&sign=true&photo-host=public&page=20"
-        genericRetrievalFunc(urlString: urlString, decodingType: [MeetupEventModel].self) { (results) in
+        genericRetrievalFunc(urlString: urlString) { (results: Result<[MeetupEventModel], AppError>) in
             
             switch results {
             case .failure(let error):
                 completionHandler(.failure(.networkError(error)))
                 return
-            case .success(let object):
-                guard let event = object as? [MeetupEventModel] else {
-                    assertionFailure("Could not cast object as MeetupEventModel")
-                    return
-                }
-                completionHandler(.success(event))
+            case .success(let events):
+                completionHandler(.success(events))
                 return
             }
         }
@@ -108,22 +95,19 @@ class MeetupDataHandler {
     ///   - completionHandler: receives information (expected type) when asynchronous call completes
     func retrieveEventRSVP(eventId: Int, eventURLName: String, completionHandler: @escaping RSVPHandler ) {
         let urlString = "https://api.meetup.com/\(eventURLName)/events/\(eventId)/rsvps?&sign=true&photo-host=public"
-        genericRetrievalFunc(urlString: urlString, decodingType: [MeetupRSVPModel].self) { (results) in
+        genericRetrievalFunc(urlString: urlString) { (results: Result<[MeetupRSVPModel],AppError>) in
             switch results {
             case .failure(let error):
                 completionHandler(.failure(.networkError(error)))
                 return
-            case .success(let object):
-                guard let rsvps = object as? [MeetupRSVPModel] else {
-                    assertionFailure("Could not cast object as MeetupRSVPModel")
-                    return }
+            case .success(let rsvps):
                 completionHandler(.success(rsvps))
                 return
             }
         }
     }
     
-    private func genericRetrievalFunc<T: Codable>(urlString: String, decodingType: T.Type, completion: @escaping GenericHandler) {
+    private func genericRetrievalFunc<T: Codable>(urlString: String, completion: @escaping (Result<T, AppError>) -> Void) {
         guard let accessCode = accessToken else { assertionFailure("AccessToken maybe nil")
             return }
         let bearer = ("Bearer \(accessCode)", "Authorization")
@@ -135,7 +119,7 @@ class MeetupDataHandler {
                 return
             case .success(let data):
                 do {
-                    let object = try JSONDecoder().decode(decodingType, from: data)
+                    let object = try JSONDecoder().decode(T.self, from: data)
                     completion(.success(object))
                     return
                 } catch {

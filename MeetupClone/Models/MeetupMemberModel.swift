@@ -10,7 +10,13 @@ import Foundation
 
 /// Representation of Member of a Group
 struct MeetupMemberModel: Codable {
+    
+    /// The member id
     let id: Int
+    
+    /// The name of the member
     let name: String
+    
+    /// The photo link the depict the member
     let photo: MeetupPhotoModel?
 }

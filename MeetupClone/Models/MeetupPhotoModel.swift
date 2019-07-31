@@ -10,7 +10,19 @@ import Foundation
 
 /// Represents a Photo model
 struct MeetupPhotoModel: Codable {
-    let highres_link: String
-    let thumb_link: String
+    
+    /// high resoution link of an image
+    let highresLink: URL
+    
+    /// thumbnail link of an image
+    let thumbLink: URL
+    
+    /// id which represents an image
     let id: Int
+    
+    private enum CodingKeys: String, CodingKey {
+        case highresLink = "highres_link"
+        case thumbLink = "thumb_link"
+        case id
+    }
 }

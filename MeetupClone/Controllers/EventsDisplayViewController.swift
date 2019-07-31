@@ -10,7 +10,7 @@ import UIKit
 /// Display a list of events after the user taps on a group.
 class EventsDisplayViewController: UIViewController {
     
-    private let meetUpDataHandler = MeetupDataHandler(networkHelper: NetworkHelper())
+    private let meetupDataHandler = MeetupDataHandler(networkHelper: NetworkHelper())
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,7 +18,7 @@ class EventsDisplayViewController: UIViewController {
     }
     
     private func retrieveEvents() {
-        meetUpDataHandler.retrieveEvents(with: "Build-with-Code-New-York") { (results) in
+        meetupDataHandler.retrieveEvents(with: "Build-with-Code-New-York") { (results) in
                 switch results {
                 case .failure(let error):
                     print(error)
