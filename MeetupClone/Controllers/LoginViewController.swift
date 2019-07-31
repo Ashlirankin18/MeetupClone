@@ -18,7 +18,7 @@ class LoginViewController: UIViewController {
     }
     
     private func presentAlertController() {
-        let alertController = UIAlertController(title: NSLocalizedString("Error", comment: "Error occured"), message: NSLocalizedString("Could not authenticate you account try again.", comment: "Tell the user the was a problem signing them in."), preferredStyle: .alert)
+        let alertController = UIAlertController(title: NSLocalizedString("Error", comment: "Error occured"), message: NSLocalizedString("Could not authenticate you account try again.", comment: "Tells the user there was a problem signing them in."), preferredStyle: .alert)
         let tryAgainAction = UIAlertAction(title: NSLocalizedString("Try Again", comment: "Prompts the user to try thier request again"), style: .default) { _ in
             self.meetupAuthenticationHandler?.startAuthorizationLogin()
         }
