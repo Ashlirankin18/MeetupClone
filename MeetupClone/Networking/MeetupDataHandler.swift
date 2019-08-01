@@ -119,7 +119,9 @@ class MeetupDataHandler {
                 return
             case .success(let data):
                 do {
-                    let object = try JSONDecoder().decode(T.self, from: data)
+                    let jsonDecoder = JSONDecoder()
+                    jsonDecoder.dateDecodingStrategy = .millisecondsSince1970
+                    let object = try jsonDecoder.decode(T.self, from: data)
                     completion(.success(object))
                     return
                 } catch {

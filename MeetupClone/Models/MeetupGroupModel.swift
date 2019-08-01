@@ -24,7 +24,7 @@ struct MeetupGroupModel: Codable {
     let link: URL?
     
     /// The date group was created
-    let createdDate: Int
+    let createdDate: Date
     
     /// The group image
     let groupPhoto: MeetupPhotoModel?
