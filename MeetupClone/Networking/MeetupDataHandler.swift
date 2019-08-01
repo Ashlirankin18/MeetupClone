@@ -95,7 +95,7 @@ class MeetupDataHandler {
     ///   - completionHandler: receives information (expected type) when asynchronous call completes
     func retrieveEventRSVP(eventId: Int, eventURLName: String, completionHandler: @escaping RSVPHandler ) {
         let urlString = "https://api.meetup.com/\(eventURLName)/events/\(eventId)/rsvps?&sign=true&photo-host=public"
-        genericRetrievalFunc(urlString: urlString) { (results: Result<[MeetupRSVPModel],AppError>) in
+        genericRetrievalFunc(urlString: urlString) { (results: Result<[MeetupRSVPModel], AppError>) in
             switch results {
             case .failure(let error):
                 completionHandler(.failure(.networkError(error)))

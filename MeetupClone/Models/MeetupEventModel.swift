@@ -12,7 +12,7 @@ import Foundation
 struct MeetupEventModel: Codable {
     
     /// Date the event was created.
-    let createdDate: Date
+    private let createdDate: Int
     
     /// Id of the event
     let eventId: String
@@ -21,7 +21,7 @@ struct MeetupEventModel: Codable {
     let eventName: String
     
     /// Website link of the group
-    let link: String
+    let link: URL
     
     /// The events description
     let description: String

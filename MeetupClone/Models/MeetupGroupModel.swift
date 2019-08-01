@@ -17,14 +17,14 @@ struct MeetupGroupModel: Codable {
     /// The name of the group
     let groupName: String
     
-    /// The group's urlName
-    let urlName: URL
+    /// The group's urlName which will be used to search for groupd events,Rsvp etc
+    let urlName: String
     
     /// The link to the group's website
     let link: URL?
     
     /// The date group was created
-    let createdDate: Date
+    let createdDate: Int
     
     /// The group image
     let groupPhoto: MeetupPhotoModel?
@@ -34,7 +34,7 @@ struct MeetupGroupModel: Codable {
     
     /// The group's description
     let description: String
-    
+  
     private enum CodingKeys: String, CodingKey {
         case id
         case groupName = "name"
@@ -43,7 +43,6 @@ struct MeetupGroupModel: Codable {
         case urlName = "urlname"
         case createdDate = "created"
         case groupPhoto = "group_photo"
-        case nextEvent = "next_event"
-        
-    }
+        case nextEvent = "next_event"        
+    }   
 }

@@ -15,7 +15,7 @@ class GroupDisplayViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        retrieveGroups()
+       retrieveGroups()
     }
     
     private func retrieveGroups() {
@@ -24,7 +24,7 @@ class GroupDisplayViewController: UIViewController {
             case .failure(let error):
                 print(error.localizedDescription)
             case .success(let groups):
-                print(groups)
+               print(groups)
             }
         }
     }
