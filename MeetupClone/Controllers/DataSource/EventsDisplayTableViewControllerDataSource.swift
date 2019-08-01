@@ -9,14 +9,16 @@
 import UIKit
 
 class EventsDisplayTableViewControllerDataSource: NSObject, UITableViewDataSource {
+    
+    //NOTE this will be changed to even once the network Login Pull Request becomes approved
+    var items = [MeetupGroupModel]()
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return items.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
         return cell
     }
-    
-
 }

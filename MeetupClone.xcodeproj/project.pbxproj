@@ -196,7 +196,6 @@
 			isa = PBXGroup;
 			children = (
 				5BA9165422F34E69000AF2E8 /* EventsDisplayTableViewController.swift */,
-				5B884C8322EB88890062F4AF /* GroupInfoDataSource.swift */,
 				5B9DECD422E8F03900321359 /* DataSource */,
 				5BB02FED22E749E300283272 /* FavoritesViewController.swift */,
 				5B8E5D6422E74458008BE588 /* GroupsDisplayViewController.swift */,
@@ -245,6 +244,7 @@
 			children = (
 				5BA9165C22F355A1000AF2E8 /* EventsDisplayTableViewControllerDataSource.swift */,
 				5B9DECD222E8F03500321359 /* UserProfileDataSource.swift */,
+				5B884C8322EB88890062F4AF /* GroupInfoDataSource.swift */,
 			);
 			path = DataSource;
 			sourceTree = "<group>";

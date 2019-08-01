@@ -12,6 +12,5 @@ class EventDisplayTableViewCell: UITableViewCell {
     @IBOutlet private weak var eventNameLabel: UILabel!
     @IBOutlet private weak var eventDescriptionTextView: UITextView!
     @IBOutlet private weak var eventLocationLabel: UILabel!
-    @IBOutlet private weak var rsvpLabel: UILabel!
-    
+    @IBOutlet private weak var rsvpLabel: UILabel!    
 }
