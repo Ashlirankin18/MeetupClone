@@ -31,6 +31,9 @@
 		5B9DECC922E89FF600321359 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B9DECC722E89FF600321359 /* Main.storyboard */; };
 		5B9DECD122E8EF5000321359 /* UserBioTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9DECD022E8EF5000321359 /* UserBioTableViewCell.swift */; };
 		5B9DECD322E8F03500321359 /* UserProfileDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9DECD222E8F03500321359 /* UserProfileDataSource.swift */; };
+		5BA9164922F31D75000AF2E8 /* GroupInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BA9164822F31D75000AF2E8 /* GroupInterface.storyboard */; };
+		5BA9164B22F31D93000AF2E8 /* ProfileInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BA9164A22F31D93000AF2E8 /* ProfileInterface.storyboard */; };
+		5BA9164D22F31DDA000AF2E8 /* FavoritesInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BA9164C22F31DDA000AF2E8 /* FavoritesInterface.storyboard */; };
 		5BB02FEC22E7499800283272 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB02FEB22E7499800283272 /* ProfileViewController.swift */; };
 		5BB02FEE22E749E300283272 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB02FED22E749E300283272 /* FavoritesViewController.swift */; };
 		5BE8470D22E75DC700B8E8FC /* PhotoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE8470C22E75DC700B8E8FC /* PhotoModel.swift */; };
@@ -82,6 +85,9 @@
 		5B9DECC822E89FF600321359 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = MeetupClone/Views/Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5B9DECD022E8EF5000321359 /* UserBioTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserBioTableViewCell.swift; sourceTree = "<group>"; };
 		5B9DECD222E8F03500321359 /* UserProfileDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileDataSource.swift; sourceTree = "<group>"; };
+		5BA9164822F31D75000AF2E8 /* GroupInterface.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GroupInterface.storyboard; sourceTree = "<group>"; };
+		5BA9164A22F31D93000AF2E8 /* ProfileInterface.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ProfileInterface.storyboard; sourceTree = "<group>"; };
+		5BA9164C22F31DDA000AF2E8 /* FavoritesInterface.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FavoritesInterface.storyboard; sourceTree = "<group>"; };
 		5BB02FEB22E7499800283272 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		5BB02FED22E749E300283272 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		5BE8470C22E75DC700B8E8FC /* PhotoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoModel.swift; sourceTree = "<group>"; };
@@ -196,7 +202,7 @@
 				5B884C7F22EB7FB40062F4AF /* GroupDisplayTableViewCell.swift */,
 				5B0B688522F21308004FDBFA /* GroupDisplayTableViewCell.xib */,
 				5B9DECD022E8EF5000321359 /* UserBioTableViewCell.swift */,
-				5B8E5D6222E743DC008BE588 /* MeetupInfoInterface.storyboard */,
+				5BA9164E22F32091000AF2E8 /* Storyboards */,
 				5B901EBA22E9ED0D00272253 /* UserImageView.xib */,
 				5B901EBC22E9ED4700272253 /* UserImageView.swift */,
 				5B9DECC722E89FF600321359 /* Main.storyboard */,
@@ -235,6 +241,17 @@
 				5B9DECD222E8F03500321359 /* UserProfileDataSource.swift */,
 			);
 			path = DataSource;
+			sourceTree = "<group>";
+		};
+		5BA9164E22F32091000AF2E8 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				5B8E5D6222E743DC008BE588 /* MeetupInfoInterface.storyboard */,
+				5BA9164C22F31DDA000AF2E8 /* FavoritesInterface.storyboard */,
+				5BA9164A22F31D93000AF2E8 /* ProfileInterface.storyboard */,
+				5BA9164822F31D75000AF2E8 /* GroupInterface.storyboard */,
+			);
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 		5BF41FF822E78A4A00ECA928 /* Enums */ = {
@@ -342,9 +359,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BA9164922F31D75000AF2E8 /* GroupInterface.storyboard in Resources */,
+				5BA9164D22F31DDA000AF2E8 /* FavoritesInterface.storyboard in Resources */,
 				5B9DECC922E89FF600321359 /* Main.storyboard in Resources */,
 				5B9DECC622E89FCE00321359 /* LaunchScreen.storyboard in Resources */,
 				5B901EBB22E9ED0D00272253 /* UserImageView.xib in Resources */,
+				5BA9164B22F31D93000AF2E8 /* ProfileInterface.storyboard in Resources */,
 				5B1AD6C022DE22910008E4EC /* Assets.xcassets in Resources */,
 				5B8E5D6322E743DC008BE588 /* MeetupInfoInterface.storyboard in Resources */,
 				5B0B688622F21308004FDBFA /* GroupDisplayTableViewCell.xib in Resources */,
