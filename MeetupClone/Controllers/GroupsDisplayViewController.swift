@@ -18,7 +18,7 @@ final class GroupsDisplayViewController: UIViewController {
         return searchController
     }()
     
-    let groupInfoDataSource = GroupInfoDataSource()
+    private let groupInfoDataSource = GroupInfoDataSource()
     
     private var meetupGroups = [MeetupGroupModel]()
     
