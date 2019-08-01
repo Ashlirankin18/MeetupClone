@@ -13,13 +13,26 @@
         <!--Groups-->
         <scene sceneID="Gld-JO-yes">
             <objects>
-                <viewController id="lM0-ys-K5t" customClass="GroupDisplayViewController" customModule="MeetupClone" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="lM0-ys-K5t" customClass="GroupsDisplayViewController" customModule="MeetupClone" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Sb1-BW-qNq">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="756"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="88E-sW-CAd">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="5dh-uy-7Gr" firstAttribute="trailing" secondItem="88E-sW-CAd" secondAttribute="trailing" id="5wc-fV-32e"/>
+                            <constraint firstItem="5dh-uy-7Gr" firstAttribute="bottom" secondItem="88E-sW-CAd" secondAttribute="bottom" id="KvH-VE-vBa"/>
+                            <constraint firstItem="88E-sW-CAd" firstAttribute="leading" secondItem="5dh-uy-7Gr" secondAttribute="leading" id="Xg8-w3-ajG"/>
+                            <constraint firstItem="88E-sW-CAd" firstAttribute="top" secondItem="5dh-uy-7Gr" secondAttribute="top" id="i0i-Kg-7c4"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="5dh-uy-7Gr"/>
                     </view>
+
                     <navigationItem key="navigationItem" title="Groups" largeTitleDisplayMode="always" id="L6c-pj-WlY">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="JBu-fu-ab7">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -30,6 +43,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="zipCodeButton" destination="JBu-fu-ab7" id="a22-P7-MJz"/>
+
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n7q-dg-Vll" userLabel="First Responder" sceneMemberID="firstResponder"/>
