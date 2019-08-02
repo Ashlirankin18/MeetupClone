@@ -9,7 +9,6 @@
 import Foundation
 
 /// Handles the methods that will request data from  the server.
-
 class MeetupDataHandler {
     
     private var networkHelper: NetworkHelper
