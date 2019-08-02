@@ -12,33 +12,119 @@ import Foundation
 class MeetupDataHandler {
     
     private var networkHelper: NetworkHelper
-    
+    private var meetupAuthenticatiorHandler = MeetupAuthenticationHandler(userDefaults: UserDefaults.standard, networkHelper: NetworkHelper())
+    private let accessToken = UserDefaults.standard.object(forKey: UserDefaultConstants.accessToken.rawValue) as? String
     /// Initializes the class with networkHelper.
     init(networkHelper: NetworkHelper) {
         self.networkHelper = networkHelper
     }
     
-    typealias Handler = (Result<MeetupUserModel, AppError>) -> Void
+    /// Represent the types that are expected to escape when the asynchrnous func completes.
+    typealias UserHandler = (Result<MeetupUserModel, AppError>) -> Void
+    
+    /// Represent the types that are expected to escape when the asynchrnous func completes.
+    typealias GroupHandler = (Result<[MeetupGroupModel], AppError>) -> Void
+    
+    /// Represent the types that are expected to escape when the asynchrnous func completes.
+    typealias EventHandler = (Result<[MeetupEventModel], AppError>) -> Void
+    
+    ///  Represent the types that are expected to escape when the asynchrnous func completes.
+    typealias RSVPHandler = (Result<[MeetupRSVPModel], AppError>) -> Void
     
     /// Retrieves the user data from the server.
-    /// - Parameter accessToken: Access token that was returned from the server.
     /// - Parameter completionHandler: receives information (expected type) when asynchronous call completes.
-    func retrieveUserData(accessToken: String, completionHandler: @escaping Handler) {
-        
+    func retrieveUserData(completionHandler: @escaping UserHandler) {
         let urlString = "https://api.meetup.com/2/member/self"
-        
-        networkHelper.performDataTask(URLEndpoint: urlString, httpMethod: .Post, httpBody: nil, httpHeader: ("Bearer \(accessToken)", "Authorization")) { (results) in
+        genericRetrievalFunc(urlString: urlString) { (results: Result<MeetupUserModel, AppError>) in
             switch results {
             case .failure(let error):
                 completionHandler(.failure(.networkError(error)))
                 return
+            case .success(let user):
+                completionHandler(.success(user))
+                return
+            }
+        }
+    }
+    
+    /// Retrives groups from the server.
+    ///
+    /// - Parameters:
+    ///   - zipCode: User provided zipcode. If there is not zipcode meetup provides similar groupos based on the location that was given when the account was created
+    ///   - completionHandler: receives information (expected type) when asynchronous call completes.
+    func retrieveMeetupGroups(zipCode: Int?, completionHandler: @escaping GroupHandler) {
+       let urlString = zipCode == nil ? "https://api.meetup.com/find/groups?&sign=true&photo-host=public&page=20" : "https://api.meetup.com/find/groups?&sign=true&photo-host=public&zip=\(11429))&page=20"
+        genericRetrievalFunc(urlString: urlString) { (results: Result<[MeetupGroupModel], AppError>) in
+            switch results {
+            case .failure(let error):
+                completionHandler(.failure(.networkError(error)))
+                return
+            case .success(let groups):
+                completionHandler(.success(groups))
+                return
+            }
+        }
+    }
+    
+    /// Retrives events from the server based the groups urlname
+    ///
+    /// - Parameters:
+    ///   - groupURLName: The URLName of the group
+    ///   - completionHandler: receives information (expected type) when asynchronous call completes.
+    func retrieveEvents(with groupURLName: String, completionHandler: @escaping EventHandler) {
+        let urlString = "https://api.meetup.com/\(groupURLName)/events?&sign=true&photo-host=public&page=20"
+        genericRetrievalFunc(urlString: urlString) { (results: Result<[MeetupEventModel], AppError>) in
+            
+            switch results {
+            case .failure(let error):
+                completionHandler(.failure(.networkError(error)))
+                return
+            case .success(let events):
+                completionHandler(.success(events))
+                return
+            }
+        }
+    }
+    
+    /// Retrieves RSVP'S from the server based on the eventID and eventURLName
+    ///
+    /// - Parameters:
+    ///   - eventId: The eventId of a chosen even.
+    ///   - eventURLName: The event URL name.
+    ///   - completionHandler: receives information (expected type) when asynchronous call completes
+    func retrieveEventRSVP(eventId: Int, eventURLName: String, completionHandler: @escaping RSVPHandler ) {
+        let urlString = "https://api.meetup.com/\(eventURLName)/events/\(eventId)/rsvps?&sign=true&photo-host=public"
+        genericRetrievalFunc(urlString: urlString) { (results: Result<[MeetupRSVPModel], AppError>) in
+            switch results {
+            case .failure(let error):
+                completionHandler(.failure(.networkError(error)))
+                return
+            case .success(let rsvps):
+                completionHandler(.success(rsvps))
+                return
+            }
+        }
+    }
+    
+    private func genericRetrievalFunc<T: Codable>(urlString: String, completion: @escaping (Result<T, AppError>) -> Void) {
+        guard let accessCode = accessToken else { assertionFailure("AccessToken maybe nil")
+            return }
+        let bearer = ("Bearer \(accessCode)", "Authorization")
+        
+        networkHelper.performDataTask(URLEndpoint: urlString, httpMethod: .Get, httpBody: nil, httpHeader: bearer) { (results) in
+            switch results {
+            case .failure(let error):
+                completion(.failure(.networkError(error)))
+                return
             case .success(let data):
                 do {
-                    let user = try JSONDecoder().decode(MeetupUserModel.self, from: data)
-                    completionHandler(.success(user))
+                    let jsonDecoder = JSONDecoder()
+                    jsonDecoder.dateDecodingStrategy = .millisecondsSince1970
+                    let object = try jsonDecoder.decode(T.self, from: data)
+                    completion(.success(object))
                     return
                 } catch {
-                    completionHandler(.failure(.decodingError("Could not decode UserModel from data")))
+                    completion(.failure(.decodingError("Could not decode type")))
                     return
                 }
             }

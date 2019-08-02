@@ -10,9 +10,17 @@ import Foundation
 
 /// JSON response of a request for an access token.
 struct AccessTokenSucessModel: Codable {
+    
+    /// Access token provided by the server
     let accessToken: String
+    
+    /// Type of toke provided
     let tokenType: String
-    let expiresIn: Int
+    
+    ///  Value representing the amount of time it takes for a token to expire
+    let expiresIn: TimeInterval
+    
+    /// Refresh token 
     let refreshToken: String
     
     private enum CodingKeys: String, CodingKey {

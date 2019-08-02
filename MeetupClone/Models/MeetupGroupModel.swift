@@ -10,23 +10,39 @@ import Foundation
 
 /// Represents a MeetupGroup model.
 struct MeetupGroupModel: Codable {
-    let id: String
-    let groupName: String
-    let link: URL
-    let description: String
-    let createdDate: Int
-    let latitude: Double
-    let longitude: Double
-    let photo: Photo
     
+    /// Meetup group Id
+    let id: Int
+    
+    /// The name of the group
+    let groupName: String
+    
+    /// The group's urlName which will be used to search for groupd events,Rsvp etc
+    let urlName: String
+    
+    /// The link to the group's website
+    let link: URL?
+    
+    /// The date group was created
+    let createdDate: Date
+    
+    /// The group image
+    let groupPhoto: MeetupPhotoModel?
+    
+    /// The next event the group will host
+    let nextEvent: MeetupNextEventModel?
+    
+    /// The group's description
+    let description: String
+  
     private enum CodingKeys: String, CodingKey {
-        case id = "id"
+        case id
         case groupName = "name"
-        case link = "link"
-        case description = "description"
+        case link
+        case description
+        case urlName = "urlname"
         case createdDate = "created"
-        case latitude = "lat"
-        case longitude = "lon"
-        case photo = "key_photo"
-    }
+        case groupPhoto = "group_photo"
+        case nextEvent = "next_event"        
+    }   
 }
