@@ -23,7 +23,7 @@ final class GroupInfoDataSource: NSObject, UITableViewDataSource {
         }
         guard !groups.isEmpty else { fatalError("No groups could be found.") }
         let group = groups[indexPath.row]
-        cell.viewModel = GroupDisplayTableViewCell.ViewModel(groupName: group.groupName, groupImage: group.photo.baseURL)
+        cell.viewModel = GroupDisplayTableViewCell.ViewModel(groupName: group.groupName, groupImage: group.groupPhoto?.highresLink)
         return cell
     }
 }
