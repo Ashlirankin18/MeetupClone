@@ -17,8 +17,8 @@ struct AccessTokenSucessModel: Codable {
     /// Type of toke provided
     let tokenType: String
     
-    /// Value representing when the token expires
-    let expiresIn: Int
+    ///  Value representing the amount of time it takes for a token to expire
+    let expiresIn: TimeInterval
     
     /// Refresh token 
     let refreshToken: String
