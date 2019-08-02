@@ -10,21 +10,25 @@ import Foundation
 
 /// Model of Application user
 struct MeetupUserModel: Codable {
-    let bio: String?
-    let city: String?
-    let country: String?
-    let id: Int?
-    let joinedDate: Int
-    let userName: String
-    let photo: Photo?
     
-    private enum CodingKeys: String, CodingKey {
-        case bio = "bio"
-        case city = "city"
-        case country = "country"
-        case id = "id"
-        case joinedDate = "joined"
-        case userName = "name"
-        case photo = "photo"
-    }
+    /// The user's bio
+    let bio: String?
+    
+    /// The city the user is located in
+    let city: String?
+    
+    /// The country the user is located
+    let country: String?
+    
+    /// the user's id
+    let id: Int?
+    
+    /// the date the user joined meetup
+    let joined: Date
+    
+    /// The user's name
+    let name: String
+    
+    /// The user's image on file
+    let photo: MeetupPhotoModel?
 }

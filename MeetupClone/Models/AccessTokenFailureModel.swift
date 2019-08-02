@@ -10,5 +10,7 @@ import Foundation
 
 /// JSON response of a request for an access token.
 struct AccessTokenFailureModel: Codable {
+    
+    /// Error returned from the server
     let error: String
 }

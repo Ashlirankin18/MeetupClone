@@ -10,8 +10,7 @@ import UIKit
 
 /// Display a list of groups that the user searches for.
 class GroupDisplayViewController: UIViewController {
-    
-    @IBOutlet private weak var zipCodeButton: UIBarButtonItem!
+    private let meetUpDataHandler = MeetupDataHandler(networkHelper: NetworkHelper())
     
     private lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
@@ -19,25 +18,40 @@ class GroupDisplayViewController: UIViewController {
         return searchController
     }()
     
+    @IBOutlet private weak var zipCodeButton: UIBarButtonItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavigationSpecifices()
         setupSearchController()
+        retrieveGroups()
     }
     
     private func setupSearchController() {
         searchController.searchResultsUpdater = self
         searchController.searchBar.placeholder = "Search for Groups"
     }
+    
     private func setNavigationSpecifices() {
         navigationItem.searchController = searchController
         navigationController?.navigationBar.prefersLargeTitles = true
         definesPresentationContext = true
     }
+    
+    private func retrieveGroups() {
+        meetUpDataHandler.retrieveMeetupGroups(zipCode: 11429) { (result) in
+            switch result {
+            case .failure(let error):
+                print(error.localizedDescription)
+            case .success(let groups):
+                print(groups)
+            }
+        }
+    }
+    
     @IBAction private func zipCodeButtonPressed(_ sender: UIBarButtonItem) {
     }
 }
 extension GroupDisplayViewController: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-    }
+    func updateSearchResults(for searchController: UISearchController) {}
 }
