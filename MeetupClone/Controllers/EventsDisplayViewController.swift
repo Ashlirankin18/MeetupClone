@@ -17,8 +17,8 @@ class EventsDisplayViewController: UIViewController {
         retrieveEvents()
     }
     
-    private func retrieveEvents() {
-        meetupDataHandler.retrieveEvents(with: "Build-with-Code-New-York") { (results) in
+     @discardableResult private func retrieveEvents() -> URLSessionDataTask? {
+       let dataTask = meetupDataHandler.retrieveEvents(with: "Build-with-Code-New-York") { (results) in
                 switch results {
                 case .failure(let error):
                     print(error)
@@ -26,5 +26,6 @@ class EventsDisplayViewController: UIViewController {
                     print(events)
                 }
         }
+        return dataTask
     }
 }

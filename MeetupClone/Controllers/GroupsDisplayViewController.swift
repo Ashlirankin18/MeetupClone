@@ -22,6 +22,8 @@ final class GroupsDisplayViewController: UIViewController {
     
     private let meetupDataHandler = MeetupDataHandler(networkHelper: NetworkHelper())
     
+    private var currentDataTask: URLSessionDataTask?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableViewProperties()
@@ -41,9 +43,9 @@ final class GroupsDisplayViewController: UIViewController {
         searchController.obscuresBackgroundDuringPresentation = false
         definesPresentationContext = true
     }
-    
-    private func retrieveGroups(searchText: String?, zipCode: Int?) {
-        meetupDataHandler.retrieveMeetupGroups(searchText: searchText ?? "", zipCode: nil) { (results) in
+
+    private func retrieveGroups(searchText: String?, zipCode: Int?) -> URLSessionDataTask? {
+        let dataTask = meetupDataHandler.retrieveMeetupGroups(searchText: searchText ?? "", zipCode: nil) { (results) in
             switch results {
             case .failure(let error):
                 print(error)
@@ -56,6 +58,7 @@ final class GroupsDisplayViewController: UIViewController {
                 }
             }
         }
+        return dataTask
     }
     
     private func checksForInputCount() -> Bool {
@@ -71,8 +74,16 @@ final class GroupsDisplayViewController: UIViewController {
 }
 extension GroupsDisplayViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        if checksForInputCount() && meetupDataHandler.dataTask == nil {                self.retrieveGroups(searchText: searchController.searchBar.text?.lowercased(), zipCode: nil)
+        if checksForInputCount() {
+                if currentDataTask == nil {
+               currentDataTask = self.retrieveGroups(searchText: searchController.searchBar.text?.lowercased(), zipCode: nil)
+                } else {
+                    currentDataTask?.cancel()
+                    let timer = Timer(timeInterval: 1.0, repeats: false) { _ in
+                        self.currentDataTask = self.retrieveGroups(searchText: searchController.searchBar.text?.lowercased(), zipCode: nil)
+                    }
+                    timer.fire()
+            }
         }
-        return
     }
 }

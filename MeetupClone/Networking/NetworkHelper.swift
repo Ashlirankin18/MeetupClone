@@ -13,17 +13,20 @@ class NetworkHelper {
     
     typealias Handler = (Result<Data, AppError>) -> Void
     
+    /// The current data task that will be carried out.
+    var currentDataTask: URLSessionDataTask?
+    
     /// Uses URLSession to make network request.
     /// - Parameter URLEndpoint: Used to form a URL Request.
     /// - Parameter httpMethod:  Represents the various HTTP Methods ex: GET, POST, DELETE.
     /// - Parameter httpBody: Data that will be used as the body of the request.
     /// - Parameter headerProperty: Value to be set for a Header
     /// - Parameter completionHandler: Handles the result of asynchronous call.
-    func performDataTask(URLEndpoint: String, httpMethod: HTTPMethods, httpBody: Data?, httpHeader: (value: String, headerProperty: String)?, completionHandler: @escaping Handler) {
+    func performDataTask(URLEndpoint: String, httpMethod: HTTPMethods, httpBody: Data?, httpHeader: (value: String, headerProperty: String)?, completionHandler: @escaping Handler) -> URLSessionDataTask? {
         
         guard let url = URL(string: URLEndpoint) else {
             completionHandler(.failure(.badURL("Could not create URL from String")))
-            return
+            return nil
         }
         
         var request = URLRequest(url: url)
@@ -34,7 +37,7 @@ class NetworkHelper {
             request.setValue(httpHeader.value, forHTTPHeaderField: httpHeader.headerProperty)
         }
         
-        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+        let dataTask = URLSession.shared.dataTask(with: request) { (data, response, error) in
             DispatchQueue.main.async {
                 
                 if let error = error {
@@ -56,6 +59,7 @@ class NetworkHelper {
                 }
             }
         }
-        task.resume()
+        dataTask.resume()
+        return dataTask
     }
 }
