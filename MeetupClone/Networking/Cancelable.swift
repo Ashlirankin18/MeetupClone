@@ -8,9 +8,11 @@
 
 import Foundation
 
+/// Defines method which cancels a data task
 protocol Cancelable: AnyObject {
     func cancelTask()
 }
+
 extension URLSessionDataTask: Cancelable {
     func cancelTask() {
         cancel()

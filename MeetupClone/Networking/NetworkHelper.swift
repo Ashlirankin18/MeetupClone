@@ -19,7 +19,7 @@ class NetworkHelper {
     /// - Parameter httpBody: Data that will be used as the body of the request.
     /// - Parameter headerProperty: Value to be set for a Header
     /// - Parameter completionHandler: Handles the result of asynchronous call.
-    func performDataTask(URLEndpoint: String, httpMethod: HTTPMethods, httpBody: Data?, httpHeader: (value: String, headerProperty: String)?, completionHandler: @escaping Handler) -> Cancelable?  {
+    func performDataTask(URLEndpoint: String, httpMethod: HTTPMethods, httpBody: Data?, httpHeader: (value: String, headerProperty: String)?, completionHandler: @escaping Handler) -> Cancelable? {
         
         guard let url = URL(string: URLEndpoint) else {
             completionHandler(.failure(.badURL("Could not create URL from String")))
