@@ -33,7 +33,7 @@ class MeetupDataHandler {
     
     /// Retrieves the user data from the server.
     /// - Parameter completionHandler: receives information (expected type) when asynchronous call completes.
-    func retrieveUserData(completionHandler: @escaping UserHandler) -> URLSessionDataTask? {
+    func retrieveUserData(completionHandler: @escaping UserHandler) -> Cancelable? {
         let urlString = "https://api.meetup.com/2/member/self"
         let dataTask = genericRetrievalFunc(urlString: urlString) { (results: Result<MeetupUserModel, AppError>) in
             switch results {
@@ -53,7 +53,7 @@ class MeetupDataHandler {
     /// - Parameters:
     ///   - zipCode: User provided zipcode. If there is not zipcode meetup provides similar groupos based on the location that was given when the account was created
     ///   - completionHandler: receives information (expected type) when asynchronous call completes.
-    func retrieveMeetupGroups(searchText: String, zipCode: Int?, completionHandler: @escaping GroupHandler) -> URLSessionDataTask? {
+    func retrieveMeetupGroups(searchText: String, zipCode: Int?, completionHandler: @escaping GroupHandler) -> Cancelable? {
         let urlString = zipCode == nil ? "https://api.meetup.com/find/groups?&sign=true&photo-host=public&text=\(searchText)&page=20" : "https://api.meetup.com/find/groups?&sign=true&photo-host=public&zip=\(11429))&page=20"
         let dataTask = genericRetrievalFunc(urlString: urlString) { (results: Result<[MeetupGroupModel], AppError>) in
             switch results {
@@ -73,7 +73,7 @@ class MeetupDataHandler {
     /// - Parameters:
     ///   - groupURLName: The URLName of the group
     ///   - completionHandler: receives information (expected type) when asynchronous call completes.
-    @discardableResult func retrieveEvents(with groupURLName: String, completionHandler: @escaping EventHandler) -> URLSessionDataTask? {
+    @discardableResult func retrieveEvents(with groupURLName: String, completionHandler: @escaping EventHandler) -> Cancelable? {
         let urlString = "https://api.meetup.com/\(groupURLName)/events?&sign=true&photo-host=public&page=20"
         let dataTask = genericRetrievalFunc(urlString: urlString) { (results: Result<[MeetupEventModel], AppError>) in
             
@@ -95,7 +95,7 @@ class MeetupDataHandler {
     ///   - eventId: The eventId of a chosen even.
     ///   - eventURLName: The event URL name.
     ///   - completionHandler: receives information (expected type) when asynchronous call completes
-    func retrieveEventRSVP(eventId: Int, eventURLName: String, completionHandler: @escaping RSVPHandler ) -> URLSessionDataTask? {
+    func retrieveEventRSVP(eventId: Int, eventURLName: String, completionHandler: @escaping RSVPHandler ) -> Cancelable? {
         let urlString = "https://api.meetup.com/\(eventURLName)/events/\(eventId)/rsvps?&sign=true&photo-host=public"
         let dataTask = genericRetrievalFunc(urlString: urlString) { (results: Result<[MeetupRSVPModel], AppError>) in
             switch results {
@@ -110,7 +110,7 @@ class MeetupDataHandler {
         return dataTask
     }
     
-    private func genericRetrievalFunc<T: Codable>(urlString: String, completion: @escaping (Result<T, AppError>) -> Void) -> URLSessionDataTask? {
+    private func genericRetrievalFunc<T: Codable>(urlString: String, completion: @escaping (Result<T, AppError>) -> Void) -> Cancelable? {
         guard let accessCode = accessToken else { assertionFailure("AccessToken maybe nil")
             return nil}
         let bearer = ("Bearer \(accessCode)", "Authorization")

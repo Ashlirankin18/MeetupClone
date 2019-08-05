@@ -22,7 +22,7 @@ final class GroupsDisplayViewController: UIViewController {
     
     private let meetupDataHandler = MeetupDataHandler(networkHelper: NetworkHelper())
     
-    private var currentDataTask: URLSessionDataTask?
+    private var currentDataTask: Cancelable?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +44,7 @@ final class GroupsDisplayViewController: UIViewController {
         definesPresentationContext = true
     }
     
-    @discardableResult private func retrieveGroups(searchText: String?, zipCode: Int?) -> URLSessionDataTask? {
+    private func retrieveGroups(searchText: String?, zipCode: Int?) -> Cancelable? {
         let dataTask = meetupDataHandler.retrieveMeetupGroups(searchText: searchText ?? "", zipCode: nil) { (results) in
             switch results {
             case .failure(let error):
@@ -76,12 +76,13 @@ extension GroupsDisplayViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         if checksForInputCount() {
             if currentDataTask == nil {
-                currentDataTask = self.retrieveGroups(searchText: searchController.searchBar.text?.lowercased(), zipCode: nil)
+                currentDataTask = retrieveGroups(searchText: searchController.searchBar.text?.lowercased(), zipCode: nil)
             } else {
-                currentDataTask?.cancel()
+                currentDataTask?.cancelTask()
                 let timer = Timer(timeInterval: 1.0, repeats: false) { _ in
                     self.currentDataTask = self.retrieveGroups(searchText: searchController.searchBar.text?.lowercased(), zipCode: nil)
                 }
+                
                 timer.fire()
             }
         }

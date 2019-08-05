@@ -10,7 +10,10 @@ import UIKit
 import Kingfisher
 /// `UITableView` subclass which represents the information about a group object.
 final class GroupDisplayTableViewCell: UITableViewCell {
-    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        groupImageView.image = nil
+    }
     /// Hold the data and logic needed to populate the `GroupDisplayTableViewCell`
     struct ViewModel {
         
