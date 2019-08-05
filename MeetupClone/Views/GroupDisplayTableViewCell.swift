@@ -19,13 +19,26 @@ final class GroupDisplayTableViewCell: UITableViewCell {
         
         /// The imageURL of the group's profile image
         let groupImage: URL?
+       
+        /// The number of people who are members of this group
+        let members: Int
+        
+        let nextEventName: String
     }
     
     /// Represents the `GroupDisplayTableViewCell` Model
     var viewModel: ViewModel? {
         didSet {
-            groupImageView.kf.setImage(with: viewModel?.groupImage)
+            guard let viewModel = viewModel else {
+                return}
+            groupImageView.kf.setImage(with: viewModel.groupImage)
+            groupNameLabel.text = viewModel.groupName
+            numberOfMembersLabel.text = "\(String(describing: viewModel.members)) Members"
+            nextEventLabel.text = "Next Event: \(String(describing: viewModel.nextEventName))"
         }
     }
     @IBOutlet private weak var groupImageView: UIImageView!
+    @IBOutlet private weak var groupNameLabel: UILabel!
+    @IBOutlet private weak var numberOfMembersLabel: UILabel!
+    @IBOutlet private weak var nextEventLabel: UILabel!
 }

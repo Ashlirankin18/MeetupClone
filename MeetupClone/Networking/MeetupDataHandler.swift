@@ -52,8 +52,8 @@ class MeetupDataHandler {
     /// - Parameters:
     ///   - zipCode: User provided zipcode. If there is not zipcode meetup provides similar groupos based on the location that was given when the account was created
     ///   - completionHandler: receives information (expected type) when asynchronous call completes.
-    func retrieveMeetupGroups(zipCode: Int?, completionHandler: @escaping GroupHandler) {
-       let urlString = zipCode == nil ? "https://api.meetup.com/find/groups?&sign=true&photo-host=public&page=20" : "https://api.meetup.com/find/groups?&sign=true&photo-host=public&zip=\(11429))&page=20"
+    func retrieveMeetupGroups(searchText: String?, zipCode: Int?, completionHandler: @escaping GroupHandler) {
+        let urlString = zipCode == nil ? "https://api.meetup.com/find/groups?&sign=true&photo-host=public&text=\(String(describing: searchText))&page=20" : "https://api.meetup.com/find/groups?&sign=true&photo-host=public&zip=\(11429))&page=20"
         genericRetrievalFunc(urlString: urlString) { (results: Result<[MeetupGroupModel], AppError>) in
             switch results {
             case .failure(let error):

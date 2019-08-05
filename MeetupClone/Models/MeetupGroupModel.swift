@@ -34,6 +34,9 @@ struct MeetupGroupModel: Codable {
     
     /// The group's description
     let description: String
+    
+    /// The number of people who are members of the group.
+    let members: Int
   
     private enum CodingKeys: String, CodingKey {
         case id
@@ -43,6 +46,7 @@ struct MeetupGroupModel: Codable {
         case urlName = "urlname"
         case createdDate = "created"
         case groupPhoto = "group_photo"
-        case nextEvent = "next_event"        
+        case nextEvent = "next_event"
+        case members
     }   
 }

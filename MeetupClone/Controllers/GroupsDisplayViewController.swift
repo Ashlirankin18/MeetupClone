@@ -20,7 +20,7 @@ final class GroupsDisplayViewController: UIViewController {
     
     private let groupInfoDataSource = GroupInfoDataSource()
     
-    private var meetupGroups = [MeetupGroupModel]()
+    private let meetupDataHandler = MeetupDataHandler(networkHelper: NetworkHelper())
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,15 +32,35 @@ final class GroupsDisplayViewController: UIViewController {
         groupDisplayTableView.dataSource = groupInfoDataSource
         groupDisplayTableView.rowHeight = UITableView.automaticDimension
         groupDisplayTableView.register(UINib(nibName: "GroupDisplayTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "GroupDisplayCell")
-        groupInfoDataSource.groups = meetupGroups
     }
     
     private func configureSearchController() {
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
-        searchController.delegate = self
+        searchController.searchResultsUpdater = self
         definesPresentationContext = true
     }
+    private func retrieveGroups(searchText: String?, zipCode: Int?) {
+
+        meetupDataHandler.retrieveMeetupGroups(searchText: searchText ?? "", zipCode: 11429) { (results) in
+            switch results {
+            case .failure(let error):
+                print(error)
+            case .success(let groups):
+               self.groupInfoDataSource.groups = groups
+            self.groupDisplayTableView.reloadData()
+            }
+        }
+    }
 }
-extension GroupsDisplayViewController: UISearchControllerDelegate {
+extension GroupsDisplayViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        if let text = searchController.searchBar.text {
+            if text.count > 3 {
+                retrieveGroups(searchText: text, zipCode: nil)
+            } else {
+                return
+            }
+        }
+    }
 }
