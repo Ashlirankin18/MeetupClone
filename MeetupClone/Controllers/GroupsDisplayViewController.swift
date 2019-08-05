@@ -38,29 +38,41 @@ final class GroupsDisplayViewController: UIViewController {
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
         definesPresentationContext = true
     }
+    
     private func retrieveGroups(searchText: String?, zipCode: Int?) {
-
-        meetupDataHandler.retrieveMeetupGroups(searchText: searchText ?? "", zipCode: 11429) { (results) in
+        meetupDataHandler.retrieveMeetupGroups(searchText: searchText ?? "", zipCode: nil) { (results) in
             switch results {
             case .failure(let error):
                 print(error)
             case .success(let groups):
-               self.groupInfoDataSource.groups = groups
-            self.groupDisplayTableView.reloadData()
+                if groups.isEmpty {
+                    // TODO:- The Empty State Controller
+                } else {
+                    self.groupInfoDataSource.groups = groups
+                    self.groupDisplayTableView.reloadData()
+                }
             }
         }
+    }
+    
+    private func checksForInputCount() -> Bool {
+        if let text = searchController.searchBar.text {
+            if text.count > 3 {
+                return true
+            } else {
+                return false
+            }
+        }
+        return false
     }
 }
 extension GroupsDisplayViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        if let text = searchController.searchBar.text {
-            if text.count > 3 {
-                retrieveGroups(searchText: text, zipCode: nil)
-            } else {
-                return
-            }
+        if checksForInputCount() && meetupDataHandler.dataTask == nil {                self.retrieveGroups(searchText: searchController.searchBar.text?.lowercased(), zipCode: nil)
         }
+        return
     }
 }
