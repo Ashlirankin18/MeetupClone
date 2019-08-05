@@ -43,8 +43,8 @@ final class GroupsDisplayViewController: UIViewController {
         searchController.obscuresBackgroundDuringPresentation = false
         definesPresentationContext = true
     }
-
-    private func retrieveGroups(searchText: String?, zipCode: Int?) -> URLSessionDataTask? {
+    
+    @discardableResult private func retrieveGroups(searchText: String?, zipCode: Int?) -> URLSessionDataTask? {
         let dataTask = meetupDataHandler.retrieveMeetupGroups(searchText: searchText ?? "", zipCode: nil) { (results) in
             switch results {
             case .failure(let error):
@@ -75,14 +75,14 @@ final class GroupsDisplayViewController: UIViewController {
 extension GroupsDisplayViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         if checksForInputCount() {
-                if currentDataTask == nil {
-               currentDataTask = self.retrieveGroups(searchText: searchController.searchBar.text?.lowercased(), zipCode: nil)
-                } else {
-                    currentDataTask?.cancel()
-                    let timer = Timer(timeInterval: 1.0, repeats: false) { _ in
-                        self.currentDataTask = self.retrieveGroups(searchText: searchController.searchBar.text?.lowercased(), zipCode: nil)
-                    }
-                    timer.fire()
+            if currentDataTask == nil {
+                currentDataTask = self.retrieveGroups(searchText: searchController.searchBar.text?.lowercased(), zipCode: nil)
+            } else {
+                currentDataTask?.cancel()
+                let timer = Timer(timeInterval: 1.0, repeats: false) { _ in
+                    self.currentDataTask = self.retrieveGroups(searchText: searchController.searchBar.text?.lowercased(), zipCode: nil)
+                }
+                timer.fire()
             }
         }
     }

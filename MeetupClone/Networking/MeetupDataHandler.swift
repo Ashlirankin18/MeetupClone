@@ -35,7 +35,7 @@ class MeetupDataHandler {
     /// - Parameter completionHandler: receives information (expected type) when asynchronous call completes.
     func retrieveUserData(completionHandler: @escaping UserHandler) -> URLSessionDataTask? {
         let urlString = "https://api.meetup.com/2/member/self"
-       let dataTask = genericRetrievalFunc(urlString: urlString) { (results: Result<MeetupUserModel, AppError>) in
+        let dataTask = genericRetrievalFunc(urlString: urlString) { (results: Result<MeetupUserModel, AppError>) in
             switch results {
             case .failure(let error):
                 completionHandler(.failure(.networkError(error)))
@@ -73,9 +73,9 @@ class MeetupDataHandler {
     /// - Parameters:
     ///   - groupURLName: The URLName of the group
     ///   - completionHandler: receives information (expected type) when asynchronous call completes.
-    func retrieveEvents(with groupURLName: String, completionHandler: @escaping EventHandler) -> URLSessionDataTask? {
+    @discardableResult func retrieveEvents(with groupURLName: String, completionHandler: @escaping EventHandler) -> URLSessionDataTask? {
         let urlString = "https://api.meetup.com/\(groupURLName)/events?&sign=true&photo-host=public&page=20"
-       let dataTask = genericRetrievalFunc(urlString: urlString) { (results: Result<[MeetupEventModel], AppError>) in
+        let dataTask = genericRetrievalFunc(urlString: urlString) { (results: Result<[MeetupEventModel], AppError>) in
             
             switch results {
             case .failure(let error):
@@ -107,7 +107,7 @@ class MeetupDataHandler {
                 return
             }
         }
-     return dataTask
+        return dataTask
     }
     
     private func genericRetrievalFunc<T: Codable>(urlString: String, completion: @escaping (Result<T, AppError>) -> Void) -> URLSessionDataTask? {
@@ -115,7 +115,7 @@ class MeetupDataHandler {
             return nil}
         let bearer = ("Bearer \(accessCode)", "Authorization")
         
-       let task = networkHelper.performDataTask(URLEndpoint: urlString, httpMethod: .Get, httpBody: nil, httpHeader: bearer) { (results) in
+        let task = networkHelper.performDataTask(URLEndpoint: urlString, httpMethod: .Get, httpBody: nil, httpHeader: bearer) { (results) in
             switch results {
             case .failure(let error):
                 completion(.failure(.networkError(error)))
