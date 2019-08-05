@@ -20,9 +20,12 @@ struct MeetupPhotoModel: Codable {
     /// id which represents an image
     let id: Int
     
+    let photoLink: URL
+    
     private enum CodingKeys: String, CodingKey {
         case highresLink = "highres_link"
         case thumbLink = "thumb_link"
+        case photoLink = "photo_link"
         case id
     }
 }
