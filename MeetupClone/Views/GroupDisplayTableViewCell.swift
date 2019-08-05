@@ -23,6 +23,7 @@ final class GroupDisplayTableViewCell: UITableViewCell {
         /// The number of people who are members of this group
         let members: Int
         
+        /// The name of the group's mext event
         let nextEventName: String
     }
     
@@ -31,7 +32,7 @@ final class GroupDisplayTableViewCell: UITableViewCell {
         didSet {
             guard let viewModel = viewModel else {
                 return}
-            groupImageView.kf.setImage(with: viewModel.groupImage)
+            groupImageView.kf.setImage(with: viewModel.groupImage, placeholder: UIImage(named: "group-placeholder") )
             groupNameLabel.text = viewModel.groupName
             numberOfMembersLabel.text = "\(String(describing: viewModel.members)) Members"
             nextEventLabel.text = "Next Event: \(String(describing: viewModel.nextEventName))"
