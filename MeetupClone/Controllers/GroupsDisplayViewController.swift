@@ -15,6 +15,9 @@ final class GroupsDisplayViewController: UIViewController {
     
     private lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+       
         return searchController
     }()
     
@@ -27,7 +30,9 @@ final class GroupsDisplayViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableViewProperties()
-        configureSearchController()
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        definesPresentationContext = true
     }
     
     private func configureTableViewProperties() {
@@ -35,14 +40,6 @@ final class GroupsDisplayViewController: UIViewController {
         groupDisplayTableView.delegate = self
         groupDisplayTableView.rowHeight = UITableView.automaticDimension
         groupDisplayTableView.register(UINib(nibName: "GroupDisplayTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "GroupDisplayCell")
-    }
-    
-    private func configureSearchController() {
-        navigationItem.searchController = searchController
-        navigationItem.hidesSearchBarWhenScrolling = false
-        searchController.searchResultsUpdater = self
-        searchController.obscuresBackgroundDuringPresentation = false
-        definesPresentationContext = true
     }
     
     private func retrieveGroups(searchText: String?, zipCode: Int?) -> Cancelable? {

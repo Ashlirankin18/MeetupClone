@@ -190,7 +190,6 @@
 		5B8932BF22E643BC00BF9876 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				5B884C8322EB88890062F4AF /* GroupInfoDataSource.swift */,
 				5B9DECD422E8F03900321359 /* DataSource */,
 				5BB02FED22E749E300283272 /* FavoritesViewController.swift */,
 				5B0B687022EF5E18004FDBFA /* EventsDisplayViewController.swift */,
@@ -247,6 +246,7 @@
 		5B9DECD422E8F03900321359 /* DataSource */ = {
 			isa = PBXGroup;
 			children = (
+				5B884C8322EB88890062F4AF /* GroupInfoDataSource.swift */,
 				5B9DECD222E8F03500321359 /* UserProfileDataSource.swift */,
 			);
 			path = DataSource;
