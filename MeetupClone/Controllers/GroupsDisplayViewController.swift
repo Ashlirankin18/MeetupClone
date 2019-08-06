@@ -68,16 +68,18 @@ final class GroupsDisplayViewController: UIViewController {
 }
 extension GroupsDisplayViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        if isSearchControllerInputValid() {
-            if currentDataTask == nil {
-                currentDataTask = retrieveGroups(searchText: searchController.searchBar.text?.lowercased(), zipCode: nil)
-            } else {
-                currentDataTask?.cancelTask()
-                let timer = Timer(timeInterval: 1.0, repeats: false) { _ in
-                    self.currentDataTask = self.retrieveGroups(searchText: searchController.searchBar.text?.lowercased(), zipCode: nil)
+        if let text = searchController.searchBar.text?.lowercased() {
+            if isSearchControllerInputValid() {
+                if currentDataTask == nil {
+                    currentDataTask = retrieveGroups(searchText: text, zipCode: nil)
+                } else {
+                    currentDataTask?.cancelTask()
+                    let timer = Timer(timeInterval: 1.0, repeats: false) { _ in
+                        self.currentDataTask = self.retrieveGroups(searchText: text, zipCode: nil)
+                    }
+                    
+                    timer.fire()
                 }
-                
-                timer.fire()
             }
         }
     }

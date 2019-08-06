@@ -53,8 +53,12 @@ class MeetupDataHandler {
     /// - Parameters:
     ///   - zipCode: User provided zipcode. If there is not zipcode meetup provides similar groupos based on the location that was given when the account was created
     ///   - completionHandler: receives information (expected type) when asynchronous call completes.
-    func retrieveMeetupGroups(searchText: String, zipCode: Int?, completionHandler: @escaping GroupHandler) -> Cancelable? {
-        let urlString = zipCode == nil ? "https://api.meetup.com/find/groups?&sign=true&photo-host=public&text=\(searchText)&page=20" : "https://api.meetup.com/find/groups?&sign=true&photo-host=public&zip=\(11429))&page=20"
+    func retrieveMeetupGroups(searchText: String?, zipCode: String?, completionHandler: @escaping GroupHandler) -> Cancelable? {
+
+        guard let urlString = checksQureyParameters(searchText: searchText, zipCode: zipCode)?.absoluteString else {
+            return nil
+        }
+        
         let dataTask = genericRetrievalFunc(urlString: urlString) { (results: Result<[MeetupGroupModel], AppError>) in
             switch results {
             case .failure(let error):
@@ -134,5 +138,16 @@ class MeetupDataHandler {
             }
         }
         return task
+    }
+    
+    private func checksQureyParameters(searchText: String?, zipCode: String?) -> URL? {
+        var component = URLComponents()
+        component.scheme = "https"
+        component.host = "api.meetup.com"
+        component.path = "/find/groups?&sign=true&photo-host=public"
+        let qureyItemOne = URLQueryItem(name: "zip", value: zipCode)
+        let qureyItemTwo = URLQueryItem(name: "text", value: searchText)
+        component.queryItems = [qureyItemOne, qureyItemTwo]
+        return component.url
     }
 }
