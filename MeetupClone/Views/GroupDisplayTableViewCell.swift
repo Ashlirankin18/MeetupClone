@@ -34,7 +34,8 @@ final class GroupDisplayTableViewCell: UITableViewCell {
     var viewModel: ViewModel? {
         didSet {
             guard let viewModel = viewModel else {
-                return}
+                return
+            }
             groupImageView.kf.setImage(with: viewModel.groupImage, placeholder: UIImage(named: "group-placeholder") )
             groupNameLabel.text = viewModel.groupName
             nextEventLabel.text = "\(viewModel.members) Members • Next Event: \(String(describing: viewModel.nextEventName))"
