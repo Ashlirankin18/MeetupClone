@@ -59,7 +59,7 @@ final class GroupsDisplayViewController: UIViewController {
         return dataTask
     }
     
-    private func checksForInputCount() -> Bool {
+    private func isSearchControllerInputValid() -> Bool {
         guard let text = searchController.searchBar.text else {
             return false
         }
