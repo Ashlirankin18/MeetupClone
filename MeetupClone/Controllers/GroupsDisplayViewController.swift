@@ -32,6 +32,7 @@ final class GroupsDisplayViewController: UIViewController {
     
     private func configureTableViewProperties() {
         groupDisplayTableView.dataSource = groupInfoDataSource
+        groupDisplayTableView.delegate = self
         groupDisplayTableView.rowHeight = UITableView.automaticDimension
         groupDisplayTableView.register(UINib(nibName: "GroupDisplayTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "GroupDisplayCell")
     }
@@ -86,5 +87,16 @@ extension GroupsDisplayViewController: UISearchResultsUpdating {
                 timer.fire()
             }
         }
+    }
+}
+extension GroupsDisplayViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 350
+    }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 1
+    }
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 1
     }
 }

@@ -37,12 +37,10 @@ final class GroupDisplayTableViewCell: UITableViewCell {
                 return}
             groupImageView.kf.setImage(with: viewModel.groupImage, placeholder: UIImage(named: "group-placeholder") )
             groupNameLabel.text = viewModel.groupName
-            numberOfMembersLabel.text = "\(String(describing: viewModel.members)) Members"
-            nextEventLabel.text = "Next Event: \(String(describing: viewModel.nextEventName))"
+            nextEventLabel.text = "\(viewModel.members) Members • Next Event: \(String(describing: viewModel.nextEventName))"
         }
     }
     @IBOutlet private weak var groupImageView: UIImageView!
     @IBOutlet private weak var groupNameLabel: UILabel!
-    @IBOutlet private weak var numberOfMembersLabel: UILabel!
     @IBOutlet private weak var nextEventLabel: UILabel!
 }
