@@ -15,6 +15,8 @@
 		5B1AD6BB22DE22900008E4EC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1AD6BA22DE22900008E4EC /* LoginViewController.swift */; };
 		5B1AD6C022DE22910008E4EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B1AD6BF22DE22910008E4EC /* Assets.xcassets */; };
 		5B1AD6CE22DE22910008E4EC /* MeetupCloneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1AD6CD22DE22910008E4EC /* MeetupCloneTests.swift */; };
+		5B884C7D22EB3AD30062F4AF /* EmptyStateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B884C7B22EB3AD30062F4AF /* EmptyStateViewController.swift */; };
+		5B884C7E22EB3AD30062F4AF /* EmptyStateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B884C7C22EB3AD30062F4AF /* EmptyStateViewController.xib */; };
 		5B884C8122EB7FB40062F4AF /* GroupDisplayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B884C7F22EB7FB40062F4AF /* GroupDisplayTableViewCell.swift */; };
 		5B884C8422EB88890062F4AF /* GroupInfoDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B884C8322EB88890062F4AF /* GroupInfoDataSource.swift */; };
 		5B8932C222E643E400BF9876 /* AccessTokenSuccessModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8932C122E643E400BF9876 /* AccessTokenSuccessModel.swift */; };
@@ -70,6 +72,8 @@
 		5B1AD6C922DE22910008E4EC /* MeetupCloneTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MeetupCloneTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B1AD6CD22DE22910008E4EC /* MeetupCloneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetupCloneTests.swift; sourceTree = "<group>"; };
 		5B1AD6CF22DE22910008E4EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5B884C7B22EB3AD30062F4AF /* EmptyStateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateViewController.swift; sourceTree = "<group>"; };
+		5B884C7C22EB3AD30062F4AF /* EmptyStateViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyStateViewController.xib; sourceTree = "<group>"; };
 		5B884C7F22EB7FB40062F4AF /* GroupDisplayTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupDisplayTableViewCell.swift; sourceTree = "<group>"; };
 		5B884C8322EB88890062F4AF /* GroupInfoDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupInfoDataSource.swift; sourceTree = "<group>"; };
 		5B8932C122E643E400BF9876 /* AccessTokenSuccessModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenSuccessModel.swift; sourceTree = "<group>"; };
@@ -189,6 +193,8 @@
 		5B8932BF22E643BC00BF9876 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				5B884C7B22EB3AD30062F4AF /* EmptyStateViewController.swift */,
+				5B884C7C22EB3AD30062F4AF /* EmptyStateViewController.xib */,
 				5B884C8322EB88890062F4AF /* GroupInfoDataSource.swift */,
 				5B9DECD422E8F03900321359 /* DataSource */,
 				5BB02FED22E749E300283272 /* FavoritesViewController.swift */,
@@ -355,6 +361,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B884C7E22EB3AD30062F4AF /* EmptyStateViewController.xib in Resources */,
 				5B9DECC922E89FF600321359 /* Main.storyboard in Resources */,
 				5B9DECC622E89FCE00321359 /* LaunchScreen.storyboard in Resources */,
 				5B901EBB22E9ED0D00272253 /* UserImageView.xib in Resources */,
@@ -480,6 +487,7 @@
 				5B0B688022F090E3004FDBFA /* MeetupVenueModel.swift in Sources */,
 				5B8932CF22E64E5800BF9876 /* AppError.swift in Sources */,
 				5B8932C222E643E400BF9876 /* AccessTokenSuccessModel.swift in Sources */,
+				5B884C7D22EB3AD30062F4AF /* EmptyStateViewController.swift in Sources */,
 				5B884C8422EB88890062F4AF /* GroupInfoDataSource.swift in Sources */,
 				5BF41FF522E7637D00ECA928 /* UserDefaultConstants.swift in Sources */,
 				5B0B687E22F0904E004FDBFA /* MeetupEventModel.swift in Sources */,
