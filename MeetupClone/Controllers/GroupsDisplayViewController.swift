@@ -68,7 +68,7 @@ final class GroupsDisplayViewController: UIViewController {
 }
 extension GroupsDisplayViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        if checksForInputCount() {
+        if isSearchControllerInputValid() {
             if currentDataTask == nil {
                 currentDataTask = retrieveGroups(searchText: searchController.searchBar.text?.lowercased(), zipCode: nil)
             } else {
