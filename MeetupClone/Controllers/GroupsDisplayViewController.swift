@@ -60,14 +60,10 @@ final class GroupsDisplayViewController: UIViewController {
     }
     
     private func checksForInputCount() -> Bool {
-        if let text = searchController.searchBar.text {
-            if text.count > 3 {
-                return true
-            } else {
-                return false
-            }
+        guard let text = searchController.searchBar.text else {
+            return false
         }
-        return false
+        return text.count > 3
     }
 }
 extension GroupsDisplayViewController: UISearchResultsUpdating {
