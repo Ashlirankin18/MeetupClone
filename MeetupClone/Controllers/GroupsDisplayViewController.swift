@@ -39,8 +39,8 @@ final class GroupsDisplayViewController: UIViewController {
     
     private func checkForLastZipCodeEntered() {
         let userDefaults = UserDefaults.standard
-        if let zipCode = userDefaults.object(forKey: "zipcode") as? String,
-            let searchText = userDefaults.object(forKey: "searchText") as? String {
+        if let zipCode = userDefaults.object(forKey: UserDefaultConstants.zipcode.rawValue) as? String,
+            let searchText = userDefaults.object(forKey: UserDefaultConstants.searchText.rawValue) as? String {
             retrieveGroups(searchText: searchText, zipCode: zipCode)
             searchController.searchBar.text = searchText
             zipCodeBarButton.title = zipCode
@@ -86,7 +86,7 @@ final class GroupsDisplayViewController: UIViewController {
                 self.presentAlertController(message: NSLocalizedString("Zip Code should be 5 digits", comment: "Promptas user to enter zipcode of five digits"))
             } else {
                 if self.parseZipCode(zipCode: zipCode) {
-                    UserDefaults.standard.set(zipCode, forKey: "zipcode")
+                    UserDefaults.standard.set(zipCode, forKey: UserDefaultConstants.zipcode.rawValue)
                 } else {
                     self.presentAlertController(message: NSLocalizedString("Enter zipcode in format ex: 11001", comment: "Prompts the user to enter zipcode in required format."))
                 }
@@ -114,10 +114,10 @@ extension GroupsDisplayViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         let userDefaults = UserDefaults.standard
         if let text = searchController.searchBar.text?.lowercased() {
-            userDefaults.set(text, forKey: "searchText")
+            userDefaults.set(text, forKey: UserDefaultConstants.searchText.rawValue)
             if isSearchControllerInputValid() {
                 if currentDataTask == nil {
-                    let zipCode = userDefaults.object(forKey: "zipcode") as? String ?? ""
+                    let zipCode = userDefaults.object(forKey: UserDefaultConstants.zipcode.rawValue) as? String ?? ""
                     currentDataTask = retrieveGroups(searchText: text, zipCode: zipCode)
                 } else {
                     currentDataTask?.cancelTask()
@@ -145,4 +145,3 @@ extension GroupsDisplayViewController: UITableViewDelegate {
         return 1
     }
 }
-

@@ -14,4 +14,8 @@ enum UserDefaultConstants: String {
     case isLoggedIn = "isLoggedIn"
     /// stores the accessToken.
     case accessToken = "accessToken"
+    /// stores the search text the user entered
+    case searchText = "searchText"
+    ///stores the zipcode the user entered
+    case zipcode = "zipcode"
 }
