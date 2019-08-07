@@ -85,13 +85,26 @@ extension GroupsDisplayViewController: UISearchResultsUpdating {
     }
 }
 extension GroupsDisplayViewController: UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 350
     }
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 1
     }
+    
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 1
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let viewController = UIStoryboard(name: "Events", bundle: nil).instantiateViewController(withIdentifier: "EventsDisplayController") as? EventsDisplayTableViewController else {
+            assertionFailure("could not instantiate view controller")
+            return
+    }
+        let chosenGroup = groupInfoDataSource.groups[indexPath.row]
+        viewController.urlName = chosenGroup.urlName
+        present(viewController, animated: true, completion: nil)
+}
 }
