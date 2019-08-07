@@ -11,8 +11,8 @@ import Foundation
 /// Model of a MeetupEvent
 struct MeetupEventModel: Codable {
     
-    /// Date the event was created.
-    private let createdDate: Int
+    /// Date of the event
+    let localDate: String
     
     /// Id of the event
     let eventId: String
@@ -22,19 +22,23 @@ struct MeetupEventModel: Codable {
     
     /// Website link of the group
     let link: URL
-    
-    /// The events description
-    let description: String
+   
+    /// A description of the event
+    let description: String?
     
     /// Venue of the event
     let venue: MeetupVenueModel?
     
+    /// Number of people who responded yes to the event
+    let yesRSVPCount: Int
+    
     private enum CodingKeys: String, CodingKey {
-        case createdDate = "created"
+        case localDate = "local_date"
         case eventId = "id"
         case eventName = "name"
         case link
-        case description
         case venue
+        case description
+        case yesRSVPCount = "yes_rsvp_count"
     }
 }
