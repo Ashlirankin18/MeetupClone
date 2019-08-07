@@ -10,6 +10,7 @@ import UIKit
 import Kingfisher
 /// `UITableView` subclass which represents the information about a group object.
 final class GroupDisplayTableViewCell: UITableViewCell {
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         groupImageView.image = nil
@@ -24,10 +25,10 @@ final class GroupDisplayTableViewCell: UITableViewCell {
         let groupImage: URL?
        
         /// The number of people who are members of this group
-        let members: Int
+        let members: Int?
         
         /// The name of the group's mext event
-        let nextEventName: String
+        let nextEventName: String?
     }
     
     /// Represents the `GroupDisplayTableViewCell` Model
@@ -38,9 +39,15 @@ final class GroupDisplayTableViewCell: UITableViewCell {
             }
             groupImageView.kf.setImage(with: viewModel.groupImage, placeholder: UIImage(named: "group-placeholder") )
             groupNameLabel.text = viewModel.groupName
-            nextEventLabel.text = "\(viewModel.members) \(NSLocalizedString("Members", comment: "The people who are members of the group")) • \(NSLocalizedString("Next Event", comment: "The group's next event")): \(String(describing: viewModel.nextEventName))"
+            if let members = viewModel.members,
+                let nextEventName = viewModel.nextEventName {
+               nextEventLabel.text = "\(members) \(NSLocalizedString("Members", comment: "The people who are members of the group")) • \(NSLocalizedString("Next Event", comment: "The group's next event")): \(nextEventName)"
+            } else {
+                nextEventLabel.isHidden = true
+            }
         }
     }
+    
     @IBOutlet private weak var groupImageView: UIImageView!
     @IBOutlet private weak var groupNameLabel: UILabel!
     @IBOutlet private weak var nextEventLabel: UILabel!
