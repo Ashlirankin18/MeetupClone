@@ -22,23 +22,16 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="LxE-MX-Ny0">
-                    <rect key="frame" x="8" y="438" width="398" height="53"/>
+                    <rect key="frame" x="15" y="305" width="384" height="53"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2GH-d4-NBZ">
-                            <rect key="frame" x="7" y="0.0" width="384" height="53"/>
-                            <color key="backgroundColor" red="0.99800962209999999" green="0.0051934742370000004" blue="0.1327431798" alpha="0.92407570419999996" colorSpace="custom" customColorSpace="sRGB"/>
+                            <rect key="frame" x="0.0" y="0.0" width="384" height="53"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <state key="normal">
                                 <attributedString key="attributedTitle">
-                                    <fragment content="No Groups Currently Explore">
+                                    <fragment content="No Groups Currently Explore!">
                                         <attributes>
-                                            <color key="NSColor" red="0.99599152803421021" green="0.99613410234451294" blue="0.9959602952003479" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <font key="NSFont" size="29" name="ChalkboardSE-Regular"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment content="!">
-                                        <attributes>
-                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="NSColor" red="0.048446349799633026" green="0.022022483870387077" blue="0.062295384705066681" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <font key="NSFont" size="29" name="ChalkboardSE-Regular"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
@@ -49,11 +42,10 @@
                     </subviews>
                 </stackView>
             </subviews>
-            <color key="backgroundColor" red="0.99800962209999999" green="0.0051934742370000004" blue="0.1327431798" alpha="0.92407570419999996" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="LxE-MX-Ny0" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="394" id="6eK-OH-Yrt"/>
-                <constraint firstItem="LxE-MX-Ny0" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="LYd-QO-50b"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="LxE-MX-Ny0" secondAttribute="trailing" constant="8" id="gMn-a4-wdU"/>
+                <constraint firstItem="LxE-MX-Ny0" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="X9J-Sf-Fwy"/>
+                <constraint firstItem="LxE-MX-Ny0" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="-116.5" id="e6A-pv-u4r"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="47.826086956521742" y="35.491071428571423"/>

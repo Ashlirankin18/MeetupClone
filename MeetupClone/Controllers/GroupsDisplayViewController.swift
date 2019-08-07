@@ -42,7 +42,13 @@ final class GroupsDisplayViewController: UIViewController {
         if let zipCode = userDefaults.object(forKey: "zipcode") as? String,
             let searchText = userDefaults.object(forKey: "searchText") as? String {
             retrieveGroups(searchText: searchText, zipCode: zipCode)
+            searchController.searchBar.text = searchText
+            zipCodeBarButton.title = zipCode
         } else {
+            let childVC = EmptyStateViewController(primaryTitle: "No Groups yet")
+            view.addSubview(childVC.view)
+            addChild(childVC)
+            childVC.didMove(toParent: self)
         }
     }
     private func configureTableViewProperties() {
@@ -52,18 +58,14 @@ final class GroupsDisplayViewController: UIViewController {
         groupDisplayTableView.register(UINib(nibName: "GroupDisplayTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "GroupDisplayCell")
     }
     
-  @discardableResult private func retrieveGroups(searchText: String?, zipCode: String?) -> Cancelable? {
+@discardableResult private func retrieveGroups(searchText: String?, zipCode: String?) -> Cancelable? {
         let dataTask = meetupDataHandler.retrieveMeetupGroups(searchText: searchText ?? "", zipCode: zipCode) { (results) in
             switch results {
             case .failure(let error):
                 print(error)
             case .success(let groups):
-                if groups.isEmpty {
-                    // TODO:- The Empty State Controller
-                } else {
-                    self.groupInfoDataSource.groups = groups
-                    self.groupDisplayTableView.reloadData()
-                }
+                self.groupInfoDataSource.groups = groups
+                self.groupDisplayTableView.reloadData()
             }
         }
         return dataTask
@@ -76,18 +78,22 @@ final class GroupsDisplayViewController: UIViewController {
         return text.count > 3
     }
     
-    private func presentAlertController() {
-        let alertController = UIAlertController(title: NSLocalizedString("Add Zip Code", comment: "The zip code the user desires"), message: NSLocalizedString("Enter the Zip Code", comment: "Prompts users to enter zipcode"), preferredStyle: .alert)
+    private func presentAlertController(message: String) {
+        let alertController = UIAlertController(title: NSLocalizedString("Add Zip Code", comment: "The zip code the user desires"), message: message, preferredStyle: .alert)
         alertController.addTextField(configurationHandler: nil)
         
         let submitAction = UIAlertAction(title: NSLocalizedString("Submit", comment: "Submit Answer"), style: .default) { _ in
             guard let zipCode = alertController.textFields?.first?.text else {
                 return
             }
-            if self.parseZipCode(zipCode: zipCode) {
-            UserDefaults.standard.set(zipCode, forKey: "zipcode")
+            if zipCode.count > 5 {
+                self.presentAlertController(message: NSLocalizedString("Zip Code should be 5 digits", comment: "Promptas user to enter zipcode of five digits"))
             } else {
-                self.presentAlertController()
+                if self.parseZipCode(zipCode: zipCode) {
+                    UserDefaults.standard.set(zipCode, forKey: "zipcode")
+                } else {
+                    self.presentAlertController(message: NSLocalizedString("Enter zipcode in format ex: 11001", comment: "Prompts the user to enter zipcode in required format."))
+                }
             }
         }
         let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel action"), style: .cancel, handler: nil)
@@ -97,14 +103,14 @@ final class GroupsDisplayViewController: UIViewController {
     }
     
     private func parseZipCode(zipCode: String) -> Bool {
-        if (Int(zipCode) != nil) && zipCode.count >= 5 {
+        if Int(zipCode) != nil {
             return true
         }
         return false
     }
     
     @IBAction private func zipCodeBarButtonPressed(_ sender: UIBarButtonItem) {
-        presentAlertController()
+        presentAlertController(message: NSLocalizedString("Enter you 5 digit zipcode.", comment: "Prompts the user to enter thier desired zipcode."))
     }
 }
 extension GroupsDisplayViewController: UISearchResultsUpdating {
@@ -139,3 +145,4 @@ extension GroupsDisplayViewController: UITableViewDelegate {
         return 1
     }
 }
+
