@@ -22,7 +22,8 @@ class EventsDisplayTableViewControllerDataSource: NSObject, UITableViewDataSourc
             return UITableViewCell()
         }
         let event = items[indexPath.row]
-        cell.viewModel = EventDisplayTableViewCell.ViewModel(eventName: event.eventName, eventDescription: event.description ?? NSLocalizedString("This event does not have a description at this time", comment: "Lets the user no the event has not description."), eventLocation: event.venue?.venueName ?? NSLocalizedString("This event does not have a locationat this time", comment: "Lets the user know there is no current location for the event."), rsvpCount: event.yesRSVPCount)
+       
+        cell.viewModel = EventDisplayTableViewCell.ViewModel(eventName: event.eventName, eventDescription: event.description?.convertHTMLStrings()?.string ?? NSLocalizedString("This event does not have a description at this time", comment: "Lets the user know there is no current description for the event."), eventLocation: event.venue?.venueName ?? NSLocalizedString("This event does not have a location at this time", comment: "Lets the user know there is no current location for the event."), rsvpCount: event.yesRSVPCount)
         return cell
     }
 }
