@@ -105,6 +105,7 @@ extension GroupsDisplayViewController: UITableViewDelegate {
     }
         let chosenGroup = groupInfoDataSource.groups[indexPath.row]
         viewController.urlName = chosenGroup.urlName
+        viewController.modalPresentationStyle = .popover
         present(viewController, animated: true, completion: nil)
 }
 }

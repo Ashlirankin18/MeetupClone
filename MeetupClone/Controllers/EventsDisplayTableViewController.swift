@@ -19,7 +19,7 @@ final class EventsDisplayTableViewController: UITableViewController {
     
     private let eventsDisplayTableViewControllerDataSource = EventsDisplayTableViewControllerDataSource()
     private let meetupDataHandler = MeetupDataHandler(networkHelper: NetworkHelper())
-
+    
     /// Initilizes the tableview controller
     ///
     /// - Parameters:
@@ -38,6 +38,9 @@ final class EventsDisplayTableViewController: UITableViewController {
         super.viewDidLoad()
         tableView.register(UINib(nibName: "EventDisplayTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "EventDisplayCell")
         tableView.dataSource = eventsDisplayTableViewControllerDataSource
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 44
+        
     }
     
     func retrieveGroupEvents(urlName: String) {
