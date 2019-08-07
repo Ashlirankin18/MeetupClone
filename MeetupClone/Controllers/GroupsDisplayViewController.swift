@@ -104,8 +104,13 @@ extension GroupsDisplayViewController: UITableViewDelegate {
             return
     }
         let chosenGroup = groupInfoDataSource.groups[indexPath.row]
+        guard let highResPhoto = chosenGroup.groupPhoto?.highresLink else {
+            assertionFailure("No high resolutionImage found")
+            return
+        }
         viewController.urlName = chosenGroup.urlName
         viewController.modalPresentationStyle = .popover
+        viewController.headerInformationModel = HeaderInformationModel(imageURL: highResPhoto, name: chosenGroup.groupName)
         present(viewController, animated: true, completion: nil)
 }
 }
