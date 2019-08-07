@@ -17,7 +17,7 @@ final class GroupsDisplayViewController: UIViewController {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
-       
+        
         return searchController
     }()
     
@@ -102,15 +102,14 @@ extension GroupsDisplayViewController: UITableViewDelegate {
         guard let viewController = UIStoryboard(name: "Events", bundle: nil).instantiateViewController(withIdentifier: "EventsDisplayController") as? EventsDisplayTableViewController else {
             assertionFailure("could not instantiate view controller")
             return
-    }
+        }
         let chosenGroup = groupInfoDataSource.groups[indexPath.row]
-        guard let highResPhoto = chosenGroup.groupPhoto?.highresLink else {
-            assertionFailure("No high resolutionImage found")
-            return
+        if let url = URL(string: "https://www.strategicproposals.com/wordpress/wp-content/uploads/2018/02/group-placeholder.png") {
+            let highResPhoto = chosenGroup.groupPhoto?.highresLink ?? url
+            viewController.headerInformationModel = HeaderInformationModel(imageURL: highResPhoto, name: chosenGroup.groupName)
         }
         viewController.urlName = chosenGroup.urlName
         viewController.modalPresentationStyle = .popover
-        viewController.headerInformationModel = HeaderInformationModel(imageURL: highResPhoto, name: chosenGroup.groupName)
-        present(viewController, animated: true, completion: nil)
-}
+        present(UINavigationController(rootViewController: viewController), animated: true, completion: nil)
+    }
 }
