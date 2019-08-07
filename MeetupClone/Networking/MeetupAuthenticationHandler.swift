@@ -19,7 +19,7 @@ class MeetupAuthenticationHandler {
     private let clientId = "v72nhfu0f9khu3i2bf1t6h87md"
     
     private let clientSecret = "kh32q1hlal6jvc8j3tdv1809rp"
-  
+    
     private let redirectURI = "groupviewerentryurl://entry"
     
     var oAuthTokenCompletionHandler: ((Error?) -> Void)?
@@ -55,7 +55,7 @@ class MeetupAuthenticationHandler {
         let components = URLComponents(url: url, resolvingAgainstBaseURL: false)
         
         let code = components?.queryItems?.first { $0.name.lowercased() == "code" }
-      
+        
         if let receivedCode = code?.value {
             retrievesAccessToken(from: receivedCode)
         } else {
@@ -65,15 +65,15 @@ class MeetupAuthenticationHandler {
     
     /// Takes accessToken that was extracted from processAuthorizationResponse and requests an accessToken from the server.
     /// - Parameter accessCode: Code extracted from the URL returned from the URL.
-    private func retrievesAccessToken(from accessCode: String) {
+    
+    @discardableResult private func retrievesAccessToken(from accessCode: String) -> Cancelable? {
         let getTokenPath = "https://secure.meetup.com/oauth2/access"
         
         /// Converted to data that will be the Body of the request.
         let dataBody = "client_id=\(clientId)&client_secret=\(clientSecret)&grant_type=authorization_code&redirect_uri=\(redirectURI)&code=\(accessCode)"
         
         let data = dataBody.data(using: .utf8)
-        
-        networkHelper.performDataTask(URLEndpoint: getTokenPath, httpMethod: .Post, httpBody: data, httpHeader: ("application/x-www-form-urlencoded", "Content-Type")) { (results) in
+        let dataTask = networkHelper.performDataTask(URLEndpoint: getTokenPath, httpMethod: .Post, httpBody: data, httpHeader: ("application/x-www-form-urlencoded", "Content-Type")) { (results) in
             switch results {
             case .failure(let error):
                 print(error)
@@ -103,5 +103,6 @@ class MeetupAuthenticationHandler {
                 }
             }
         }
+        return dataTask
     }
 }
