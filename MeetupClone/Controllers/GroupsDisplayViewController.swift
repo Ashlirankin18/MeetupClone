@@ -44,13 +44,9 @@ final class GroupsDisplayViewController: UIViewController {
             retrieveGroups(searchText: searchText, zipCode: zipCode)
             searchController.searchBar.text = searchText
             zipCodeBarButton.title = zipCode
-        } else {
-            let childVC = EmptyStateViewController(primaryTitle: "No Groups yet")
-            view.addSubview(childVC.view)
-            addChild(childVC)
-            childVC.didMove(toParent: self)
         }
     }
+    
     private func configureTableViewProperties() {
         groupDisplayTableView.dataSource = groupInfoDataSource
         groupDisplayTableView.delegate = self
@@ -58,7 +54,7 @@ final class GroupsDisplayViewController: UIViewController {
         groupDisplayTableView.register(UINib(nibName: "GroupDisplayTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "GroupDisplayCell")
     }
     
-@discardableResult private func retrieveGroups(searchText: String?, zipCode: String?) -> Cancelable? {
+    @discardableResult private func retrieveGroups(searchText: String?, zipCode: String?) -> Cancelable? {
         let dataTask = meetupDataHandler.retrieveMeetupGroups(searchText: searchText ?? "", zipCode: zipCode) { (results) in
             switch results {
             case .failure(let error):
@@ -114,6 +110,7 @@ final class GroupsDisplayViewController: UIViewController {
     }
 }
 extension GroupsDisplayViewController: UISearchResultsUpdating {
+    
     func updateSearchResults(for searchController: UISearchController) {
         let userDefaults = UserDefaults.standard
         if let text = searchController.searchBar.text?.lowercased() {
@@ -135,12 +132,15 @@ extension GroupsDisplayViewController: UISearchResultsUpdating {
     }
 }
 extension GroupsDisplayViewController: UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 350
     }
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 1
     }
+    
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 1
     }
