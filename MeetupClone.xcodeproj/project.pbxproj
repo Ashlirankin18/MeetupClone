@@ -32,6 +32,7 @@
 		5B8E5D6522E74458008BE588 /* GroupsDisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8E5D6422E74458008BE588 /* GroupsDisplayViewController.swift */; };
 		5B901EBB22E9ED0D00272253 /* UserImageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B901EBA22E9ED0D00272253 /* UserImageView.xib */; };
 		5B901EBD22E9ED4700272253 /* UserImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B901EBC22E9ED4700272253 /* UserImageView.swift */; };
+		5B9251D722FB3EF40053B768 /* Events.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BA9165322F34D9B000AF2E8 /* Events.storyboard */; };
 		5B9DECC322E89F7600321359 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9DECC222E89F7600321359 /* AppDelegate.swift */; };
 		5B9DECC622E89FCE00321359 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B9DECC422E89FCE00321359 /* LaunchScreen.storyboard */; };
 		5B9DECC922E89FF600321359 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B9DECC722E89FF600321359 /* Main.storyboard */; };
@@ -266,7 +267,6 @@
 				5BA9165C22F355A1000AF2E8 /* EventsDisplayTableViewControllerDataSource.swift */,
 				5BD475D922F9DCF000F091AA /* GroupInfoDataSource.swift */,
 				5B9DECD222E8F03500321359 /* UserProfileDataSource.swift */,
-				5B884C8322EB88890062F4AF /* GroupInfoDataSource.swift */,
 			);
 			path = DataSource;
 			sourceTree = "<group>";
@@ -408,6 +408,7 @@
 				5B884C7E22EB3AD30062F4AF /* EmptyStateViewController.xib in Resources */,
 				5B9DECC922E89FF600321359 /* Main.storyboard in Resources */,
 				5B9DECC622E89FCE00321359 /* LaunchScreen.storyboard in Resources */,
+				5B9251D722FB3EF40053B768 /* Events.storyboard in Resources */,
 				5B901EBB22E9ED0D00272253 /* UserImageView.xib in Resources */,
 				5BA9164B22F31D93000AF2E8 /* ProfileInterface.storyboard in Resources */,
 				5B1AD6C022DE22910008E4EC /* Assets.xcassets in Resources */,
