@@ -40,7 +40,6 @@ final class EventsDisplayTableViewController: UITableViewController {
         tableView.dataSource = eventsDisplayTableViewControllerDataSource
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 44
-        
     }
     
     func retrieveGroupEvents(urlName: String) {
