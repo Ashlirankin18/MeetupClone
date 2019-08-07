@@ -10,11 +10,7 @@ import UIKit
 
 /// `UITableView` subclass which represents the information about a group object.
 final class EventDisplayTableViewCell: UITableViewCell {
-    @IBOutlet private weak var eventNameLabel: UILabel!
-    @IBOutlet private weak var eventDescriptionTextView: UITextView!
-    @IBOutlet private weak var eventLocationLabel: UILabel!
-    @IBOutlet private weak var rsvpLabel: UILabel!
-    
+   
     /// Hold the data and logic needed to populate the `EventDisplayTableViewCell`
     struct ViewModel {
         
@@ -39,8 +35,12 @@ final class EventDisplayTableViewCell: UITableViewCell {
             }
             eventNameLabel.text = viewModel.eventName
             eventDescriptionTextView.text = viewModel.eventDescription
-            eventLocationLabel.text = viewModel.eventLocation
-            rsvpLabel.text = "\(viewModel.rsvpCount)"
+            eventLocationLabel.text = "Event Location: \(viewModel.eventLocation)"
+            rsvpLabel.text = "Number of persons Attending: \(viewModel.rsvpCount)"
         }
-    }    
+    }
+    @IBOutlet private weak var eventNameLabel: UILabel!
+    @IBOutlet private weak var eventDescriptionTextView: UITextView!
+    @IBOutlet private weak var eventLocationLabel: UILabel!
+    @IBOutlet private weak var rsvpLabel: UILabel!
 }
