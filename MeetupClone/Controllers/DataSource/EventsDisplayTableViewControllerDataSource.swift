@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// DataSource which will be used to mage data for the EventDisplayTableViewController.
 class EventsDisplayTableViewControllerDataSource: NSObject, UITableViewDataSource {
     
     var items = [MeetupEventModel]()
