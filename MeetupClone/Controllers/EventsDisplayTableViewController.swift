@@ -44,6 +44,13 @@ final class EventsDisplayTableViewController: UITableViewController {
         tableView.dataSource = eventsDisplayTableViewControllerDataSource
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 44
+        title = NSLocalizedString("Events", comment: "The events a group has")
+        setupBarButtonItem()
+    }
+    
+    private func setupBarButtonItem() {
+        let backbutton = UIBarButtonItem(title: "Back", style: .done, target: self, action: #selector(backButtonPressed))
+        navigationItem.leftBarButtonItem = backbutton
     }
     
     private func retrieveGroupEvents(urlName: String) {
@@ -57,6 +64,11 @@ final class EventsDisplayTableViewController: UITableViewController {
             }
         }
     }
+    
+    @objc func backButtonPressed() {
+        dismiss(animated: true)
+    }
+    
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = Bundle.main.loadNibNamed("GroupDisplayTableViewCell", owner: self, options: nil)?.first as? GroupDisplayTableViewCell
         guard let headerInformationModel = headerInformationModel else {
@@ -65,6 +77,7 @@ final class EventsDisplayTableViewController: UITableViewController {
         headerView?.viewModel = GroupDisplayTableViewCell.ViewModel(groupName: headerInformationModel.name, groupImage: headerInformationModel.imageURL, members: nil, nextEventName: nil)
         return headerView
     }
+    
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 300
     }

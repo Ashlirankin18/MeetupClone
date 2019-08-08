@@ -109,7 +109,6 @@ extension GroupsDisplayViewController: UITableViewDelegate {
             viewController.headerInformationModel = HeaderInformationModel(imageURL: highResPhoto, name: chosenGroup.groupName)
         }
         viewController.urlName = chosenGroup.urlName
-        viewController.modalPresentationStyle = .popover
         present(UINavigationController(rootViewController: viewController), animated: true, completion: nil)
     }
 }
