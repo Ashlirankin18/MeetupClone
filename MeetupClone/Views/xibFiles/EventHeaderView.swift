@@ -9,7 +9,9 @@
 import UIKit
 import MapKit
 
+/// `UIView` subclass which represents a headerView for a MeetupEvent
 class EventHeaderView: UIView {
+    
     @IBOutlet private weak var eventLocationMapView: MKMapView!
     
     @IBOutlet private weak var eventNameLabel: UILabel!
