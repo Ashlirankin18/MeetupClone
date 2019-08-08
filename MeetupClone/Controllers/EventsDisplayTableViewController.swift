@@ -45,10 +45,10 @@ final class EventsDisplayTableViewController: UITableViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 44
         title = NSLocalizedString("Events", comment: "The events a group has")
-        setupBarButtonItem()
+        setupBarButtonItems()
     }
     
-    private func setupBarButtonItem() {
+    private func setupBarButtonItems() {
         let backbutton = UIBarButtonItem(title: "Back", style: .done, target: self, action: #selector(backButtonPressed))
         navigationItem.leftBarButtonItem = backbutton
     }
@@ -83,6 +83,6 @@ final class EventsDisplayTableViewController: UITableViewController {
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailedController = EventDetailedTableViewController(style: .grouped)
-        present(detailedController, animated: true, completion: nil)
+        present(UINavigationController(rootViewController: detailedController), animated: true, completion: nil)
     }
 }

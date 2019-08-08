@@ -12,7 +12,6 @@
 		5B0B688022F090E3004FDBFA /* MeetupVenueModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B0B687F22F090E3004FDBFA /* MeetupVenueModel.swift */; };
 		5B0B688622F21308004FDBFA /* GroupDisplayTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B0B688522F21308004FDBFA /* GroupDisplayTableViewCell.xib */; };
 		5B18D63922F8B95B00FFDD5E /* Cancelable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B18D63822F8B95B00FFDD5E /* Cancelable.swift */; };
-		5B1AD6BB22DE22900008E4EC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1AD6BA22DE22900008E4EC /* LoginViewController.swift */; };
 		5B1AD6C022DE22910008E4EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B1AD6BF22DE22910008E4EC /* Assets.xcassets */; };
 		5B1AD6CE22DE22910008E4EC /* MeetupCloneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1AD6CD22DE22910008E4EC /* MeetupCloneTests.swift */; };
 		5B526C0322FCAC7000F77EAC /* EventHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B526C0222FCAC7000F77EAC /* EventHeaderView.swift */; };
@@ -21,6 +20,7 @@
 		5B526C0922FCAEA600F77EAC /* MeetupMemberDisplayTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B526C0722FCAEA600F77EAC /* MeetupMemberDisplayTableViewCell.xib */; };
 		5B526C0B22FCB20500F77EAC /* EventDetailedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B526C0A22FCB20500F77EAC /* EventDetailedTableViewController.swift */; };
 		5B526C0D22FCB2AE00F77EAC /* EventDetailedControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B526C0C22FCB2AE00F77EAC /* EventDetailedControllerDataSource.swift */; };
+		5B526C0E22FCBBC500F77EAC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1AD6BA22DE22900008E4EC /* LoginViewController.swift */; };
 		5B884C7D22EB3AD30062F4AF /* EmptyStateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B884C7B22EB3AD30062F4AF /* EmptyStateViewController.swift */; };
 		5B884C7E22EB3AD30062F4AF /* EmptyStateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B884C7C22EB3AD30062F4AF /* EmptyStateViewController.xib */; };
 		5B884C8122EB7FB40062F4AF /* GroupDisplayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B884C7F22EB7FB40062F4AF /* GroupDisplayTableViewCell.swift */; };
@@ -536,9 +536,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B526C0E22FCBBC500F77EAC /* LoginViewController.swift in Sources */,
 				5BD475DA22F9DCF000F091AA /* GroupInfoDataSource.swift in Sources */,
 				5B9DECC322E89F7600321359 /* AppDelegate.swift in Sources */,
-				5B1AD6BB22DE22900008E4EC /* LoginViewController.swift in Sources */,
 				5BB02FEE22E749E300283272 /* FavoritesViewController.swift in Sources */,
 				5B8E5D6522E74458008BE588 /* GroupsDisplayViewController.swift in Sources */,
 				5B526C0322FCAC7000F77EAC /* EventHeaderView.swift in Sources */,
@@ -569,7 +569,6 @@
 				5B0B687E22F0904E004FDBFA /* MeetupEventModel.swift in Sources */,
 				5B0B686D22EF510E004FDBFA /* MeetupNextEventModel.swift in Sources */,
 				5B901EBD22E9ED4700272253 /* UserImageView.swift in Sources */,
-				5B1AD6BB22DE22900008E4EC /* LoginViewController.swift in Sources */,
 				5BA9165A22F35043000AF2E8 /* EventDisplayTableViewCell.swift in Sources */,
 				5B526C0822FCAEA600F77EAC /* MeetupMemberDisplayTableViewCell.swift in Sources */,
 				5BF41FF322E7609500ECA928 /* MeetupMemberModel.swift in Sources */,
