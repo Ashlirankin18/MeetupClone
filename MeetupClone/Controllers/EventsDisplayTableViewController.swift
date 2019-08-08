@@ -65,7 +65,7 @@ final class EventsDisplayTableViewController: UITableViewController {
         }
     }
     
-    @objc func backButtonPressed() {
+    @objc private func backButtonPressed() {
         dismiss(animated: true)
     }
     
