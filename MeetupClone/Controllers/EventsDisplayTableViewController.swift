@@ -81,4 +81,8 @@ final class EventsDisplayTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 300
     }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let detailedController = EventDetailedTableViewController(style: .grouped)
+        present(detailedController, animated: true, completion: nil)
+    }
 }
