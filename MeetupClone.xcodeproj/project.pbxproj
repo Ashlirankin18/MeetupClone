@@ -15,6 +15,10 @@
 		5B1AD6BB22DE22900008E4EC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1AD6BA22DE22900008E4EC /* LoginViewController.swift */; };
 		5B1AD6C022DE22910008E4EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B1AD6BF22DE22910008E4EC /* Assets.xcassets */; };
 		5B1AD6CE22DE22910008E4EC /* MeetupCloneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1AD6CD22DE22910008E4EC /* MeetupCloneTests.swift */; };
+		5B526C0322FCAC7000F77EAC /* EventHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B526C0222FCAC7000F77EAC /* EventHeaderView.swift */; };
+		5B526C0522FCACAD00F77EAC /* EventHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B526C0422FCACAD00F77EAC /* EventHeaderView.xib */; };
+		5B526C0822FCAEA600F77EAC /* MeetupMemberDisplayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B526C0622FCAEA600F77EAC /* MeetupMemberDisplayTableViewCell.swift */; };
+		5B526C0922FCAEA600F77EAC /* MeetupMemberDisplayTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B526C0722FCAEA600F77EAC /* MeetupMemberDisplayTableViewCell.xib */; };
 		5B884C7D22EB3AD30062F4AF /* EmptyStateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B884C7B22EB3AD30062F4AF /* EmptyStateViewController.swift */; };
 		5B884C7E22EB3AD30062F4AF /* EmptyStateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B884C7C22EB3AD30062F4AF /* EmptyStateViewController.xib */; };
 		5B884C8122EB7FB40062F4AF /* GroupDisplayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B884C7F22EB7FB40062F4AF /* GroupDisplayTableViewCell.swift */; };
@@ -82,6 +86,10 @@
 		5B1AD6C922DE22910008E4EC /* MeetupCloneTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MeetupCloneTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B1AD6CD22DE22910008E4EC /* MeetupCloneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetupCloneTests.swift; sourceTree = "<group>"; };
 		5B1AD6CF22DE22910008E4EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5B526C0222FCAC7000F77EAC /* EventHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventHeaderView.swift; sourceTree = "<group>"; };
+		5B526C0422FCACAD00F77EAC /* EventHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventHeaderView.xib; sourceTree = "<group>"; };
+		5B526C0622FCAEA600F77EAC /* MeetupMemberDisplayTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetupMemberDisplayTableViewCell.swift; sourceTree = "<group>"; };
+		5B526C0722FCAEA600F77EAC /* MeetupMemberDisplayTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MeetupMemberDisplayTableViewCell.xib; sourceTree = "<group>"; };
 		5B884C7B22EB3AD30062F4AF /* EmptyStateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateViewController.swift; sourceTree = "<group>"; };
 		5B884C7C22EB3AD30062F4AF /* EmptyStateViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyStateViewController.xib; sourceTree = "<group>"; };
 		5B884C7F22EB7FB40062F4AF /* GroupDisplayTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupDisplayTableViewCell.swift; sourceTree = "<group>"; };
@@ -290,6 +298,10 @@
 		5BA9164F22F32150000AF2E8 /* xibFiles */ = {
 			isa = PBXGroup;
 			children = (
+				5B526C0222FCAC7000F77EAC /* EventHeaderView.swift */,
+				5B526C0422FCACAD00F77EAC /* EventHeaderView.xib */,
+				5B526C0622FCAEA600F77EAC /* MeetupMemberDisplayTableViewCell.swift */,
+				5B526C0722FCAEA600F77EAC /* MeetupMemberDisplayTableViewCell.xib */,
 				5BA9165822F35043000AF2E8 /* EventDisplayTableViewCell.swift */,
 				5BA9165922F35043000AF2E8 /* EventDisplayTableViewCell.xib */,
 				5B884C7F22EB7FB40062F4AF /* GroupDisplayTableViewCell.swift */,
@@ -412,7 +424,9 @@
 				5B9DECC922E89FF600321359 /* Main.storyboard in Resources */,
 				5B9DECC622E89FCE00321359 /* LaunchScreen.storyboard in Resources */,
 				5B9251D722FB3EF40053B768 /* Events.storyboard in Resources */,
+				5B526C0522FCACAD00F77EAC /* EventHeaderView.xib in Resources */,
 				5B901EBB22E9ED0D00272253 /* UserImageView.xib in Resources */,
+				5B526C0922FCAEA600F77EAC /* MeetupMemberDisplayTableViewCell.xib in Resources */,
 				5BA9164B22F31D93000AF2E8 /* ProfileInterface.storyboard in Resources */,
 				5B1AD6C022DE22910008E4EC /* Assets.xcassets in Resources */,
 				5BA9165B22F35043000AF2E8 /* EventDisplayTableViewCell.xib in Resources */,
@@ -521,6 +535,7 @@
 				5B1AD6BB22DE22900008E4EC /* LoginViewController.swift in Sources */,
 				5BB02FEE22E749E300283272 /* FavoritesViewController.swift in Sources */,
 				5B8E5D6522E74458008BE588 /* GroupsDisplayViewController.swift in Sources */,
+				5B526C0322FCAC7000F77EAC /* EventHeaderView.swift in Sources */,
 				5BB02FEC22E7499800283272 /* ProfileViewController.swift in Sources */,
 				5B8932D422E651C100BF9876 /* MeetupDataHandler.swift in Sources */,
 				5B9DECD322E8F03500321359 /* UserProfileDataSource.swift in Sources */,
@@ -549,6 +564,7 @@
 				5B901EBD22E9ED4700272253 /* UserImageView.swift in Sources */,
 				5B1AD6BB22DE22900008E4EC /* LoginViewController.swift in Sources */,
 				5BA9165A22F35043000AF2E8 /* EventDisplayTableViewCell.swift in Sources */,
+				5B526C0822FCAEA600F77EAC /* MeetupMemberDisplayTableViewCell.swift in Sources */,
 				5BF41FF322E7609500ECA928 /* MeetupMemberModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
