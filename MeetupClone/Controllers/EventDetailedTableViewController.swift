@@ -8,7 +8,7 @@
 
 import UIKit
 
-/// `UITableViewController` subclass that will display MeetUpEvent location details and the persons who have rsv'p to an event
+/// `UITableViewController` subclass that will display MeetUpEvent location details and the persons who have rsvp'd to an event.
 final class EventDetailedTableViewController: UITableViewController {
     let eventDetailedControllerDataSource = EventDetailedControllerDataSource()
     
