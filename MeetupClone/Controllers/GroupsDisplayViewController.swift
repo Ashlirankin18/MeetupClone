@@ -11,14 +11,13 @@ import UIKit
 /// Display a list of groups that the user searches for.
 final class GroupsDisplayViewController: UIViewController {
     
-    @IBOutlet private weak var zipCodeBarButton: UIBarButtonItem!
+    @IBOutlet private weak var zipCodeBarButtonItem: UIBarButtonItem!
     @IBOutlet private weak var groupDisplayTableView: UITableView!
     
     private lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
-        
         return searchController
     }()
     
@@ -41,9 +40,11 @@ final class GroupsDisplayViewController: UIViewController {
         let userDefaults = UserDefaults.standard
         if let zipCode = userDefaults.object(forKey: UserDefaultConstants.zipcode.rawValue) as? String,
             let searchText = userDefaults.object(forKey: UserDefaultConstants.searchText.rawValue) as? String {
-            retrieveGroups(searchText: searchText, zipCode: zipCode)
+            zipCodeBarButtonItem.title = zipCode
             searchController.searchBar.text = searchText
-            zipCodeBarButton.title = zipCode
+        } else {
+            zipCodeBarButtonItem.title = NSLocalizedString("Add Zipcode", comment: "Prompts user to enter a zipcode")
+            searchController.searchBar.text = NSLocalizedString("Search for group", comment: "Prompts the user to search for a group.")
         }
     }
     
@@ -76,21 +77,20 @@ final class GroupsDisplayViewController: UIViewController {
     
     private func presentAlertController(message: String) {
         let alertController = UIAlertController(title: NSLocalizedString("Add Zip Code", comment: "The zip code the user desires"), message: message, preferredStyle: .alert)
-        alertController.addTextField(configurationHandler: nil)
+        alertController.addTextField { (textfield) in
+            textfield.keyboardType = .numberPad
+        }
         
         let submitAction = UIAlertAction(title: NSLocalizedString("Submit", comment: "Submit Answer"), style: .default) { _ in
             guard let zipCode = alertController.textFields?.first?.text else {
                 return
             }
-            if zipCode.count > 5 {
-                self.presentAlertController(message: NSLocalizedString("Zip Code should be 5 digits", comment: "Promptas user to enter zipcode of five digits"))
+            self.zipCodeBarButtonItem.title = zipCode
+            if self.isEnteredZipCodeValid(zipCode: zipCode) {
+            UserDefaults.standard.set(zipCode, forKey: UserDefaultConstants.zipcode.rawValue)
             } else {
-                if self.parseZipCode(zipCode: zipCode) {
-                    UserDefaults.standard.set(zipCode, forKey: UserDefaultConstants.zipcode.rawValue)
-                } else {
                     self.presentAlertController(message: NSLocalizedString("Enter zipcode in format ex: 11001", comment: "Prompts the user to enter zipcode in required format."))
                 }
-            }
         }
         let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel action"), style: .cancel, handler: nil)
         alertController.addAction(submitAction)
@@ -98,15 +98,15 @@ final class GroupsDisplayViewController: UIViewController {
         self.present(alertController, animated: true, completion: nil)
     }
     
-    private func parseZipCode(zipCode: String) -> Bool {
-        if Int(zipCode) != nil {
+    private func isEnteredZipCodeValid(zipCode: String) -> Bool {
+        if Int(zipCode) != nil && zipCode.count == 5 {
             return true
         }
         return false
     }
     
     @IBAction private func zipCodeBarButtonPressed(_ sender: UIBarButtonItem) {
-        presentAlertController(message: NSLocalizedString("Enter you 5 digit zipcode.", comment: "Prompts the user to enter thier desired zipcode."))
+        presentAlertController(message: NSLocalizedString("Enter your 5 digit zipcode.", comment: "Prompts the user to enter thier desired zipcode."))
     }
 }
 extension GroupsDisplayViewController: UISearchResultsUpdating {
@@ -118,11 +118,12 @@ extension GroupsDisplayViewController: UISearchResultsUpdating {
             if isSearchControllerInputValid() {
                 if currentDataTask == nil {
                     let zipCode = userDefaults.object(forKey: UserDefaultConstants.zipcode.rawValue) as? String ?? ""
-                    currentDataTask = retrieveGroups(searchText: text, zipCode: zipCode)
+                   currentDataTask = retrieveGroups(searchText: text, zipCode: zipCode)
                 } else {
                     currentDataTask?.cancelTask()
+                     let zipCode = userDefaults.object(forKey: UserDefaultConstants.zipcode.rawValue) as? String ?? ""
                     let timer = Timer(timeInterval: 1.0, repeats: false) { _ in
-                        self.currentDataTask = self.retrieveGroups(searchText: text, zipCode: nil)
+                        self.currentDataTask = self.retrieveGroups(searchText: text, zipCode: zipCode)
                     }
                     
                     timer.fire()
@@ -135,13 +136,5 @@ extension GroupsDisplayViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 350
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 1
     }
 }

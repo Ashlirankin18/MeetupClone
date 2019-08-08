@@ -44,7 +44,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="groupDisplayTableView" destination="88E-sW-CAd" id="mdd-uG-TYJ"/>
-                        <outlet property="zipCodeBarButton" destination="JBu-fu-ab7" id="WVv-A3-oVD"/>
+                        <outlet property="zipCodeBarButtonItem" destination="JBu-fu-ab7" id="WVv-A3-oVD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n7q-dg-Vll" userLabel="First Responder" sceneMemberID="firstResponder"/>
