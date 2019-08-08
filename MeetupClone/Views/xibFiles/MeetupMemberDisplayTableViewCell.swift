@@ -9,7 +9,7 @@
 import UIKit
 
 /// `UITableViewCell` subclass which will display information pertaining to a member of a MeeetupGroup
-class MeetupMemberDisplayTableViewCell: UITableViewCell {
+final class MeetupMemberDisplayTableViewCell: UITableViewCell {
 
     @IBOutlet private weak var memberImageView: UIImageView!
     
