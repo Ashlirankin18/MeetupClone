@@ -33,4 +33,14 @@ final class EventDetailedTableViewController: UITableViewController {
     @objc private func backButtonPressed() {
         dismiss(animated: true)
     }
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let headerView = Bundle.main.loadNibNamed("EventHeaderView", owner: self, options: nil)?.first as? EventHeaderView else {
+            return UIView()
+    
+        }
+        return headerView
+}
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 300
+    }
 }
