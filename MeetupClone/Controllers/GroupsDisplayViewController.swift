@@ -43,8 +43,7 @@ final class GroupsDisplayViewController: UIViewController {
             zipCodeBarButtonItem.title = zipCode
             searchController.searchBar.text = searchText
         } else {
-            zipCodeBarButtonItem.title = NSLocalizedString("Add Zipcode", comment: "Prompts user to enter a zipcode")
-            searchController.searchBar.text = NSLocalizedString("Search for group", comment: "Prompts the user to search for a group.")
+            searchController.searchBar.placeholder = NSLocalizedString("Search for group", comment: "Prompts the user to search for a group.")
         }
     }
     
@@ -87,10 +86,10 @@ final class GroupsDisplayViewController: UIViewController {
             }
             self.zipCodeBarButtonItem.title = zipCode
             if self.isEnteredZipCodeValid(zipCode: zipCode) {
-            UserDefaults.standard.set(zipCode, forKey: UserDefaultConstants.zipcode.rawValue)
+                UserDefaults.standard.set(zipCode, forKey: UserDefaultConstants.zipcode.rawValue)
             } else {
-                    self.presentAlertController(message: NSLocalizedString("Enter zipcode in format ex: 11001", comment: "Prompts the user to enter zipcode in required format."))
-                }
+                self.presentAlertController(message: NSLocalizedString("Enter zipcode in format ex: 11001", comment: "Prompts the user to enter zipcode in required format."))
+            }
         }
         let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel action"), style: .cancel, handler: nil)
         alertController.addAction(submitAction)
@@ -118,10 +117,10 @@ extension GroupsDisplayViewController: UISearchResultsUpdating {
             if isSearchControllerInputValid() {
                 if currentDataTask == nil {
                     let zipCode = userDefaults.object(forKey: UserDefaultConstants.zipcode.rawValue) as? String ?? ""
-                   currentDataTask = retrieveGroups(searchText: text, zipCode: zipCode)
+                    currentDataTask = retrieveGroups(searchText: text, zipCode: zipCode)
                 } else {
                     currentDataTask?.cancelTask()
-                     let zipCode = userDefaults.object(forKey: UserDefaultConstants.zipcode.rawValue) as? String ?? ""
+                    let zipCode = userDefaults.object(forKey: UserDefaultConstants.zipcode.rawValue) as? String ?? ""
                     let timer = Timer(timeInterval: 1.0, repeats: false) { _ in
                         self.currentDataTask = self.retrieveGroups(searchText: text, zipCode: zipCode)
                     }
