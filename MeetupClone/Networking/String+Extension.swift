@@ -8,7 +8,7 @@
 import Foundation
 
 extension String {
-    func convertHTMLStrings() throws -> NSAttributedString {
+    func asHTMLAttributedString() throws -> NSAttributedString {
         if let data = self.data(using: .utf8),
             let attributedString = try? NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil) {
             return attributedString
