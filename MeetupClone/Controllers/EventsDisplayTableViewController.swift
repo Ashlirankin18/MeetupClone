@@ -40,7 +40,7 @@ final class EventsDisplayTableViewController: UITableViewController {
     }
     
     private func retrieveGroupEvents(urlName: String) {
-        meetupDataHandler.retrieveEvents(with: urlName) { (results) in
+        meetupDataHandler.retrieveEvents(with: urlName) { result in
             switch result {
             case .failure(let error):
                 print(error)
