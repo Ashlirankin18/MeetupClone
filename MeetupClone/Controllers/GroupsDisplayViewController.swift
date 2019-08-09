@@ -11,13 +11,13 @@ import UIKit
 /// Display a list of groups that the user searches for.
 final class GroupsDisplayViewController: UIViewController {
     
+    @IBOutlet private weak var zipCodeBarButtonItem: UIBarButtonItem!
     @IBOutlet private weak var groupDisplayTableView: UITableView!
     
     private lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
-       
         return searchController
     }()
     
@@ -33,6 +33,18 @@ final class GroupsDisplayViewController: UIViewController {
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         definesPresentationContext = true
+        checkForLastZipCodeEntered()
+    }
+    
+    private func checkForLastZipCodeEntered() {
+        let userDefaults = UserDefaults.standard
+        if let zipCode = userDefaults.object(forKey: UserDefaultConstants.zipCode.rawValue) as? String,
+            let searchText = userDefaults.object(forKey: UserDefaultConstants.searchText.rawValue) as? String {
+            zipCodeBarButtonItem.title = zipCode
+            searchController.searchBar.text = searchText
+        } else {
+            searchController.searchBar.placeholder = NSLocalizedString("Search for group", comment: "Prompts the user to search for a group.")
+        }
     }
     
     private func configureTableViewProperties() {
@@ -42,18 +54,14 @@ final class GroupsDisplayViewController: UIViewController {
         groupDisplayTableView.register(UINib(nibName: "GroupDisplayTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "GroupDisplayCell")
     }
     
-    private func retrieveGroups(searchText: String?, zipCode: Int?) -> Cancelable? {
-        let dataTask = meetupDataHandler.retrieveMeetupGroups(searchText: searchText ?? "", zipCode: nil) { (results) in
+    @discardableResult private func retrieveGroups(searchText: String?, zipCode: String?) -> Cancelable? {
+        let dataTask = meetupDataHandler.retrieveMeetupGroups(searchText: searchText ?? "", zipCode: zipCode) { (results) in
             switch results {
             case .failure(let error):
                 print(error)
             case .success(let groups):
-                if groups.isEmpty {
-                    // TODO:- The Empty State Controller
-                } else {
-                    self.groupInfoDataSource.groups = groups
-                    self.groupDisplayTableView.reloadData()
-                }
+                self.groupInfoDataSource.groups = groups
+                self.groupDisplayTableView.reloadData()
             }
         }
         return dataTask
@@ -63,19 +71,59 @@ final class GroupsDisplayViewController: UIViewController {
         guard let text = searchController.searchBar.text else {
             return false
         }
-        return text.count > 3
+        return text.count >= 3
+    }
+    
+    private func presentAlertController(message: String) {
+        let alertController = UIAlertController(title: NSLocalizedString("Add Zip Code", comment: "The zip code the user desires"), message: message, preferredStyle: .alert)
+        alertController.addTextField { (textfield) in
+            textfield.keyboardType = .numberPad
+        }
+        
+        let submitAction = UIAlertAction(title: NSLocalizedString("Submit", comment: "Submit Answer"), style: .default) { _ in
+            guard let zipCode = alertController.textFields?.first?.text else {
+                return
+            }
+          
+            if self.isEnteredZipCodeValid(zipCode: zipCode) {
+                self.zipCodeBarButtonItem.title = zipCode
+                UserDefaults.standard.set(zipCode, forKey: UserDefaultConstants.zipCode.rawValue)
+            } else {
+                self.presentAlertController(message: NSLocalizedString("Enter zip code in format ex: 11001", comment: "Prompts the user to enter zip code in required format."))
+            }
+        }
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel action"), style: .cancel, handler: nil)
+        alertController.addAction(submitAction)
+        alertController.addAction(cancelAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    private func isEnteredZipCodeValid(zipCode: String) -> Bool {
+        if Int(zipCode) != nil && zipCode.count == 5 {
+            return true
+        }
+        return false
+    }
+    
+    @IBAction private func zipCodeBarButtonPressed(_ sender: UIBarButtonItem) {
+        presentAlertController(message: NSLocalizedString("Enter your 5 digit zip code.", comment: "Prompts the user to enter thier desired zip code."))
     }
 }
 extension GroupsDisplayViewController: UISearchResultsUpdating {
+    
     func updateSearchResults(for searchController: UISearchController) {
+        let userDefaults = UserDefaults.standard
         if let text = searchController.searchBar.text?.lowercased() {
+            userDefaults.set(text, forKey: UserDefaultConstants.searchText.rawValue)
             if isSearchControllerInputValid() {
                 if currentDataTask == nil {
-                    currentDataTask = retrieveGroups(searchText: text, zipCode: nil)
+                    let zipCode = userDefaults.object(forKey: UserDefaultConstants.zipCode.rawValue) as? String ?? ""
+                    currentDataTask = retrieveGroups(searchText: text, zipCode: zipCode)
                 } else {
                     currentDataTask?.cancelTask()
+                    let zipCode = userDefaults.object(forKey: UserDefaultConstants.zipCode.rawValue) as? String ?? ""
                     let timer = Timer(timeInterval: 1.0, repeats: false) { _ in
-                        self.currentDataTask = self.retrieveGroups(searchText: text, zipCode: nil)
+                        self.currentDataTask = self.retrieveGroups(searchText: text, zipCode: zipCode)
                     }
                     
                     timer.fire()
@@ -85,13 +133,8 @@ extension GroupsDisplayViewController: UISearchResultsUpdating {
     }
 }
 extension GroupsDisplayViewController: UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 350
-    }
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 1
-    }
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 1
     }
 }
