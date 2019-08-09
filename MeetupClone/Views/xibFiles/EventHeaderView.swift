@@ -17,4 +17,27 @@ final class EventHeaderView: UIView {
     @IBOutlet private weak var eventNameLabel: UILabel!
     
     @IBOutlet private weak var eventLocationLabel: UILabel!
+    
+    /// Hold the data and logic needed to populate the `EventHeaderView`
+    struct ViewModel {
+        
+        /// The coordinates of the event
+        let eventCoordinates: CLLocationCoordinate2D
+        
+        /// The name of the event
+        let eventName: String
+        
+        /// The string representation of the event location
+        let eventLocation: String?
+    }
+    
+    /// The header's View Model
+    var viewModel: ViewModel? {
+        didSet {
+            guard let viewModel = viewModel else {
+                assertionFailure("could not initilize viewModel")
+                return
+            }
+        }
+    }
 }

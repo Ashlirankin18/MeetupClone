@@ -12,3 +12,10 @@ struct HeaderInformationModel {
     let imageURL: URL
     let name: String
 }
+
+struct MapDisplayHeaderModel {
+    let lattitude: Double?
+    let longitude: Double?
+    let eventName: String
+    let eventLocation: String?
+}
