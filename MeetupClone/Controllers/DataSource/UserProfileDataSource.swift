@@ -23,7 +23,7 @@ final class UserProfileDataSource: NSObject, UITableViewDataSource {
             cell.textLabel?.text = NSLocalizedString("Name", comment: "Username")
             cell.detailTextLabel?.text = NSLocalizedString("Ashli", comment: "Actual Name")
             return cell
-
+            
         default:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "UserBioCell", for: indexPath) as? UserBioTableViewCell else {
                 return UITableViewCell() }

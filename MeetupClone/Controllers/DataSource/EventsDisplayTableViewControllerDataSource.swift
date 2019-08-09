@@ -10,7 +10,7 @@ import UIKit
 
 /// DataSource which will be used to mage data for the eventsDisplayTableView.
 final class EventsDisplayTableViewControllerDataSource: NSObject, UITableViewDataSource {
-
+    
     /// Array of model objects that will be displayed on screen.
     var items = [MeetupEventModel]()
     
@@ -24,7 +24,7 @@ final class EventsDisplayTableViewControllerDataSource: NSObject, UITableViewDat
         }
         let event = items[indexPath.row]
         do {
-           let description = try event.description?.convertHTMLStrings()
+            let description = try event.description?.convertHTMLStrings()
             cell.viewModel = EventDisplayTableViewCell.ViewModel(eventName: event.eventName, eventDescription: description?.string ?? NSLocalizedString("This event does not have a description at this time", comment: "Lets the user know there is no current description for the event."), eventLocation: event.venue?.venueName ?? NSLocalizedString("This event does not have a location at this time", comment: "Lets the user know there is no current location for the event."), rsvpCount: event.yesRSVPCount)
         } catch {
             assertionFailure("Could not create NSAttributedString")

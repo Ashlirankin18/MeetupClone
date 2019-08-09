@@ -17,7 +17,7 @@ final class EventsDisplayTableViewController: UITableViewController {
             retrieveGroupEvents(urlName: urlName)
         }
     }
-  
+    
     /// The model representing the infoprmation a headerView need it be initilized
     var headerInformationModel: HeaderInformationModel?
     

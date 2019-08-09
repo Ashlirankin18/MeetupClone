@@ -23,7 +23,7 @@ final class GroupInfoDataSource: NSObject, UITableViewDataSource {
         }
         guard !groups.isEmpty else { fatalError("No groups could be found.") }
         let group = groups[indexPath.row]
-
+        
         cell.viewModel = GroupDisplayTableViewCell.ViewModel(groupName: group.groupName, groupImage: group.groupPhoto?.photoLink, members: group.members, nextEventName: group.nextEvent?.eventName ?? NSLocalizedString("This group has no upcoming Events", comment: "Describes the group's upcoming events"))
         return cell
     }
