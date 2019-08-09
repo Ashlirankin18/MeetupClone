@@ -11,7 +11,10 @@ import UIKit
 /// DataSource which will be used to mage data for the groupDisplayTableView.
 final class GroupInfoDataSource: NSObject, UITableViewDataSource {
     
-    var groups = [MeetupGroupModel]() 
+    // MARK: - UITableViewDataSource
+    
+    /// Array of model objects that will be displayed on screen.
+    var groups = [MeetupGroupModel]()
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return groups.count

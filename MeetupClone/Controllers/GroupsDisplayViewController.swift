@@ -8,7 +8,7 @@
 
 import UIKit
 
-/// Display a list of groups that the user searches for.
+/// A `UIViewController` subclass which displays a list of groups that the user searches for.
 final class GroupsDisplayViewController: UIViewController {
     
     @IBOutlet private weak var groupDisplayTableView: UITableView!
