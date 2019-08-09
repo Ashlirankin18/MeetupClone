@@ -12,7 +12,7 @@ import UIKit
 final class EventsDisplayTableViewControllerDataSource: NSObject, UITableViewDataSource {
     
     /// Array of model objects that will be displayed on screen.
-    var items = [MeetupEventModel]()
+    var events = [MeetupEventModel]()
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return items.count
