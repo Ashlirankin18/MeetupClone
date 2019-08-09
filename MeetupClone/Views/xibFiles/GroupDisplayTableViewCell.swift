@@ -8,7 +8,7 @@
 
 import UIKit
 import Kingfisher
-/// `UITableView` subclass which represents the information about a group object.
+/// `UITableViewCell` subclass which represents the information about a group object.
 final class GroupDisplayTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {

@@ -8,7 +8,12 @@
 
 import Foundation
 
+/// Represents the information needed to see up a headerView
 struct HeaderInformationModel {
-    let imageURL: URL
+    
+    /// The URL of an image that will be displayed on the header view.
+    let imageURL: URL?
+    
+    /// The name of the group.
     let name: String
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-/// `UITableView` subclass which represents the information about a group object.
+/// `UITableViewCell` subclass which represents the information about a group object.
 final class EventDisplayTableViewCell: UITableViewCell {
    
     /// Hold the data and logic needed to populate the `EventDisplayTableViewCell`

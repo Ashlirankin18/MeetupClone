@@ -9,7 +9,7 @@
 import UIKit
 
 /// Represents the cell that will display the user's bio information.
-class UserBioTableViewCell: UITableViewCell {
+final class UserBioTableViewCell: UITableViewCell {
 
     @IBOutlet private weak var bioDisplayTextView: UITextView!
     

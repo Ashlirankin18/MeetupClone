@@ -9,7 +9,7 @@
 import UIKit
 
 /// A 'UIViewController' subclass that represents the empty states the application may have.
-class EmptyStateViewController: UIViewController {
+final class EmptyStateViewController: UIViewController {
     
     @IBOutlet private weak var promptButton: UIButton!
     

@@ -9,7 +9,7 @@
 import UIKit
 
 /// Represents the dataSource used to configure the tableView in the ProfileViewController 
-class UserProfileDataSource: NSObject, UITableViewDataSource {
+final class UserProfileDataSource: NSObject, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3

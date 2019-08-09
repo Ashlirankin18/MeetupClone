@@ -24,32 +24,18 @@ final class EventsDisplayTableViewController: UITableViewController {
     private let eventsDisplayTableViewControllerDataSource = EventsDisplayTableViewControllerDataSource()
     private let meetupDataHandler = MeetupDataHandler(networkHelper: NetworkHelper())
     
-    /// Initilizes the tableview controller
-    ///
-    /// - Parameters:
-    ///   - items: An array of items that will be displayed on the tableView cells
-    ///   - headerView: The header view which will display information. If there is a view it will be displayed if not the value will be nil
-    init(urlName: String) {
-        super.init(nibName: nil, bundle: nil)
-        self.urlName = urlName
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(UINib(nibName: "EventDisplayTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "EventDisplayCell")
         tableView.dataSource = eventsDisplayTableViewControllerDataSource
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 44
+        tableView.sectionHeaderHeight = UITableView.automaticDimension
         title = NSLocalizedString("Events", comment: "The events a group has")
         setupBarButtonItem()
     }
     
     private func setupBarButtonItem() {
-        let backbutton = UIBarButtonItem(title: "Back", style: .done, target: self, action: #selector(backButtonPressed))
+        let backbutton = UIBarButtonItem(title: NSLocalizedString("Back", comment: "Tells the user to go back to the previous page."), style: .done, target: self, action: #selector(backButtonPressed))
         navigationItem.leftBarButtonItem = backbutton
     }
     
@@ -76,9 +62,5 @@ final class EventsDisplayTableViewController: UITableViewController {
         }
         headerView?.viewModel = GroupDisplayTableViewCell.ViewModel(groupName: headerInformationModel.name, groupImage: headerInformationModel.imageURL, members: nil, nextEventName: nil)
         return headerView
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 300
     }
 }

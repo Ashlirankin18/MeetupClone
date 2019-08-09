@@ -8,8 +8,10 @@
 
 import UIKit
 
-class EventsDisplayTableViewControllerDataSource: NSObject, UITableViewDataSource {
-    
+/// DataSource which will be used to mage data for the eventsDisplayTableView.
+final class EventsDisplayTableViewControllerDataSource: NSObject, UITableViewDataSource {
+
+    /// Array of model objects that will be displayed on screen.
     var items = [MeetupEventModel]()
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
