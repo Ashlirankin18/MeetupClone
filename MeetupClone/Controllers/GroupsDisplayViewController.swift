@@ -84,8 +84,9 @@ final class GroupsDisplayViewController: UIViewController {
             guard let zipCode = alertController.textFields?.first?.text else {
                 return
             }
-            self.zipCodeBarButtonItem.title = zipCode
+          
             if self.isEnteredZipCodeValid(zipCode: zipCode) {
+                self.zipCodeBarButtonItem.title = zipCode
                 UserDefaults.standard.set(zipCode, forKey: UserDefaultConstants.zipcode.rawValue)
             } else {
                 self.presentAlertController(message: NSLocalizedString("Enter zipcode in format ex: 11001", comment: "Prompts the user to enter zipcode in required format."))
