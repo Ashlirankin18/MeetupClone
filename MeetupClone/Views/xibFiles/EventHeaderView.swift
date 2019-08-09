@@ -38,6 +38,7 @@ final class EventHeaderView: UIView {
                 assertionFailure("could not initilize viewModel")
                 return
             }
+            eventLocationMapView.setCenter(viewModel.eventCoordinates, animated: true)
         }
     }
 }
