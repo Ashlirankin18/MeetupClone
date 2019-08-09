@@ -23,8 +23,13 @@ final class EventsDisplayTableViewControllerDataSource: NSObject, UITableViewDat
             return UITableViewCell()
         }
         let event = items[indexPath.row]
-       
-        cell.viewModel = EventDisplayTableViewCell.ViewModel(eventName: event.eventName, eventDescription: event.description?.convertHTMLStrings()?.string ?? NSLocalizedString("This event does not have a description at this time", comment: "Lets the user know there is no current description for the event."), eventLocation: event.venue?.venueName ?? NSLocalizedString("This event does not have a location at this time", comment: "Lets the user know there is no current location for the event."), rsvpCount: event.yesRSVPCount)
+        do {
+           let description = try event.description?.convertHTMLStrings()
+            cell.viewModel = EventDisplayTableViewCell.ViewModel(eventName: event.eventName, eventDescription: description?.string ?? NSLocalizedString("This event does not have a description at this time", comment: "Lets the user know there is no current description for the event."), eventLocation: event.venue?.venueName ?? NSLocalizedString("This event does not have a location at this time", comment: "Lets the user know there is no current location for the event."), rsvpCount: event.yesRSVPCount)
+        } catch {
+            assertionFailure("Could not create NSAttributedString")
+        }
+        
         return cell
     }
 }
