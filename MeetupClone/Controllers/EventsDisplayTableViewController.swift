@@ -45,7 +45,7 @@ final class EventsDisplayTableViewController: UITableViewController {
             case .failure(let error):
                 print(error)
             case .success(let events):
-                self.eventsDisplayTableViewControllerDataSource.items = events
+                self.eventsDisplayTableViewControllerDataSource.events = events
                 self.tableView.reloadData()
             }
         }
