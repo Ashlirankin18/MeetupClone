@@ -38,7 +38,7 @@ final class GroupsDisplayViewController: UIViewController {
     
     private func checkForLastZipCodeEntered() {
         let userDefaults = UserDefaults.standard
-        if let zipCode = userDefaults.object(forKey: UserDefaultConstants.zipcode.rawValue) as? String,
+        if let zipCode = userDefaults.object(forKey: UserDefaultConstants.zipCode.rawValue) as? String,
             let searchText = userDefaults.object(forKey: UserDefaultConstants.searchText.rawValue) as? String {
             zipCodeBarButtonItem.title = zipCode
             searchController.searchBar.text = searchText
@@ -71,7 +71,7 @@ final class GroupsDisplayViewController: UIViewController {
         guard let text = searchController.searchBar.text else {
             return false
         }
-        return text.count > 3
+        return text.count >= 3
     }
     
     private func presentAlertController(message: String) {
@@ -87,9 +87,9 @@ final class GroupsDisplayViewController: UIViewController {
           
             if self.isEnteredZipCodeValid(zipCode: zipCode) {
                 self.zipCodeBarButtonItem.title = zipCode
-                UserDefaults.standard.set(zipCode, forKey: UserDefaultConstants.zipcode.rawValue)
+                UserDefaults.standard.set(zipCode, forKey: UserDefaultConstants.zipCode.rawValue)
             } else {
-                self.presentAlertController(message: NSLocalizedString("Enter zipcode in format ex: 11001", comment: "Prompts the user to enter zipcode in required format."))
+                self.presentAlertController(message: NSLocalizedString("Enter zip code in format ex: 11001", comment: "Prompts the user to enter zip code in required format."))
             }
         }
         let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel action"), style: .cancel, handler: nil)
@@ -106,7 +106,7 @@ final class GroupsDisplayViewController: UIViewController {
     }
     
     @IBAction private func zipCodeBarButtonPressed(_ sender: UIBarButtonItem) {
-        presentAlertController(message: NSLocalizedString("Enter your 5 digit zipcode.", comment: "Prompts the user to enter thier desired zipcode."))
+        presentAlertController(message: NSLocalizedString("Enter your 5 digit zip code.", comment: "Prompts the user to enter thier desired zip code."))
     }
 }
 extension GroupsDisplayViewController: UISearchResultsUpdating {
@@ -117,11 +117,11 @@ extension GroupsDisplayViewController: UISearchResultsUpdating {
             userDefaults.set(text, forKey: UserDefaultConstants.searchText.rawValue)
             if isSearchControllerInputValid() {
                 if currentDataTask == nil {
-                    let zipCode = userDefaults.object(forKey: UserDefaultConstants.zipcode.rawValue) as? String ?? ""
+                    let zipCode = userDefaults.object(forKey: UserDefaultConstants.zipCode.rawValue) as? String ?? ""
                     currentDataTask = retrieveGroups(searchText: text, zipCode: zipCode)
                 } else {
                     currentDataTask?.cancelTask()
-                    let zipCode = userDefaults.object(forKey: UserDefaultConstants.zipcode.rawValue) as? String ?? ""
+                    let zipCode = userDefaults.object(forKey: UserDefaultConstants.zipCode.rawValue) as? String ?? ""
                     let timer = Timer(timeInterval: 1.0, repeats: false) { _ in
                         self.currentDataTask = self.retrieveGroups(searchText: text, zipCode: zipCode)
                     }

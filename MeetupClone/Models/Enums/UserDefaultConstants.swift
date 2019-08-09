@@ -17,5 +17,5 @@ enum UserDefaultConstants: String {
     /// stores the search text the user entered
     case searchText = "searchText"
     ///stores the zipcode the user entered
-    case zipcode = "zipcode"
+    case zipCode = "zipCode"
 }
