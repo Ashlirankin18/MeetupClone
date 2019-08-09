@@ -40,8 +40,8 @@ final class EventsDisplayTableViewController: UITableViewController {
     }
     
     private func retrieveGroupEvents(urlName: String) {
-        meetupDataHandler.retrieveEvents(with: urlName) { (results) in
-            switch results {
+        meetupDataHandler.retrieveEvents(with: urlName) { result in
+            switch result {
             case .failure(let error):
                 print(error)
             case .success(let events):
@@ -54,7 +54,7 @@ final class EventsDisplayTableViewController: UITableViewController {
     @objc private func backButtonPressed() {
         dismiss(animated: true)
     }
-    
+    // MARK: - UITableViewDelegate
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = Bundle.main.loadNibNamed("GroupDisplayTableViewCell", owner: self, options: nil)?.first as? GroupDisplayTableViewCell
         guard let headerInformationModel = headerInformationModel else {
