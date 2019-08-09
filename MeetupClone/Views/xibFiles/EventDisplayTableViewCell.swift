@@ -35,8 +35,8 @@ final class EventDisplayTableViewCell: UITableViewCell {
             }
             eventNameLabel.text = viewModel.eventName
             eventDescriptionTextView.text = viewModel.eventDescription
-            eventLocationLabel.text = "Event Location: \(viewModel.eventLocation)"
-            rsvpLabel.text = "Number of persons Attending: \(viewModel.rsvpCount)"
+            eventLocationLabel.text = "\(NSLocalizedString("Event Location:", comment: "The location of an event")) \(viewModel.eventLocation)"
+            rsvpLabel.text = "\(NSLocalizedString("Number of persons Attending: ", comment: "Indicates to the user how many persons are attending an event")) \(viewModel.rsvpCount)"
         }
     }
     @IBOutlet private weak var eventNameLabel: UILabel!
