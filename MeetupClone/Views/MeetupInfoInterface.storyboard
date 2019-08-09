@@ -35,12 +35,16 @@
                         <viewLayoutGuide key="safeArea" id="5dh-uy-7Gr"/>
                     </view>
                     <navigationItem key="navigationItem" title="Groups" largeTitleDisplayMode="always" id="L6c-pj-WlY">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="JBu-fu-ab7">
+                        <barButtonItem key="rightBarButtonItem" title="Add Zipcode" id="JBu-fu-ab7">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="zipCodeBarButtonPressed:" destination="lM0-ys-K5t" id="Ug5-B6-mex"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="groupDisplayTableView" destination="88E-sW-CAd" id="mdd-uG-TYJ"/>
+                        <outlet property="zipCodeBarButtonItem" destination="JBu-fu-ab7" id="WVv-A3-oVD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n7q-dg-Vll" userLabel="First Responder" sceneMemberID="firstResponder"/>
