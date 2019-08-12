@@ -27,7 +27,7 @@ final class EventHeaderView: UIView {
     struct ViewModel {
         
         /// The coordinates of the event
-        let eventCoordinates: CLLocationCoordinate2D
+        let eventCoordinates: CLLocationCoordinate2D?
         
         /// The name of the event
         let eventName: String
@@ -55,12 +55,16 @@ final class EventHeaderView: UIView {
             assertionFailure("could not initilize viewModel")
             return
         }
-        let locationAnnotation = MKPointAnnotation()
-        locationAnnotation.coordinate = CLLocationCoordinate2D(latitude: viewModel.eventCoordinates.latitude, longitude: viewModel.eventCoordinates.longitude)
-        locationAnnotation.title = viewModel.eventName
-        eventLocationMapView.addAnnotation(locationAnnotation)
+        if let lattitude = viewModel.eventCoordinates?.latitude,
+            let longitude = viewModel.eventCoordinates?.longitude {
+            let locationAnnotation = MKPointAnnotation()
+            locationAnnotation.coordinate = CLLocationCoordinate2D(latitude: lattitude, longitude: longitude)
+            locationAnnotation.title = viewModel.eventName
+            eventLocationMapView.addAnnotation(locationAnnotation)
+        } else {
+            eventLocationMapView.isHidden = true
+        }
     }
-    
 }
 extension EventHeaderView: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {

@@ -32,6 +32,7 @@ final class EventDetailedTableViewController: UITableViewController {
         tableView.register(UINib(nibName: "MeetupMemberDisplayTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "MemberCell")
         tableView.dataSource = eventDetailedControllerDataSource
         tableView.rowHeight = 80
+        tableView.sectionHeaderHeight = UITableView.automaticDimension
         configureBarButtonItems()
     }
     
@@ -67,12 +68,15 @@ final class EventDetailedTableViewController: UITableViewController {
         let headerModel = headerModel else {
             return UIView()
         }
-        headerView.viewModel = EventHeaderView.ViewModel(eventCoordinates: CLLocationCoordinate2D(latitude: headerModel.lattitude ?? 40.7128, longitude: headerModel.longitude ?? -74.0060), eventName: headerModel.eventName, eventLocation: headerModel.eventLocation)
-        headerView.eventHeaderViewDelegate = self
+        if let lattitude = headerModel.lattitude,
+            let longitude = headerModel.longitude {
+           headerView.viewModel = EventHeaderView.ViewModel(eventCoordinates: CLLocationCoordinate2D(latitude: lattitude, longitude: longitude), eventName: headerModel.eventName, eventLocation: headerModel.eventLocation)
+              headerView.eventHeaderViewDelegate = self
+        } else {
+            headerView.viewModel = EventHeaderView.ViewModel(eventCoordinates: nil, eventName: headerModel.eventName, eventLocation: headerModel.eventLocation)
+        }
+      
         return headerView
-    }
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 350
     }
 }
 extension EventDetailedTableViewController: EventHeaderViewDelegate {

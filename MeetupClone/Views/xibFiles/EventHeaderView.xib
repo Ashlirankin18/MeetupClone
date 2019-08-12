@@ -13,23 +13,26 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EventHeaderView" customModule="MeetupClone" customModuleProvider="target"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="EventHeaderView" customModule="MeetupClone" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="656" height="663"/>
+            <rect key="frame" x="0.0" y="0.0" width="541" height="522"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="QKw-cI-gth">
-                    <rect key="frame" x="0.0" y="0.0" width="656" height="568"/>
-                </mapView>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="rvy-cJ-Fbc">
-                    <rect key="frame" x="0.0" y="578" width="656" height="51"/>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="JDM-ed-XCP">
+                    <rect key="frame" x="0.0" y="0.0" width="541" height="488"/>
                     <subviews>
+                        <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="QKw-cI-gth">
+                            <rect key="frame" x="0.0" y="0.0" width="541" height="425"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="QKw-cI-gth" secondAttribute="height" multiplier="541:425" id="utv-d6-PMh"/>
+                            </constraints>
+                        </mapView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lgb-Dl-acB">
-                            <rect key="frame" x="0.0" y="0.0" width="656" height="26.5"/>
+                            <rect key="frame" x="0.0" y="433" width="541" height="26.5"/>
                             <fontDescription key="fontDescription" name="GurmukhiMN" family="Gurmukhi MN" pointSize="22"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Location" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dgm-OM-RIm">
-                            <rect key="frame" x="0.0" y="30.5" width="656" height="20.5"/>
+                            <rect key="frame" x="0.0" y="467.5" width="541" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -39,13 +42,10 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="rvy-cJ-Fbc" firstAttribute="top" secondItem="QKw-cI-gth" secondAttribute="bottom" constant="10" id="58H-Rs-JDd"/>
-                <constraint firstItem="rvy-cJ-Fbc" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="GWa-FK-BHp"/>
-                <constraint firstItem="rvy-cJ-Fbc" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="Zcq-KD-TSX"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="rvy-cJ-Fbc" secondAttribute="trailing" id="g6k-5r-CzD"/>
-                <constraint firstItem="QKw-cI-gth" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="mZj-LU-GQA"/>
-                <constraint firstItem="QKw-cI-gth" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="rMB-lM-d67"/>
-                <constraint firstItem="QKw-cI-gth" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" id="zyh-XR-ORJ"/>
+                <constraint firstItem="JDM-ed-XCP" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" id="07d-qX-en5"/>
+                <constraint firstItem="JDM-ed-XCP" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="LHw-tw-RNg"/>
+                <constraint firstItem="JDM-ed-XCP" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="QrS-37-FeW"/>
+                <constraint firstItem="JDM-ed-XCP" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="vj2-pa-Q6i"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
@@ -54,7 +54,7 @@
                 <outlet property="eventLocationMapView" destination="QKw-cI-gth" id="DjT-I4-jbS"/>
                 <outlet property="eventNameLabel" destination="lgb-Dl-acB" id="8cw-cK-0ST"/>
             </connections>
-            <point key="canvasLocation" x="311.59420289855075" y="50.558035714285715"/>
+            <point key="canvasLocation" x="228.2608695652174" y="-23.4375"/>
         </view>
     </objects>
 </document>
