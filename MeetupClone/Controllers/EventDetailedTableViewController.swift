@@ -15,8 +15,7 @@ final class EventDetailedTableViewController: UITableViewController {
     let eventDetailedControllerDataSource = EventDetailedControllerDataSource()
     
     var headerModel: MapDisplayHeaderModel?
-    var annotation: MKAnnotationView?
-    
+   
     var eventCredentials: (urlName: String, eventId: String)? {
         didSet {
             guard let eventCredentials = eventCredentials else {
@@ -42,6 +41,7 @@ final class EventDetailedTableViewController: UITableViewController {
         navigationItem.rightBarButtonItem = rightBarButtonItem
         navigationItem.leftBarButtonItem = leftBarButtonItem
     }
+    
     private func retrieveRSVPData(eventId: String, eventURLName: String) {
         meetupDataHandler.retrieveEventRSVP(eventId: eventId, eventURLName: eventURLName) { (result) in
             switch result {
@@ -49,7 +49,7 @@ final class EventDetailedTableViewController: UITableViewController {
                 //TODO:- Add an empty state for a 403 error. The error should let the user know they are not a member of the group.
                 print(error)
             case .success(let rsvps):
-               self.eventDetailedControllerDataSource.items = rsvps
+                self.eventDetailedControllerDataSource.items = rsvps
                 self.tableView.reloadData()
             }
         }
@@ -57,26 +57,26 @@ final class EventDetailedTableViewController: UITableViewController {
     
     @objc private func favoriteButtonPressed() {
     }
+    
     @objc private func backButtonPressed() {
         dismiss(animated: true)
     }
+    
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let headerView = Bundle.main.loadNibNamed("EventHeaderView", owner: self, options: nil)?.first as? EventHeaderView else {
+        guard let headerView = Bundle.main.loadNibNamed("EventHeaderView", owner: self, options: nil)?.first as? EventHeaderView,
+        let headerModel = headerModel else {
             return UIView()
         }
-        
-        headerView.viewModel = EventHeaderView.ViewModel(eventCoordinates: CLLocationCoordinate2D(latitude: headerModel?.lattitude ?? 40.7128, longitude: headerModel?.longitude ?? -74.0060), eventName: headerModel?.eventName ?? "No event name found", eventLocation: headerModel?.eventLocation)
-            headerView.eventHeaderViewDelegate = self
+        headerView.viewModel = EventHeaderView.ViewModel(eventCoordinates: CLLocationCoordinate2D(latitude: headerModel.lattitude ?? 40.7128, longitude: headerModel.longitude ?? -74.0060), eventName: headerModel.eventName, eventLocation: headerModel.eventLocation)
+        headerView.eventHeaderViewDelegate = self
         return headerView
-}
+    }
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 350
     }
 }
 extension EventDetailedTableViewController: EventHeaderViewDelegate {
-    func showAnnotationView(mapView: MKMapView) {
-        <#code#>
+    func showAnnotationView(mapView: MKMapView, annotation: MKAnnotation) {
+        mapView.showAnnotations([annotation], animated: true)
     }
-    
- 
 }
