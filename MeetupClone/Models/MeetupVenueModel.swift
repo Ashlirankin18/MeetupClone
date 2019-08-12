@@ -26,7 +26,8 @@ struct MeetupVenueModel: Codable {
     /// The city that the event will be held
     let city: String
     /// The state that the event will be held
-    let state: String
+    let state: String?
+    
     private enum CodingKeys: String, CodingKey {
         case eventId = "id"
         case venueName = "name"
