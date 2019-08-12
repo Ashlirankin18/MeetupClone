@@ -45,12 +45,6 @@ final class EventsDisplayTableViewController: UITableViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderHeight = UITableView.automaticDimension
         title = NSLocalizedString("Events", comment: "The events a group has")
-        setupBarButtonItems()
-    }
-    
-    private func setupBarButtonItems() {
-        let backbutton = UIBarButtonItem(title: "Back", style: .done, target: self, action: #selector(backButtonPressed))
-        navigationItem.leftBarButtonItem = backbutton
     }
     
     private func retrieveGroupEvents(urlName: String) {
@@ -63,10 +57,6 @@ final class EventsDisplayTableViewController: UITableViewController {
                 self.tableView.reloadData()
             }
         }
-    }
-    
-    @objc private func backButtonPressed() {
-        dismiss(animated: true)
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -86,6 +76,6 @@ final class EventsDisplayTableViewController: UITableViewController {
         let event = eventsDisplayTableViewControllerDataSource.items[indexPath.row]
         detailedController.headerModel = MapDisplayHeaderModel(lattitude: event.venue?.lattitude, longitude: event.venue?.longitude, eventName: event.eventName, eventLocation: event.venue?.city)
         detailedController.eventCredentials = (urlName: urlName, eventId: event.eventId) as? (urlName: String, eventId: String)
-        present(UINavigationController(rootViewController: detailedController), animated: true, completion: nil)
+        navigationController?.pushViewController(detailedController, animated: true)
     }
 }

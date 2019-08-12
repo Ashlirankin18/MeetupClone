@@ -33,14 +33,12 @@ final class EventDetailedTableViewController: UITableViewController {
         tableView.dataSource = eventDetailedControllerDataSource
         tableView.rowHeight = 80
         tableView.sectionHeaderHeight = UITableView.automaticDimension
-        configureBarButtonItems()
+        configureBarButtonItem()
     }
     
-    private func configureBarButtonItems() {
+    private func configureBarButtonItem() {
         let rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "icons8-heart-26"), style: .done, target: self, action: #selector(favoriteButtonPressed))
-        let leftBarButtonItem = UIBarButtonItem(title: "Back", style: .done, target: self, action: #selector(backButtonPressed))
         navigationItem.rightBarButtonItem = rightBarButtonItem
-        navigationItem.leftBarButtonItem = leftBarButtonItem
     }
     
     private func retrieveRSVPData(eventId: String, eventURLName: String) {
@@ -59,10 +57,6 @@ final class EventDetailedTableViewController: UITableViewController {
     @objc private func favoriteButtonPressed() {
     }
     
-    @objc private func backButtonPressed() {
-        dismiss(animated: true)
-    }
-    
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let headerView = Bundle.main.loadNibNamed("EventHeaderView", owner: self, options: nil)?.first as? EventHeaderView,
         let headerModel = headerModel else {
@@ -75,7 +69,6 @@ final class EventDetailedTableViewController: UITableViewController {
         } else {
             headerView.viewModel = EventHeaderView.ViewModel(eventCoordinates: nil, eventName: headerModel.eventName, eventLocation: headerModel.eventLocation)
         }
-      
         return headerView
     }
 }

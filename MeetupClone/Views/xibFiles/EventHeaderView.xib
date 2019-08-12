@@ -20,19 +20,19 @@
                     <rect key="frame" x="0.0" y="0.0" width="541" height="488"/>
                     <subviews>
                         <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="QKw-cI-gth">
-                            <rect key="frame" x="0.0" y="0.0" width="541" height="425"/>
+                            <rect key="frame" x="0.0" y="0.0" width="541" height="472"/>
                             <constraints>
-                                <constraint firstAttribute="width" secondItem="QKw-cI-gth" secondAttribute="height" multiplier="541:425" id="utv-d6-PMh"/>
+                                <constraint firstAttribute="width" secondItem="QKw-cI-gth" secondAttribute="height" multiplier="1:1" priority="999" id="Yn7-SH-3JL"/>
                             </constraints>
                         </mapView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lgb-Dl-acB">
-                            <rect key="frame" x="0.0" y="433" width="541" height="26.5"/>
+                            <rect key="frame" x="0.0" y="480" width="541" height="0.0"/>
                             <fontDescription key="fontDescription" name="GurmukhiMN" family="Gurmukhi MN" pointSize="22"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Location" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dgm-OM-RIm">
-                            <rect key="frame" x="0.0" y="467.5" width="541" height="20.5"/>
+                            <rect key="frame" x="0.0" y="488" width="541" height="0.0"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
