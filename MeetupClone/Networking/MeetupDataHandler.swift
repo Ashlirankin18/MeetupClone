@@ -99,7 +99,7 @@ class MeetupDataHandler {
     ///   - eventId: The eventId of a chosen even.
     ///   - eventURLName: The event URL name.
     ///   - completionHandler: receives information (expected type) when asynchronous call completes
-    func retrieveEventRSVP(eventId: Int, eventURLName: String, completionHandler: @escaping RSVPHandler ) -> Cancelable? {
+  @discardableResult  func retrieveEventRSVP(eventId: String, eventURLName: String, completionHandler: @escaping RSVPHandler ) -> Cancelable? {
         let urlString = "https://api.meetup.com/\(eventURLName)/events/\(eventId)/rsvps?&sign=true&photo-host=public"
         let dataTask = genericRetrievalFunc(urlString: urlString) { (results: Result<[MeetupRSVPModel], AppError>) in
             switch results {
@@ -132,6 +132,7 @@ class MeetupDataHandler {
                     completion(.success(object))
                     return
                 } catch {
+                    print(error)
                     completion(.failure(.decodingError("Could not decode type")))
                     return
                 }
