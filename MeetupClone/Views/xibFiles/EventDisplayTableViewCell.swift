@@ -33,10 +33,12 @@ final class EventDisplayTableViewCell: UITableViewCell {
             guard let viewModel = viewModel else {
                 return
             }
+            let locationFormat = NSLocalizedString("Event Location: %@", comment: "The location of an event")
+            let rsvpFormat = NSLocalizedString("Number of persons Attending: %d", comment: "Indicates to the user how many persons are attending an event")
             eventNameLabel.text = viewModel.eventName
             eventDescriptionTextView.text = viewModel.eventDescription
-            eventLocationLabel.text = "\(NSLocalizedString("Event Location:", comment: "The location of an event")) \(viewModel.eventLocation)"
-            rsvpLabel.text = "\(NSLocalizedString("Number of persons Attending: ", comment: "Indicates to the user how many persons are attending an event")) \(viewModel.rsvpCount)"
+            eventLocationLabel.text = String.localizedStringWithFormat(locationFormat, viewModel.eventLocation)
+            rsvpLabel.text = String.localizedStringWithFormat(rsvpFormat, viewModel.rsvpCount)
         }
     }
     @IBOutlet private weak var eventNameLabel: UILabel!

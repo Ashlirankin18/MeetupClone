@@ -37,11 +37,13 @@ final class GroupDisplayTableViewCell: UITableViewCell {
             guard let viewModel = viewModel else {
                 return
             }
+            let memberFormat = NSLocalizedString("%d Members", comment: "The people who are members of the group")
+            let nextEventFormat = NSLocalizedString("Next Event: %@ ", comment: "The group's next event")
             groupImageView.kf.setImage(with: viewModel.groupImage, placeholder: UIImage(named: "group-placeholder") )
             groupNameLabel.text = viewModel.groupName
             if let members = viewModel.members,
                 let nextEventName = viewModel.nextEventName {
-               nextEventLabel.text = "\(members) \(NSLocalizedString("Members", comment: "The people who are members of the group")) • \(NSLocalizedString("Next Event", comment: "The group's next event")): \(nextEventName)"
+               nextEventLabel.text = "\(String.localizedStringWithFormat(memberFormat, members))  •  \(String.localizedStringWithFormat(nextEventFormat, nextEventName))"
             } else {
                 nextEventLabel.isHidden = true
             }
