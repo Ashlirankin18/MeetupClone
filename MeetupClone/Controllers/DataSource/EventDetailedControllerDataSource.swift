@@ -13,14 +13,15 @@ final class EventDetailedControllerDataSource: NSObject, UITableViewDataSource {
     var items: [MeetupRSVPModel] = []
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return items.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "MemberCell", for: indexPath) as? MeetupMemberDisplayTableViewCell else {
             return UITableViewCell()
         }
-        cell.backgroundColor = .white
+        let rsvp = items[indexPath.row]
+        cell.viewModel = MeetupMemberDisplayTableViewCell.ViewModel(memberImageURL: rsvp.member?.photo?.thumbLink, memberName: rsvp.member?.name ?? "No name")
         return cell
     }
 }

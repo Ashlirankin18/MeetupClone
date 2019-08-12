@@ -16,20 +16,20 @@
             <rect key="frame" x="0.0" y="0.0" width="656" height="663"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="rvy-cJ-Fbc">
-                    <rect key="frame" x="0.0" y="0.0" width="656" height="663"/>
+                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="QKw-cI-gth">
+                    <rect key="frame" x="0.0" y="0.0" width="656" height="568"/>
+                </mapView>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="rvy-cJ-Fbc">
+                    <rect key="frame" x="0.0" y="578" width="656" height="51"/>
                     <subviews>
-                        <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="QKw-cI-gth">
-                            <rect key="frame" x="0.0" y="0.0" width="656" height="578.5"/>
-                        </mapView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lgb-Dl-acB">
-                            <rect key="frame" x="0.0" y="600.5" width="656" height="26.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="656" height="26.5"/>
                             <fontDescription key="fontDescription" name="GurmukhiMN" family="Gurmukhi MN" pointSize="22"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Location" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dgm-OM-RIm">
-                            <rect key="frame" x="0.0" y="649" width="656" height="14"/>
+                            <rect key="frame" x="0.0" y="30.5" width="656" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -39,10 +39,13 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="rvy-cJ-Fbc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="OmY-2d-Z3z"/>
-                <constraint firstItem="rvy-cJ-Fbc" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="QEH-MY-32N"/>
-                <constraint firstItem="rvy-cJ-Fbc" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" id="fHO-Ac-8k0"/>
-                <constraint firstItem="rvy-cJ-Fbc" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="hUQ-DT-A2D"/>
+                <constraint firstItem="rvy-cJ-Fbc" firstAttribute="top" secondItem="QKw-cI-gth" secondAttribute="bottom" constant="10" id="58H-Rs-JDd"/>
+                <constraint firstItem="rvy-cJ-Fbc" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="GWa-FK-BHp"/>
+                <constraint firstItem="rvy-cJ-Fbc" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="Zcq-KD-TSX"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="rvy-cJ-Fbc" secondAttribute="trailing" id="g6k-5r-CzD"/>
+                <constraint firstItem="QKw-cI-gth" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="mZj-LU-GQA"/>
+                <constraint firstItem="QKw-cI-gth" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="rMB-lM-d67"/>
+                <constraint firstItem="QKw-cI-gth" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailing" id="zyh-XR-ORJ"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>

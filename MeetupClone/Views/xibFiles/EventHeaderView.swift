@@ -9,8 +9,13 @@
 import UIKit
 import MapKit
 
+protocol EventHeaderViewDelegate: AnyObject {
+    func showAnnotationView(mapView: MKMapView)
+}
 /// `UIView` subclass which represents a headerView for a MeetupEvent
 final class EventHeaderView: UIView {
+    
+    weak var eventHeaderViewDelegate: EventHeaderViewDelegate?
     
     @IBOutlet private weak var eventLocationMapView: MKMapView!
     
@@ -38,7 +43,27 @@ final class EventHeaderView: UIView {
                 assertionFailure("could not initilize viewModel")
                 return
             }
-            eventLocationMapView.setCenter(viewModel.eventCoordinates, animated: true)
+            eventNameLabel.text = viewModel.eventName
+            eventLocationLabel.text = viewModel.eventLocation
+            eventLocationMapView.delegate = self
         }
+    }
+}
+extension EventHeaderView: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        guard annotation is MKPointAnnotation else {
+            return nil }
+        
+        let identifier = "Annotation"
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+        
+        if annotationView == nil {
+            annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            annotationView!.canShowCallout = true
+        } else {
+            annotationView!.annotation = annotation
+        }
+        eventHeaderViewDelegate?.showAnnotationView(mapView: eventLocationMapView)
+        return annotationView
     }
 }
