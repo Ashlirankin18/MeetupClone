@@ -31,7 +31,6 @@
 		5B8E5D6522E74458008BE588 /* GroupsDisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8E5D6422E74458008BE588 /* GroupsDisplayViewController.swift */; };
 		5B901EBB22E9ED0D00272253 /* UserImageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B901EBA22E9ED0D00272253 /* UserImageView.xib */; };
 		5B901EBD22E9ED4700272253 /* UserImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B901EBC22E9ED4700272253 /* UserImageView.swift */; };
-		5B9251D722FB3EF40053B768 /* Events.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BA9165322F34D9B000AF2E8 /* Events.storyboard */; };
 		5B9251DB22FB63AA0053B768 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9251DA22FB63AA0053B768 /* String+Extension.swift */; };
 		5B9251DD22FB69450053B768 /* HeaderInformationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9251DC22FB69450053B768 /* HeaderInformationModel.swift */; };
 		5B9DECC322E89F7600321359 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9DECC222E89F7600321359 /* AppDelegate.swift */; };
@@ -48,6 +47,7 @@
 		5BA9165D22F355A1000AF2E8 /* EventsDisplayTableViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA9165C22F355A1000AF2E8 /* EventsDisplayTableViewControllerDataSource.swift */; };
 		5BB02FEC22E7499800283272 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB02FEB22E7499800283272 /* ProfileViewController.swift */; };
 		5BB02FEE22E749E300283272 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB02FED22E749E300283272 /* FavoritesViewController.swift */; };
+		5BB3070323033E09007119E3 /* Events.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BB3070123033DFB007119E3 /* Events.storyboard */; };
 		5BD475DA22F9DCF000F091AA /* GroupInfoDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD475D922F9DCF000F091AA /* GroupInfoDataSource.swift */; };
 		5BE8470D22E75DC700B8E8FC /* MeetupPhotoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE8470C22E75DC700B8E8FC /* MeetupPhotoModel.swift */; };
 		5BF41FF322E7609500ECA928 /* MeetupMemberModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF41FF222E7609500ECA928 /* MeetupMemberModel.swift */; };
@@ -108,13 +108,13 @@
 		5BA9164822F31D75000AF2E8 /* GroupInterface.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GroupInterface.storyboard; sourceTree = "<group>"; };
 		5BA9164A22F31D93000AF2E8 /* ProfileInterface.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ProfileInterface.storyboard; sourceTree = "<group>"; };
 		5BA9164C22F31DDA000AF2E8 /* FavoritesInterface.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FavoritesInterface.storyboard; sourceTree = "<group>"; };
-		5BA9165322F34D9B000AF2E8 /* Events.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Events.storyboard; path = /Users/Ashli/Desktop/MeetupClone/MeetupClone/Views/Storyboards/Events.storyboard; sourceTree = "<absolute>"; };
 		5BA9165422F34E69000AF2E8 /* EventsDisplayTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsDisplayTableViewController.swift; sourceTree = "<group>"; };
 		5BA9165822F35043000AF2E8 /* EventDisplayTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDisplayTableViewCell.swift; sourceTree = "<group>"; };
 		5BA9165922F35043000AF2E8 /* EventDisplayTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventDisplayTableViewCell.xib; sourceTree = "<group>"; };
 		5BA9165C22F355A1000AF2E8 /* EventsDisplayTableViewControllerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsDisplayTableViewControllerDataSource.swift; sourceTree = "<group>"; };
 		5BB02FEB22E7499800283272 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		5BB02FED22E749E300283272 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
+		5BB3070123033DFB007119E3 /* Events.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Events.storyboard; sourceTree = "<group>"; };
 		5BD475D922F9DCF000F091AA /* GroupInfoDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupInfoDataSource.swift; sourceTree = "<group>"; };
 		5BE8470C22E75DC700B8E8FC /* MeetupPhotoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetupPhotoModel.swift; sourceTree = "<group>"; };
 		5BF41FF222E7609500ECA928 /* MeetupMemberModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetupMemberModel.swift; sourceTree = "<group>"; };
@@ -277,7 +277,7 @@
 		5BA9164E22F32091000AF2E8 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				5BA9165322F34D9B000AF2E8 /* Events.storyboard */,
+				5BB3070123033DFB007119E3 /* Events.storyboard */,
 				5B8E5D6222E743DC008BE588 /* MeetupInfoInterface.storyboard */,
 				5BA9164C22F31DDA000AF2E8 /* FavoritesInterface.storyboard */,
 				5BA9164A22F31D93000AF2E8 /* ProfileInterface.storyboard */,
@@ -411,7 +411,7 @@
 				5B884C7E22EB3AD30062F4AF /* EmptyStateViewController.xib in Resources */,
 				5B9DECC922E89FF600321359 /* Main.storyboard in Resources */,
 				5B9DECC622E89FCE00321359 /* LaunchScreen.storyboard in Resources */,
-				5B9251D722FB3EF40053B768 /* Events.storyboard in Resources */,
+				5BB3070323033E09007119E3 /* Events.storyboard in Resources */,
 				5B901EBB22E9ED0D00272253 /* UserImageView.xib in Resources */,
 				5BA9164B22F31D93000AF2E8 /* ProfileInterface.storyboard in Resources */,
 				5B1AD6C022DE22910008E4EC /* Assets.xcassets in Resources */,
