@@ -11,6 +11,7 @@ import UIKit
 /// DataSource which will be used to mage data for the EventDetailedTableViewController.
 final class EventDetailedControllerDataSource: NSObject, UITableViewDataSource {
     
+    /// An Array of model objects the will be displayed on screen.
     var rsvps: [MeetupRSVPModel] = []
     
     // MARK: - UITableViewDataSource
@@ -28,7 +29,7 @@ final class EventDetailedControllerDataSource: NSObject, UITableViewDataSource {
             return UITableViewCell()
         }
         let rsvp = rsvps[indexPath.row]
-        cell.viewModel = MeetupMemberDisplayTableViewCell.ViewModel(memberImageURL: rsvp.member?.photo?.thumbLink, memberName: rsvp.member?.name ?? "No name")
+        cell.viewModel = MeetupMemberDisplayTableViewCell.ViewModel(memberImageURL: rsvp.member?.photo?.photoLink, memberName: rsvp.member?.name ?? "No name")
         return cell
     }
 }

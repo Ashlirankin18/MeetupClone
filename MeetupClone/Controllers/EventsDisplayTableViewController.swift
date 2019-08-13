@@ -17,7 +17,7 @@ final class EventsDisplayTableViewController: UITableViewController {
             retrieveGroupEvents(urlName: urlName)
         }
     }
-  
+    
     /// The model representing the infoprmation a headerView need it be initilized
     var headerInformationModel: HeaderInformationModel?
     
@@ -40,14 +40,19 @@ final class EventsDisplayTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureTableViewProperties()
+    }
+    
+    private func configureTableViewProperties() {
+        
         tableView.register(UINib(nibName: "EventDisplayTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "EventDisplayCell")
         tableView.dataSource = eventsDisplayTableViewControllerDataSource
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderHeight = UITableView.automaticDimension
-        title = NSLocalizedString("Events", comment: "The events a group has")
     }
     
     private func retrieveGroupEvents(urlName: String) {
+        
         meetupDataHandler.retrieveEvents(with: urlName) { (results) in
             switch results {
             case .failure(let error):
@@ -60,6 +65,7 @@ final class EventsDisplayTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
         let headerView = Bundle.main.loadNibNamed("GroupDisplayTableViewCell", owner: self, options: nil)?.first as? GroupDisplayTableViewCell
         guard let headerInformationModel = headerInformationModel else {
             return nil
@@ -71,7 +77,9 @@ final class EventsDisplayTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 300
     }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         let detailedController = EventDetailedTableViewController(style: .grouped)
         let event = eventsDisplayTableViewControllerDataSource.items[indexPath.row]
         detailedController.headerModel = MapDisplayHeaderModel(lattitude: event.venue?.lattitude, longitude: event.venue?.longitude, eventName: event.eventName, eventLocation: event.venue?.city)

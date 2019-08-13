@@ -44,7 +44,6 @@ final class EventDetailedTableViewController: UITableViewController {
         tableView.dataSource = eventDetailedControllerDataSource
         tableView.rowHeight = 80
         tableView.sectionHeaderHeight = UITableView.automaticDimension
-        
     }
     
     private func configureBarButtonItem() {
@@ -77,10 +76,10 @@ final class EventDetailedTableViewController: UITableViewController {
         if let lattitude = headerModel.lattitude,
             let longitude = headerModel.longitude {
             headerView.viewModel = EventHeaderView.ViewModel(eventCoordinates: CLLocationCoordinate2D(latitude: lattitude, longitude: longitude), eventName: headerModel.eventName, eventLocation: headerModel.eventLocation)
-            headerView.eventHeaderViewDelegate = self
         } else {
             headerView.viewModel = EventHeaderView.ViewModel(eventCoordinates: nil, eventName: headerModel.eventName, eventLocation: headerModel.eventLocation)
         }
+        headerView.eventHeaderViewDelegate = self
         return headerView
     }
 }
