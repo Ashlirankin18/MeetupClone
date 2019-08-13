@@ -10,7 +10,7 @@ import Foundation
 
 /// Model of a MeetupEvent
 struct MeetupEventModel: Codable {
-    
+
     /// Id of the event
     let eventId: String?
     

@@ -439,6 +439,7 @@
 				5B526C0522FCACAD00F77EAC /* EventHeaderView.xib in Resources */,
 				5B901EBB22E9ED0D00272253 /* UserImageView.xib in Resources */,
 				5B526C0922FCAEA600F77EAC /* MeetupMemberDisplayTableViewCell.xib in Resources */,
+				5B901EBB22E9ED0D00272253 /* UserImageView.xib in Resources */,
 				5BA9164B22F31D93000AF2E8 /* ProfileInterface.storyboard in Resources */,
 				5B1AD6C022DE22910008E4EC /* Assets.xcassets in Resources */,
 				5BA9165B22F35043000AF2E8 /* EventDisplayTableViewCell.xib in Resources */,
@@ -579,6 +580,8 @@
 				5B901EBD22E9ED4700272253 /* UserImageView.swift in Sources */,
 				5BA9165A22F35043000AF2E8 /* EventDisplayTableViewCell.swift in Sources */,
 				5B526C0822FCAEA600F77EAC /* MeetupMemberDisplayTableViewCell.swift in Sources */,
+				5B1AD6BB22DE22900008E4EC /* LoginViewController.swift in Sources */,
+				5BA9165A22F35043000AF2E8 /* EventDisplayTableViewCell.swift in Sources */,
 				5BF41FF322E7609500ECA928 /* MeetupMemberModel.swift in Sources */,
 				5B526C0B22FCB20500F77EAC /* EventDetailedTableViewController.swift in Sources */,
 			);

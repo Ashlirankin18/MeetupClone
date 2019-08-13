@@ -22,21 +22,8 @@ final class EventsDisplayTableViewController: UITableViewController {
     var headerInformationModel: HeaderInformationModel?
     
     private let eventsDisplayTableViewControllerDataSource = EventsDisplayTableViewControllerDataSource()
+  
     private let meetupDataHandler = MeetupDataHandler(networkHelper: NetworkHelper())
-    
-    /// Initilizes the tableview controller
-    ///
-    /// - Parameters:
-    ///   - items: An array of items that will be displayed on the tableView cells
-    ///   - headerView: The header view which will display information. If there is a view it will be displayed if not the value will be nil
-    init(urlName: String) {
-        super.init(nibName: nil, bundle: nil)
-        self.urlName = urlName
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,28 +31,26 @@ final class EventsDisplayTableViewController: UITableViewController {
     }
     
     private func configureTableViewProperties() {
-        
         tableView.register(UINib(nibName: "EventDisplayTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "EventDisplayCell")
         tableView.dataSource = eventsDisplayTableViewControllerDataSource
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderHeight = UITableView.automaticDimension
     }
-    
+
     private func retrieveGroupEvents(urlName: String) {
-        
-        meetupDataHandler.retrieveEvents(with: urlName) { (results) in
-            switch results {
+        meetupDataHandler.retrieveEvents(with: urlName) { result in
+            switch result {
             case .failure(let error):
                 print(error)
             case .success(let events):
-                self.eventsDisplayTableViewControllerDataSource.items = events
+                self.eventsDisplayTableViewControllerDataSource.events = events
                 self.tableView.reloadData()
             }
         }
     }
-    
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
+    // MARK: - UITableViewDelegate
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = Bundle.main.loadNibNamed("GroupDisplayTableViewCell", owner: self, options: nil)?.first as? GroupDisplayTableViewCell
         guard let headerInformationModel = headerInformationModel else {
             return nil
@@ -78,8 +63,7 @@ final class EventsDisplayTableViewController: UITableViewController {
         return 300
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) { 
         let detailedController = EventDetailedTableViewController(style: .grouped)
         let event = eventsDisplayTableViewControllerDataSource.items[indexPath.row]
         detailedController.headerModel = MapDisplayHeaderModel(lattitude: event.venue?.lattitude, longitude: event.venue?.longitude, eventName: event.eventName, eventLocation: event.venue?.city)
