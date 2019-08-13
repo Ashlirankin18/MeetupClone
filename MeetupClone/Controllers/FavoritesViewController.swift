@@ -9,9 +9,9 @@
 import UIKit
 
 /// Shows the groups that the user has favorited 
-class FavoritesViewController: UIViewController {
+final class FavoritesViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
+    }    
 }

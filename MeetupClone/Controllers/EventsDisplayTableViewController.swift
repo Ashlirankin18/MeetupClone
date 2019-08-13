@@ -70,7 +70,7 @@ final class EventsDisplayTableViewController: UITableViewController {
             assertionFailure("This event does not contain an id")
             return
         }
-           detailedController.viewModel = EventDetailedTableViewController.ViewModel(lattitude: event.venue?.lattitude, longitude: event.venue?.longitude, eventName: event.eventName, eventCity: event.venue?.city, urlName: urlName, eventId: eventId)
+        detailedController.viewModel = EventDetailedTableViewController.ViewModel(lattitude: event.venue?.lattitude, longitude: event.venue?.longitude, eventName: event.eventName, eventCity: event.venue?.city, urlName: urlName, eventId: eventId, description: event.description, rsvpCount: event.yesRSVPCount)
         navigationController?.pushViewController(detailedController, animated: true)
     }
 }

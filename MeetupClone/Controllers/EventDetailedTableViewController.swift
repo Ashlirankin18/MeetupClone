@@ -32,6 +32,12 @@ final class EventDetailedTableViewController: UITableViewController {
         
         /// The event's id
         let eventId: String
+        
+        /// The event's description
+        let description: String?
+        
+        /// The number of the person who have rsvp'd
+        let rsvpCount: Int
     }
     
     private let eventDetailedControllerDataSource = EventDetailedControllerDataSource()

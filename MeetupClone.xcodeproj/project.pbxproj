@@ -56,6 +56,8 @@
 		5BB02FEE22E749E300283272 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB02FED22E749E300283272 /* FavoritesViewController.swift */; };
 		5BB306EF2302F68D007119E3 /* IBDesignableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB306EE2302F68D007119E3 /* IBDesignableImageView.swift */; };
 		5BB306F12302FE08007119E3 /* MapDisplayHeaderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB306F02302FE08007119E3 /* MapDisplayHeaderModel.swift */; };
+		5BB306F723032701007119E3 /* FavoritesTableViewControllerDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB306F623032701007119E3 /* FavoritesTableViewControllerDatasource.swift */; };
+		5BB306F923032773007119E3 /* FavoriteEventsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB306F823032773007119E3 /* FavoriteEventsModel.swift */; };
 		5BD475DA22F9DCF000F091AA /* GroupInfoDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD475D922F9DCF000F091AA /* GroupInfoDataSource.swift */; };
 		5BE8470D22E75DC700B8E8FC /* MeetupPhotoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE8470C22E75DC700B8E8FC /* MeetupPhotoModel.swift */; };
 		5BF41FF322E7609500ECA928 /* MeetupMemberModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF41FF222E7609500ECA928 /* MeetupMemberModel.swift */; };
@@ -131,6 +133,8 @@
 		5BB02FED22E749E300283272 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		5BB306EE2302F68D007119E3 /* IBDesignableImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IBDesignableImageView.swift; sourceTree = "<group>"; };
 		5BB306F02302FE08007119E3 /* MapDisplayHeaderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapDisplayHeaderModel.swift; sourceTree = "<group>"; };
+		5BB306F623032701007119E3 /* FavoritesTableViewControllerDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewControllerDatasource.swift; sourceTree = "<group>"; };
+		5BB306F823032773007119E3 /* FavoriteEventsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteEventsModel.swift; sourceTree = "<group>"; };
 		5BD475D922F9DCF000F091AA /* GroupInfoDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupInfoDataSource.swift; sourceTree = "<group>"; };
 		5BE8470C22E75DC700B8E8FC /* MeetupPhotoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetupPhotoModel.swift; sourceTree = "<group>"; };
 		5BF41FF222E7609500ECA928 /* MeetupMemberModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetupMemberModel.swift; sourceTree = "<group>"; };
@@ -254,6 +258,7 @@
 		5B8932C322E643F700BF9876 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				5BB306F823032773007119E3 /* FavoriteEventsModel.swift */,
 				5B9251DC22FB69450053B768 /* HeaderInformationModel.swift */,
 				5BB306F02302FE08007119E3 /* MapDisplayHeaderModel.swift */,
 				5B8932C122E643E400BF9876 /* AccessTokenSuccessModel.swift */,
@@ -288,6 +293,7 @@
 			children = (
 				5B526C0C22FCB2AE00F77EAC /* EventDetailedControllerDataSource.swift */,
 				5BA9165C22F355A1000AF2E8 /* EventsDisplayTableViewControllerDataSource.swift */,
+				5BB306F623032701007119E3 /* FavoritesTableViewControllerDatasource.swift */,
 				5BD475D922F9DCF000F091AA /* GroupInfoDataSource.swift */,
 				5B9DECD222E8F03500321359 /* UserProfileDataSource.swift */,
 			);
@@ -545,6 +551,7 @@
 			files = (
 				5B526C0E22FCBBC500F77EAC /* LoginViewController.swift in Sources */,
 				5BD475DA22F9DCF000F091AA /* GroupInfoDataSource.swift in Sources */,
+				5BB306F723032701007119E3 /* FavoritesTableViewControllerDatasource.swift in Sources */,
 				5B9DECC322E89F7600321359 /* AppDelegate.swift in Sources */,
 				5BB02FEE22E749E300283272 /* FavoritesViewController.swift in Sources */,
 				5B8E5D6522E74458008BE588 /* GroupsDisplayViewController.swift in Sources */,
@@ -580,10 +587,10 @@
 				5B901EBD22E9ED4700272253 /* UserImageView.swift in Sources */,
 				5BA9165A22F35043000AF2E8 /* EventDisplayTableViewCell.swift in Sources */,
 				5B526C0822FCAEA600F77EAC /* MeetupMemberDisplayTableViewCell.swift in Sources */,
-				5B1AD6BB22DE22900008E4EC /* LoginViewController.swift in Sources */,
 				5BA9165A22F35043000AF2E8 /* EventDisplayTableViewCell.swift in Sources */,
 				5BF41FF322E7609500ECA928 /* MeetupMemberModel.swift in Sources */,
 				5B526C0B22FCB20500F77EAC /* EventDetailedTableViewController.swift in Sources */,
+				5BB306F923032773007119E3 /* FavoriteEventsModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
