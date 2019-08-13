@@ -110,6 +110,5 @@ extension GroupsDisplayViewController: UITableViewDelegate {
         }
         viewController.urlName = chosenGroup.urlName
         navigationController?.pushViewController(viewController, animated: true)
-      
     }
 }

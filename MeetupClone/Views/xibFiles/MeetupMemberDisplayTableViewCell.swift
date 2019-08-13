@@ -10,14 +10,14 @@ import UIKit
 
 /// `UITableViewCell` subclass which will display information pertaining to a member of a MeeetupGroup
 final class MeetupMemberDisplayTableViewCell: UITableViewCell {
-
-    @IBOutlet private weak var memberImageView: UIImageView!
-    
-    @IBOutlet private weak var memberNameLabel: UILabel!
     
     /// Hold the data and logic needed to populate the `MeetupMemberDisplayTableViewCell`
     struct ViewModel {
+        
+        /// The URL the hold the information to the image of a member of a group
         let memberImageURL: URL?
+        
+        /// The name of the member of the group
         let memberName: String
     }
     
@@ -31,4 +31,8 @@ final class MeetupMemberDisplayTableViewCell: UITableViewCell {
             memberNameLabel.text = viewModel.memberName
         }
     }
+    
+    @IBOutlet private weak var memberImageView: UIImageView!
+    
+    @IBOutlet private weak var memberNameLabel: UILabel!
 }
