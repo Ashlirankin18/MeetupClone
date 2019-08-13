@@ -18,16 +18,16 @@ final class EventDetailedTableViewController: UITableViewController {
     private let meetupDataHandler = MeetupDataHandler(networkHelper: NetworkHelper())
     
     /// Represents the model used to set up the headerView of the model
-    var meetupEventModel: MeetupEventModel?
+    var headerModel: MapDisplayHeaderModel?
     
     /// The information needed to make the network call to retrieve rsvp data.
     var eventInformation: (urlName: String, eventId: String)? {
         
         didSet {
-            guard let eventInformation = eventInformation else {
+            guard let eventCredentials = eventInformation else {
                 return
             }
-            retrieveRSVPData(eventId: eventInformation.eventId, eventURLName: eventInformation.urlName)
+            retrieveRSVPData(eventId: eventCredentials.eventId, eventURLName: eventCredentials.urlName)
         }
     }
     
@@ -70,15 +70,14 @@ final class EventDetailedTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let headerView = Bundle.main.loadNibNamed("EventHeaderView", owner: self, options: nil)?.first as? EventHeaderView,
-        let meetupEventModel = meetupEventModel else {
+            let headerModel = headerModel else {
                 return UIView()
         }
-        
-        if let lattitude = meetupEventModel.venue?.lattitude,
-            let longitude = meetupEventModel.venue?.longitude {
-            headerView.viewModel = EventHeaderView.ViewModel(eventCoordinates: CLLocationCoordinate2D(latitude: lattitude, longitude: longitude), eventName: meetupEventModel.eventName, eventLocation: meetupEventModel.venue?.city)
+        if let lattitude = headerModel.lattitude,
+            let longitude = headerModel.longitude {
+            headerView.viewModel = EventHeaderView.ViewModel(eventCoordinates: CLLocationCoordinate2D(latitude: lattitude, longitude: longitude), eventName: headerModel.eventName, eventLocation: headerModel.eventLocation)
         } else {
-            headerView.viewModel = EventHeaderView.ViewModel(eventCoordinates: nil, eventName: meetupEventModel.eventName, eventLocation: meetupEventModel.venue?.city)
+            headerView.viewModel = EventHeaderView.ViewModel(eventCoordinates: nil, eventName: headerModel.eventName, eventLocation: headerModel.eventLocation)
         }
         headerView.eventHeaderViewDelegate = self
         return headerView
