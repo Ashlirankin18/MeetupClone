@@ -28,7 +28,7 @@ final class MeetupMemberDisplayTableViewCell: UITableViewCell {
                 return
             }
             memberImageView.kf.setImage(with: viewModel.memberImageURL, placeholder: UIImage(named: "personPlaceholder"))
-            memberNameLabel.text = viewModel.memberName
+            memberNameLabel.text = viewModel.memberName.capitalized
         }
     }
     
