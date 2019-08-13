@@ -63,10 +63,10 @@ final class EventsDisplayTableViewController: UITableViewController {
         return 300
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) { 
-        let detailedController = EventDetailedTableViewController(style: .grouped)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let event = eventsDisplayTableViewControllerDataSource.events[indexPath.row]
-        detailedController.headerModel = MapDisplayHeaderModel(lattitude: event.venue?.lattitude, longitude: event.venue?.longitude, eventName: event.eventName, eventLocation: event.venue?.city)
+        let detailedController = EventDetailedTableViewController(style: .grouped)
+        detailedController.meetupEventModel = event
         detailedController.eventInformation = (urlName: urlName, eventId: event.eventId) as? (urlName: String, eventId: String)
         navigationController?.pushViewController(detailedController, animated: true)
     }
