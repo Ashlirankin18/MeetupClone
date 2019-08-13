@@ -12,18 +12,20 @@ import UIKit
 final class FavoritesTableViewController: UITableViewController {
     
     private let favoritesTableViewControllerDataSource = FavoritesTableViewControllerDatasource() 
-    
-    private var persistenceHelper = PersistenceHelper()
+    private let persistenceHelper = PersistenceHelper.self
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableViewProperties()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+         tableView.reloadData()
+    }
+    
     private func configureTableViewProperties() {
         tableView.register(UINib(nibName: "EventDisplayTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "EventDisplayCell")
         tableView.dataSource = favoritesTableViewControllerDataSource
-        favoritesTableViewControllerDataSource.favoriteEvents = persistenceHelper.retrieveFavoriteEventsFromDocumentsDirectory()
-        tableView.reloadData()
     }
 }

@@ -59,7 +59,7 @@ final class EventDetailedTableViewController: UITableViewController {
     }
     private var rightBarButtonItem: UIBarButtonItem?
     
-    private var persistenceHelper = PersistenceHelper()
+    private var persistenceHelper = PersistenceHelper.self
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -99,15 +99,13 @@ final class EventDetailedTableViewController: UITableViewController {
     }
     
     private func checksIfEventIsFavorited() {
-        guard var viewModel = viewModel else {
+        guard let viewModel = viewModel else {
             return
         }
-        if !viewModel.isFavorited {
+        if rightBarButtonItem?.image == UIImage(named: "icons8-heart-26") {
             rightBarButtonItem?.image = UIImage(named: "icons8-heart-25")
             persistenceHelper.addFavoriteEventToDocumentsDirectory(favoriteEvent: viewModel)
-            viewModel.isFavorited = true
         } else {
-            viewModel.isFavorited = false
             rightBarButtonItem?.image = UIImage(named: "icons8-heart-26")
             persistenceHelper.deleteItemFromDocumentsDirectory(favoriteEvent: viewModel)
         }
