@@ -13,7 +13,7 @@ import MapKit
 final class EventDetailedTableViewController: UITableViewController {
     
     /// Represents the information needed to see up a EventDetailedTableViewController view
-    struct ViewModel {
+    struct ViewModel: Codable {
         
         /// The lattitude of the event
         let lattitude: Double?
@@ -38,6 +38,9 @@ final class EventDetailedTableViewController: UITableViewController {
         
         /// The number of the person who have rsvp'd
         let rsvpCount: Int
+        
+        /// Indicates wether the event has been favorited or not.
+        var isFavorited: Bool
     }
     
     private let eventDetailedControllerDataSource = EventDetailedControllerDataSource()
@@ -54,11 +57,14 @@ final class EventDetailedTableViewController: UITableViewController {
         retrieveRSVPData(eventId: viewModel.eventId, eventURLName: viewModel.urlName)
         }
     }
+    private var rightBarButtonItem: UIBarButtonItem?
+    
+    private var persistenceHelper = PersistenceHelper()
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         configureTableViewProperties()
+        
         configureBarButtonItem()
     }
     
@@ -71,8 +77,7 @@ final class EventDetailedTableViewController: UITableViewController {
     }
     
     private func configureBarButtonItem() {
-        
-        let rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "icons8-heart-26"), style: .done, target: self, action: #selector(favoriteButtonPressed))
+        rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "icons8-heart-26"), style: .done, target: self, action: #selector(favoriteButtonPressed))
         navigationItem.rightBarButtonItem = rightBarButtonItem
     }
     
@@ -90,6 +95,22 @@ final class EventDetailedTableViewController: UITableViewController {
     }
     
     @objc private func favoriteButtonPressed() {
+        checksIfEventIsFavorited()
+    }
+    
+    private func checksIfEventIsFavorited() {
+        guard var viewModel = viewModel else {
+            return
+        }
+        if !viewModel.isFavorited {
+            rightBarButtonItem?.image = UIImage(named: "icons8-heart-25")
+            persistenceHelper.addFavoriteEventToDocumentsDirectory(favoriteEvent: viewModel)
+            viewModel.isFavorited = true
+        } else {
+            viewModel.isFavorited = false
+            rightBarButtonItem?.image = UIImage(named: "icons8-heart-26")
+            persistenceHelper.deleteItemFromDocumentsDirectory(favoriteEvent: viewModel)
+        }
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
