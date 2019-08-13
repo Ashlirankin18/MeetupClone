@@ -13,6 +13,7 @@ struct MapDisplayHeaderModel {
     
     /// The lattitude of the event
     let lattitude: Double?
+    
     /// The longitude of the event
     let longitude: Double?
     
