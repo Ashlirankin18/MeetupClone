@@ -10,7 +10,7 @@ import UIKit
 
 final class FavoritesTableViewControllerDatasource: NSObject, UITableViewDataSource {
     
-    var favoriteEvents = [FavoriteEventsModel]()
+    var favoriteEvents = [EventDetailedTableViewController.ViewModel]()
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return favoriteEvents.count
@@ -21,7 +21,7 @@ final class FavoritesTableViewControllerDatasource: NSObject, UITableViewDataSou
             return UITableViewCell()
         }
         let event = favoriteEvents[indexPath.row]
-        cell.viewModel = EventDisplayTableViewCell.ViewModel(eventName: event.eventName, eventDescription: event.description ?? NSLocalizedString("This event does not have a description", comment: "Informs the user the event has no description currently."), eventLocation: event.eventCity, rsvpCount: event.rsvpCount)
+        cell.viewModel = EventDisplayTableViewCell.ViewModel(eventName: event.eventName, eventDescription: event.description ?? NSLocalizedString("This event does not have a description", comment: "Informs the user the event has no description currently."), eventLocation: event.eventCity ?? "", rsvpCount: event.rsvpCount)
         return cell
     }
 }
