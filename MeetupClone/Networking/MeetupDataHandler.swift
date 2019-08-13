@@ -58,7 +58,6 @@ class MeetupDataHandler {
         guard let urlString = checksQureyParameters(searchText: searchText, zipCode: zipCode)?.absoluteString else {
             return nil
         }
-        
         let dataTask = genericRetrievalFunc(urlString: urlString) { (results: Result<[MeetupGroupModel], AppError>) in
             switch results {
             case .failure(let error):
