@@ -15,14 +15,6 @@ protocol EventHeaderViewDelegate: AnyObject {
 /// `UIView` subclass which represents a headerView for a MeetupEvent
 final class EventHeaderView: UIView {
     
-    weak var eventHeaderViewDelegate: EventHeaderViewDelegate?
-    
-    @IBOutlet private weak var eventLocationMapView: MKMapView!
-    
-    @IBOutlet private weak var eventNameLabel: UILabel!
-    
-    @IBOutlet private weak var eventLocationLabel: UILabel!
-    
     /// Hold the data and logic needed to populate the `EventHeaderView`
     struct ViewModel {
         
@@ -35,6 +27,8 @@ final class EventHeaderView: UIView {
         /// The string representation of the event location
         let eventLocation: String?
     }
+    
+    weak var eventHeaderViewDelegate: EventHeaderViewDelegate?
     
     /// The header's View Model
     var viewModel: ViewModel? {
@@ -49,6 +43,12 @@ final class EventHeaderView: UIView {
             createAndAddMapAnnotation()
         }
     }
+    
+    @IBOutlet private weak var eventLocationMapView: MKMapView!
+    
+    @IBOutlet private weak var eventNameLabel: UILabel!
+    
+    @IBOutlet private weak var eventLocationLabel: UILabel!
     
     private func createAndAddMapAnnotation() {
         guard let viewModel = viewModel else {
@@ -66,19 +66,21 @@ final class EventHeaderView: UIView {
         }
     }
 }
+
 extension EventHeaderView: MKMapViewDelegate {
+    
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         guard annotation is MKPointAnnotation else {
             return nil }
         
         let identifier = "Annotation"
-    
+        
         if let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) {
             annotationView.annotation = annotation
             eventHeaderViewDelegate?.showAnnotationView(mapView: eventLocationMapView, annotation: annotation)
             return annotationView
         } else {
-           let annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            let annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
             eventHeaderViewDelegate?.showAnnotationView(mapView: eventLocationMapView, annotation: annotation)
             return annotationView
         }
