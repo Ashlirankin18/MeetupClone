@@ -15,6 +15,7 @@ final class EventsDisplayTableViewControllerDataSource: NSObject, UITableViewDat
     var events = [MeetupEventModel]()
    
     // MARK: - UITableViewDataSource
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return events.count
     }

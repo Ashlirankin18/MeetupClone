@@ -11,10 +11,20 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>Kingfisher.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>0</integer>
+		</dict>
 		<key>Pods-MeetupClone.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>Pods-MeetupClone.xcscheme_^#shared#^_</key>
+		<dict>
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
@@ -25,10 +35,20 @@
 			<key>orderHint</key>
 			<integer>2</integer>
 		</dict>
+		<key>Pods-MeetupCloneTests.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 		<key>SwiftLint.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
+		<key>SwiftLint.xcscheme_^#shared#^_</key>
+		<dict>
 			<key>orderHint</key>
 			<integer>3</integer>
 		</dict>

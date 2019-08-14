@@ -64,7 +64,6 @@ final class EventDetailedTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableViewProperties()
-        
         configureBarButtonItem()
     }
     
@@ -122,14 +121,6 @@ final class EventDetailedTableViewController: UITableViewController {
         } else {
             headerView.viewModel = EventHeaderView.ViewModel(eventCoordinates: nil, eventName: headerModel.eventName, eventLocation: headerModel.eventCity)
         }
-        headerView.eventHeaderViewDelegate = self
         return headerView
-    }
-}
-
-extension EventDetailedTableViewController: EventHeaderViewDelegate {
-    
-    func showAnnotationView(mapView: MKMapView, annotation: MKAnnotation) {
-        mapView.showAnnotations([annotation], animated: true)
     }
 }

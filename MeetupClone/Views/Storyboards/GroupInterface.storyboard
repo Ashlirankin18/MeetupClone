@@ -32,9 +32,16 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="5dh-uy-7Gr"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Groups" largeTitleDisplayMode="always" id="L6c-pj-WlY"/>
+                    <navigationItem key="navigationItem" title="Groups" largeTitleDisplayMode="always" id="L6c-pj-WlY">
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="8ox-jr-NhH">
+                            <connections>
+                                <action selector="zipCodeBarButtonPressed:" destination="lM0-ys-K5t" id="T0q-6d-7Zg"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="groupDisplayTableView" destination="88E-sW-CAd" id="ytg-v1-Oav"/>
+                        <outlet property="zipCodeBarButtonItem" destination="8ox-jr-NhH" id="jHx-Be-8Pv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n7q-dg-Vll" userLabel="First Responder" sceneMemberID="firstResponder"/>
