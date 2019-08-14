@@ -12,7 +12,7 @@ import Foundation
 struct MeetupEventModel: Codable {
 
     /// Id of the event
-    let eventId: String?
+    let eventId: String
     
     /// Name of the event
     let eventName: String
