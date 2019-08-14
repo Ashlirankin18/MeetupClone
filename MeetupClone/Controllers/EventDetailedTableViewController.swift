@@ -12,45 +12,26 @@ import MapKit
 /// `UITableViewController` subclass that will display MeetUpEvent location details and the persons who have rsvp'd to an event.
 final class EventDetailedTableViewController: UITableViewController {
     
-    /// Represents the information needed to set up the EventDetailedTableViewController view
-    struct ViewModel {
-        
-        /// The lattitude of the event
-        let lattitude: Double?
-        
-        /// The longitude of the event
-        let longitude: Double?
-        
-        /// The name of the event
-        let eventName: String
-        
-        /// The name of the city where the event is being held
-        let eventCity: String?
-        
-        /// The group's URL Name
-        let urlName: String
-        
-        /// The event's id
-        let eventId: String
-    }
-    
     private let eventDetailedControllerDataSource = EventDetailedControllerDataSource()
     
     private let meetupDataHandler = MeetupDataHandler(networkHelper: NetworkHelper())
     
+    /// The URL Name of the meetup group
+    var urlName: String?
+    
     /// EventDetailedTableViewController's view model.
-    var viewModel: ViewModel? {
+    var meetupEventModel: MeetupEventModel? {
         didSet {
-            guard let viewModel = self.viewModel else {
-                assertionFailure("No viewModel found")
+            guard let meetupEventModel = meetupEventModel,
+            let urlName = self.urlName else {
+                assertionFailure("No eventModel found")
                 return
             }
-            retrieveRSVPData(eventId: viewModel.eventId, eventURLName: viewModel.urlName)
+            retrieveRSVPData(eventId: meetupEventModel.eventId, eventURLName: urlName)
         }
     }
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         configureTableViewProperties()
         configureBarButtonItem()
@@ -70,7 +51,11 @@ final class EventDetailedTableViewController: UITableViewController {
         navigationItem.rightBarButtonItem = rightBarButtonItem
     }
     
-    private func retrieveRSVPData(eventId: String, eventURLName: String) {
+    private func retrieveRSVPData(eventId: String?, eventURLName: String) {
+        guard let eventId = eventId else {
+            assertionFailure("Event Id could not be found")
+            return
+        }
         meetupDataHandler.retrieveEventRSVP(eventId: eventId, eventURLName: eventURLName) { (result) in
             switch result {
             case .failure(let error):
@@ -88,14 +73,14 @@ final class EventDetailedTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let headerView = Bundle.main.loadNibNamed("EventHeaderView", owner: self, options: nil)?.first as? EventHeaderView,
-            let headerModel = viewModel else {
+            let meetupEventModel = meetupEventModel else {
                 return UIView()
         }
-        if let lattitude = headerModel.lattitude,
-            let longitude = headerModel.longitude {
-            headerView.viewModel = EventHeaderView.ViewModel(eventCoordinates: CLLocationCoordinate2D(latitude: lattitude, longitude: longitude), eventName: headerModel.eventName, eventLocation: headerModel.eventCity)
+        if let lattitude = meetupEventModel.venue?.lattitude,
+            let longitude = meetupEventModel.venue?.longitude {
+            headerView.viewModel = EventHeaderView.ViewModel(eventCoordinates: CLLocationCoordinate2D(latitude: lattitude, longitude: longitude), eventName: meetupEventModel.eventName, eventLocation: meetupEventModel.venue?.city)
         } else {
-            headerView.viewModel = EventHeaderView.ViewModel(eventCoordinates: nil, eventName: headerModel.eventName, eventLocation: headerModel.eventCity)
+            headerView.viewModel = EventHeaderView.ViewModel(eventCoordinates: nil, eventName: meetupEventModel.eventName, eventLocation: meetupEventModel.venue?.city)
         }
         headerView.eventHeaderViewDelegate = self
         return headerView

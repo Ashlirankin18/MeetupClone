@@ -66,11 +66,8 @@ final class EventsDisplayTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) { 
         let detailedController = EventDetailedTableViewController(style: .grouped)
         let event = eventsDisplayTableViewControllerDataSource.events[indexPath.row]
-        guard let eventId = event.eventId else {
-            assertionFailure("This event does not contain an id")
-            return
-        }
-           detailedController.viewModel = EventDetailedTableViewController.ViewModel(lattitude: event.venue?.lattitude, longitude: event.venue?.longitude, eventName: event.eventName, eventCity: event.venue?.city, urlName: urlName, eventId: eventId)
+        detailedController.urlName = urlName
+        detailedController.meetupEventModel = event
         navigationController?.pushViewController(detailedController, animated: true)
     }
 }
