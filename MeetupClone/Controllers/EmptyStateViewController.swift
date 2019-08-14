@@ -18,7 +18,7 @@ final class EmptyStateViewController: UIViewController {
     /// - Parameter primaryTitle: The title which will be given to the prompt button.
     init(primaryTitle: String) {
         super.init(nibName: nil, bundle: nil)
-     Bundle.main.loadNibNamed("EmptyStateViewController", owner: self, options: nil)
+        Bundle.main.loadNibNamed("EmptyStateViewController", owner: self, options: nil)
         titleLabel.setTitle(primaryTitle, for: .normal)
     }
     

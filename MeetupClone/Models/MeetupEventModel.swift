@@ -10,7 +10,7 @@ import Foundation
 
 /// Model of a MeetupEvent
 struct MeetupEventModel: Codable {
-
+    
     /// Id of the event
     let eventId: String
     
@@ -19,7 +19,7 @@ struct MeetupEventModel: Codable {
     
     /// Website link of the group
     let link: URL
-   
+    
     /// A description of the event
     let description: String?
     

@@ -22,7 +22,7 @@ final class EventsDisplayTableViewController: UITableViewController {
     var headerInformationModel: HeaderInformationModel?
     
     private let eventsDisplayTableViewControllerDataSource = EventsDisplayTableViewControllerDataSource()
-  
+    
     private let meetupDataHandler = MeetupDataHandler(networkHelper: NetworkHelper())
     
     override func viewDidLoad() {
@@ -36,7 +36,7 @@ final class EventsDisplayTableViewController: UITableViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderHeight = UITableView.automaticDimension
     }
-
+    
     private func retrieveGroupEvents(urlName: String) {
         meetupDataHandler.retrieveEvents(with: urlName) { result in
             switch result {
@@ -48,7 +48,7 @@ final class EventsDisplayTableViewController: UITableViewController {
             }
         }
     }
-        
+    
     // MARK: - UITableViewDelegate
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = Bundle.main.loadNibNamed("GroupDisplayTableViewCell", owner: self, options: nil)?.first as? GroupDisplayTableViewCell
@@ -58,7 +58,7 @@ final class EventsDisplayTableViewController: UITableViewController {
         headerView?.viewModel = GroupDisplayTableViewCell.ViewModel(groupName: headerInformationModel.name, groupImage: headerInformationModel.imageURL, members: nil, nextEventName: nil)
         return headerView
     }
-
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) { 
         let detailedController = EventDetailedTableViewController(style: .grouped)
         let event = eventsDisplayTableViewControllerDataSource.events[indexPath.row]

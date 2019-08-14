@@ -13,7 +13,7 @@ final class EventsDisplayTableViewControllerDataSource: NSObject, UITableViewDat
     
     /// Array of model objects that will be displayed on screen.
     var events = [MeetupEventModel]()
-   
+    
     // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return events.count
@@ -23,7 +23,7 @@ final class EventsDisplayTableViewControllerDataSource: NSObject, UITableViewDat
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "EventDisplayCell", for: indexPath) as? EventDisplayTableViewCell else {
             return UITableViewCell()
         }
-      
+        
         let event = events[indexPath.row]
         do {
             let description = try event.description?.asHTMLAttributedString()

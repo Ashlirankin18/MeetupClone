@@ -19,10 +19,10 @@ final class UserImageView: UIView {
     func configureCell(userImage: UIImage?) {
         userImageView.image = userImage
     }
-   
+    
     override func layoutSubviews() {
         super.layoutSubviews()
-         userImageView.layer.cornerRadius = userImageView.frame.width / 2
+        userImageView.layer.cornerRadius = userImageView.frame.width / 2
         userImageView.layer.masksToBounds = true
     }
 }
