@@ -8,7 +8,7 @@
 
 import UIKit
 
-/// `UITableViewCell` subclass which will display information pertaining to a member of a MeeetupGroup
+/// `UITableViewCell` subclass which will display information pertaining to a member of a MeetupGroup
 final class MeetupMemberDisplayTableViewCell: UITableViewCell {
     
     /// Hold the data and logic needed to populate the `MeetupMemberDisplayTableViewCell`
