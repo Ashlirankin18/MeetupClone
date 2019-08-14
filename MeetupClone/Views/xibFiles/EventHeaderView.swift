@@ -44,11 +44,6 @@ final class EventHeaderView: UIView {
     
     @IBOutlet private weak var eventLocationLabel: UILabel!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        eventLocationMapView.delegate = self
-    }
-    
     private func createAndAddMapAnnotation() {
         guard let viewModel = viewModel else {
             assertionFailure("could not initilize viewModel")
@@ -56,29 +51,17 @@ final class EventHeaderView: UIView {
         }
         if let lattitude = viewModel.eventCoordinates?.latitude,
             let longitude = viewModel.eventCoordinates?.longitude {
-            guard eventLocationMapView.annotations.isEmpty else {
+            if !eventLocationMapView.annotations.isEmpty {
                 eventLocationMapView.removeAnnotations(eventLocationMapView.annotations)
-                return
+            } else {
+                let locationAnnotation = MKPointAnnotation()
+                locationAnnotation.coordinate = CLLocationCoordinate2D(latitude: lattitude, longitude: longitude)
+                locationAnnotation.title = viewModel.eventName
+                eventLocationMapView.addAnnotation(locationAnnotation)
+                eventLocationMapView.showAnnotations([locationAnnotation], animated: true)
             }
-            let locationAnnotation = MKPointAnnotation()
-            locationAnnotation.coordinate = CLLocationCoordinate2D(latitude: lattitude, longitude: longitude)
-            locationAnnotation.title = viewModel.eventName
-            eventLocationMapView.addAnnotation(locationAnnotation)
         } else {
             eventLocationMapView.isHidden = true
         }
-    }
-}
-
-extension EventHeaderView: MKMapViewDelegate {
-    
-    // MARK: - MKMapViewDelegate
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        guard annotation is MKPointAnnotation else {
-            return nil }
-        let identifier = "Annotation"
-        let annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-        eventLocationMapView.showAnnotations([annotation], animated: true)
-        return annotationView
     }
 }

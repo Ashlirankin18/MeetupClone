@@ -11,7 +11,7 @@ import Foundation
 /// Represents a Photo model
 struct MeetupPhotoModel: Codable {
     
-    /// high resoution link of an image
+    /// high resoution link of an image. This value maybe nil if the user has joined through facebook.
     let highresLink: URL?
     
     /// thumbnail link of an image

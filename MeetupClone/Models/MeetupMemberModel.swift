@@ -12,10 +12,10 @@ import Foundation
 struct MeetupMemberModel: Codable {
     
     /// The member id
-    let id: Int?
+    let id: Int
     
     /// The name of the member
-    let name: String?
+    let name: String
     
     /// The photo link the depict the member
     let photo: MeetupPhotoModel?
