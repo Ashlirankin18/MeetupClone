@@ -82,14 +82,6 @@ final class EventDetailedTableViewController: UITableViewController {
         } else {
             headerView.viewModel = EventHeaderView.ViewModel(eventCoordinates: nil, eventName: meetupEventModel.eventName, eventLocation: meetupEventModel.venue?.city)
         }
-        headerView.eventHeaderViewDelegate = self
         return headerView
-    }
-}
-
-extension EventDetailedTableViewController: EventHeaderViewDelegate {
-    
-    func showAnnotationView(mapView: MKMapView, annotation: MKAnnotation) {
-        mapView.showAnnotations([annotation], animated: true)
     }
 }

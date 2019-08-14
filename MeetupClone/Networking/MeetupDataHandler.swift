@@ -20,6 +20,7 @@ class MeetupDataHandler {
     init(networkHelper: NetworkHelper) {
         self.networkHelper = networkHelper
     }
+    
     /// Represent the types that are expected to escape when the asynchrnous func completes.
     typealias UserHandler = (Result<MeetupUserModel, AppError>) -> Void
     
@@ -132,7 +133,6 @@ class MeetupDataHandler {
                     completion(.success(object))
                     return
                 } catch {
-                    print(error)
                     completion(.failure(.decodingError("Could not decode type")))
                     return
                 }
