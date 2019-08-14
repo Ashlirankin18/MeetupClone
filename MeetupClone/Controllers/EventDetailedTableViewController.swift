@@ -50,11 +50,11 @@ final class EventDetailedTableViewController: UITableViewController {
     /// EventDetailedTableViewController's view model.
     var viewModel: ViewModel? {
         didSet {
-        guard let viewModel = self.viewModel else {
-            assertionFailure("No viewModel found")
-            return
-        }
-        retrieveRSVPData(eventId: viewModel.eventId, eventURLName: viewModel.urlName)
+            guard let viewModel = self.viewModel else {
+                assertionFailure("No viewModel found")
+                return
+            }
+            retrieveRSVPData(eventId: viewModel.eventId, eventURLName: viewModel.urlName)
         }
     }
     private var rightBarButtonItem: UIBarButtonItem?
@@ -64,20 +64,29 @@ final class EventDetailedTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableViewProperties()
-        configureBarButtonItem()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        configureRightBarButtonItem()
     }
     
     private func configureTableViewProperties() {
-        
         tableView.register(UINib(nibName: "MeetupMemberDisplayTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "MemberCell")
         tableView.dataSource = eventDetailedControllerDataSource
         tableView.rowHeight = 80
         tableView.sectionHeaderHeight = UITableView.automaticDimension
     }
     
-    private func configureBarButtonItem() {
+    private func configureRightBarButtonItem() {
+        guard let viewModel = viewModel else {
+            return
+        }
         rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "icons8-heart-26"), style: .done, target: self, action: #selector(favoriteButtonPressed))
         navigationItem.rightBarButtonItem = rightBarButtonItem
+        if persistenceHelper.isEventFavorited(eventId: viewModel.eventId) {
+            rightBarButtonItem?.image = UIImage(named: "icons8-heart-25")
+        }
     }
     
     private func retrieveRSVPData(eventId: String, eventURLName: String) {
@@ -94,14 +103,17 @@ final class EventDetailedTableViewController: UITableViewController {
     }
     
     @objc private func favoriteButtonPressed() {
-        checksIfEventIsFavorited()
-    }
-    
-    private func checksIfEventIsFavorited() {
         guard let viewModel = viewModel else {
             return
         }
-        if rightBarButtonItem?.image == UIImage(named: "icons8-heart-26") {
+        toggleButtonImage(eventId: viewModel.eventId)
+    }
+    
+    private func toggleButtonImage(eventId: String) {
+        guard let viewModel = viewModel else {
+            return
+        }
+        if !persistenceHelper.isEventFavorited(eventId: eventId) {
             rightBarButtonItem?.image = UIImage(named: "icons8-heart-25")
             persistenceHelper.addFavoriteEventToDocumentsDirectory(favoriteEvent: viewModel)
         } else {

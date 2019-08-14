@@ -66,5 +66,13 @@ final class PersistenceHelper {
         } else {
             assertionFailure("Index could not be found")
         }
-    }    
+    }
+    
+    /// Chacks the favorites Array for the chosen eventId
+    ///
+    /// - Parameter eventId: The chosen event array
+    /// - Returns: Returns wether the event id is contained
+    static func isEventFavorited(eventId: String) -> Bool {
+        return favoriteEvents.contains(where: { $0.eventId == eventId })
+    }
 }
