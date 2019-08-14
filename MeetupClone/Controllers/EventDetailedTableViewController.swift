@@ -59,7 +59,7 @@ final class EventDetailedTableViewController: UITableViewController {
         meetupDataHandler.retrieveEventRSVP(eventId: eventId, eventURLName: eventURLName) { (result) in
             switch result {
             case .failure(let error):
-                //TODO:- Add an empty state for a 403 error. The error should let the user know they are not a member of the group.
+                //TODO:- Add an empty state for a 403 error. The error should let the user know they are not a member of the group. https://github.com/Lickability/meetup-browser/issues/29#issue-480432788
                 print(error)
             case .success(let rsvps):
                 self.eventDetailedControllerDataSource.rsvps = rsvps

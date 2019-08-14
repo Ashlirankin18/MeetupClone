@@ -58,11 +58,7 @@ final class EventsDisplayTableViewController: UITableViewController {
         headerView?.viewModel = GroupDisplayTableViewCell.ViewModel(groupName: headerInformationModel.name, groupImage: headerInformationModel.imageURL, members: nil, nextEventName: nil)
         return headerView
     }
-    
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 300
-    }
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) { 
         let detailedController = EventDetailedTableViewController(style: .grouped)
         let event = eventsDisplayTableViewControllerDataSource.events[indexPath.row]
