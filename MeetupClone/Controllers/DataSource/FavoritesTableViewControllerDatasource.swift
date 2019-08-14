@@ -21,9 +21,9 @@ final class FavoritesTableViewControllerDatasource: NSObject, UITableViewDataSou
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "EventDisplayCell", for: indexPath) as? EventDisplayTableViewCell else {
             return UITableViewCell()
         }
-        let event = PersistenceHelper.retrieveFavoriteEventsFromDocumentsDirectory()[indexPath.row]
+        let event = PersistenceHelper.retrieveFavoriteEventsFromDocumentsDirectory().reversed()[indexPath.row]
         
-        cell.viewModel = EventDisplayTableViewCell.ViewModel(eventName: event.eventName, eventDescription: event.description ?? NSLocalizedString("This event does not have a description", comment: "Informs the user the event has no description currently."), eventLocation: event.eventCity ?? "", rsvpCount: event.rsvpCount)
+        cell.viewModel = EventDisplayTableViewCell.ViewModel(eventName: event.eventName, eventDescription: event.description ?? NSLocalizedString("This event does not have a description", comment: "Informs the user the event has no description currently."), eventLocation: event.eventCity, rsvpCount: event.rsvpCount)
         return cell
     }
 }

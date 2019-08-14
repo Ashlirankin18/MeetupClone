@@ -17,15 +17,17 @@ final class FavoritesTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableViewProperties()
+        title = NSLocalizedString("My Favorites", comment: "Indicates to the user the tab they are on")
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-         tableView.reloadData()
+        tableView.reloadData()
     }
     
     private func configureTableViewProperties() {
         tableView.register(UINib(nibName: "EventDisplayTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "EventDisplayCell")
         tableView.dataSource = favoritesTableViewControllerDataSource
+        
     }
 }
