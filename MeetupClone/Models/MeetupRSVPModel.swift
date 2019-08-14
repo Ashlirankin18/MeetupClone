@@ -12,7 +12,7 @@ import Foundation
 struct MeetupRSVPModel: Codable {
     
     /// The member who RSVP
-    let member: MeetupMemberModel?
+    let member: MeetupMemberModel
     
     /// The member's response
     let response: String?
