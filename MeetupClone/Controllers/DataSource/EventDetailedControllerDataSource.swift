@@ -8,7 +8,7 @@
 
 import UIKit
 
-/// DataSource which will be used to mage data for the EventDetailedTableViewController.
+/// DataSource which will be used to manage data for the EventDetailedTableViewController.
 final class EventDetailedControllerDataSource: NSObject, UITableViewDataSource {
     
     /// An Array of model objects the will be displayed on screen.
@@ -24,8 +24,8 @@ final class EventDetailedControllerDataSource: NSObject, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "MemberCell", for: indexPath) as? MeetupMemberDisplayTableViewCell else {
             return UITableViewCell()
         }
-        guard !rsvps.isEmpty else {
-            assertionFailure("RSVP Array is empty")
+        guard rsvps.indices.contains(indexPath.row) else {
+            assertionFailure("RSVP Array does not contin the specified index")
             return UITableViewCell()
         }
         let rsvp = rsvps[indexPath.row]

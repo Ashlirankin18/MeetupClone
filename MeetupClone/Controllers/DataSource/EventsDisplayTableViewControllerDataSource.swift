@@ -8,7 +8,7 @@
 
 import UIKit
 
-/// DataSource which will be used to mage data for the EventDisplayTableViewController.
+/// DataSource which will be used to manage data for the EventDisplayTableViewController.
 final class EventsDisplayTableViewControllerDataSource: NSObject, UITableViewDataSource {
     
     /// Array of model objects that will be displayed on screen.
