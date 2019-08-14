@@ -48,6 +48,7 @@ final class EventHeaderView: UIView {
         super.awakeFromNib()
         eventLocationMapView.delegate = self
     }
+    
     private func createAndAddMapAnnotation() {
         guard let viewModel = viewModel else {
             assertionFailure("could not initilize viewModel")
