@@ -8,7 +8,7 @@
 
 import UIKit
 
-/// Display a list of groups that the user searches for.
+/// A `UIViewController` subclass which displays a list of groups that the user searches for.
 final class GroupsDisplayViewController: UIViewController {
     
     @IBOutlet private weak var zipCodeBarButtonItem: UIBarButtonItem!
@@ -18,6 +18,7 @@ final class GroupsDisplayViewController: UIViewController {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
+        
         return searchController
     }()
     
@@ -134,7 +135,16 @@ extension GroupsDisplayViewController: UISearchResultsUpdating {
 }
 extension GroupsDisplayViewController: UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 350
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let viewController = UIStoryboard(name: "Events", bundle: nil).instantiateViewController(withIdentifier: "EventsDisplayController") as? EventsDisplayTableViewController else {
+            assertionFailure("could not instantiate view controller")
+            return
+        }
+        let chosenGroup = groupInfoDataSource.groups[indexPath.row]
+        let highResPhoto = chosenGroup.groupPhoto?.highresLink
+        viewController.headerInformationModel = HeaderInformationModel(imageURL: highResPhoto, name: chosenGroup.groupName)
+        
+        viewController.urlName = chosenGroup.urlName
+        present(UINavigationController(rootViewController: viewController), animated: true, completion: nil)
     }
 }

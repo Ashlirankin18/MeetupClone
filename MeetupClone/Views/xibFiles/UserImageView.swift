@@ -9,7 +9,7 @@
 import UIKit
 
 /// Represent the users Profile Image.
-class UserImageView: UIView {
+final class UserImageView: UIView {
     
     @IBOutlet private weak var userImageView: UIImageView!
     
