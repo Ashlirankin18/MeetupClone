@@ -56,6 +56,10 @@ final class EventHeaderView: UIView {
         }
         if let lattitude = viewModel.eventCoordinates?.latitude,
             let longitude = viewModel.eventCoordinates?.longitude {
+            guard eventLocationMapView.annotations.isEmpty else {
+                eventLocationMapView.removeAnnotations(eventLocationMapView.annotations)
+                return
+            }
             let locationAnnotation = MKPointAnnotation()
             locationAnnotation.coordinate = CLLocationCoordinate2D(latitude: lattitude, longitude: longitude)
             locationAnnotation.title = viewModel.eventName

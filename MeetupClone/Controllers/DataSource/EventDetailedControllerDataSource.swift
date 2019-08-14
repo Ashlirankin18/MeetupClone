@@ -25,7 +25,7 @@ final class EventDetailedControllerDataSource: NSObject, UITableViewDataSource {
             return UITableViewCell()
         }
         guard rsvps.indices.contains(indexPath.row) else {
-            assertionFailure("RSVP Array does not contin the specified index")
+            assertionFailure("RSVP Array does not contain the specified index")
             return UITableViewCell()
         }
         let rsvp = rsvps[indexPath.row]
