@@ -12,7 +12,7 @@ import MapKit
 /// `UITableViewController` subclass that will display MeetUpEvent location details and the persons who have rsvp'd to an event.
 final class EventDetailedTableViewController: UITableViewController {
     
-    /// Represents the information needed to see up a EventDetailedTableViewController view
+    /// Represents the information needed to set up the EventDetailedTableViewController view
     struct ViewModel {
         
         /// The lattitude of the event
@@ -41,11 +41,11 @@ final class EventDetailedTableViewController: UITableViewController {
     /// EventDetailedTableViewController's view model.
     var viewModel: ViewModel? {
         didSet {
-        guard let viewModel = self.viewModel else {
-            assertionFailure("No viewModel found")
-            return
-        }
-        retrieveRSVPData(eventId: viewModel.eventId, eventURLName: viewModel.urlName)
+            guard let viewModel = self.viewModel else {
+                assertionFailure("No viewModel found")
+                return
+            }
+            retrieveRSVPData(eventId: viewModel.eventId, eventURLName: viewModel.urlName)
         }
     }
     

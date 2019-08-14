@@ -29,7 +29,7 @@ final class EventDetailedControllerDataSource: NSObject, UITableViewDataSource {
             return UITableViewCell()
         }
         let rsvp = rsvps[indexPath.row]
-        cell.viewModel = MeetupMemberDisplayTableViewCell.ViewModel(memberImageURL: rsvp.member?.photo?.photoLink, memberName: rsvp.member?.name ?? "No name")
+        cell.viewModel = MeetupMemberDisplayTableViewCell.ViewModel(memberImageURL: rsvp.member?.photo?.photoLink, memberName: rsvp.member?.name)
         return cell
     }
 }
