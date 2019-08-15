@@ -10,21 +10,21 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EmptyStateView" customModule="MeetupClone" customModuleProvider="target"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="EmptyStateView" customModule="MeetupClone" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="43" translatesAutoresizingMaskIntoConstraints="NO" id="cKy-cK-fy0">
-                    <rect key="frame" x="0.0" y="267" width="414" height="299"/>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="cKy-cK-fy0">
+                    <rect key="frame" x="10" y="267" width="394" height="299"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UPy-aH-Zz9">
-                            <rect key="frame" x="87" y="0.0" width="240" height="128"/>
+                            <rect key="frame" x="77" y="0.0" width="240" height="148"/>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0bq-UG-jFu">
-                            <rect key="frame" x="186" y="171" width="42" height="128"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0bq-UG-jFu">
+                            <rect key="frame" x="169" y="151" width="56.5" height="148"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="23"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -34,8 +34,8 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="cKy-cK-fy0" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="223" id="3Zp-qi-pOy"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="cKy-cK-fy0" secondAttribute="trailing" id="I80-fo-ySl"/>
-                <constraint firstItem="cKy-cK-fy0" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Pl4-Vm-hYV"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="cKy-cK-fy0" secondAttribute="trailing" constant="10" id="I80-fo-ySl"/>
+                <constraint firstItem="cKy-cK-fy0" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="10" id="Pl4-Vm-hYV"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="cKy-cK-fy0" secondAttribute="bottom" constant="296" id="Xnx-Ea-LWX"/>
                 <constraint firstItem="cKy-cK-fy0" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="qAo-jN-jCL"/>
             </constraints>

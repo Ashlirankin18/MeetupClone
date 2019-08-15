@@ -17,6 +17,11 @@ final class GroupInfoDataSource: NSObject, UITableViewDataSource {
     // MARK: - UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if groups.isEmpty {
+          tableView.setupEmptyStateView(image: UIImage(named: "noGroups"), prompt: NSLocalizedString("No groups were found. Please search by your interest", comment: "Lets the user know no groups were found."))
+        } else {
+            tableView.restoreView()
+        }
         return groups.count
     }
     
