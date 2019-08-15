@@ -18,19 +18,19 @@ extension UITableView {
     ///   - prompt: The prompty to the user if there are no items found.
     func setupEmptyStateView(image: UIImage?, prompt: String) {
         guard let emptyStateView = Bundle.main.loadNibNamed("EmptyStateView", owner: self, options: nil)?.first as? EmptyStateView,
-        let image = image else {
-            assertionFailure("Could not load nib or find an image")
-            return
+            let image = image else {
+                assertionFailure("Could not load nib or find an image")
+                return
         }
-        emptyStateView.frame = CGRect(x: 0, y: 0, width: self.frame.height, height: self.frame.width)
+        emptyStateView.frame = CGRect(x: 0, y: 0, width: frame.height, height: frame.width)
         emptyStateView.viewModel = EmptyStateView.ViewModel(image: image, prompt: prompt)
-        self.backgroundView = emptyStateView
-        self.separatorStyle = .none
+        backgroundView = emptyStateView
+        separatorStyle = .none
     }
     
     /// Removes the backgroundView and return the seperator style
     func restoreView() {
-        self.backgroundView = nil
-        self.separatorStyle = .singleLine
+        backgroundView = nil
+        separatorStyle = .singleLine
     }
 }

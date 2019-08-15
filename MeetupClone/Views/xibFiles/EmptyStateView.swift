@@ -10,7 +10,7 @@ import UIKit
 
 /// 'UIView' subclass which will display a prompt to the user if the object array is empty.
 final class EmptyStateView: UIView {
-
+    
     /// Manages the data that is needed to populate the `EmptyStateView`
     struct ViewModel {
         
@@ -20,10 +20,6 @@ final class EmptyStateView: UIView {
         /// The prompt shown when there are no results
         let prompt: String
     }
-    
-    @IBOutlet private weak var emptyStateImage: UIImageView!
-    
-    @IBOutlet private weak var emptyStatePrompt: UILabel!
     
     /// Represents the `EmptyStateView`'s model
     var viewModel: ViewModel? {
@@ -36,4 +32,10 @@ final class EmptyStateView: UIView {
             emptyStatePrompt.text = viewModel.prompt
         }
     }
+    
+    @IBOutlet private weak var emptyStateImage: UIImageView!
+    
+    @IBOutlet private weak var emptyStatePrompt: UILabel!
+    
+    
 }

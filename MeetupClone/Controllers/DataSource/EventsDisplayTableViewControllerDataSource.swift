@@ -13,7 +13,7 @@ final class EventsDisplayTableViewControllerDataSource: NSObject, UITableViewDat
     
     /// Array of model objects that will be displayed on screen.
     var events = [MeetupEventModel]()
-   
+    
     // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if events.isEmpty {
