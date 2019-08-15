@@ -22,7 +22,7 @@ final class EventsDisplayTableViewController: UITableViewController {
     var headerInformationModel: HeaderInformationModel?
     
     private let eventsDisplayTableViewControllerDataSource = EventsDisplayTableViewControllerDataSource()
-  
+    
     private let meetupDataHandler = MeetupDataHandler(networkHelper: NetworkHelper())
     
     override func viewDidLoad() {
@@ -36,7 +36,7 @@ final class EventsDisplayTableViewController: UITableViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderHeight = UITableView.automaticDimension
     }
-
+    
     private func retrieveGroupEvents(urlName: String) {
         meetupDataHandler.retrieveEvents(with: urlName) { result in
             switch result {
@@ -48,7 +48,7 @@ final class EventsDisplayTableViewController: UITableViewController {
             }
         }
     }
-        
+    
     // MARK: - UITableViewDelegate
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = Bundle.main.loadNibNamed("GroupDisplayTableViewCell", owner: self, options: nil)?.first as? GroupDisplayTableViewCell
@@ -59,18 +59,11 @@ final class EventsDisplayTableViewController: UITableViewController {
         return headerView
     }
     
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 300
-    }
-    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) { 
         let detailedController = EventDetailedTableViewController(style: .grouped)
         let event = eventsDisplayTableViewControllerDataSource.events[indexPath.row]
-        guard let eventId = event.eventId else {
-            assertionFailure("This event does not contain an id")
-            return
-        }
-        detailedController.viewModel = EventDetailedTableViewController.ViewModel(lattitude: event.venue?.lattitude, longitude: event.venue?.longitude, eventName: event.eventName, eventCity: event.venue?.city, urlName: urlName, eventId: eventId, description: event.description, rsvpCount: event.yesRSVPCount, isFavorited: false)
+        detailedController.urlName = urlName
+        detailedController.meetupEventModel = event
         navigationController?.pushViewController(detailedController, animated: true)
     }
 }

@@ -20,6 +20,7 @@ class MeetupDataHandler {
     init(networkHelper: NetworkHelper) {
         self.networkHelper = networkHelper
     }
+    
     /// Represent the types that are expected to escape when the asynchrnous func completes.
     typealias UserHandler = (Result<MeetupUserModel, AppError>) -> Void
     
@@ -55,7 +56,7 @@ class MeetupDataHandler {
     ///   - zipCode: User provided zipcode. If there is not zipcode meetup provides similar groupos based on the location that was given when the account was created
     ///   - completionHandler: receives information (expected type) when asynchronous call completes.
     func retrieveMeetupGroups(searchText: String?, zipCode: String?, completionHandler: @escaping GroupHandler) -> Cancelable? {
-
+        
         guard let urlString = checksQureyParameters(searchText: searchText, zipCode: zipCode)?.absoluteString else {
             return nil
         }
@@ -99,7 +100,7 @@ class MeetupDataHandler {
     ///   - eventId: The eventId of a chosen even.
     ///   - eventURLName: The event URL name.
     ///   - completionHandler: receives information (expected type) when asynchronous call completes
-  @discardableResult  func retrieveEventRSVP(eventId: String, eventURLName: String, completionHandler: @escaping RSVPHandler ) -> Cancelable? {
+    @discardableResult  func retrieveEventRSVP(eventId: String, eventURLName: String, completionHandler: @escaping RSVPHandler ) -> Cancelable? {
         let urlString = "https://api.meetup.com/\(eventURLName)/events/\(eventId)/rsvps?&sign=true&photo-host=public"
         let dataTask = genericRetrievalFunc(urlString: urlString) { (results: Result<[MeetupRSVPModel], AppError>) in
             switch results {
@@ -132,7 +133,6 @@ class MeetupDataHandler {
                     completion(.success(object))
                     return
                 } catch {
-                    print(error)
                     completion(.failure(.decodingError("Could not decode type")))
                     return
                 }

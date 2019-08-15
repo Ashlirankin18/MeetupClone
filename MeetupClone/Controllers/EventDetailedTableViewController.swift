@@ -11,50 +11,23 @@ import MapKit
 
 /// `UITableViewController` subclass that will display MeetUpEvent location details and the persons who have rsvp'd to an event.
 final class EventDetailedTableViewController: UITableViewController {
-    
-    /// Represents the information needed to see up a EventDetailedTableViewController view
-    struct ViewModel: Codable {
-        
-        /// The lattitude of the event
-        let lattitude: Double?
-        
-        /// The longitude of the event
-        let longitude: Double?
-        
-        /// The name of the event
-        let eventName: String
-        
-        /// The name of the city where the event is being held
-        let eventCity: String?
-        
-        /// The group's URL Name
-        let urlName: String
-        
-        /// The event's id
-        let eventId: String
-        
-        /// The event's description
-        let description: String?
-        
-        /// The number of the person who have rsvp'd
-        let rsvpCount: Int
-        
-        /// Indicates wether the event has been favorited or not.
-        var isFavorited: Bool
-    }
-    
+
     private let eventDetailedControllerDataSource = EventDetailedControllerDataSource()
     
     private let meetupDataHandler = MeetupDataHandler(networkHelper: NetworkHelper())
     
+    /// The URL Name of the meetup group
+    var urlName: String?
+    
     /// EventDetailedTableViewController's view model.
-    var viewModel: ViewModel? {
+    var meetupEventModel: MeetupEventModel? {
         didSet {
-            guard let viewModel = self.viewModel else {
-                assertionFailure("No viewModel found")
-                return
+            guard let meetupEventModel = meetupEventModel,
+                let urlName = self.urlName else {
+                    assertionFailure("No eventModel found")
+                    return
             }
-            retrieveRSVPData(eventId: viewModel.eventId, eventURLName: viewModel.urlName)
+            retrieveRSVPData(eventId: meetupEventModel.eventId, eventURLName: urlName)
         }
     }
     private var rightBarButtonItem: UIBarButtonItem?
@@ -89,11 +62,15 @@ final class EventDetailedTableViewController: UITableViewController {
         }
     }
     
-    private func retrieveRSVPData(eventId: String, eventURLName: String) {
+    private func retrieveRSVPData(eventId: String?, eventURLName: String) {
+        guard let eventId = eventId else {
+            assertionFailure("Event Id could not be found")
+            return
+        }
         meetupDataHandler.retrieveEventRSVP(eventId: eventId, eventURLName: eventURLName) { (result) in
             switch result {
             case .failure(let error):
-                //TODO:- Add an empty state for a 403 error. The error should let the user know they are not a member of the group.
+                //TODO:- Add an empty state for a 403 error. The error should let the user know they are not a member of the group. https://github.com/Lickability/meetup-browser/issues/29#issue-480432788
                 print(error)
             case .success(let rsvps):
                 self.eventDetailedControllerDataSource.rsvps = rsvps
@@ -124,14 +101,14 @@ final class EventDetailedTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let headerView = Bundle.main.loadNibNamed("EventHeaderView", owner: self, options: nil)?.first as? EventHeaderView,
-            let headerModel = viewModel else {
+            let meetupEventModel = meetupEventModel else {
                 return UIView()
         }
-        if let lattitude = headerModel.lattitude,
-            let longitude = headerModel.longitude {
-            headerView.viewModel = EventHeaderView.ViewModel(eventCoordinates: CLLocationCoordinate2D(latitude: lattitude, longitude: longitude), eventName: headerModel.eventName, eventLocation: headerModel.eventCity)
+        if let lattitude = meetupEventModel.venue?.lattitude,
+            let longitude = meetupEventModel.venue?.longitude {
+            headerView.viewModel = EventHeaderView.ViewModel(eventCoordinates: CLLocationCoordinate2D(latitude: lattitude, longitude: longitude), eventName: meetupEventModel.eventName, eventLocation: meetupEventModel.venue?.city)
         } else {
-            headerView.viewModel = EventHeaderView.ViewModel(eventCoordinates: nil, eventName: headerModel.eventName, eventLocation: headerModel.eventCity)
+            headerView.viewModel = EventHeaderView.ViewModel(eventCoordinates: nil, eventName: meetupEventModel.eventName, eventLocation: meetupEventModel.venue?.city)
         }
         return headerView
     }

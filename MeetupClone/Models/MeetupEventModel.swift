@@ -10,16 +10,16 @@ import Foundation
 
 /// Model of a MeetupEvent
 struct MeetupEventModel: Codable {
-
+    
     /// Id of the event
-    let eventId: String?
+    let eventId: String
     
     /// Name of the event
     let eventName: String
     
     /// Website link of the group
     let link: URL
-   
+    
     /// A description of the event
     let description: String?
     

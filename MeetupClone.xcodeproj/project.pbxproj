@@ -54,7 +54,6 @@
 		5BB02FEC22E7499800283272 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB02FEB22E7499800283272 /* ProfileViewController.swift */; };
 		5BB02FEE22E749E300283272 /* FavoritesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB02FED22E749E300283272 /* FavoritesTableViewController.swift */; };
 		5BB306EF2302F68D007119E3 /* IBDesignableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB306EE2302F68D007119E3 /* IBDesignableImageView.swift */; };
-		5BB306F12302FE08007119E3 /* MapDisplayHeaderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB306F02302FE08007119E3 /* MapDisplayHeaderModel.swift */; };
 		5BB306F723032701007119E3 /* FavoritesTableViewControllerDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB306F623032701007119E3 /* FavoritesTableViewControllerDatasource.swift */; };
 		5BB306FB23032E5E007119E3 /* DocumentsDirectory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB306FA23032E5E007119E3 /* DocumentsDirectory.swift */; };
 		5BB306FD23032E6F007119E3 /* PersistenceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB306FC23032E6F007119E3 /* PersistenceHelper.swift */; };
@@ -132,7 +131,6 @@
 		5BB02FEB22E7499800283272 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		5BB02FED22E749E300283272 /* FavoritesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewController.swift; sourceTree = "<group>"; };
 		5BB306EE2302F68D007119E3 /* IBDesignableImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IBDesignableImageView.swift; sourceTree = "<group>"; };
-		5BB306F02302FE08007119E3 /* MapDisplayHeaderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapDisplayHeaderModel.swift; sourceTree = "<group>"; };
 		5BB306F623032701007119E3 /* FavoritesTableViewControllerDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewControllerDatasource.swift; sourceTree = "<group>"; };
 		5BB306FA23032E5E007119E3 /* DocumentsDirectory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsDirectory.swift; sourceTree = "<group>"; };
 		5BB306FC23032E6F007119E3 /* PersistenceHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceHelper.swift; sourceTree = "<group>"; };
@@ -261,7 +259,6 @@
 			isa = PBXGroup;
 			children = (
 				5B9251DC22FB69450053B768 /* HeaderInformationModel.swift */,
-				5BB306F02302FE08007119E3 /* MapDisplayHeaderModel.swift */,
 				5B8932C122E643E400BF9876 /* AccessTokenSuccessModel.swift */,
 				5B8932C422E6450F00BF9876 /* AccessTokenFailureModel.swift */,
 				5B0B687D22F0904E004FDBFA /* MeetupEventModel.swift */,
@@ -439,6 +436,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BB3070523033ED7007119E3 /* Events.storyboard in Resources */,
 				5BA9164922F31D75000AF2E8 /* GroupInterface.storyboard in Resources */,
 				5BA9164D22F31DDA000AF2E8 /* FavoritesInterface.storyboard in Resources */,
 				5B884C7E22EB3AD30062F4AF /* EmptyStateViewController.xib in Resources */,
@@ -585,7 +583,6 @@
 				5B884C7D22EB3AD30062F4AF /* EmptyStateViewController.swift in Sources */,
 				5BF41FF522E7637D00ECA928 /* UserDefaultConstants.swift in Sources */,
 				5B526C0D22FCB2AE00F77EAC /* EventDetailedControllerDataSource.swift in Sources */,
-				5BB306F12302FE08007119E3 /* MapDisplayHeaderModel.swift in Sources */,
 				5B0B687E22F0904E004FDBFA /* MeetupEventModel.swift in Sources */,
 				5B0B686D22EF510E004FDBFA /* MeetupNextEventModel.swift in Sources */,
 				5B901EBD22E9ED4700272253 /* UserImageView.swift in Sources */,

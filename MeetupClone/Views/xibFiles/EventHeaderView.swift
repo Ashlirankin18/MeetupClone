@@ -9,9 +9,6 @@
 import UIKit
 import MapKit
 
-protocol EventHeaderViewDelegate: AnyObject {
-    func showAnnotationView(mapView: MKMapView, annotation: MKAnnotation)
-}
 /// `UIView` subclass which represents a headerView for a MeetupEvent
 final class EventHeaderView: UIView {
     
@@ -28,8 +25,6 @@ final class EventHeaderView: UIView {
         let eventLocation: String?
     }
     
-    weak var eventHeaderViewDelegate: EventHeaderViewDelegate?
-    
     /// The header's View Model
     var viewModel: ViewModel? {
         didSet {
@@ -39,7 +34,6 @@ final class EventHeaderView: UIView {
             }
             eventNameLabel.text = viewModel.eventName
             eventLocationLabel.text = viewModel.eventLocation
-            eventLocationMapView.delegate = self
             createAndAddMapAnnotation()
         }
     }
@@ -55,35 +49,24 @@ final class EventHeaderView: UIView {
             assertionFailure("could not initilize viewModel")
             return
         }
+       
         if let lattitude = viewModel.eventCoordinates?.latitude,
             let longitude = viewModel.eventCoordinates?.longitude {
-            let locationAnnotation = MKPointAnnotation()
-            locationAnnotation.coordinate = CLLocationCoordinate2D(latitude: lattitude, longitude: longitude)
-            locationAnnotation.title = viewModel.eventName
-            eventLocationMapView.addAnnotation(locationAnnotation)
+            checksForExistingAnnotations(viewModel: viewModel, lattitude: lattitude, longitude: longitude)
         } else {
             eventLocationMapView.isHidden = true
         }
     }
-}
-
-extension EventHeaderView: MKMapViewDelegate {
     
-    // MARK: - MKMapViewDelegate
-    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        guard annotation is MKPointAnnotation else {
-            return nil }
-        
-        let identifier = "Annotation"
-        
-        if let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) {
-            annotationView.annotation = annotation
-            eventHeaderViewDelegate?.showAnnotationView(mapView: eventLocationMapView, annotation: annotation)
-            return annotationView
+    private func checksForExistingAnnotations(viewModel: ViewModel, lattitude: Double, longitude: Double) {
+        if !eventLocationMapView.annotations.isEmpty {
+            eventLocationMapView.removeAnnotations(eventLocationMapView.annotations)
         } else {
-            let annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-            eventHeaderViewDelegate?.showAnnotationView(mapView: eventLocationMapView, annotation: annotation)
-            return annotationView
+            let locationAnnotation = MKPointAnnotation()
+            locationAnnotation.coordinate = CLLocationCoordinate2D(latitude: lattitude, longitude: longitude)
+            locationAnnotation.title = viewModel.eventName
+            eventLocationMapView.addAnnotation(locationAnnotation)
+            eventLocationMapView.showAnnotations([locationAnnotation], animated: true)
         }
     }
 }
