@@ -15,7 +15,7 @@ import Foundation
 /// - noFavoritesFound: The user has no save events
 /// - noGroupFound: No groups were from the qurey
 enum EmptyStateImageName: String {
-    case notAMemberofGroup = "notAMember"
+    case notAGroupMember = "notAMember"
     case noEventsFound = "noEvents"
     case noFavoritesFound = "noFavorite"
     case noGroupFound = "noGroups"
