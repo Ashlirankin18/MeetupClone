@@ -16,6 +16,11 @@ final class EventsDisplayTableViewControllerDataSource: NSObject, UITableViewDat
    
     // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if events.isEmpty {
+            tableView.setupEmptyStateView(image: UIImage(named: EmptyStateImageName.noEventsFound.rawValue), prompt: NSLocalizedString("You have no favorites, Try searching for a group", comment: "Indicates to the user they have no favorites"))
+        } else {
+            tableView.restoreView()
+        }
         return events.count
     }
     
