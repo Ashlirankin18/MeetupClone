@@ -49,19 +49,24 @@ final class EventHeaderView: UIView {
             assertionFailure("could not initilize viewModel")
             return
         }
+       
         if let lattitude = viewModel.eventCoordinates?.latitude,
             let longitude = viewModel.eventCoordinates?.longitude {
-            if !eventLocationMapView.annotations.isEmpty {
-                eventLocationMapView.removeAnnotations(eventLocationMapView.annotations)
-            } else {
-                let locationAnnotation = MKPointAnnotation()
-                locationAnnotation.coordinate = CLLocationCoordinate2D(latitude: lattitude, longitude: longitude)
-                locationAnnotation.title = viewModel.eventName
-                eventLocationMapView.addAnnotation(locationAnnotation)
-                eventLocationMapView.showAnnotations([locationAnnotation], animated: true)
-            }
+            checksForExistingAnnotations(viewModel: viewModel, lattitude: lattitude, longitude: longitude)
         } else {
             eventLocationMapView.isHidden = true
+        }
+    }
+    
+    private func checksForExistingAnnotations(viewModel: ViewModel, lattitude: Double, longitude: Double) {
+        if !eventLocationMapView.annotations.isEmpty {
+            eventLocationMapView.removeAnnotations(eventLocationMapView.annotations)
+        } else {
+            let locationAnnotation = MKPointAnnotation()
+            locationAnnotation.coordinate = CLLocationCoordinate2D(latitude: lattitude, longitude: longitude)
+            locationAnnotation.title = viewModel.eventName
+            eventLocationMapView.addAnnotation(locationAnnotation)
+            eventLocationMapView.showAnnotations([locationAnnotation], animated: true)
         }
     }
 }
