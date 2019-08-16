@@ -45,13 +45,13 @@
 		5BA9165D22F355A1000AF2E8 /* EventsDisplayTableViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA9165C22F355A1000AF2E8 /* EventsDisplayTableViewControllerDataSource.swift */; };
 		5BB02FEC22E7499800283272 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB02FEB22E7499800283272 /* ProfileViewController.swift */; };
 		5BB02FEE22E749E300283272 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB02FED22E749E300283272 /* FavoritesViewController.swift */; };
-		5BB1E651230593A90050CAFB /* EmptyStateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BB1E650230593A90050CAFB /* EmptyStateView.xib */; };
-		5BB1E653230593C00050CAFB /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB1E652230593C00050CAFB /* EmptyStateView.swift */; };
-		5BB1E655230599950050CAFB /* TableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB1E654230599950050CAFB /* TableView+Extension.swift */; };
-		5BB1E6572305A2A30050CAFB /* EmptyStateImageNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB1E6562305A2A30050CAFB /* EmptyStateImageNames.swift */; };
 		5BB3070323033E09007119E3 /* Events.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BB3070123033DFB007119E3 /* Events.storyboard */; };
 		5BD475DA22F9DCF000F091AA /* GroupInfoDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD475D922F9DCF000F091AA /* GroupInfoDataSource.swift */; };
 		5BE8470D22E75DC700B8E8FC /* MeetupPhotoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE8470C22E75DC700B8E8FC /* MeetupPhotoModel.swift */; };
+		5BEFBB562306DF59008466F8 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BEFBB552306DF59008466F8 /* UIImageView+Extension.swift */; };
+		5BEFBB5F2306EC53008466F8 /* EmptyStateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BEFBB5D2306EC53008466F8 /* EmptyStateTableViewCell.swift */; };
+		5BEFBB602306EC53008466F8 /* EmptyStateTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5BEFBB5E2306EC53008466F8 /* EmptyStateTableViewCell.xib */; };
+		5BEFBB6223071C3F008466F8 /* TableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BEFBB6123071C3F008466F8 /* TableView+Extension.swift */; };
 		5BF41FF322E7609500ECA928 /* MeetupMemberModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF41FF222E7609500ECA928 /* MeetupMemberModel.swift */; };
 		5BF41FF522E7637D00ECA928 /* UserDefaultConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF41FF422E7637D00ECA928 /* UserDefaultConstants.swift */; };
 		5BF41FF722E781E700ECA928 /* HTTPMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF41FF622E781E700ECA928 /* HTTPMethods.swift */; };
@@ -114,13 +114,13 @@
 		5BA9165C22F355A1000AF2E8 /* EventsDisplayTableViewControllerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsDisplayTableViewControllerDataSource.swift; sourceTree = "<group>"; };
 		5BB02FEB22E7499800283272 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		5BB02FED22E749E300283272 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
-		5BB1E650230593A90050CAFB /* EmptyStateView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyStateView.xib; sourceTree = "<group>"; };
-		5BB1E652230593C00050CAFB /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
-		5BB1E654230599950050CAFB /* TableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TableView+Extension.swift"; sourceTree = "<group>"; };
-		5BB1E6562305A2A30050CAFB /* EmptyStateImageNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateImageNames.swift; sourceTree = "<group>"; };
 		5BB3070123033DFB007119E3 /* Events.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Events.storyboard; sourceTree = "<group>"; };
 		5BD475D922F9DCF000F091AA /* GroupInfoDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupInfoDataSource.swift; sourceTree = "<group>"; };
 		5BE8470C22E75DC700B8E8FC /* MeetupPhotoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetupPhotoModel.swift; sourceTree = "<group>"; };
+		5BEFBB552306DF59008466F8 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
+		5BEFBB5D2306EC53008466F8 /* EmptyStateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateTableViewCell.swift; sourceTree = "<group>"; };
+		5BEFBB5E2306EC53008466F8 /* EmptyStateTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyStateTableViewCell.xib; sourceTree = "<group>"; };
+		5BEFBB6123071C3F008466F8 /* TableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TableView+Extension.swift"; sourceTree = "<group>"; };
 		5BF41FF222E7609500ECA928 /* MeetupMemberModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetupMemberModel.swift; sourceTree = "<group>"; };
 		5BF41FF422E7637D00ECA928 /* UserDefaultConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultConstants.swift; sourceTree = "<group>"; };
 		5BF41FF622E781E700ECA928 /* HTTPMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethods.swift; sourceTree = "<group>"; };
@@ -269,9 +269,10 @@
 		5B9DECD422E8F03900321359 /* DataSource */ = {
 			isa = PBXGroup;
 			children = (
+				5BEFBB6123071C3F008466F8 /* TableView+Extension.swift */,
 				5BA9165C22F355A1000AF2E8 /* EventsDisplayTableViewControllerDataSource.swift */,
 				5BD475D922F9DCF000F091AA /* GroupInfoDataSource.swift */,
-				5BB1E654230599950050CAFB /* TableView+Extension.swift */,
+				5BEFBB552306DF59008466F8 /* UIImageView+Extension.swift */,
 				5B9DECD222E8F03500321359 /* UserProfileDataSource.swift */,
 			);
 			path = DataSource;
@@ -293,11 +294,11 @@
 		5BA9164F22F32150000AF2E8 /* xibFiles */ = {
 			isa = PBXGroup;
 			children = (
+				5BEFBB5D2306EC53008466F8 /* EmptyStateTableViewCell.swift */,
+				5BEFBB5E2306EC53008466F8 /* EmptyStateTableViewCell.xib */,
 				5BA9165822F35043000AF2E8 /* EventDisplayTableViewCell.swift */,
 				5BA9165922F35043000AF2E8 /* EventDisplayTableViewCell.xib */,
 				5B884C7F22EB7FB40062F4AF /* GroupDisplayTableViewCell.swift */,
-				5BB1E650230593A90050CAFB /* EmptyStateView.xib */,
-				5BB1E652230593C00050CAFB /* EmptyStateView.swift */,
 				5B0B688522F21308004FDBFA /* GroupDisplayTableViewCell.xib */,
 				5B9DECD022E8EF5000321359 /* UserBioTableViewCell.swift */,
 				5B901EBA22E9ED0D00272253 /* UserImageView.xib */,
@@ -312,7 +313,6 @@
 				5B8932CE22E64E5800BF9876 /* AppError.swift */,
 				5BF41FF422E7637D00ECA928 /* UserDefaultConstants.swift */,
 				5BF41FF622E781E700ECA928 /* HTTPMethods.swift */,
-				5BB1E6562305A2A30050CAFB /* EmptyStateImageNames.swift */,
 			);
 			name = Enums;
 			path = MeetupClone/Models/Enums;
@@ -418,8 +418,8 @@
 				5B9DECC622E89FCE00321359 /* LaunchScreen.storyboard in Resources */,
 				5BB3070323033E09007119E3 /* Events.storyboard in Resources */,
 				5B901EBB22E9ED0D00272253 /* UserImageView.xib in Resources */,
-				5BB1E651230593A90050CAFB /* EmptyStateView.xib in Resources */,
 				5BA9164B22F31D93000AF2E8 /* ProfileInterface.storyboard in Resources */,
+				5BEFBB602306EC53008466F8 /* EmptyStateTableViewCell.xib in Resources */,
 				5B1AD6C022DE22910008E4EC /* Assets.xcassets in Resources */,
 				5BA9165B22F35043000AF2E8 /* EventDisplayTableViewCell.xib in Resources */,
 				5B8E5D6322E743DC008BE588 /* MeetupInfoInterface.storyboard in Resources */,
@@ -528,9 +528,12 @@
 				5BB02FEE22E749E300283272 /* FavoritesViewController.swift in Sources */,
 				5B8E5D6522E74458008BE588 /* GroupsDisplayViewController.swift in Sources */,
 				5BB02FEC22E7499800283272 /* ProfileViewController.swift in Sources */,
+				5BEFBB6223071C3F008466F8 /* TableView+Extension.swift in Sources */,
 				5B8932D422E651C100BF9876 /* MeetupDataHandler.swift in Sources */,
 				5B9DECD322E8F03500321359 /* UserProfileDataSource.swift in Sources */,
+				5BEFBB562306DF59008466F8 /* UIImageView+Extension.swift in Sources */,
 				5B9251DB22FB63AA0053B768 /* String+Extension.swift in Sources */,
+				5BEFBB5F2306EC53008466F8 /* EmptyStateTableViewCell.swift in Sources */,
 				5B8932C522E6450F00BF9876 /* AccessTokenFailureModel.swift in Sources */,
 				5B8932D222E650C000BF9876 /* NetworkHelper.swift in Sources */,
 				5B884C8122EB7FB40062F4AF /* GroupDisplayTableViewCell.swift in Sources */,
@@ -544,9 +547,7 @@
 				5B9DECD122E8EF5000321359 /* UserBioTableViewCell.swift in Sources */,
 				5BA9165522F34E69000AF2E8 /* EventsDisplayTableViewController.swift in Sources */,
 				5B8932C722E645C200BF9876 /* MeetupUserModel.swift in Sources */,
-				5BB1E653230593C00050CAFB /* EmptyStateView.swift in Sources */,
 				5B0B688022F090E3004FDBFA /* MeetupVenueModel.swift in Sources */,
-				5BB1E6572305A2A30050CAFB /* EmptyStateImageNames.swift in Sources */,
 				5B8932CF22E64E5800BF9876 /* AppError.swift in Sources */,
 				5B9251DD22FB69450053B768 /* HeaderInformationModel.swift in Sources */,
 				5B8932C222E643E400BF9876 /* AccessTokenSuccessModel.swift in Sources */,
@@ -554,7 +555,6 @@
 				5B0B687E22F0904E004FDBFA /* MeetupEventModel.swift in Sources */,
 				5B0B686D22EF510E004FDBFA /* MeetupNextEventModel.swift in Sources */,
 				5B901EBD22E9ED4700272253 /* UserImageView.swift in Sources */,
-				5BB1E655230599950050CAFB /* TableView+Extension.swift in Sources */,
 				5B1AD6BB22DE22900008E4EC /* LoginViewController.swift in Sources */,
 				5BA9165A22F35043000AF2E8 /* EventDisplayTableViewCell.swift in Sources */,
 				5BF41FF322E7609500ECA928 /* MeetupMemberModel.swift in Sources */,

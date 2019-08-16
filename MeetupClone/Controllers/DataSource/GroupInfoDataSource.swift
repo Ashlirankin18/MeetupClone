@@ -18,21 +18,22 @@ final class GroupInfoDataSource: NSObject, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if groups.isEmpty {
-            tableView.setupEmptyStateView(image: UIImage(named: EmptyStateImageName.noGroupFound.rawValue), prompt: NSLocalizedString("No groups were found. Please search by your interest", comment: "Lets the user know no groups were found."))
+            return 1
         } else {
-            tableView.restoreView()
+              return groups.count
         }
-        return groups.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "GroupDisplayCell", for: indexPath) as? GroupDisplayTableViewCell else {
-            fatalError("Could not dequeue cell at indexPath.")
+        if groups.isEmpty {
+            return tableView.dequeueEmptyStateCellAtIndexPath(cell: EmptyStateTableViewCell(), indexPath: indexPath, prompt: NSLocalizedString("No groups were found, try searching for your interest", comment: "Indicates to the user no groups were found"), image: UIImage.noGroupsFound)
+        } else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "GroupDisplayCell", for: indexPath) as? GroupDisplayTableViewCell else {
+                fatalError("Could not dequeue cell at indexPath.")
+            }
+            let group = groups[indexPath.row]
+            cell.viewModel = GroupDisplayTableViewCell.ViewModel(groupName: group.groupName, groupImage: group.groupPhoto?.photoLink, members: group.members, nextEventName: group.nextEvent?.eventName ?? NSLocalizedString("This group has no upcoming Events", comment: "Describes the group's upcoming events"))
+            return cell
         }
-        guard !groups.isEmpty else { fatalError("No groups could be found.") }
-        let group = groups[indexPath.row]
-        
-        cell.viewModel = GroupDisplayTableViewCell.ViewModel(groupName: group.groupName, groupImage: group.groupPhoto?.photoLink, members: group.members, nextEventName: group.nextEvent?.eventName ?? NSLocalizedString("This group has no upcoming Events", comment: "Describes the group's upcoming events"))
-        return cell
     }
 }
