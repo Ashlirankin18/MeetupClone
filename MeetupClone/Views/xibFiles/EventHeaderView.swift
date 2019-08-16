@@ -34,7 +34,7 @@ final class EventHeaderView: UIView {
             }
             eventNameLabel.text = viewModel.eventName
             eventLocationLabel.text = viewModel.eventLocation
-            handlesMapAnnotations()
+            handleMapAnnotations()
         }
     }
     
@@ -44,7 +44,7 @@ final class EventHeaderView: UIView {
     
     @IBOutlet private weak var eventLocationLabel: UILabel!
     
-    private func handlesMapAnnotations() {
+    private func handleMapAnnotations() {
         guard let viewModel = viewModel else {
             assertionFailure("could not initilize viewModel")
             return
@@ -62,10 +62,10 @@ final class EventHeaderView: UIView {
         if !eventLocationMapView.annotations.isEmpty {
             eventLocationMapView.removeAnnotations(eventLocationMapView.annotations)
         }
-        addsAndShowsAnnotation(viewModel: viewModel, lattitude: lattitude, longitude: lattitude)
+        addAndShowAnnotation(viewModel: viewModel, lattitude: lattitude, longitude: lattitude)
     }
     
-    private func addsAndShowsAnnotation(viewModel: ViewModel, lattitude: Double, longitude: Double){
+    private func addAndShowAnnotation(viewModel: ViewModel, lattitude: Double, longitude: Double){
         let locationAnnotation = MKPointAnnotation()
         locationAnnotation.coordinate = CLLocationCoordinate2D(latitude: lattitude, longitude: longitude)
         locationAnnotation.title = viewModel.eventName
