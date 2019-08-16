@@ -30,7 +30,7 @@ final class EventDetailedTableViewController: UITableViewController {
             retrieveRSVPData(eventId: meetupEventModel.eventId, eventURLName: urlName)
         }
     }
-    private var rightBarButtonItem: UIBarButtonItem?
+    private lazy var rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "icons8-heart-26"), style: .done, target: self, action: #selector(favoriteButtonPressed))
     
     private var persistenceHelper = PersistenceHelper.self
     
@@ -52,13 +52,12 @@ final class EventDetailedTableViewController: UITableViewController {
     }
     
     private func configureRightBarButtonItem() {
-        guard let viewModel = viewModel else {
+        guard let meetupEventModel = meetupEventModel else {
             return
         }
-        rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "icons8-heart-26"), style: .done, target: self, action: #selector(favoriteButtonPressed))
         navigationItem.rightBarButtonItem = rightBarButtonItem
-        if persistenceHelper.isEventFavorited(eventId: viewModel.eventId) {
-            rightBarButtonItem?.image = UIImage(named: "icons8-heart-25")
+        if persistenceHelper.isEventFavorited(eventId: meetupEventModel.eventId) {
+            rightBarButtonItem.image = UIImage(named: "icons8-heart-25")
         }
     }
     
@@ -80,22 +79,22 @@ final class EventDetailedTableViewController: UITableViewController {
     }
     
     @objc private func favoriteButtonPressed() {
-        guard let viewModel = viewModel else {
+        guard let meetupEventModel = meetupEventModel else {
             return
         }
-        toggleButtonImage(eventId: viewModel.eventId)
+        toggleButtonImage(eventId: meetupEventModel.eventId)
     }
     
     private func toggleButtonImage(eventId: String) {
-        guard let viewModel = viewModel else {
+        guard let meetupEventModel = meetupEventModel else {
             return
         }
         if !persistenceHelper.isEventFavorited(eventId: eventId) {
-            rightBarButtonItem?.image = UIImage(named: "icons8-heart-25")
-            persistenceHelper.addFavoriteEventToDocumentsDirectory(favoriteEvent: viewModel)
+            rightBarButtonItem.image = UIImage(named: "icons8-heart-25")
+            persistenceHelper.addFavoriteEventToDocumentsDirectory(favoriteEvent: meetupEventModel)
         } else {
-            rightBarButtonItem?.image = UIImage(named: "icons8-heart-26")
-            persistenceHelper.deleteItemFromDocumentsDirectory(favoriteEvent: viewModel)
+            rightBarButtonItem.image = UIImage(named: "icons8-heart-26")
+            persistenceHelper.deleteItemFromDocumentsDirectory(favoriteEvent: meetupEventModel)
         }
     }
     

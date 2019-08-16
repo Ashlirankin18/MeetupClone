@@ -54,7 +54,7 @@
 		5BB02FEC22E7499800283272 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB02FEB22E7499800283272 /* ProfileViewController.swift */; };
 		5BB02FEE22E749E300283272 /* FavoritesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB02FED22E749E300283272 /* FavoritesTableViewController.swift */; };
 		5BB306EF2302F68D007119E3 /* IBDesignableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB306EE2302F68D007119E3 /* IBDesignableImageView.swift */; };
-		5BB306F723032701007119E3 /* FavoritesTableViewControllerDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB306F623032701007119E3 /* FavoritesTableViewControllerDatasource.swift */; };
+		5BB306F723032701007119E3 /* FavoritesTableViewControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB306F623032701007119E3 /* FavoritesTableViewControllerDataSource.swift */; };
 		5BB306FB23032E5E007119E3 /* DocumentsDirectory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB306FA23032E5E007119E3 /* DocumentsDirectory.swift */; };
 		5BB306FD23032E6F007119E3 /* PersistenceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB306FC23032E6F007119E3 /* PersistenceHelper.swift */; };
 		5BB3070023033CE8007119E3 /* Events.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BB306FE23033C76007119E3 /* Events.storyboard */; };
@@ -131,7 +131,7 @@
 		5BB02FEB22E7499800283272 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		5BB02FED22E749E300283272 /* FavoritesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewController.swift; sourceTree = "<group>"; };
 		5BB306EE2302F68D007119E3 /* IBDesignableImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IBDesignableImageView.swift; sourceTree = "<group>"; };
-		5BB306F623032701007119E3 /* FavoritesTableViewControllerDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewControllerDatasource.swift; sourceTree = "<group>"; };
+		5BB306F623032701007119E3 /* FavoritesTableViewControllerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewControllerDataSource.swift; sourceTree = "<group>"; };
 		5BB306FA23032E5E007119E3 /* DocumentsDirectory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsDirectory.swift; sourceTree = "<group>"; };
 		5BB306FC23032E6F007119E3 /* PersistenceHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceHelper.swift; sourceTree = "<group>"; };
 		5BB306FE23033C76007119E3 /* Events.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Events.storyboard; sourceTree = "<group>"; };
@@ -293,7 +293,7 @@
 			children = (
 				5B526C0C22FCB2AE00F77EAC /* EventDetailedControllerDataSource.swift */,
 				5BA9165C22F355A1000AF2E8 /* EventsDisplayTableViewControllerDataSource.swift */,
-				5BB306F623032701007119E3 /* FavoritesTableViewControllerDatasource.swift */,
+				5BB306F623032701007119E3 /* FavoritesTableViewControllerDataSource.swift */,
 				5BD475D922F9DCF000F091AA /* GroupInfoDataSource.swift */,
 				5B9DECD222E8F03500321359 /* UserProfileDataSource.swift */,
 			);
@@ -436,7 +436,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5BB3070523033ED7007119E3 /* Events.storyboard in Resources */,
 				5BA9164922F31D75000AF2E8 /* GroupInterface.storyboard in Resources */,
 				5BA9164D22F31DDA000AF2E8 /* FavoritesInterface.storyboard in Resources */,
 				5B884C7E22EB3AD30062F4AF /* EmptyStateViewController.xib in Resources */,
@@ -552,7 +551,7 @@
 			files = (
 				5B526C0E22FCBBC500F77EAC /* LoginViewController.swift in Sources */,
 				5BD475DA22F9DCF000F091AA /* GroupInfoDataSource.swift in Sources */,
-				5BB306F723032701007119E3 /* FavoritesTableViewControllerDatasource.swift in Sources */,
+				5BB306F723032701007119E3 /* FavoritesTableViewControllerDataSource.swift in Sources */,
 				5B9DECC322E89F7600321359 /* AppDelegate.swift in Sources */,
 				5BB02FEE22E749E300283272 /* FavoritesTableViewController.swift in Sources */,
 				5B8E5D6522E74458008BE588 /* GroupsDisplayViewController.swift in Sources */,
