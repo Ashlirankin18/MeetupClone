@@ -15,10 +15,14 @@ class ProfileViewController: UIViewController {
     
     private let meetupCloneDataSource = UserProfileDataSource()
     
+    private let meetupDatatHandler = MeetupDataHandler(networkHelper: NetworkHelper())
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpProfileTableView()
+        retrieveUserInformation()
     }
+    private var meetupUserModel: MeetupUserModel?
     
     private func setUpProfileTableView() {
         profileControllerTableView.delegate = self
@@ -26,11 +30,28 @@ class ProfileViewController: UIViewController {
         profileControllerTableView.rowHeight = UITableView.automaticDimension
         profileControllerTableView.estimatedRowHeight = 44
     }
+    
+    private func retrieveUserInformation() {
+        meetupDatatHandler.retrieveUserData { (result) in
+            switch result {
+            case .failure(let error):
+                print(error)
+            case .success(let userInfo):
+                self.meetupUserModel = userInfo
+                self.meetupCloneDataSource.meetupUserModel = userInfo
+                self.profileControllerTableView.reloadData()
+            }
+        }
+    }
 }
 extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let headerView = Bundle.main.loadNibNamed("UserImageView", owner: self, options: nil)?.first as? UserImageView else {
             return UIView() }
+        guard let meetupUserModel = meetupUserModel else {
+            return UIView()
+        }
+        headerView.viewModel = UserImageView.ViewModel(userImageLink: meetupUserModel.photo?.highresLink)
         return headerView
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

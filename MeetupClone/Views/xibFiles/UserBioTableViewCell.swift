@@ -11,12 +11,24 @@ import UIKit
 /// Represents the cell that will display the user's bio information.
 final class UserBioTableViewCell: UITableViewCell {
 
-    @IBOutlet private weak var bioDisplayTextView: UITextView!
-    
-    /// Configure the textView with text.
-    ///
-    /// - Parameter userBio: The text representing the user's bio.
-    func configureCell(userBio: String) {
-        self.bioDisplayTextView.text = userBio
+    struct ViewModel {
+        let bio: String?
     }
+    
+    var viewModel: ViewModel? {
+        didSet {
+            guard let viewModel = viewModel else {
+                return
+            }
+            if let userBio = viewModel.bio {
+                bioDisplayTextView.text = userBio
+            } else {
+                bioDisplayTextView.isHidden = true
+                bioDisplayNameLabel.isHidden = true
+            }
+        }
+    }
+    
+    @IBOutlet weak var bioDisplayNameLabel: UILabel!
+    @IBOutlet private weak var bioDisplayTextView: UITextView!
 }

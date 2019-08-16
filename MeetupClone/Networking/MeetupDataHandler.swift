@@ -33,7 +33,7 @@ class MeetupDataHandler {
     
     /// Retrieves the user data from the server.
     /// - Parameter completionHandler: receives information (expected type) when asynchronous call completes.
-    func retrieveUserData(completionHandler: @escaping UserHandler) -> Cancelable? {
+  @discardableResult func retrieveUserData(completionHandler: @escaping UserHandler) -> Cancelable? {
         let urlString = "https://api.meetup.com/2/member/self"
         let dataTask = genericRetrievalFunc(urlString: urlString) { (results: Result<MeetupUserModel, AppError>) in
             switch results {
