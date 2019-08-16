@@ -10,15 +10,18 @@ import Foundation
 
 /// The class represents the method for interacting with the Documents Directory
 final class PersistenceHelper {
+    private init () {}
     
-    private static let fileName = "newFavoriteEvents.plist"
+    static let shared = PersistenceHelper()
     
-    private static var favoriteEvents = [MeetupEventModel]()
+    private let fileName = "newFavoriteEvents.plist"
+    
+    private var favoriteEvents = [MeetupEventModel]()
     
     /// Retrieves an array of the FavoriteEvents type from the documents directory
     ///
     /// - Returns: An array of FavoriteEvents
-    static func retrieveFavoriteEventsFromDocumentsDirectory() -> [MeetupEventModel] {
+     func retrieveFavoriteEventsFromDocumentsDirectory() -> [MeetupEventModel] {
         let path = DataPersistenceManager().filepathToDocumentsDiretory(filename: fileName).path
         if FileManager.default.fileExists(atPath: path),
             let data = FileManager.default.contents(atPath: path) {
@@ -35,7 +38,7 @@ final class PersistenceHelper {
     }
     
     /// Saves objects added of removed from the documents directory
-    static func saveFavoriteEventsToDocumentsDirectory() {
+     func saveFavoriteEventsToDocumentsDirectory() {
         let path = DataPersistenceManager().filepathToDocumentsDiretory(filename: fileName)
         
         do {
@@ -49,7 +52,7 @@ final class PersistenceHelper {
     /// Adds the event the user has favorited to the documents directory.
     ///
     /// - Parameter favoriteEvent: The event that was chosen by the user.
-    static func addFavoriteEventToDocumentsDirectory(favoriteEvent: MeetupEventModel) {
+     func addFavoriteEventToDocumentsDirectory(favoriteEvent: MeetupEventModel) {
         favoriteEvents.append(favoriteEvent)
         saveFavoriteEventsToDocumentsDirectory()
     }
@@ -57,7 +60,7 @@ final class PersistenceHelper {
     /// Removes an event from the documents directory
     ///
     /// - Parameter favoriteEvent: The event which was chosen by the user to delete
-    static func deleteItemFromDocumentsDirectory(favoriteEvent: MeetupEventModel) {
+     func deleteItemFromDocumentsDirectory(favoriteEvent: MeetupEventModel) {
         if let index = favoriteEvents.firstIndex(where: { $0.eventId == favoriteEvent.eventId }) {
             favoriteEvents.remove(at: index)
             saveFavoriteEventsToDocumentsDirectory()
@@ -70,7 +73,7 @@ final class PersistenceHelper {
     ///
     /// - Parameter eventId: The chosen event array
     /// - Returns: Returns wether the event id is contained
-    static func isEventFavorited(eventId: String) -> Bool {
+     func isEventFavorited(eventId: String) -> Bool {
         return favoriteEvents.contains(where: { $0.eventId == eventId })
     }
 }

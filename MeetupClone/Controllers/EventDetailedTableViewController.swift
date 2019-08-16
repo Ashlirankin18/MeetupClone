@@ -56,7 +56,7 @@ final class EventDetailedTableViewController: UITableViewController {
             return
         }
         navigationItem.rightBarButtonItem = rightBarButtonItem
-        if persistenceHelper.isEventFavorited(eventId: meetupEventModel.eventId) {
+        if persistenceHelper.shared.isEventFavorited(eventId: meetupEventModel.eventId) {
             rightBarButtonItem.image = UIImage(named: "icons8-heart-25")
         }
     }
@@ -89,12 +89,12 @@ final class EventDetailedTableViewController: UITableViewController {
         guard let meetupEventModel = meetupEventModel else {
             return
         }
-        if !persistenceHelper.isEventFavorited(eventId: eventId) {
+        if !persistenceHelper.shared.isEventFavorited(eventId: eventId) {
             rightBarButtonItem.image = UIImage(named: "icons8-heart-25")
-            persistenceHelper.addFavoriteEventToDocumentsDirectory(favoriteEvent: meetupEventModel)
+            persistenceHelper.shared.addFavoriteEventToDocumentsDirectory(favoriteEvent: meetupEventModel)
         } else {
             rightBarButtonItem.image = UIImage(named: "icons8-heart-26")
-            persistenceHelper.deleteItemFromDocumentsDirectory(favoriteEvent: meetupEventModel)
+            persistenceHelper.shared.deleteItemFromDocumentsDirectory(favoriteEvent: meetupEventModel)
         }
     }
     
