@@ -85,7 +85,7 @@ final class GroupsDisplayViewController: UIViewController {
             guard let zipCode = alertController.textFields?.first?.text else {
                 return
             }
-          
+            
             if self.isEnteredZipCodeValid(zipCode: zipCode) {
                 self.zipCodeBarButtonItem.title = zipCode
                 UserDefaults.standard.set(zipCode, forKey: UserDefaultConstants.zipCode.rawValue)
@@ -145,6 +145,6 @@ extension GroupsDisplayViewController: UITableViewDelegate {
         viewController.headerInformationModel = HeaderInformationModel(imageURL: highResPhoto, name: chosenGroup.groupName)
         
         viewController.urlName = chosenGroup.urlName
-        present(UINavigationController(rootViewController: viewController), animated: true, completion: nil)
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }

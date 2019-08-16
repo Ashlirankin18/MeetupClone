@@ -8,12 +8,12 @@
 
 import UIKit
 
-/// DataSource which will be used to mage data for the eventsDisplayTableView.
+/// DataSource which will be used to manage data for the EventDisplayTableViewController.
 final class EventsDisplayTableViewControllerDataSource: NSObject, UITableViewDataSource {
     
     /// Array of model objects that will be displayed on screen.
     var events = [MeetupEventModel]()
-   
+    
     // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return events.count
@@ -23,6 +23,7 @@ final class EventsDisplayTableViewControllerDataSource: NSObject, UITableViewDat
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "EventDisplayCell", for: indexPath) as? EventDisplayTableViewCell else {
             return UITableViewCell()
         }
+        
         let event = events[indexPath.row]
         do {
             let description = try event.description?.asHTMLAttributedString()
@@ -30,7 +31,6 @@ final class EventsDisplayTableViewControllerDataSource: NSObject, UITableViewDat
         } catch {
             assertionFailure("Could not create NSAttributedString")
         }
-        
         return cell
     }
 }

@@ -8,6 +8,7 @@
 
 import UIKit
 import Kingfisher
+
 /// `UITableViewCell` subclass which represents the information about a group object.
 final class GroupDisplayTableViewCell: UITableViewCell {
     
@@ -23,7 +24,7 @@ final class GroupDisplayTableViewCell: UITableViewCell {
         
         /// The imageURL of the group's profile image
         let groupImage: URL?
-       
+        
         /// The number of people who are members of this group
         let members: Int?
         
@@ -43,7 +44,7 @@ final class GroupDisplayTableViewCell: UITableViewCell {
             groupNameLabel.text = viewModel.groupName
             if let members = viewModel.members,
                 let nextEventName = viewModel.nextEventName {
-               nextEventLabel.text = "\(String.localizedStringWithFormat(memberFormat, members))  •  \(String.localizedStringWithFormat(nextEventFormat, nextEventName))"
+                nextEventLabel.text = "\(String.localizedStringWithFormat(memberFormat, members))  •  \(String.localizedStringWithFormat(nextEventFormat, nextEventName))"
             } else {
                 nextEventLabel.isHidden = true
             }

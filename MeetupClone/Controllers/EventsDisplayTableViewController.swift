@@ -22,21 +22,19 @@ final class EventsDisplayTableViewController: UITableViewController {
     var headerInformationModel: HeaderInformationModel?
     
     private let eventsDisplayTableViewControllerDataSource = EventsDisplayTableViewControllerDataSource()
+    
     private let meetupDataHandler = MeetupDataHandler(networkHelper: NetworkHelper())
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureTableViewProperties()
+    }
+    
+    private func configureTableViewProperties() {
         tableView.register(UINib(nibName: "EventDisplayTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "EventDisplayCell")
         tableView.dataSource = eventsDisplayTableViewControllerDataSource
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderHeight = UITableView.automaticDimension
-        title = NSLocalizedString("Events", comment: "The events a group has")
-        setupBarButtonItem()
-    }
-    
-    private func setupBarButtonItem() {
-        let backbutton = UIBarButtonItem(title: NSLocalizedString("Back", comment: "Tells the user to go back to the previous page."), style: .done, target: self, action: #selector(backButtonPressed))
-        navigationItem.leftBarButtonItem = backbutton
     }
     
     private func retrieveGroupEvents(urlName: String) {
@@ -51,9 +49,6 @@ final class EventsDisplayTableViewController: UITableViewController {
         }
     }
     
-    @objc private func backButtonPressed() {
-        dismiss(animated: true)
-    }
     // MARK: - UITableViewDelegate
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = Bundle.main.loadNibNamed("GroupDisplayTableViewCell", owner: self, options: nil)?.first as? GroupDisplayTableViewCell
@@ -62,5 +57,13 @@ final class EventsDisplayTableViewController: UITableViewController {
         }
         headerView?.viewModel = GroupDisplayTableViewCell.ViewModel(groupName: headerInformationModel.name, groupImage: headerInformationModel.imageURL, members: nil, nextEventName: nil)
         return headerView
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) { 
+        let detailedController = EventDetailedTableViewController(style: .grouped)
+        let event = eventsDisplayTableViewControllerDataSource.events[indexPath.row]
+        detailedController.urlName = urlName
+        detailedController.meetupEventModel = event
+        navigationController?.pushViewController(detailedController, animated: true)
     }
 }
