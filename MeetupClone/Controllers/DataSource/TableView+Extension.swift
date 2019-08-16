@@ -14,10 +14,10 @@ extension UITableView {
     ///
     /// - Parameters:
     ///   - cell: `UITableView` subclass which 
-    ///   - indexPath: <#indexPath description#>
-    ///   - prompt: <#prompt description#>
-    ///   - image: <#image description#>
-    /// - Returns: <#return value description#>
+    ///   - indexPath: The indexPath where the cell will be dequeued
+    ///   - prompt: The prompt that will be displayed to the user
+    ///   - image: The image whicch will be displayed on the cell
+    /// - Returns: The configured tableView Cell
     func dequeueEmptyStateCellAtIndexPath(cell: EmptyStateTableViewCell, indexPath: IndexPath, prompt: String, image: UIImage?) -> UITableViewCell {
         guard let cell = self.dequeueReusableCell(withIdentifier: "EmptyStateCell", for: indexPath) as? EmptyStateTableViewCell,
         let image = image else {
