@@ -23,12 +23,11 @@ final class UserBioTableViewCell: UITableViewCell {
             if let userBio = viewModel.bio {
                 bioDisplayTextView.text = userBio
             } else {
-                bioDisplayTextView.isHidden = true
-                bioDisplayNameLabel.isHidden = true
+                bioDisplayTextView.text = NSLocalizedString("You have no bio", comment: "Indicates to the user they have no bio")
             }
         }
     }
     
-    @IBOutlet weak var bioDisplayNameLabel: UILabel!
+    @IBOutlet private weak var bioDisplayNameLabel: UILabel!
     @IBOutlet private weak var bioDisplayTextView: UITextView!
 }

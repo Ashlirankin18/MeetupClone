@@ -9,7 +9,7 @@
 import UIKit
 
 /// Displays the users profile information.
-class ProfileViewController: UIViewController {
+final class ProfileViewController: UIViewController {
     
     @IBOutlet private weak var profileControllerTableView: UITableView!
     
@@ -22,13 +22,13 @@ class ProfileViewController: UIViewController {
         setUpProfileTableView()
         retrieveUserInformation()
     }
+    
     private var meetupUserModel: MeetupUserModel?
     
     private func setUpProfileTableView() {
         profileControllerTableView.delegate = self
         profileControllerTableView.dataSource = meetupCloneDataSource
         profileControllerTableView.rowHeight = UITableView.automaticDimension
-        profileControllerTableView.estimatedRowHeight = 44
     }
     
     private func retrieveUserInformation() {
@@ -54,6 +54,7 @@ extension ProfileViewController: UITableViewDelegate {
         headerView.viewModel = UserImageView.ViewModel(userImageLink: meetupUserModel.photo?.highresLink)
         return headerView
     }
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 300
     }
