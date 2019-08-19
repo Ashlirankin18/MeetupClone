@@ -16,17 +16,14 @@ final class EventDetailedTableViewController: UITableViewController {
     
     private let meetupDataHandler = MeetupDataHandler(networkHelper: NetworkHelper())
     
-    /// The URL Name of the meetup group
-    var urlName: String?
-    
     /// EventDetailedTableViewController's view model.
     var meetupEventModel: MeetupEventModel? {
         didSet {
-            guard let meetupEventModel = meetupEventModel,
-                let urlName = self.urlName else {
+            guard let meetupEventModel = meetupEventModel else {
                     assertionFailure("No eventModel found")
                     return
             }
+            let urlName = meetupEventModel.group.urlName
             retrieveRSVPData(eventId: meetupEventModel.eventId, eventURLName: urlName)
         }
     }

@@ -62,7 +62,6 @@ final class EventsDisplayTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) { 
         let detailedController = EventDetailedTableViewController(style: .grouped)
         let event = eventsDisplayTableViewControllerDataSource.events[indexPath.row]
-        detailedController.urlName = urlName
         detailedController.meetupEventModel = event
         navigationController?.pushViewController(detailedController, animated: true)
     }
