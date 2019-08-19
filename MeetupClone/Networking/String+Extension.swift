@@ -9,7 +9,6 @@ import Foundation
 
 // MARK: - Extension to the String class
 extension String {
-    
     /// Will convert a String with possible HTML syntax to a human readable format
     ///
     /// - Returns: An string which will display in an human readable format.

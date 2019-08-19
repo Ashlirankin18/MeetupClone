@@ -15,5 +15,5 @@ struct MeetupRSVPModel: Codable {
     let member: MeetupMemberModel
     
     /// The member's response
-    let response: String
+    let response: String?
 }

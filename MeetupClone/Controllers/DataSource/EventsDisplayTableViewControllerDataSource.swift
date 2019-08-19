@@ -8,7 +8,7 @@
 
 import UIKit
 
-/// DataSource which will be used to mage data for the eventsDisplayTableView.
+/// DataSource which will be used to manage data for the EventDisplayTableViewController.
 final class EventsDisplayTableViewControllerDataSource: NSObject, UITableViewDataSource {
     
     /// Array of model objects that will be displayed on screen.
@@ -23,7 +23,7 @@ final class EventsDisplayTableViewControllerDataSource: NSObject, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+
         if events.isEmpty {
             return tableView.dequeueEmptyStateCellAtIndexPath(cell: EmptyStateTableViewCell(), indexPath: indexPath, prompt: NSLocalizedString("This group has not upcoming events", comment: "Indicates to the user that there are no upcoming events"), image: UIImage.noEventsFound)
         } else {
