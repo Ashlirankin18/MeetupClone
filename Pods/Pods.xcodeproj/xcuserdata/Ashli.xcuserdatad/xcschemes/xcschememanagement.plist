@@ -14,7 +14,7 @@
 		<key>Kingfisher.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>1</integer>
 		</dict>
 		<key>Pods-MeetupClone.xcscheme</key>
 		<dict>
@@ -26,7 +26,7 @@
 		<key>Pods-MeetupClone.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>1</integer>
+			<integer>2</integer>
 		</dict>
 		<key>Pods-MeetupCloneTests.xcscheme</key>
 		<dict>
@@ -38,7 +38,7 @@
 		<key>Pods-MeetupCloneTests.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>2</integer>
+			<integer>3</integer>
 		</dict>
 		<key>SwiftLint.xcscheme</key>
 		<dict>
@@ -50,7 +50,7 @@
 		<key>SwiftLint.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>3</integer>
+			<integer>4</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
