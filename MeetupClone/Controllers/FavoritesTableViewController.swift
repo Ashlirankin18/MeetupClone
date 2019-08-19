@@ -11,7 +11,7 @@ import UIKit
 /// Shows the groups that the user has favorited 
 final class FavoritesTableViewController: UITableViewController {
     
-    private let favoritesTableViewControllerDataSource = FavoritesTableViewControllerDataSource() 
+    private let favoritesTableViewControllerDataSource = FavoritesTableViewControllerDatasource() 
     private let persistenceHelper = PersistenceHelper.self
     
     override func viewDidLoad() {
