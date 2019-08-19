@@ -39,18 +39,18 @@ final class GroupDisplayTableViewCell: UITableViewCell {
                 return
             }
             groupImageView.kf.setImage(with: viewModel.groupImage, placeholder: UIImage(named: "group-placeholder"))
-            checkForGroupNameAndSetsLabel(viewModel: viewModel)
+            updateView(viewModel: viewModel)
             checkForEventsInformationAndSetsLabel(viewModel: viewModel)
         }
     }
     
-    private func checkForGroupNameAndSetsLabel(viewModel: ViewModel) {
+    private func updateView(viewModel: ViewModel) {
         if let groupName = viewModel.groupName {
             groupNameLabel.text = groupName
         } else {
             groupNameLabel.isHidden = true
             tintedView.isHidden = true
-            contentView.backgroundColor = #colorLiteral(red: 0.8641044497, green: 0.2083849907, blue: 0.2688426971, alpha: 1)
+            contentView.backgroundColor = UIColor(named: "ClayRed", in: Bundle.main, compatibleWith: .none)
         }
     }
     

@@ -31,13 +31,17 @@ final class FavoritesTableViewController: UITableViewController {
     private func configureTableViewProperties() {
         tableView.register(UINib(nibName: "EventDisplayTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "EventDisplayCell")
         tableView.dataSource = favoritesTableViewControllerDataSource
+        tableView.sectionHeaderHeight = UITableView.automaticDimension
     }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let event = persistenceHelper.shared.retrieveFavoriteEventsFromDocumentsDirectory()[indexPath.row]
         let detailedController = EventDetailedTableViewController(style: .grouped)
         detailedController.meetupEventModel = event
-        navigationController?.pushViewController(detailedController, animated: true)
+        self.show(detailedController, sender: self)
     }
+    
+    // MARK: - UITableViewDelegate
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let headerView = Bundle.main.loadNibNamed("GroupDisplayTableViewCell", owner: self, options: nil)?.first as? GroupDisplayTableViewCell else {
@@ -49,8 +53,5 @@ final class FavoritesTableViewController: UITableViewController {
         
         headerView.viewModel = GroupDisplayTableViewCell.ViewModel(groupName: nil, groupImage: url, members: nil, nextEventName: nil)
         return headerView
-    }
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 300
     }
 } 
