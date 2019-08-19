@@ -34,7 +34,7 @@ final class EventHeaderView: UIView {
             }
             eventNameLabel.text = viewModel.eventName
             eventLocationLabel.text = viewModel.eventLocation
-            createAndAddMapAnnotation()
+            handleMapAnnotations()
         }
     }
     
@@ -44,12 +44,12 @@ final class EventHeaderView: UIView {
     
     @IBOutlet private weak var eventLocationLabel: UILabel!
     
-    private func createAndAddMapAnnotation() {
+    private func handleMapAnnotations() {
         guard let viewModel = viewModel else {
             assertionFailure("could not initilize viewModel")
             return
         }
-       
+        
         if let lattitude = viewModel.eventCoordinates?.latitude,
             let longitude = viewModel.eventCoordinates?.longitude {
             checksForExistingAnnotations(viewModel: viewModel, lattitude: lattitude, longitude: longitude)
@@ -61,12 +61,15 @@ final class EventHeaderView: UIView {
     private func checksForExistingAnnotations(viewModel: ViewModel, lattitude: Double, longitude: Double) {
         if !eventLocationMapView.annotations.isEmpty {
             eventLocationMapView.removeAnnotations(eventLocationMapView.annotations)
-        } else {
-            let locationAnnotation = MKPointAnnotation()
-            locationAnnotation.coordinate = CLLocationCoordinate2D(latitude: lattitude, longitude: longitude)
-            locationAnnotation.title = viewModel.eventName
-            eventLocationMapView.addAnnotation(locationAnnotation)
-            eventLocationMapView.showAnnotations([locationAnnotation], animated: true)
         }
+        addAndShowAnnotation(viewModel: viewModel, lattitude: lattitude, longitude: lattitude)
+    }
+    
+    private func addAndShowAnnotation(viewModel: ViewModel, lattitude: Double, longitude: Double){
+        let locationAnnotation = MKPointAnnotation()
+        locationAnnotation.coordinate = CLLocationCoordinate2D(latitude: lattitude, longitude: longitude)
+        locationAnnotation.title = viewModel.eventName
+        eventLocationMapView.addAnnotation(locationAnnotation)
+        eventLocationMapView.showAnnotations([locationAnnotation], animated: true)
     }
 }
