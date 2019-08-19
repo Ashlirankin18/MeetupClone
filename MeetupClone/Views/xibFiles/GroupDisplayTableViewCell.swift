@@ -16,7 +16,7 @@ final class GroupDisplayTableViewCell: UITableViewCell {
         super.prepareForReuse()
         groupImageView.image = nil
     }
-    /// Hold the data and logic needed to populate the `GroupDisplayTableViewCell`
+    /// Holds the data and logic needed to populate the `GroupDisplayTableViewCell`
     struct ViewModel {
         
         /// The name given to a MeetupGroup

@@ -11,7 +11,7 @@ import MapKit
 
 /// `UITableViewController` subclass that will display MeetUpEvent location details and the persons who have rsvp'd to an event.
 final class EventDetailedTableViewController: UITableViewController {
-    
+
     private let eventDetailedControllerDataSource = EventDetailedControllerDataSource()
     
     private let meetupDataHandler = MeetupDataHandler(networkHelper: NetworkHelper())
@@ -30,25 +30,35 @@ final class EventDetailedTableViewController: UITableViewController {
             retrieveRSVPData(eventId: meetupEventModel.eventId, eventURLName: urlName)
         }
     }
+    private lazy var rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "icons8-heart-26"), style: .done, target: self, action: #selector(favoriteButtonPressed))
+    
+    private var persistenceHelper = PersistenceHelper.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableViewProperties()
-        configureBarButtonItem()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        configureRightBarButtonItem()
     }
     
     private func configureTableViewProperties() {
-        
         tableView.register(UINib(nibName: "MeetupMemberDisplayTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "MemberCell")
         tableView.dataSource = eventDetailedControllerDataSource
         tableView.rowHeight = 80
         tableView.sectionHeaderHeight = UITableView.automaticDimension
     }
     
-    private func configureBarButtonItem() {
-        
-        let rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "icons8-heart-26"), style: .done, target: self, action: #selector(favoriteButtonPressed))
+    private func configureRightBarButtonItem() {
+        guard let meetupEventModel = meetupEventModel else {
+            return
+        }
         navigationItem.rightBarButtonItem = rightBarButtonItem
+        if persistenceHelper.isEventFavorited(eventId: meetupEventModel.eventId) {
+            rightBarButtonItem.image = UIImage(named: "icons8-heart-25")
+        }
     }
     
     private func retrieveRSVPData(eventId: String?, eventURLName: String) {
@@ -69,6 +79,23 @@ final class EventDetailedTableViewController: UITableViewController {
     }
     
     @objc private func favoriteButtonPressed() {
+        guard let meetupEventModel = meetupEventModel else {
+            return
+        }
+        toggleButtonImage(eventId: meetupEventModel.eventId)
+    }
+    
+    private func toggleButtonImage(eventId: String) {
+        guard let meetupEventModel = meetupEventModel else {
+            return
+        }
+        if !persistenceHelper.isEventFavorited(eventId: eventId) {
+            rightBarButtonItem.image = UIImage(named: "icons8-heart-25")
+            persistenceHelper.addFavoriteEventToDocumentsDirectory(favoriteEvent: meetupEventModel)
+        } else {
+            rightBarButtonItem.image = UIImage(named: "icons8-heart-26")
+            persistenceHelper.deleteItemFromDocumentsDirectory(favoriteEvent: meetupEventModel)
+        }
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

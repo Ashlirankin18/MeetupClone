@@ -13,7 +13,11 @@ protocol Cancelable: AnyObject {
     func cancelTask()
 }
 
+// MARK: - <#Cancelable#> Extension on the URLSessionDataTask, all the canceling of a datatask.
+
 extension URLSessionDataTask: Cancelable {
+    
+    /// Cancels a datatask
     func cancelTask() {
         cancel()
     }
