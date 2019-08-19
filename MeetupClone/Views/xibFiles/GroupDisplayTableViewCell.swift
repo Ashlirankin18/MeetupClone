@@ -20,7 +20,7 @@ final class GroupDisplayTableViewCell: UITableViewCell {
     struct ViewModel {
         
         /// The name given to a MeetupGroup
-        let groupName: String
+        let groupName: String?
         
         /// The imageURL of the group's profile image
         let groupImage: URL?
@@ -38,20 +38,34 @@ final class GroupDisplayTableViewCell: UITableViewCell {
             guard let viewModel = viewModel else {
                 return
             }
-            let memberFormat = NSLocalizedString("%d Members", comment: "The people who are members of the group")
-            let nextEventFormat = NSLocalizedString("Next Event: %@ ", comment: "The group's next event")
-            groupImageView.kf.setImage(with: viewModel.groupImage, placeholder: UIImage(named: "group-placeholder") )
-            groupNameLabel.text = viewModel.groupName
-            if let members = viewModel.members,
-                let nextEventName = viewModel.nextEventName {
-                nextEventLabel.text = "\(String.localizedStringWithFormat(memberFormat, members))  •  \(String.localizedStringWithFormat(nextEventFormat, nextEventName))"
-            } else {
-                nextEventLabel.isHidden = true
-            }
+            groupImageView.kf.setImage(with: viewModel.groupImage, placeholder: UIImage(named: "group-placeholder"))
+            checkForGroupNameAndSetsLabel(viewModel: viewModel)
+            checkForEventsInformationAndSetsLabel(viewModel: viewModel)
         }
     }
     
+    private func checkForGroupNameAndSetsLabel(viewModel: ViewModel) {
+        if let groupName = viewModel.groupName {
+            groupNameLabel.text = groupName
+        } else {
+            groupNameLabel.isHidden = true
+            tintedView.isHidden = true
+            contentView.backgroundColor = #colorLiteral(red: 0.8641044497, green: 0.2083849907, blue: 0.2688426971, alpha: 1)
+        }
+    }
+    
+    private func checkForEventsInformationAndSetsLabel(viewModel: ViewModel) {
+        let memberFormat = NSLocalizedString("%d Members", comment: "The people who are members of the group")
+        let nextEventFormat = NSLocalizedString("Next Event: %@ ", comment: "The group's next event")
+        if let members = viewModel.members,
+            let nextEventName = viewModel.nextEventName {
+            nextEventLabel.text = "\(String.localizedStringWithFormat(memberFormat, members))  •  \(String.localizedStringWithFormat(nextEventFormat, nextEventName))"
+        } else {
+            nextEventLabel.isHidden = true
+        }
+    }
     @IBOutlet private weak var groupImageView: UIImageView!
     @IBOutlet private weak var groupNameLabel: UILabel!
     @IBOutlet private weak var nextEventLabel: UILabel!
+    @IBOutlet private weak var tintedView: UIView!
 }

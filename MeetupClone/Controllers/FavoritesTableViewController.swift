@@ -19,6 +19,10 @@ final class FavoritesTableViewController: UITableViewController {
         configureTableViewProperties()
     }
     
+    override func didMove(toParent parent: UIViewController?) {
+        super.didMove(toParent: parent)
+        navigationController?.navigationBar.shadowImage = UIImage()
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         tableView.reloadData()
@@ -29,10 +33,10 @@ final class FavoritesTableViewController: UITableViewController {
         tableView.dataSource = favoritesTableViewControllerDataSource
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-     let event = persistenceHelper.shared.retrieveFavoriteEventsFromDocumentsDirectory()[indexPath.row]
-     let detailedController = EventDetailedTableViewController(style: .grouped)
-     detailedController.meetupEventModel = event
-     navigationController?.pushViewController(detailedController, animated: true)
+        let event = persistenceHelper.shared.retrieveFavoriteEventsFromDocumentsDirectory()[indexPath.row]
+        let detailedController = EventDetailedTableViewController(style: .grouped)
+        detailedController.meetupEventModel = event
+        navigationController?.pushViewController(detailedController, animated: true)
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
