@@ -14,15 +14,15 @@ final class DataPersistenceManager {
     /// Provides a URL to the documents directory
     ///
     /// - Returns: The path returned
-    func documentsDirectory() -> URL {
-        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+    func documentsDirectory() -> URL? {
+        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
     }
     
     /// Creates a filepath to the documents directory
     ///
     /// - Parameter filename: The name of the plist file that will be saved.
     /// - Returns: A URL Representing the location of the data stored
-    func filepathToDocumentsDiretory(filename: String) -> URL {
-        return documentsDirectory().appendingPathComponent(filename)
+    func filepathToDocumentsDiretory(filename: String) -> URL? {
+        return documentsDirectory()?.appendingPathComponent(filename)
     }
 }

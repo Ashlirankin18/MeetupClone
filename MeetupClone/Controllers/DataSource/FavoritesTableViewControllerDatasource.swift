@@ -9,7 +9,7 @@
 import UIKit
 
 ///  DataSource which will be used to mage data for the FavoritesTableViewController.
-final class FavoritesTableViewControllerDatasource: NSObject, UITableViewDataSource {
+final class FavoritesTableViewControllerDataSource: NSObject, UITableViewDataSource {
     
     // MARK: - UITableViewDataSource
     
@@ -28,7 +28,6 @@ final class FavoritesTableViewControllerDatasource: NSObject, UITableViewDataSou
         } catch {
          assertionFailure("Could not create NSAttributedString")
         }
-       
         return cell
     }
 }
