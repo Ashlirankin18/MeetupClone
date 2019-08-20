@@ -33,11 +33,11 @@ struct MeetupGroupModel: Codable {
     let nextEvent: MeetupNextEventModel?
     
     /// The group's description
-    let description: String
+    let description: String?
     
     /// The number of people who are members of the group.
-    let members: Int
-  
+    let members: Int?
+    
     private enum CodingKeys: String, CodingKey {
         case id
         case groupName = "name"

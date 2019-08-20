@@ -10,7 +10,7 @@ import Foundation
 
 /// Used to handle network requests.
 class NetworkHelper {
-
+    
     typealias Handler = (Result<Data, AppError>) -> Void
     
     /// Uses URLSession to make network request.

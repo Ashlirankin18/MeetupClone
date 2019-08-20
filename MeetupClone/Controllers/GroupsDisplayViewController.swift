@@ -53,7 +53,8 @@ final class GroupsDisplayViewController: UIViewController {
         groupDisplayTableView.delegate = self
         groupDisplayTableView.rowHeight = UITableView.automaticDimension
         groupDisplayTableView.register(UINib(nibName: "GroupDisplayTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "GroupDisplayCell")
-    }
+        groupDisplayTableView.register(UINib(nibName: "EmptyStateTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "EmptyStateCell")
+}
     
     @discardableResult private func retrieveGroups(searchText: String?, zipCode: String?) -> Cancelable? {
         let dataTask = meetupDataHandler.retrieveMeetupGroups(searchText: searchText ?? "", zipCode: zipCode) { (results) in
@@ -85,7 +86,7 @@ final class GroupsDisplayViewController: UIViewController {
             guard let zipCode = alertController.textFields?.first?.text else {
                 return
             }
-          
+            
             if self.isEnteredZipCodeValid(zipCode: zipCode) {
                 self.zipCodeBarButtonItem.title = zipCode
                 UserDefaults.standard.set(zipCode, forKey: UserDefaultConstants.zipCode.rawValue)
@@ -145,6 +146,6 @@ extension GroupsDisplayViewController: UITableViewDelegate {
         viewController.headerInformationModel = HeaderInformationModel(imageURL: highResPhoto, name: chosenGroup.groupName)
         
         viewController.urlName = chosenGroup.urlName
-        present(UINavigationController(rootViewController: viewController), animated: true, completion: nil)
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }

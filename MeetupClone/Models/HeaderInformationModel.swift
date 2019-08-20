@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// Represents the information needed to see up a headerView
+/// Represents the information needed to see up a HeaderView
 struct HeaderInformationModel {
     
     /// The URL of an image that will be displayed on the header view.

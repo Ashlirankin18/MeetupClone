@@ -10,9 +10,7 @@ import UIKit
 
 /// Represent the users Profile Image.
 final class UserImageView: UIView {
-    
-    
-    
+ 
     /// Holds the data needed to populate `UserImageView`
     struct ViewModel {
         let userImageLink: URL?
@@ -24,7 +22,9 @@ final class UserImageView: UIView {
             userImageView.kf.setImage(with: viewModel?.userImageLink)
         }
     }
+  
     @IBOutlet private weak var userImageView: UIImageView!
+
     override func layoutSubviews() {
         super.layoutSubviews()
         userImageView.layer.cornerRadius = userImageView.frame.width / 2

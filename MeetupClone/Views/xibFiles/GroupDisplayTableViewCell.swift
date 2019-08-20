@@ -8,6 +8,7 @@
 
 import UIKit
 import Kingfisher
+
 /// `UITableViewCell` subclass which represents the information about a group object.
 final class GroupDisplayTableViewCell: UITableViewCell {
     
@@ -15,7 +16,7 @@ final class GroupDisplayTableViewCell: UITableViewCell {
         super.prepareForReuse()
         groupImageView.image = nil
     }
-    /// Hold the data and logic needed to populate the `GroupDisplayTableViewCell`
+    /// Holds the data and logic needed to populate the `GroupDisplayTableViewCell`
     struct ViewModel {
         
         /// The name given to a MeetupGroup
@@ -23,7 +24,7 @@ final class GroupDisplayTableViewCell: UITableViewCell {
         
         /// The imageURL of the group's profile image
         let groupImage: URL?
-       
+        
         /// The number of people who are members of this group
         let members: Int?
         
@@ -34,23 +35,25 @@ final class GroupDisplayTableViewCell: UITableViewCell {
     /// Represents the `GroupDisplayTableViewCell` Model
     var viewModel: ViewModel? {
         didSet {
-            guard let viewModel = viewModel else {
-                return
-            }
-            let memberFormat = NSLocalizedString("%d Members", comment: "The people who are members of the group")
-            let nextEventFormat = NSLocalizedString("Next Event: %@ ", comment: "The group's next event")
-            groupImageView.kf.setImage(with: viewModel.groupImage, placeholder: UIImage(named: "group-placeholder") )
-            groupNameLabel.text = viewModel.groupName
-            if let members = viewModel.members,
-                let nextEventName = viewModel.nextEventName {
-               nextEventLabel.text = "\(String.localizedStringWithFormat(memberFormat, members))  •  \(String.localizedStringWithFormat(nextEventFormat, nextEventName))"
-            } else {
-                nextEventLabel.isHidden = true
-            }
+            groupNameLabel.text = viewModel?.groupName
+            groupImageView.kf.setImage(with: viewModel?.groupImage, placeholder: UIImage(named: "group-placeholder"))
+            checkForEventsInformationAndSetsLabel(viewModel: viewModel)
         }
     }
     
+    private func checkForEventsInformationAndSetsLabel(viewModel: ViewModel?) {
+        let memberFormat = NSLocalizedString("%d Members", comment: "The people who are members of the group")
+        let nextEventFormat = NSLocalizedString("Next Event: %@ ", comment: "The group's next event")
+        nextEventLabel.isHidden = false
+        if let members = viewModel?.members,
+            let nextEventName = viewModel?.nextEventName {
+            nextEventLabel.text = "\(String.localizedStringWithFormat(memberFormat, members))  •  \(String.localizedStringWithFormat(nextEventFormat, nextEventName))"
+        } else {
+            nextEventLabel.isHidden = true
+        }
+    }
     @IBOutlet private weak var groupImageView: UIImageView!
     @IBOutlet private weak var groupNameLabel: UILabel!
     @IBOutlet private weak var nextEventLabel: UILabel!
+    @IBOutlet private weak var tintedView: UIView!
 }

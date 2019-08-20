@@ -10,7 +10,7 @@ import Foundation
 
 /// Model of a MeetupEvent
 struct MeetupEventModel: Codable {
-   
+    
     /// Id of the event
     let eventId: String
     
@@ -19,7 +19,7 @@ struct MeetupEventModel: Codable {
     
     /// Website link of the group
     let link: URL
-   
+    
     /// A description of the event
     let description: String?
     
@@ -29,6 +29,9 @@ struct MeetupEventModel: Codable {
     /// Number of people who responded yes to the event
     let yesRSVPCount: Int
     
+    /// The group that is hosting the event.
+    let group: MeetupGroupModel
+    
     private enum CodingKeys: String, CodingKey {
         case eventId = "id"
         case eventName = "name"
@@ -36,5 +39,6 @@ struct MeetupEventModel: Codable {
         case venue
         case description
         case yesRSVPCount = "yes_rsvp_count"
+        case group
     }
 }
