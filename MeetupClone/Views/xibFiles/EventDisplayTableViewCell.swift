@@ -37,7 +37,7 @@ final class EventDisplayTableViewCell: UITableViewCell {
             let rsvpFormat = NSLocalizedString("Number of persons Attending: %d", comment: "Indicates to the user how many persons are attending an event")
             eventNameLabel.text = viewModel.eventName
             eventDescriptionTextView.text = viewModel.eventDescription
-            eventLocationLabel.text = String.localizedStringWithFormat(locationFormat, viewModel.eventLocation ?? "")
+            eventLocationLabel.text = String.localizedStringWithFormat(locationFormat, viewModel.eventLocation ?? NSLocalizedString("This group has no description currently", comment: "Indicates to the user there is no description"))
             rsvpLabel.text = String.localizedStringWithFormat(rsvpFormat, viewModel.rsvpCount)
         }
     }

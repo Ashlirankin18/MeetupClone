@@ -9,20 +9,22 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Favorites Table View Controller-->
+        <!--Favorites-->
         <scene sceneID="zd9-rk-KUe">
             <objects>
                 <tableViewController id="u9R-q5-r0z" customClass="FavoritesTableViewController" customModule="MeetupClone" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="dL6-iP-VAk">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" id="dL6-iP-VAk">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="756"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="separatorColor" red="0.86410444974899292" green="0.20838499069213867" blue="0.26884269714355469" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <connections>
                             <outlet property="dataSource" destination="u9R-q5-r0z" id="34v-Ff-2eA"/>
                             <outlet property="delegate" destination="u9R-q5-r0z" id="iyn-Nw-ylU"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="fkQ-YS-cSs"/>
+                    <navigationItem key="navigationItem" title="Favorites" id="fkQ-YS-cSs"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sgc-pK-3rh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -32,11 +34,13 @@
         <scene sceneID="E12-mx-Bx8">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jdW-84-Nmc" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Favorites" image="icons8-star-26" id="4m8-3n-Er8"/>
+                    <tabBarItem key="tabBarItem" title="Favorites" image="icons8-heart-26" id="4m8-3n-Er8"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="drN-aI-jqQ">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" translucent="NO" largeTitles="YES" id="drN-aI-jqQ">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" red="0.86410444974899292" green="0.20838499069213867" blue="0.26884269714355469" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -49,6 +53,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="icons8-star-26" width="25" height="25"/>
+        <image name="icons8-heart-26" width="25" height="25"/>
     </resources>
 </document>
