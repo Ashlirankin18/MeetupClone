@@ -38,6 +38,6 @@ final class FavoritesTableViewController: UITableViewController {
         let event = persistenceHelper.shared.retrieveFavoriteEventsFromDocumentsDirectory()[indexPath.row]
         let detailedController = EventDetailedTableViewController(style: .grouped)
         detailedController.meetupEventModel = event
-        self.show(detailedController, sender: self)
+        show(detailedController, sender: self)
     }
 } 
