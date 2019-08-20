@@ -46,6 +46,7 @@ final class EventDetailedTableViewController: UITableViewController {
     
     private func configureTableViewProperties() {
         tableView.register(UINib(nibName: "MeetupMemberDisplayTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "MemberCell")
+        tableView.register(UINib(nibName: "EmptyStateTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "EmptyStateCell")
         tableView.dataSource = eventDetailedControllerDataSource
         tableView.rowHeight = 80
         tableView.sectionHeaderHeight = UITableView.automaticDimension
@@ -69,7 +70,6 @@ final class EventDetailedTableViewController: UITableViewController {
         meetupDataHandler.retrieveEventRSVP(eventId: eventId, eventURLName: eventURLName) { (result) in
             switch result {
             case .failure(let error):
-                //TODO:- Add an empty state for a 403 error. The error should let the user know they are not a member of the group. https://github.com/Lickability/meetup-browser/issues/29#issue-480432788
                 print(error)
             case .success(let rsvps):
                 self.eventDetailedControllerDataSource.rsvps = rsvps

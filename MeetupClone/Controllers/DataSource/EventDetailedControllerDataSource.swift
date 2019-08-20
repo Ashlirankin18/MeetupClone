@@ -17,19 +17,29 @@ final class EventDetailedControllerDataSource: NSObject, UITableViewDataSource {
     // MARK: - UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return rsvps.count
+        if rsvps.isEmpty {
+            return 1
+        } else {
+            return rsvps.count
+        }       
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "MemberCell", for: indexPath) as? MeetupMemberDisplayTableViewCell else {
-            return UITableViewCell()
+        if rsvps.isEmpty {
+            let cell = tableView.dequeueEmptyStateCellAtIndexPath(cell: EmptyStateTableViewCell(), indexPath: indexPath, prompt: NSLocalizedString("You are not a member of this group", comment: "Indicates to the user that they are not a member of the group"), image: UIImage.notAGroupMember)
+            return cell
+        } else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "MemberCell", for: indexPath) as? MeetupMemberDisplayTableViewCell else {
+                return UITableViewCell()
+            }
+            guard rsvps.indices.contains(indexPath.row) else {
+                assertionFailure("RSVP Array does not contain the specified index")
+                return UITableViewCell()
+            }
+            let rsvp = rsvps[indexPath.row]
+            cell.viewModel = MeetupMemberDisplayTableViewCell.ViewModel(memberImageURL: rsvp.member.photo?.photoLink, memberName: rsvp.member.name)
+            return cell
+            
         }
-        guard rsvps.indices.contains(indexPath.row) else {
-            assertionFailure("RSVP Array does not contain the specified index")
-            return UITableViewCell()
-        }
-        let rsvp = rsvps[indexPath.row]
-        cell.viewModel = MeetupMemberDisplayTableViewCell.ViewModel(memberImageURL: rsvp.member.photo?.photoLink, memberName: rsvp.member.name)
-        return cell
     }
 }
