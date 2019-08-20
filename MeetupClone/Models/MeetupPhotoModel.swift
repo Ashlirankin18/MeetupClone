@@ -24,8 +24,8 @@ struct MeetupPhotoModel: Codable {
     private var photoId: Int?
     
     /// The user's id which is determined on wethere and id or photoId was returned
-    // Two id properties were needed because there were inconsistencies in the photoModel and a photoModel on the user object.
     var userId: Int? {
+        // Two id properties were needed because there were inconsistencies in the photoModel and a photoModel on the user object.
         return id == nil ? photoId : id
     }
     /// link to the photo
