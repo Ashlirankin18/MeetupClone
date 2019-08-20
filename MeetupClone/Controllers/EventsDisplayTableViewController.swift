@@ -56,7 +56,7 @@ final class EventsDisplayTableViewController: UITableViewController {
         guard let headerInformationModel = headerInformationModel else {
             return nil
         }
-        headerView?.viewModel = GroupDisplayTableViewCell.ViewModel(groupName: headerInformationModel.name, groupImage: headerInformationModel.imageURL, members: nil, nextEventName: nil, date: nil)
+        headerView?.viewModel = GroupDisplayTableViewCell.ViewModel(groupName: headerInformationModel.name, groupImage: headerInformationModel.imageURL, members: nil, nextEventName: nil)
         return headerView
     }
     

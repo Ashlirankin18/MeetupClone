@@ -31,7 +31,6 @@ final class GroupDisplayTableViewCell: UITableViewCell {
         /// The name of the group's mext event
         let nextEventName: String?
         
-        let date: Date?
     }
     
     /// Represents the `GroupDisplayTableViewCell` Model
@@ -47,22 +46,13 @@ final class GroupDisplayTableViewCell: UITableViewCell {
             groupNameLabel.text = viewModel.groupName
             if let members = viewModel.members,
                 let nextEventName = viewModel.nextEventName {
-                nextEventLabel.text = "\(String.localizedStringWithFormat(memberFormat, members))  •  \(String.localizedStringWithFormat(nextEventFormat, nextEventName)) \(convertDateToString(date: viewModel.date))"
+                nextEventLabel.text = "\(String.localizedStringWithFormat(memberFormat, members))  •  \(String.localizedStringWithFormat(nextEventFormat, nextEventName))"
             } else {
                 nextEventLabel.isHidden = true
             }
         }
     }
     
-    private func convertDateToString(date: Date?) -> String {
-        if let date = date {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateStyle = .short
-            return "• \(dateFormatter.string(from: date))"
-        } else {
-            return ""
-        }
-    }
     @IBOutlet private weak var groupImageView: UIImageView!
     @IBOutlet private weak var groupNameLabel: UILabel!
     @IBOutlet private weak var nextEventLabel: UILabel!
