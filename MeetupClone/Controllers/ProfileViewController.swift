@@ -23,8 +23,6 @@ final class ProfileViewController: UIViewController {
         retrieveUserInformation()
     }
     
-    private var meetupUserModel: MeetupUserModel?
-    
     private func setUpProfileTableView() {
         profileControllerTableView.delegate = self
         profileControllerTableView.dataSource = meetupCloneDataSource
@@ -37,7 +35,6 @@ final class ProfileViewController: UIViewController {
             case .failure(let error):
                 print(error)
             case .success(let userInfo):
-                self.meetupUserModel = userInfo
                 self.meetupCloneDataSource.meetupUserModel = userInfo
                 self.profileControllerTableView.reloadData()
             }
@@ -45,10 +42,12 @@ final class ProfileViewController: UIViewController {
     }
 }
 extension ProfileViewController: UITableViewDelegate {
+    
+    // MARK: - UITableViewDelegate 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let headerView = Bundle.main.loadNibNamed("UserImageView", owner: self, options: nil)?.first as? UserImageView else {
             return UIView() }
-        guard let meetupUserModel = meetupUserModel else {
+        guard let meetupUserModel = meetupCloneDataSource.meetupUserModel else {
             return UIView()
         }
         headerView.viewModel = UserImageView.ViewModel(userImageLink: meetupUserModel.photo?.highresLink)

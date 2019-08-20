@@ -85,7 +85,6 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="bioDisplayNameLabel" destination="GBT-b1-I3r" id="kyi-2O-jmF"/>
                                             <outlet property="bioDisplayTextView" destination="znn-IA-1pH" id="OcE-B3-pHz"/>
                                         </connections>
                                     </tableViewCell>

@@ -9,7 +9,7 @@
 import Foundation
 
 /// Represents a Photo model
-struct MeetupPhotoModel: Decodable {
+struct MeetupPhotoModel: Codable {
     
     /// high resoution link of an image
     let highresLink: URL
@@ -20,8 +20,11 @@ struct MeetupPhotoModel: Decodable {
     /// id which represents an image
     private var id: Int?
     
+    /// another variation of the named property for id
     private var photoId: Int?
     
+    /// The user's id which is determined on wethere and id or photoId was returned
+    // Two id properties were needed because there were inconsistencies in the photoModel and a photoModel on the user object.
     var userId: Int? {
         return id == nil ? photoId : id
     }
@@ -35,15 +38,4 @@ struct MeetupPhotoModel: Decodable {
         case id
         case photoId = "photo_id"
     }
-    
-    init(decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        
-        id = container.contains(.id) ? try container.decode(Int.self, forKey: .id) : try container.decode(Int.self, forKey: .photoId)
-        highresLink = try container.decode(URL.self, forKey: .highresLink)
-        thumbLink = try container.decode(URL.self, forKey: .thumbLink)
-        photoLink = try container.decode(URL.self, forKey: .photoLink)
-    }
-}
-extension MeetupPhotoModel: Encodable {
 }

@@ -11,6 +11,7 @@ import UIKit
 /// Represents the dataSource used to configure the tableView in the ProfileViewController 
 final class UserProfileDataSource: NSObject, UITableViewDataSource {
     
+    /// The model representing a user object
     var meetupUserModel: MeetupUserModel?
     
     // MARK: - UITableViewDataSource
