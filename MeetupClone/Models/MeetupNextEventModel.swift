@@ -20,9 +20,12 @@ struct MeetupNextEventModel: Codable {
     /// The number of RSVP 
     let rsvpCount: Int
     
+    let time: Date?
+    
     private enum CodingKeys: String, CodingKey {
         case eventId = "id"
         case eventName = "name"
         case rsvpCount = "yes_rsvp_count"
+        case time
     }
 }
