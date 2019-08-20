@@ -30,6 +30,7 @@ final class FavoritesTableViewController: UITableViewController {
     
     private func configureTableViewProperties() {
         tableView.register(UINib(nibName: "EventDisplayTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "EventDisplayCell")
+        tableView.register(UINib(nibName: "EmptyStateTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "EmptyStateCell")
         tableView.dataSource = favoritesTableViewControllerDataSource
     }
     

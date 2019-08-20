@@ -34,7 +34,7 @@
         <scene sceneID="E12-mx-Bx8">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jdW-84-Nmc" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Favorites" image="icons8-heart-26" id="4m8-3n-Er8"/>
+                    <tabBarItem key="tabBarItem" title="Favorites" image="icons8-star-26" id="4m8-3n-Er8"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" translucent="NO" largeTitles="YES" id="drN-aI-jqQ">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
@@ -53,6 +53,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="icons8-heart-26" width="25" height="25"/>
+        <image name="icons8-star-26" width="25" height="25"/>
     </resources>
 </document>
