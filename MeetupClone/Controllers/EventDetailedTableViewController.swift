@@ -22,11 +22,11 @@ final class EventDetailedTableViewController: UITableViewController {
     /// Model representing an event object.
     var meetupEventModel: MeetupEventModel? {
         didSet {
-            guard let meetupEventModel = meetupEventModel,
-                let urlName = self.urlName else {
+            guard let meetupEventModel = meetupEventModel else {
                     assertionFailure("No eventModel found")
                     return
             }
+            let urlName = meetupEventModel.group.urlName
             retrieveRSVPData(eventId: meetupEventModel.eventId, eventURLName: urlName)
         }
     }

@@ -17,9 +17,12 @@ final class FavoritesTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableViewProperties()
-        title = NSLocalizedString("My Favorites", comment: "Indicates to the user the tab they are on")
     }
     
+    override func didMove(toParent parent: UIViewController?) {
+        super.didMove(toParent: parent)
+        navigationController?.navigationBar.shadowImage = UIImage()
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         tableView.reloadData()
@@ -29,4 +32,12 @@ final class FavoritesTableViewController: UITableViewController {
         tableView.register(UINib(nibName: "EventDisplayTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "EventDisplayCell")
         tableView.dataSource = favoritesTableViewControllerDataSource
     }
-}
+    
+    // MARK: - UITableViewDelegate
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let event = persistenceHelper.shared.retrieveFavoriteEventsFromDocumentsDirectory()[indexPath.row]
+        let detailedController = EventDetailedTableViewController(style: .grouped)
+        detailedController.meetupEventModel = event
+        show(detailedController, sender: self)
+    }
+} 
