@@ -44,6 +44,7 @@ final class GroupDisplayTableViewCell: UITableViewCell {
     private func checkForEventsInformationAndSetsLabel(viewModel: ViewModel?) {
         let memberFormat = NSLocalizedString("%d Members", comment: "The people who are members of the group")
         let nextEventFormat = NSLocalizedString("Next Event: %@ ", comment: "The group's next event")
+        nextEventLabel.isHidden = false
         if let members = viewModel?.members,
             let nextEventName = viewModel?.nextEventName {
             nextEventLabel.text = "\(String.localizedStringWithFormat(memberFormat, members))  •  \(String.localizedStringWithFormat(nextEventFormat, nextEventName))"
