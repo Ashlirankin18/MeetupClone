@@ -60,6 +60,7 @@
                 <outlet property="groupImageView" destination="FXF-B8-rjN" id="qUh-eM-wJH"/>
                 <outlet property="groupNameLabel" destination="8Pf-cv-i9Y" id="mgw-JF-GXl"/>
                 <outlet property="nextEventLabel" destination="bYk-3d-QkG" id="0sz-ua-dWI"/>
+                <outlet property="tintedView" destination="IHY-w6-m7t" id="8P2-l0-NrH"/>
             </connections>
             <point key="canvasLocation" x="84.782608695652186" y="-100.11160714285714"/>
         </tableViewCell>
