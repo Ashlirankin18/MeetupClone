@@ -11,12 +11,21 @@ import UIKit
 /// Represents the cell that will display the user's bio information.
 final class UserBioTableViewCell: UITableViewCell {
     
-    @IBOutlet private weak var bioDisplayTextView: UITextView!
-    
-    /// Configure the textView with text.
-    ///
-    /// - Parameter userBio: The text representing the user's bio.
-    func configureCell(userBio: String) {
-        self.bioDisplayTextView.text = userBio
+    /// Holds the data and logic needed to populate the `UserBioTableViewCell`
+    struct ViewModel {
+        let bio: String?
     }
+    
+    /// Represents the `UserBioTableViewCell` model
+    var viewModel: ViewModel? {
+        didSet {
+            if let userBio = viewModel?.bio {
+                bioDisplayTextView.text = userBio
+            } else {
+                bioDisplayTextView.text = NSLocalizedString("You have no bio", comment: "Indicates to the user they have no bio")
+            }
+        }
+    }
+    
+    @IBOutlet private weak var bioDisplayTextView: UITextView!
 }
