@@ -20,7 +20,7 @@ final class GroupDisplayTableViewCell: UITableViewCell {
     struct ViewModel {
         
         /// The name given to a MeetupGroup
-        let groupName: String?
+        let groupName: String
         
         /// The imageURL of the group's profile image
         let groupImage: URL?
@@ -35,30 +35,17 @@ final class GroupDisplayTableViewCell: UITableViewCell {
     /// Represents the `GroupDisplayTableViewCell` Model
     var viewModel: ViewModel? {
         didSet {
-            guard let viewModel = viewModel else {
-                return
-            }
-            groupImageView.kf.setImage(with: viewModel.groupImage, placeholder: UIImage(named: "group-placeholder"))
-            updateView(viewModel: viewModel)
+            groupNameLabel.text = viewModel?.groupName
+            groupImageView.kf.setImage(with: viewModel?.groupImage, placeholder: UIImage(named: "group-placeholder"))
             checkForEventsInformationAndSetsLabel(viewModel: viewModel)
         }
     }
     
-    private func updateView(viewModel: ViewModel) {
-        if let groupName = viewModel.groupName {
-            groupNameLabel.text = groupName
-        } else {
-            groupNameLabel.isHidden = true
-            tintedView.isHidden = true
-            contentView.backgroundColor = UIColor(named: "ClayRed", in: Bundle.main, compatibleWith: .none)
-        }
-    }
-    
-    private func checkForEventsInformationAndSetsLabel(viewModel: ViewModel) {
+    private func checkForEventsInformationAndSetsLabel(viewModel: ViewModel?) {
         let memberFormat = NSLocalizedString("%d Members", comment: "The people who are members of the group")
         let nextEventFormat = NSLocalizedString("Next Event: %@ ", comment: "The group's next event")
-        if let members = viewModel.members,
-            let nextEventName = viewModel.nextEventName {
+        if let members = viewModel?.members,
+            let nextEventName = viewModel?.nextEventName {
             nextEventLabel.text = "\(String.localizedStringWithFormat(memberFormat, members))  •  \(String.localizedStringWithFormat(nextEventFormat, nextEventName))"
         } else {
             nextEventLabel.isHidden = true

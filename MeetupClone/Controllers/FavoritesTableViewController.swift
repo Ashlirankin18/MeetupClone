@@ -31,27 +31,13 @@ final class FavoritesTableViewController: UITableViewController {
     private func configureTableViewProperties() {
         tableView.register(UINib(nibName: "EventDisplayTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "EventDisplayCell")
         tableView.dataSource = favoritesTableViewControllerDataSource
-        tableView.sectionHeaderHeight = UITableView.automaticDimension
     }
     
+    // MARK: - UITableViewDelegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let event = persistenceHelper.shared.retrieveFavoriteEventsFromDocumentsDirectory()[indexPath.row]
         let detailedController = EventDetailedTableViewController(style: .grouped)
         detailedController.meetupEventModel = event
         self.show(detailedController, sender: self)
-    }
-    
-    // MARK: - UITableViewDelegate
-    
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let headerView = Bundle.main.loadNibNamed("GroupDisplayTableViewCell", owner: self, options: nil)?.first as? GroupDisplayTableViewCell else {
-            return UIView()
-        }
-        guard let url = URL(string: "https://thememylogin.com/app/uploads/edd/2019/03/favorites.png") else {
-            return UIView()
-        }
-        
-        headerView.viewModel = GroupDisplayTableViewCell.ViewModel(groupName: nil, groupImage: url, members: nil, nextEventName: nil)
-        return headerView
     }
 } 
