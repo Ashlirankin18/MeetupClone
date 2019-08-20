@@ -18,8 +18,17 @@ struct MeetupPhotoModel: Codable {
     let thumbLink: URL
     
     /// id which represents an image
-    let id: Int
+    private var id: Int?
     
+    /// another variation of the named property for id
+    private var photoId: Int?
+    
+    /// The user's id, which is determined based on whether an id or photoId is present.
+    var userId: Int? {
+        // Two id properties were needed because there were inconsistencies in the photoModel and a photoModel on the user object.
+        return id == nil ? photoId : id
+    }
+    /// link to the photo
     let photoLink: URL
     
     private enum CodingKeys: String, CodingKey {
@@ -27,5 +36,6 @@ struct MeetupPhotoModel: Codable {
         case thumbLink = "thumb_link"
         case photoLink = "photo_link"
         case id
+        case photoId = "photo_id"
     }
 }

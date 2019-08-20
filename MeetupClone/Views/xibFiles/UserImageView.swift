@@ -10,16 +10,21 @@ import UIKit
 
 /// Represent the users Profile Image.
 final class UserImageView: UIView {
-    
-    @IBOutlet private weak var userImageView: UIImageView!
-    
-    /// Configure the user's profileImage on the imageView
-    ///
-    /// - Parameter userImage:  The UIImage representing the users's Image
-    func configureCell(userImage: UIImage?) {
-        userImageView.image = userImage
+ 
+    /// Holds the data needed to populate `UserImageView`
+    struct ViewModel {
+        let userImageLink: URL?
     }
     
+    /// Represents the `UserImageView` model
+    var viewModel: ViewModel? {
+        didSet {
+            userImageView.kf.setImage(with: viewModel?.userImageLink)
+        }
+    }
+  
+    @IBOutlet private weak var userImageView: UIImageView!
+
     override func layoutSubviews() {
         super.layoutSubviews()
         userImageView.layer.cornerRadius = userImageView.frame.width / 2
