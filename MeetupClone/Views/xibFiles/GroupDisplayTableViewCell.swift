@@ -30,7 +30,6 @@ final class GroupDisplayTableViewCell: UITableViewCell {
         
         /// The name of the group's mext event
         let nextEventName: String?
-        
     }
     
     /// Represents the `GroupDisplayTableViewCell` Model
