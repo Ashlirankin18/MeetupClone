@@ -14,20 +14,32 @@ final class FavoritesTableViewControllerDataSource: NSObject, UITableViewDataSou
     // MARK: - UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return PersistenceHelper.shared.retrieveFavoriteEventsFromDocumentsDirectory().count
+        let favorites = PersistenceHelper.shared.retrieveFavoriteEventsFromDocumentsDirectory()
+        if favorites.isEmpty {
+            return 1
+        } else {
+            return PersistenceHelper.shared.retrieveFavoriteEventsFromDocumentsDirectory().count
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "EventDisplayCell", for: indexPath) as? EventDisplayTableViewCell else {
-            return UITableViewCell()
+      let favorite = PersistenceHelper.shared.retrieveFavoriteEventsFromDocumentsDirectory()
+        if favorite.isEmpty {
+           let cell = tableView.dequeueEmptyStateCellAtIndexPath(cell: EmptyStateTableViewCell(), indexPath: indexPath, prompt: NSLocalizedString("You have not favorite events", comment: "Indicates to the user the have no favorite events"), image: UIImage.noFavoritesFound)
+            return cell
+        } else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "EventDisplayCell", for: indexPath) as? EventDisplayTableViewCell else {
+                return UITableViewCell()
+            }
+            let event =  PersistenceHelper.shared.retrieveFavoriteEventsFromDocumentsDirectory().reversed()[indexPath.row]
+            do {
+                let description = try event.description?.asHTMLAttributedString()
+                cell.viewModel = EventDisplayTableViewCell.ViewModel(eventName: event.eventName, eventDescription: description?.string ?? NSLocalizedString("This event does not have a description", comment: "Informs the user the event has no description currently."), eventLocation: event.venue?.city, rsvpCount: event.yesRSVPCount)
+            } catch {
+                assertionFailure("Could not create NSAttributedString")
+            }
+            return cell
         }
-        let event = PersistenceHelper.shared.retrieveFavoriteEventsFromDocumentsDirectory().reversed()[indexPath.row]
-        do {
-        let description = try event.description?.asHTMLAttributedString()
-         cell.viewModel = EventDisplayTableViewCell.ViewModel(eventName: event.eventName, eventDescription: description?.string ?? NSLocalizedString("This event does not have a description", comment: "Informs the user the event has no description currently."), eventLocation: event.venue?.city, rsvpCount: event.yesRSVPCount)
-        } catch {
-         assertionFailure("Could not create NSAttributedString")
-        }
-        return cell
     }
 }
