@@ -31,34 +31,26 @@ final class GroupDisplayTableViewCell: UITableViewCell {
         /// The name of the group's mext event
         let nextEventName: String?
         
+        /// The date of the upcoming event
         let date: Date?
     }
     
     /// Represents the `GroupDisplayTableViewCell` Model
     var viewModel: ViewModel? {
         didSet {
-            guard let viewModel = viewModel else {
-                return
-            }
-               groupNameLabel.text = viewModel?.groupName
-            groupImageView.kf.setImage(with: viewModel?.groupImage, placeholder: UIImage(named: "group-placeholder"))
-            checkForEventsInformationAndSetsLabel(viewModel: viewModel)
+            groupNameLabel.text = self.viewModel?.groupName
+            groupImageView.kf.setImage(with: self.viewModel?.groupImage, placeholder: UIImage(named: "group-placeholder"))
             let memberFormat = NSLocalizedString("%d Members", comment: "The people who are members of the group")
             let nextEventFormat = NSLocalizedString("Next Event: %@ ", comment: "The group's next event")
-            if let members = viewModel.members,
-                let nextEventName = viewModel.nextEventName {
-                nextEventLabel.text = "\(String.localizedStringWithFormat(memberFormat, members))  •  \(String.localizedStringWithFormat(nextEventFormat, nextEventName)) \(convertDateToString(date: viewModel.date))"
+            if let members = self.viewModel?.members,
+                let nextEventName = self.viewModel?.nextEventName {
+                nextEventLabel.text = "\(String.localizedStringWithFormat(memberFormat, members))  •  \(String.localizedStringWithFormat(nextEventFormat, nextEventName)) \(convertDateToString(date: viewModel?.date))"
             } else {
                 nextEventLabel.isHidden = true
             }
         }
     }
-  
-    @IBOutlet private weak var groupImageView: UIImageView!
-    @IBOutlet private weak var groupNameLabel: UILabel!
-    @IBOutlet private weak var nextEventLabel: UILabel!
-    @IBOutlet private weak var tintedView: UIView!
-  
+    
     private func convertDateToString(date: Date?) -> String {
         if let date = date {
             let dateFormatter = DateFormatter()
@@ -68,6 +60,13 @@ final class GroupDisplayTableViewCell: UITableViewCell {
             return ""
         }
     }
-    }
-
+    
+    @IBOutlet private weak var groupImageView: UIImageView!
+    @IBOutlet private weak var groupNameLabel: UILabel!
+    @IBOutlet private weak var nextEventLabel: UILabel!
+    @IBOutlet private weak var tintedView: UIView!
+    
+    
 }
+
+

@@ -20,6 +20,7 @@ struct MeetupNextEventModel: Codable {
     /// The number of RSVP 
     let rsvpCount: Int
     
+    /// The date of the group's next event
     let time: Date?
     
     private enum CodingKeys: String, CodingKey {
