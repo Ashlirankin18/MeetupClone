@@ -51,11 +51,13 @@ final class GroupDisplayTableViewCell: UITableViewCell {
         }
     }
     
+    private var dateFormatter = DateFormatter()
+    
     private func convertDateToString(date: Date?) -> String {
         if let date = date {
-            let dateFormatter = DateFormatter()
+            let format = NSLocalizedString("• %@", comment: "Seperator of information")
             dateFormatter.dateStyle = .short
-            return "• \(dateFormatter.string(from: date))"
+            return String.localizedStringWithFormat(format, dateFormatter.string(from: date))
         } else {
             return ""
         }
@@ -65,8 +67,4 @@ final class GroupDisplayTableViewCell: UITableViewCell {
     @IBOutlet private weak var groupNameLabel: UILabel!
     @IBOutlet private weak var nextEventLabel: UILabel!
     @IBOutlet private weak var tintedView: UIView!
-    
-    
 }
-
-
