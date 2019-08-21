@@ -41,7 +41,7 @@ final class GroupDisplayTableViewCell: UITableViewCell {
             groupNameLabel.text = self.viewModel?.groupName
             groupImageView.kf.setImage(with: self.viewModel?.groupImage, placeholder: UIImage(named: "group-placeholder"))
             let memberFormat = NSLocalizedString("%d Members", comment: "The people who are members of the group")
-            let nextEventFormat = NSLocalizedString("Next Event: %@ ", comment: "The group's next event")
+            let nextEventFormat = NSLocalizedString("Next Event: %@", comment: "The group's next event")
             if let members = self.viewModel?.members,
                 let nextEventName = self.viewModel?.nextEventName {
                 nextEventLabel.text = "\(String.localizedStringWithFormat(memberFormat, members))  •  \(String.localizedStringWithFormat(nextEventFormat, nextEventName)) \(convertDateToString(date: viewModel?.date))"
@@ -51,13 +51,14 @@ final class GroupDisplayTableViewCell: UITableViewCell {
         }
     }
     
-    private var dateFormatter = DateFormatter()
+    private static let dateFormatter = DateFormatter()
     
     private func convertDateToString(date: Date?) -> String {
+        let owner = GroupDisplayTableViewCell.self
         if let date = date {
             let format = NSLocalizedString("• %@", comment: "Seperator of information")
-            dateFormatter.dateStyle = .short
-            return String.localizedStringWithFormat(format, dateFormatter.string(from: date))
+            owner.dateFormatter.dateStyle = .short
+            return String.localizedStringWithFormat(format, owner.dateFormatter.string(from: date))
         } else {
             return ""
         }
