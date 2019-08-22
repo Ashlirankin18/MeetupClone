@@ -44,6 +44,7 @@ final class GroupDisplayTableViewCell: UITableViewCell {
             let nextEventFormat = NSLocalizedString("Next Event: %@", comment: "The group's next event")
             if let members = self.viewModel?.members,
                 let nextEventName = self.viewModel?.nextEventName {
+                nextEventLabel.isHidden = false
                 nextEventLabel.text = "\(String.localizedStringWithFormat(memberFormat, members))  •  \(String.localizedStringWithFormat(nextEventFormat, nextEventName)) \(convertDateToString(date: viewModel?.date))"
             } else {
                 nextEventLabel.isHidden = true
@@ -51,14 +52,16 @@ final class GroupDisplayTableViewCell: UITableViewCell {
         }
     }
     
-    private static let dateFormatter = DateFormatter()
+    static var dateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        return dateFormatter
+    }()
     
     private func convertDateToString(date: Date?) -> String {
-        let owner = GroupDisplayTableViewCell.self
         if let date = date {
             let format = NSLocalizedString("• %@", comment: "Seperator of information")
-            owner.dateFormatter.dateStyle = .short
-            return String.localizedStringWithFormat(format, owner.dateFormatter.string(from: date))
+            return String.localizedStringWithFormat(format, GroupDisplayTableViewCell.dateFormatter.string(from: date))
         } else {
             return ""
         }
