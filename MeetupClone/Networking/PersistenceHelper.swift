@@ -16,12 +16,12 @@ final class PersistenceHelper {
     
     private let fileName = "newFavoriteEvents.plist"
     
-    private var favoriteEvents = [MeetupEventModel]()
+    private(set) var favoriteEvents = [MeetupEventModel]()
     
     /// Retrieves an array of the MeetupEventModel type from the documents directory
     ///
     /// - Returns: An array of MeetupEventModel
-    func retrieveFavoriteEventsFromDocumentsDirectory() -> [MeetupEventModel] {
+    private func retrieveFavoriteEventsFromDocumentsDirectory() -> [MeetupEventModel] {
         if let path = DataPersistenceManager().filepathToDocumentsDiretory(filename: fileName)?.path {
             if FileManager.default.fileExists(atPath: path),
                 let data = FileManager.default.contents(atPath: path) {

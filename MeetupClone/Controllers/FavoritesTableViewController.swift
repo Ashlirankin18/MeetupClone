@@ -11,8 +11,7 @@ import UIKit
 /// Shows the groups that the user has favorited 
 final class FavoritesTableViewController: UITableViewController {
     
-    private let favoritesTableViewControllerDataSource = FavoritesTableViewControllerDataSource() 
-    private let persistenceHelper = PersistenceHelper.shared
+    private let favoritesTableViewControllerDataSource = FavoritesTableViewControllerDataSource()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +35,7 @@ final class FavoritesTableViewController: UITableViewController {
     
     // MARK: - UITableViewDelegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let event = persistenceHelper.retrieveFavoriteEventsFromDocumentsDirectory()[indexPath.row]
+        let event = favoritesTableViewControllerDataSource.favorites.reversed()[indexPath.row]
         let detailedController = EventDetailedTableViewController(style: .grouped)
         detailedController.meetupEventModel = event
         show(detailedController, sender: self)
