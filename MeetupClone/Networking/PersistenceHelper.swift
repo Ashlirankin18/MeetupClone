@@ -12,11 +12,12 @@ import Foundation
 final class PersistenceHelper {
     private init () {}
     
+    /// The instance of the `PersistenceHelper` class that will be shared 
     static let shared = PersistenceHelper()
     
     private let fileName = "newFavoriteEvents.plist"
     
-    private(set) var favoriteEvents = [MeetupEventModel]()
+    private(set) lazy var favoriteEvents: [MeetupEventModel] = retrieveFavoriteEventsFromDocumentsDirectory()
     
     /// Retrieves an array of the MeetupEventModel type from the documents directory
     ///
