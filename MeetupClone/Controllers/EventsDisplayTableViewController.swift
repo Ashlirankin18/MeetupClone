@@ -64,6 +64,6 @@ final class EventsDisplayTableViewController: UITableViewController {
         let detailedController = EventDetailedTableViewController(style: .grouped)
         let event = eventsDisplayTableViewControllerDataSource.events[indexPath.row]
         detailedController.meetupEventModel = event
-        navigationController?.pushViewController(detailedController, animated: true)
+        show(detailedController, sender: self)
     }
 }
