@@ -17,11 +17,9 @@ final class PersistenceHelper {
     
     private let fileName = "newFavoriteEvents.plist"
     
+    /// An array of events which are calculated lazily. It has a private setter which is set only in the `Persistence Helper`, but the contents of this array can be accessed outside the class.
     private(set) lazy var favoriteEvents: [MeetupEventModel] = retrieveFavoriteEventsFromDocumentsDirectory()
     
-    /// Retrieves an array of the MeetupEventModel type from the documents directory
-    ///
-    /// - Returns: An array of MeetupEventModel
     private func retrieveFavoriteEventsFromDocumentsDirectory() -> [MeetupEventModel] {
         if let path = DataPersistenceManager().filepathToDocumentsDiretory(filename: fileName)?.path {
             if FileManager.default.fileExists(atPath: path),
