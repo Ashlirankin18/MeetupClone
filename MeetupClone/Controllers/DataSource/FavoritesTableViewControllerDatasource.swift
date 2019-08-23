@@ -20,7 +20,6 @@ final class FavoritesTableViewControllerDataSource: NSObject, UITableViewDataSou
         } else {
             return favorites.count
         }
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -32,7 +31,7 @@ final class FavoritesTableViewControllerDataSource: NSObject, UITableViewDataSou
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "EventDisplayCell", for: indexPath) as? EventDisplayTableViewCell else {
                 return UITableViewCell()
             }
-            let event =  favorites[indexPath.row]
+            let event = favorites[indexPath.row]
             do {
                 let description = try event.description?.asHTMLAttributedString()
                 cell.viewModel = EventDisplayTableViewCell.ViewModel(eventName: event.eventName, eventDescription: description?.string ?? NSLocalizedString("This event does not have a description", comment: "Informs the user the event has no description currently."), eventLocation: event.venue?.city, rsvpCount: event.yesRSVPCount)
