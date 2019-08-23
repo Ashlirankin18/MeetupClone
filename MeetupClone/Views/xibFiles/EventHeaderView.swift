@@ -65,7 +65,7 @@ final class EventHeaderView: UIView {
         addAndShowAnnotation(viewModel: viewModel, lattitude: lattitude, longitude: lattitude)
     }
     
-    private func addAndShowAnnotation(viewModel: ViewModel, lattitude: Double, longitude: Double){
+    private func addAndShowAnnotation(viewModel: ViewModel, lattitude: Double, longitude: Double) {
         let locationAnnotation = MKPointAnnotation()
         locationAnnotation.coordinate = CLLocationCoordinate2D(latitude: lattitude, longitude: longitude)
         locationAnnotation.title = viewModel.eventName

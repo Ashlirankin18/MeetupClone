@@ -14,18 +14,17 @@ final class EventDetailedControllerDataSource: NSObject, UITableViewDataSource {
     /// An Array of model objects the will be displayed on screen.
     var rsvps: [MeetupRSVPModel] = []
     
+    private var shouldDisplayEmptyStateCell: Bool {
+        return rsvps.isEmpty
+    }
     // MARK: - UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if rsvps.isEmpty {
-            return 1
-        } else {
-            return rsvps.count
-        }       
+        return shouldDisplayEmptyStateCell ? 1: rsvps.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if rsvps.isEmpty {
+        if shouldDisplayEmptyStateCell {
             let cell = tableView.dequeueEmptyStateCellAtIndexPath(cell: EmptyStateTableViewCell(), indexPath: indexPath, prompt: NSLocalizedString("You are not a member of this group", comment: "Indicates to the user that they are not a member of the group"), image: UIImage.notAGroupMember)
             return cell
         } else {
@@ -39,7 +38,6 @@ final class EventDetailedControllerDataSource: NSObject, UITableViewDataSource {
             let rsvp = rsvps[indexPath.row]
             cell.viewModel = MeetupMemberDisplayTableViewCell.ViewModel(memberImageURL: rsvp.member.photo?.photoLink, memberName: rsvp.member.name)
             return cell
-            
         }
     }
 }
