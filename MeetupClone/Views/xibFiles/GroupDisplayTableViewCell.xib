@@ -18,8 +18,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="511" height="306.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Next Event" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bYk-3d-QkG">
-                        <rect key="frame" x="10" y="276" width="511" height="20.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Next Event" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bYk-3d-QkG">
+                        <rect key="frame" x="10" y="276" width="491" height="20.5"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                         <nil key="highlightedColor"/>
                         <size key="shadowOffset" width="0.0" height="0.0"/>
@@ -44,7 +44,7 @@
                     <constraint firstItem="FXF-B8-rjN" firstAttribute="trailing" secondItem="IHY-w6-m7t" secondAttribute="trailing" id="1T4-Hv-L3d"/>
                     <constraint firstItem="IHY-w6-m7t" firstAttribute="leading" secondItem="71P-8o-mDO" secondAttribute="leading" id="6W6-yA-ZqL"/>
                     <constraint firstItem="8Pf-cv-i9Y" firstAttribute="leading" secondItem="IHY-w6-m7t" secondAttribute="leading" constant="10" id="8u8-Tl-g2N"/>
-                    <constraint firstItem="bYk-3d-QkG" firstAttribute="trailing" secondItem="71P-8o-mDO" secondAttribute="trailing" constant="10" id="AbN-jM-9Xa"/>
+                    <constraint firstItem="bYk-3d-QkG" firstAttribute="trailing" secondItem="71P-8o-mDO" secondAttribute="trailing" constant="-10" id="AbN-jM-9Xa"/>
                     <constraint firstItem="FXF-B8-rjN" firstAttribute="bottom" secondItem="IHY-w6-m7t" secondAttribute="bottom" id="Ifr-bq-Nho"/>
                     <constraint firstItem="bYk-3d-QkG" firstAttribute="top" secondItem="IHY-w6-m7t" secondAttribute="bottom" constant="10" id="L8s-8X-tW9"/>
                     <constraint firstItem="8Pf-cv-i9Y" firstAttribute="trailing" secondItem="IHY-w6-m7t" secondAttribute="trailing" constant="10" id="RcP-z6-i0x"/>

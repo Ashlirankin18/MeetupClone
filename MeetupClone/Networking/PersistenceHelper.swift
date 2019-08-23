@@ -12,16 +12,15 @@ import Foundation
 final class PersistenceHelper {
     private init () {}
     
+    /// The instance of the `PersistenceHelper` class that will be shared 
     static let shared = PersistenceHelper()
     
     private let fileName = "newFavoriteEvents.plist"
     
-    private var favoriteEvents = [MeetupEventModel]()
+    /// An array of events which are calculated lazily. It has a private setter which is set only in the `Persistence Helper`, but the contents of this array can be accessed outside the class.
+    private(set) lazy var favoriteEvents: [MeetupEventModel] = retrieveFavoriteEventsFromDocumentsDirectory()
     
-    /// Retrieves an array of the MeetupEventModel type from the documents directory
-    ///
-    /// - Returns: An array of MeetupEventModel
-    func retrieveFavoriteEventsFromDocumentsDirectory() -> [MeetupEventModel] {
+    private func retrieveFavoriteEventsFromDocumentsDirectory() -> [MeetupEventModel] {
         if let path = DataPersistenceManager().filepathToDocumentsDiretory(filename: fileName)?.path {
             if FileManager.default.fileExists(atPath: path),
                 let data = FileManager.default.contents(atPath: path) {

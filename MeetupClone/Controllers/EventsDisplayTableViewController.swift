@@ -56,7 +56,7 @@ final class EventsDisplayTableViewController: UITableViewController {
         guard let headerInformationModel = headerInformationModel else {
             return nil
         }
-        headerView?.viewModel = GroupDisplayTableViewCell.ViewModel(groupName: headerInformationModel.name, groupImage: headerInformationModel.imageURL, members: nil, nextEventName: nil)
+        headerView?.viewModel = GroupDisplayTableViewCell.ViewModel(groupName: headerInformationModel.name, groupImage: headerInformationModel.imageURL, members: nil, nextEventName: nil, date: nil)
         return headerView
     }
     
@@ -64,6 +64,6 @@ final class EventsDisplayTableViewController: UITableViewController {
         let detailedController = EventDetailedTableViewController(style: .grouped)
         let event = eventsDisplayTableViewControllerDataSource.events[indexPath.row]
         detailedController.meetupEventModel = event
-        navigationController?.pushViewController(detailedController, animated: true)
+        show(detailedController, sender: self)
     }
 }
