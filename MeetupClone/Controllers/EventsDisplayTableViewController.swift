@@ -32,7 +32,7 @@ final class EventsDisplayTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableViewProperties()
-        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationItem.largeTitleDisplayMode = .never
     }
     
     private func configureTableViewProperties() {
