@@ -21,12 +21,23 @@ final class GroupsDisplayViewController: UIViewController {
         
         return searchController
     }()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        setupActivityIndicator()
+    }
     
     private let groupInfoDataSource = GroupInfoDataSource()
     
     private let meetupDataHandler = MeetupDataHandler(networkHelper: NetworkHelper())
     
     private var currentDataTask: Cancelable?
+    
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.color = UIColor(named: "ClayRed", in: Bundle.main, compatibleWith: .none)
+        return activityIndicator
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +48,11 @@ final class GroupsDisplayViewController: UIViewController {
         checkForLastZipCodeEntered()
     }
     
+    private func setupActivityIndicator() {
+        groupDisplayTableView.backgroundView = activityIndicator
+        groupDisplayTableView.separatorStyle = .none
+        activityIndicator.startAnimating()
+    }
     private func checkForLastZipCodeEntered() {
         let userDefaults = UserDefaults.standard
         if let zipCode = userDefaults.object(forKey: UserDefaultConstants.zipCode.rawValue) as? String,
@@ -62,7 +78,11 @@ final class GroupsDisplayViewController: UIViewController {
             case .failure(let error):
                 print(error)
             case .success(let groups):
+                if groups.isEmpty {
+                  self.activityIndicator.stopAnimating()
+                }
                 self.groupInfoDataSource.groups = groups
+                self.activityIndicator.stopAnimating()
                 self.groupDisplayTableView.reloadData()
             }
         }
@@ -119,12 +139,15 @@ extension GroupsDisplayViewController: UISearchResultsUpdating {
             userDefaults.set(text, forKey: UserDefaultConstants.searchText.rawValue)
             if isSearchControllerInputValid() {
                 if currentDataTask == nil {
+                    activityIndicator.startAnimating()
                     let zipCode = userDefaults.object(forKey: UserDefaultConstants.zipCode.rawValue) as? String ?? ""
                     currentDataTask = retrieveGroups(searchText: text, zipCode: zipCode)
                 } else {
                     currentDataTask?.cancelTask()
+                    activityIndicator.stopAnimating()
                     let zipCode = userDefaults.object(forKey: UserDefaultConstants.zipCode.rawValue) as? String ?? ""
                     let timer = Timer(timeInterval: 1.0, repeats: false) { _ in
+                        self.activityIndicator.startAnimating()
                         self.currentDataTask = self.retrieveGroups(searchText: text, zipCode: zipCode)
                     }
                     

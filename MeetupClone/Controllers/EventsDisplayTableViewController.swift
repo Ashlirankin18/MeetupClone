@@ -25,6 +25,13 @@ final class EventsDisplayTableViewController: UITableViewController {
         }
     }
     
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.color = UIColor(named: "ClayRed", in: Bundle.main, compatibleWith: .none)
+        return activityIndicator
+    }()
+    
     private let eventsDisplayTableViewControllerDataSource = EventsDisplayTableViewControllerDataSource()
     
     private let meetupDataHandler = MeetupDataHandler(networkHelper: NetworkHelper())
@@ -33,6 +40,17 @@ final class EventsDisplayTableViewController: UITableViewController {
         super.viewDidLoad()
         configureTableViewProperties()
         navigationItem.largeTitleDisplayMode = .never
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        setUpActivityIndicator()
+    }
+    
+    private func setUpActivityIndicator() {
+        tableView.backgroundView = activityIndicator
+        tableView.separatorStyle = .none
+        activityIndicator.startAnimating()
     }
     
     private func configureTableViewProperties() {
@@ -50,6 +68,7 @@ final class EventsDisplayTableViewController: UITableViewController {
                 print(error)
             case .success(let events):
                 self.eventsDisplayTableViewControllerDataSource.events = events
+                self.activityIndicator.stopAnimating()
                 self.tableView.reloadData()
             }
         }
