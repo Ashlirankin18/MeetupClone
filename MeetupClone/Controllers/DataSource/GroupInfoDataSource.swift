@@ -14,17 +14,17 @@ final class GroupInfoDataSource: NSObject, UITableViewDataSource {
     /// Array of model objects that will be displayed on screen.
     var groups = [MeetupGroupModel]()
     
-    private var shouldReturnEmptyStateCell: Bool {
+    private var showsEmptyState: Bool {
         return groups.isEmpty
     }
     // MARK: - UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return shouldReturnEmptyStateCell ? 1 : groups.count
+        return showsEmptyState ? 1 : groups.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if shouldReturnEmptyStateCell {
+        if showsEmptyState {
             return tableView.dequeueEmptyStateCellAtIndexPath(cell: EmptyStateTableViewCell(), indexPath: indexPath, prompt: NSLocalizedString("No groups were found, try searching for your interest", comment: "Indicates to the user no groups were found"), image: UIImage.noGroupsFound)
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "GroupDisplayCell", for: indexPath) as? GroupDisplayTableViewCell else {

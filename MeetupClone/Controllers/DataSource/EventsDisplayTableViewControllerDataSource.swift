@@ -14,18 +14,18 @@ final class EventsDisplayTableViewControllerDataSource: NSObject, UITableViewDat
     /// Array of model objects that will be displayed on screen.
     var events = [MeetupEventModel]()
     
-    private var shouldReturnEmptyStateCell: Bool {
+    private var showsEmptyState: Bool {
         return events.isEmpty
     }
     // MARK: - UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return shouldReturnEmptyStateCell ? 1: events.count
+        return showsEmptyState ? 1: events.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        if shouldReturnEmptyStateCell {
+        if showsEmptyState {
             return tableView.dequeueEmptyStateCellAtIndexPath(cell: EmptyStateTableViewCell(), indexPath: indexPath, prompt: NSLocalizedString("This group has not upcoming events", comment: "Indicates to the user that there are no upcoming events"), image: UIImage.noEventsFound)
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "EventDisplayCell", for: indexPath) as? EventDisplayTableViewCell else {
