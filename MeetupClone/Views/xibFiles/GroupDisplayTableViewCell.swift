@@ -39,15 +39,17 @@ final class GroupDisplayTableViewCell: UITableViewCell {
     /// Represents the `GroupDisplayTableViewCell` Model
     var viewModel: ViewModel? {
         didSet {
-            groupNameLabel.text = self.viewModel?.groupName
             groupImageView.kf.setImage(with: self.viewModel?.groupImage, placeholder: UIImage(named: "group-placeholder"))
             let memberFormat = NSLocalizedString("%d Members", comment: "The people who are members of the group")
             let nextEventFormat = NSLocalizedString("Next Event: %@", comment: "The group's next event")
             if let members = self.viewModel?.members,
                 let nextEventName = self.viewModel?.nextEventName {
+                groupNameLabel.isHidden = false
+                groupNameLabel.text = self.viewModel?.groupName
                 nextEventLabel.isHidden = false
                 nextEventLabel.text = "\(String.localizedStringWithFormat(memberFormat, members)) • \(String.localizedStringWithFormat(nextEventFormat, nextEventName)) \(convertDateToString(date: viewModel?.date))"
             } else {
+                groupNameLabel.isHidden = true
                 nextEventLabel.isHidden = true
             }
         }
