@@ -11,12 +11,15 @@ import MapKit
 
 /// `UITableViewController` subclass that will display MeetUpEvent location details and the persons who have rsvp'd to an event.
 final class EventDetailedTableViewController: UITableViewController {
-
+    
     private let eventDetailedControllerDataSource = EventDetailedControllerDataSource()
     
     private let meetupDataHandler = MeetupDataHandler(networkHelper: NetworkHelper())
     
-    /// EventDetailedTableViewController's view model.
+    /// The URL Name of the meetup group
+    var urlName: String?
+    
+    /// Model representing an event object.
     var meetupEventModel: MeetupEventModel? {
         didSet {
             guard let meetupEventModel = meetupEventModel else {
@@ -27,6 +30,7 @@ final class EventDetailedTableViewController: UITableViewController {
             retrieveRSVPData(eventId: meetupEventModel.eventId, eventURLName: urlName)
         }
     }
+    
     private lazy var rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "icons8-heart-26"), style: .done, target: self, action: #selector(favoriteButtonPressed))
     
     private var persistenceHelper = PersistenceHelper.shared
@@ -43,6 +47,7 @@ final class EventDetailedTableViewController: UITableViewController {
     
     private func configureTableViewProperties() {
         tableView.register(UINib(nibName: "MeetupMemberDisplayTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "MemberCell")
+        tableView.register(UINib(nibName: "EmptyStateTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "EmptyStateCell")
         tableView.dataSource = eventDetailedControllerDataSource
         tableView.rowHeight = 80
         tableView.sectionHeaderHeight = UITableView.automaticDimension
@@ -66,7 +71,6 @@ final class EventDetailedTableViewController: UITableViewController {
         meetupDataHandler.retrieveEventRSVP(eventId: eventId, eventURLName: eventURLName) { (result) in
             switch result {
             case .failure(let error):
-                //TODO:- Add an empty state for a 403 error. The error should let the user know they are not a member of the group. https://github.com/Lickability/meetup-browser/issues/29#issue-480432788
                 print(error)
             case .success(let rsvps):
                 self.eventDetailedControllerDataSource.rsvps = rsvps
@@ -94,6 +98,8 @@ final class EventDetailedTableViewController: UITableViewController {
             persistenceHelper.deleteItemFromDocumentsDirectory(favoriteEvent: meetupEventModel)
         }
     }
+    
+    // MARK: - UITableViewDelegate
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let headerView = Bundle.main.loadNibNamed("EventHeaderView", owner: self, options: nil)?.first as? EventHeaderView,

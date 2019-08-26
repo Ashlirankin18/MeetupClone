@@ -32,7 +32,6 @@ final class FavoritesTableViewController: UITableViewController {
     // MARK: - UITableViewDelegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let favorites = PersistenceHelper.shared.favoriteEvents
-        let event = favorites[indexPath.row]
         let detailedController = EventDetailedTableViewController(style: .grouped)
         detailedController.meetupEventModel = event
         show(detailedController, sender: self)
