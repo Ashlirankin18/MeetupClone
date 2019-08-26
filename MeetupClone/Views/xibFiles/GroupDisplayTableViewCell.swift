@@ -17,10 +17,6 @@ final class GroupDisplayTableViewCell: UITableViewCell {
         groupImageView.image = nil
     }
     
-    override func layoutSubviews() {
-        layer.borderColor = UIColor(named: "ClayRed", in: Bundle.main, compatibleWith: .none)?.cgColor
-        layer.borderWidth = 0.5
-    }
     /// Holds the data and logic needed to populate the `GroupDisplayTableViewCell`
     struct ViewModel {
         
