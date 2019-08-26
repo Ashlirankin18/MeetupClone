@@ -11,58 +11,52 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="563" id="dJs-I1-v87" customClass="GroupDisplayTableViewCell" customModule="MeetupClone" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="511" height="307"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="GroupDisplayCell" rowHeight="600" id="dJs-I1-v87" customClass="GroupDisplayTableViewCell" customModule="MeetupClone" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="400" height="600"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dJs-I1-v87" id="71P-8o-mDO">
-                <rect key="frame" x="0.0" y="0.0" width="511" height="306.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="400" height="599.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Next Event" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bYk-3d-QkG">
-                        <rect key="frame" x="10" y="276" width="491" height="20.5"/>
-                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                        <nil key="highlightedColor"/>
-                        <size key="shadowOffset" width="0.0" height="0.0"/>
-                    </label>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="gWe-Gs-SsQ">
+                        <rect key="frame" x="10" y="10" width="380" height="54"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Burna Boy" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Pf-cv-i9Y">
+                                <rect key="frame" x="135" y="0.0" width="110" height="26.5"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Next Event" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bYk-3d-QkG">
+                                <rect key="frame" x="145" y="36.5" width="90.5" height="17.5"/>
+                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="15"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                                <size key="shadowOffset" width="0.0" height="0.0"/>
+                            </label>
+                        </subviews>
+                    </stackView>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" image="download" translatesAutoresizingMaskIntoConstraints="NO" id="FXF-B8-rjN">
-                        <rect key="frame" x="0.0" y="0.0" width="511" height="266"/>
+                        <rect key="frame" x="0.0" y="74" width="400" height="501"/>
                     </imageView>
-                    <view opaque="NO" alpha="0.14000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IHY-w6-m7t">
-                        <rect key="frame" x="0.0" y="0.0" width="511" height="266"/>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Burna Boy" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Pf-cv-i9Y">
-                        <rect key="frame" x="10" y="232" width="511" height="24"/>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                 </subviews>
                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
-                    <constraint firstItem="bYk-3d-QkG" firstAttribute="leading" secondItem="71P-8o-mDO" secondAttribute="leading" constant="10" id="16F-Xm-Sqo"/>
-                    <constraint firstItem="FXF-B8-rjN" firstAttribute="trailing" secondItem="IHY-w6-m7t" secondAttribute="trailing" id="1T4-Hv-L3d"/>
-                    <constraint firstItem="IHY-w6-m7t" firstAttribute="leading" secondItem="71P-8o-mDO" secondAttribute="leading" id="6W6-yA-ZqL"/>
-                    <constraint firstItem="8Pf-cv-i9Y" firstAttribute="leading" secondItem="IHY-w6-m7t" secondAttribute="leading" constant="10" id="8u8-Tl-g2N"/>
-                    <constraint firstItem="bYk-3d-QkG" firstAttribute="trailing" secondItem="71P-8o-mDO" secondAttribute="trailing" constant="-10" id="AbN-jM-9Xa"/>
-                    <constraint firstItem="FXF-B8-rjN" firstAttribute="bottom" secondItem="IHY-w6-m7t" secondAttribute="bottom" id="Ifr-bq-Nho"/>
-                    <constraint firstItem="bYk-3d-QkG" firstAttribute="top" secondItem="IHY-w6-m7t" secondAttribute="bottom" constant="10" id="L8s-8X-tW9"/>
-                    <constraint firstItem="8Pf-cv-i9Y" firstAttribute="trailing" secondItem="IHY-w6-m7t" secondAttribute="trailing" constant="10" id="RcP-z6-i0x"/>
-                    <constraint firstItem="FXF-B8-rjN" firstAttribute="top" secondItem="IHY-w6-m7t" secondAttribute="top" id="VQH-2j-aNC"/>
-                    <constraint firstAttribute="trailing" secondItem="IHY-w6-m7t" secondAttribute="trailing" id="e5m-51-rht"/>
-                    <constraint firstItem="8Pf-cv-i9Y" firstAttribute="bottom" secondItem="IHY-w6-m7t" secondAttribute="bottom" constant="-10" id="lDX-Yq-TVY"/>
-                    <constraint firstItem="bYk-3d-QkG" firstAttribute="bottom" secondItem="71P-8o-mDO" secondAttribute="bottom" constant="-10" id="mXn-Yf-dCJ"/>
-                    <constraint firstItem="IHY-w6-m7t" firstAttribute="top" secondItem="71P-8o-mDO" secondAttribute="top" id="sje-he-MLT"/>
-                    <constraint firstItem="FXF-B8-rjN" firstAttribute="leading" secondItem="IHY-w6-m7t" secondAttribute="leading" id="vcz-Iz-pUN"/>
+                    <constraint firstItem="gWe-Gs-SsQ" firstAttribute="leading" secondItem="71P-8o-mDO" secondAttribute="leading" constant="10" id="4tF-BT-9M3"/>
+                    <constraint firstItem="FXF-B8-rjN" firstAttribute="top" secondItem="gWe-Gs-SsQ" secondAttribute="bottom" constant="10" id="ALl-7u-uyg"/>
+                    <constraint firstItem="FXF-B8-rjN" firstAttribute="leading" secondItem="71P-8o-mDO" secondAttribute="leading" id="FGq-kg-h1u"/>
+                    <constraint firstItem="FXF-B8-rjN" firstAttribute="trailing" secondItem="71P-8o-mDO" secondAttribute="trailing" id="Gat-TA-d1p"/>
+                    <constraint firstItem="gWe-Gs-SsQ" firstAttribute="top" secondItem="71P-8o-mDO" secondAttribute="top" constant="10" id="Hcn-fZ-fVs"/>
+                    <constraint firstItem="FXF-B8-rjN" firstAttribute="bottom" secondItem="71P-8o-mDO" secondAttribute="bottomMargin" constant="20" id="LrP-xo-Orc"/>
+                    <constraint firstItem="gWe-Gs-SsQ" firstAttribute="trailing" secondItem="71P-8o-mDO" secondAttribute="trailing" constant="-10" id="Lre-o6-cFb"/>
                 </constraints>
             </tableViewCellContentView>
+            <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
             <connections>
                 <outlet property="groupImageView" destination="FXF-B8-rjN" id="qUh-eM-wJH"/>
                 <outlet property="groupNameLabel" destination="8Pf-cv-i9Y" id="mgw-JF-GXl"/>
                 <outlet property="nextEventLabel" destination="bYk-3d-QkG" id="0sz-ua-dWI"/>
-                <outlet property="tintedView" destination="IHY-w6-m7t" id="8P2-l0-NrH"/>
             </connections>
-            <point key="canvasLocation" x="84.782608695652186" y="-100.11160714285714"/>
+            <point key="canvasLocation" x="-142.02898550724638" y="-86.383928571428569"/>
         </tableViewCell>
     </objects>
     <resources>

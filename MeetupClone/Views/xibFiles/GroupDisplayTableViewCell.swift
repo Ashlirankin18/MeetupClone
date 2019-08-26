@@ -16,6 +16,11 @@ final class GroupDisplayTableViewCell: UITableViewCell {
         super.prepareForReuse()
         groupImageView.image = nil
     }
+    
+    override func layoutSubviews() {
+        layer.borderColor = UIColor(named: "ClayRed", in: Bundle.main, compatibleWith: .none)?.cgColor
+        layer.borderWidth = 0.5
+    }
     /// Holds the data and logic needed to populate the `GroupDisplayTableViewCell`
     struct ViewModel {
         
@@ -45,7 +50,7 @@ final class GroupDisplayTableViewCell: UITableViewCell {
             if let members = self.viewModel?.members,
                 let nextEventName = self.viewModel?.nextEventName {
                 nextEventLabel.isHidden = false
-                nextEventLabel.text = "\(String.localizedStringWithFormat(memberFormat, members))  •  \(String.localizedStringWithFormat(nextEventFormat, nextEventName)) \(convertDateToString(date: viewModel?.date))"
+                nextEventLabel.text = "\(String.localizedStringWithFormat(memberFormat, members)) • \(String.localizedStringWithFormat(nextEventFormat, nextEventName)) \(convertDateToString(date: viewModel?.date))"
             } else {
                 nextEventLabel.isHidden = true
             }
