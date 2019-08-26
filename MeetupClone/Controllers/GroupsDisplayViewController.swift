@@ -142,7 +142,7 @@ extension GroupsDisplayViewController: UITableViewDelegate {
             return
         }
         let chosenGroup = groupInfoDataSource.groups[indexPath.row]
-        let highResPhoto = chosenGroup.groupPhoto?.highresLink
+        let highResPhoto = chosenGroup.groupPhoto?.photoLink
         viewController.headerInformationModel = HeaderInformationModel(imageURL: highResPhoto, name: chosenGroup.groupName)
         
         viewController.urlName = chosenGroup.urlName
