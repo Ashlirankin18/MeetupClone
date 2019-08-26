@@ -19,7 +19,11 @@ final class EventsDisplayTableViewController: UITableViewController {
     }
     
     /// The model representing the infoprmation a headerView need it be initilized
-    var headerInformationModel: HeaderInformationModel?
+    var headerInformationModel: HeaderInformationModel? {
+        didSet {
+            title = headerInformationModel?.name
+        }
+    }
     
     private let eventsDisplayTableViewControllerDataSource = EventsDisplayTableViewControllerDataSource()
     
@@ -28,6 +32,7 @@ final class EventsDisplayTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableViewProperties()
+        navigationItem.largeTitleDisplayMode = .never
     }
     
     private func configureTableViewProperties() {
@@ -56,6 +61,7 @@ final class EventsDisplayTableViewController: UITableViewController {
         guard let headerInformationModel = headerInformationModel else {
             return nil
         }
+    
         headerView?.viewModel = GroupDisplayTableViewCell.ViewModel(groupName: headerInformationModel.name, groupImage: headerInformationModel.imageURL, members: nil, nextEventName: nil, date: nil)
         return headerView
     }
