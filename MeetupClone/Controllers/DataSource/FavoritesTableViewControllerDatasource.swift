@@ -15,11 +15,7 @@ final class FavoritesTableViewControllerDataSource: NSObject, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let favorites = PersistenceHelper.shared.favoriteEvents
-        if favorites.isEmpty {
-            return 1
-        } else {
-            return favorites.count
-        }
+        return favorites.isEmpty ? 1 : favorites.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
