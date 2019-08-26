@@ -139,15 +139,14 @@ extension GroupsDisplayViewController: UISearchResultsUpdating {
             userDefaults.set(text, forKey: UserDefaultConstants.searchText.rawValue)
             if isSearchControllerInputValid() {
                 if currentDataTask == nil {
-                    activityIndicator.startAnimating()
                     let zipCode = userDefaults.object(forKey: UserDefaultConstants.zipCode.rawValue) as? String ?? ""
+                    activityIndicator.startAnimating()
                     currentDataTask = retrieveGroups(searchText: text, zipCode: zipCode)
                 } else {
+                    activityIndicator.startAnimating()
                     currentDataTask?.cancelTask()
-                    activityIndicator.stopAnimating()
                     let zipCode = userDefaults.object(forKey: UserDefaultConstants.zipCode.rawValue) as? String ?? ""
                     let timer = Timer(timeInterval: 1.0, repeats: false) { _ in
-                        self.activityIndicator.startAnimating()
                         self.currentDataTask = self.retrieveGroups(searchText: text, zipCode: zipCode)
                     }
                     
