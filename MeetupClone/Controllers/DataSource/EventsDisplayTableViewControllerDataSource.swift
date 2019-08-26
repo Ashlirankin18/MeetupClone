@@ -20,7 +20,7 @@ final class EventsDisplayTableViewControllerDataSource: NSObject, UITableViewDat
     // MARK: - UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return showsEmptyState ? 1: events.count
+        return showsEmptyState ? 1 : events.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
