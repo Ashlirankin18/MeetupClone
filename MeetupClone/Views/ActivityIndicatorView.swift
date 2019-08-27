@@ -32,7 +32,7 @@ final class ActivityIndicatorView: UIView {
     private func commonInit() {
         addSubview(activityIndicatorView)
         setUpActivityIndicatorConstraints()
-        backgroundColor = .white
+        backgroundColor = .groupTableViewBackground
     }
     
     func indicatorStartAnimating() {

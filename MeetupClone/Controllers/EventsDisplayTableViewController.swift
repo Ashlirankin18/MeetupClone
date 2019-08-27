@@ -24,9 +24,6 @@ final class EventsDisplayTableViewController: UITableViewController {
             title = headerInformationModel?.name
         }
     }
-    
-    private var activityIndicatorView = ActivityIndicatorView()
-    
     private let eventsDisplayTableViewControllerDataSource = EventsDisplayTableViewControllerDataSource()
     
     private let meetupDataHandler = MeetupDataHandler(networkHelper: NetworkHelper())
@@ -36,18 +33,17 @@ final class EventsDisplayTableViewController: UITableViewController {
         configureTableViewProperties()
         navigationItem.largeTitleDisplayMode = .never
     }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)       
-    }
     
     private func configureTableViewProperties() {
-        tableView.register(UINib(nibName: "EventDisplayTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "EventDisplayCell")
-        tableView.register(UINib(nibName: "EmptyStateTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "EmptyStateCell")
+        registerTableViewCells()
         tableView.dataSource = eventsDisplayTableViewControllerDataSource
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderHeight = UITableView.automaticDimension
     }
-    
+    private func registerTableViewCells() {
+        tableView.register(UINib(nibName: "EventDisplayTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "EventDisplayCell")
+        tableView.register(UINib(nibName: "EmptyStateTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "EmptyStateCell")
+    }
     private func retrieveGroupEvents(urlName: String) {
         meetupDataHandler.retrieveEvents(with: urlName) { result in
             switch result {
