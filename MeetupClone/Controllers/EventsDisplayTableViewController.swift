@@ -25,10 +25,9 @@ final class EventsDisplayTableViewController: UITableViewController {
         }
     }
     
-    private lazy var activityIndicator: UIActivityIndicatorView = {
+    private var activityIndicator: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView()
-        activityIndicator.hidesWhenStopped = true
-        activityIndicator.color = UIColor(named: "ClayRed", in: Bundle.main, compatibleWith: .none)
+        activityIndicator.color = UIColor.clayRed
         return activityIndicator
     }()
     
@@ -43,7 +42,7 @@ final class EventsDisplayTableViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+        super.viewWillAppear(animated)
         setUpActivityIndicator()
     }
     

@@ -22,7 +22,7 @@ final class GroupsDisplayViewController: UIViewController {
         return searchController
     }()
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+        super.viewWillAppear(animated)
         setupActivityIndicator()
     }
     
@@ -32,10 +32,9 @@ final class GroupsDisplayViewController: UIViewController {
     
     private var currentDataTask: Cancelable?
     
-    private lazy var activityIndicator: UIActivityIndicatorView = {
+    private var activityIndicator: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView()
-        activityIndicator.hidesWhenStopped = true
-        activityIndicator.color = UIColor(named: "ClayRed", in: Bundle.main, compatibleWith: .none)
+        activityIndicator.color = UIColor.clayRed
         return activityIndicator
     }()
     
@@ -78,9 +77,6 @@ final class GroupsDisplayViewController: UIViewController {
             case .failure(let error):
                 print(error)
             case .success(let groups):
-                if groups.isEmpty {
-                  self.activityIndicator.stopAnimating()
-                }
                 self.groupInfoDataSource.groups = groups
                 self.activityIndicator.stopAnimating()
                 self.groupDisplayTableView.reloadData()
@@ -140,10 +136,8 @@ extension GroupsDisplayViewController: UISearchResultsUpdating {
             if isSearchControllerInputValid() {
                 if currentDataTask == nil {
                     let zipCode = userDefaults.object(forKey: UserDefaultConstants.zipCode.rawValue) as? String ?? ""
-                    activityIndicator.startAnimating()
                     currentDataTask = retrieveGroups(searchText: text, zipCode: zipCode)
                 } else {
-                    activityIndicator.startAnimating()
                     currentDataTask?.cancelTask()
                     let zipCode = userDefaults.object(forKey: UserDefaultConstants.zipCode.rawValue) as? String ?? ""
                     let timer = Timer(timeInterval: 1.0, repeats: false) { _ in
