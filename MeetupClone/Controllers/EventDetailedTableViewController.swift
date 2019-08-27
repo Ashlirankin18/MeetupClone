@@ -41,7 +41,7 @@ final class EventDetailedTableViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+        super.viewWillAppear(animated)
         configureRightBarButtonItem()
     }
     
