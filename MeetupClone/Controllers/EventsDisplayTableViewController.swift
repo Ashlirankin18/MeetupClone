@@ -24,16 +24,36 @@ final class EventsDisplayTableViewController: UITableViewController {
             title = headerInformationModel?.name
         }
     }
+    
+    private var activityIndicatorView = ActivityIndicatorView()
+    
     private let eventsDisplayTableViewControllerDataSource = EventsDisplayTableViewControllerDataSource()
     
     private let meetupDataHandler = MeetupDataHandler(networkHelper: NetworkHelper())
+    
+    private var isAnimating = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableViewProperties()
         navigationItem.largeTitleDisplayMode = .never
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        activityIndicatorView.frame = CGRect(x: 0, y: 0, width: tableView.bounds.width, height: tableView.bounds.height)
+        showActivityIndicator()
+    }
     
+    private func showActivityIndicator() {
+        tableView.backgroundView = activityIndicatorView
+        activityIndicatorView.indicatorStartAnimating()
+        isAnimating = true
+    }
+    private func hideActivityIndicator() {
+        tableView.backgroundView = nil
+        activityIndicatorView.indicatorStopAnimating()
+         isAnimating = false
+    }
     private func configureTableViewProperties() {
         registerTableViewCells()
         tableView.dataSource = eventsDisplayTableViewControllerDataSource
@@ -50,6 +70,7 @@ final class EventsDisplayTableViewController: UITableViewController {
             case .failure(let error):
                 print(error)
             case .success(let events):
+                self.hideActivityIndicator()
                 self.eventsDisplayTableViewControllerDataSource.events = events
                 self.tableView.reloadData()
             }
@@ -62,8 +83,12 @@ final class EventsDisplayTableViewController: UITableViewController {
         guard let headerInformationModel = headerInformationModel else {
             return nil
         }
-    
-        headerView?.viewModel = GroupDisplayTableViewCell.ViewModel(groupName: headerInformationModel.name, groupImage: headerInformationModel.imageURL, members: nil, nextEventName: nil, date: nil)
+        if isAnimating {
+            headerView?.isHidden = true
+        } else {
+            headerView?.isHidden = false
+            headerView?.viewModel = GroupDisplayTableViewCell.ViewModel(groupName: headerInformationModel.name, groupImage: headerInformationModel.imageURL, members: nil, nextEventName: nil, date: nil)
+        }
         return headerView
     }
     
