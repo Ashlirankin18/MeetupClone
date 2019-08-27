@@ -25,11 +25,7 @@ final class EventsDisplayTableViewController: UITableViewController {
         }
     }
     
-    private var activityIndicator: UIActivityIndicatorView = {
-        let activityIndicator = UIActivityIndicatorView()
-        activityIndicator.color = UIColor.clayRed
-        return activityIndicator
-    }()
+    private var activityIndicatorView = ActivityIndicatorView()
     
     private let eventsDisplayTableViewControllerDataSource = EventsDisplayTableViewControllerDataSource()
     
@@ -40,16 +36,8 @@ final class EventsDisplayTableViewController: UITableViewController {
         configureTableViewProperties()
         navigationItem.largeTitleDisplayMode = .never
     }
-    
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setUpActivityIndicator()
-    }
-    
-    private func setUpActivityIndicator() {
-        tableView.backgroundView = activityIndicator
-        tableView.separatorStyle = .none
-        activityIndicator.startAnimating()
+        super.viewWillAppear(animated)       
     }
     
     private func configureTableViewProperties() {
@@ -67,7 +55,6 @@ final class EventsDisplayTableViewController: UITableViewController {
                 print(error)
             case .success(let events):
                 self.eventsDisplayTableViewControllerDataSource.events = events
-                self.activityIndicator.stopAnimating()
                 self.tableView.reloadData()
             }
         }
