@@ -45,16 +45,16 @@ final class GroupsDisplayViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableViewProperties()
+        configureNavigationItemProperties()
+        checkForLastZipCodeEntered()
+        setUpEmptyStateView()
+        setUpActivityIndicator()
+    }
+    
+    private func configureNavigationItemProperties() {
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         definesPresentationContext = true
-        checkForLastZipCodeEntered()
-        loadingState = .isFinishLoading
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setUpEmptyStateView()
-        setUpActivityIndicator()
     }
     
     private func setUpEmptyStateView() {
@@ -163,7 +163,7 @@ final class GroupsDisplayViewController: UIViewController {
             textfield.keyboardType = .numberPad
         }
         
-        let submitAction = UIAlertAction(title: NSLocalizedString("Submit", comment: "Submit Answer"), style: .default) { _ in
+        let submitAction = UIAlertAction(title: NSLocalizedString("Submit", comment: "Submit Answer"), style: .default) { [unowned self] _ in
             guard let zipCode = alertController.textFields?.first?.text else {
                 return
             }
@@ -178,7 +178,7 @@ final class GroupsDisplayViewController: UIViewController {
         let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel action"), style: .cancel, handler: nil)
         alertController.addAction(submitAction)
         alertController.addAction(cancelAction)
-        self.present(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
     
     private func isEnteredZipCodeValid(zipCode: String) -> Bool {
@@ -199,15 +199,15 @@ extension GroupsDisplayViewController: UISearchResultsUpdating {
         if let text = searchController.searchBar.text?.lowercased() {
             userDefaults.set(text, forKey: UserDefaultConstants.searchText.rawValue)
             if isSearchControllerInputValid() {
-                self.loadingState = .isLoading
+                loadingState = .isLoading
                 if currentDataTask == nil {
                     let zipCode = userDefaults.object(forKey: UserDefaultConstants.zipCode.rawValue) as? String ?? ""
                     currentDataTask = retrieveGroups(searchText: text, zipCode: zipCode)
                 } else {
                     currentDataTask?.cancelTask()
                     let zipCode = userDefaults.object(forKey: UserDefaultConstants.zipCode.rawValue) as? String ?? ""
-                    let timer = Timer(timeInterval: 1.0, repeats: false) { _ in
-                        self.currentDataTask = self.retrieveGroups(searchText: text, zipCode: zipCode)
+                    let timer = Timer(timeInterval: 1.0, repeats: false) { [weak self] _ in
+                        self?.currentDataTask = self?.retrieveGroups(searchText: text, zipCode: zipCode)
                     }
                     
                     timer.fire()
