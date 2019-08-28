@@ -14,6 +14,8 @@ final class GroupsDisplayViewController: UIViewController {
     @IBOutlet private weak var zipCodeBarButtonItem: UIBarButtonItem!
     @IBOutlet private weak var groupDisplayTableView: UITableView!
     
+    private let networkConnectivityHelper = NetworkConnectivityHelper()
+    
     private lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
@@ -36,7 +38,13 @@ final class GroupsDisplayViewController: UIViewController {
         definesPresentationContext = true
         checkForLastZipCodeEntered()
     }
-    
+    private func checkForNetworkConnection() {
+        if networkConnectivityHelper.isReachable {
+            print("network is reachable")
+        } else {
+          
+        }
+    }
     private func checkForLastZipCodeEntered() {
         let userDefaults = UserDefaults.standard
         if let zipCode = userDefaults.object(forKey: UserDefaultConstants.zipCode.rawValue) as? String,
