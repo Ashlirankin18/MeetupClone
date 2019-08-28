@@ -9,10 +9,13 @@
 import Foundation
 import SystemConfiguration
 
-class NetworkConnectivityHelper {
+/// Handles the tasks related to network connectivity
+final class NetworkConnectivityHelper {
     
     private let reachability = SCNetworkReachabilityCreateWithName(nil, "www.google.com")
     
+    
+    /// Represents wether the network is reachable 
     private(set) var isReachable: Bool = true
     
     init() {

@@ -17,12 +17,26 @@ final class ProfileViewController: UIViewController {
     
     private let meetupDatatHandler = MeetupDataHandler(networkHelper: NetworkHelper())
     
+    private let emptyStateView = EmptyStateView()
+    
+    private let networkConnectivityHelper = NetworkConnectivityHelper()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpProfileTableView()
-        retrieveUserInformation()
+        if networkConnectivityHelper.isReachable {
+            setUpProfileTableView()
+            retrieveUserInformation()
+        } else {
+            
+            setUpEmptyStateView(image: UIImage.noInternetConnection, prompt: "No Internet Connection detected")
+        }
     }
     
+    private func setUpEmptyStateView(image: UIImage?, prompt: String) {
+        view.addSubview(emptyStateView)
+        constrainViewToScreen(view: emptyStateView)
+        emptyStateView.viewModel = EmptyStateView.ViewModel(emptyStateImage: image, emptyStatePrompt: prompt)
+    }
     private func setUpProfileTableView() {
         profileControllerTableView.delegate = self
         profileControllerTableView.dataSource = meetupCloneDataSource

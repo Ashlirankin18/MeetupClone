@@ -11,6 +11,8 @@ import UIKit
 /// A `UIViewController` subclass which displays a list of groups that the user searches for.
 final class GroupsDisplayViewController: UIViewController {
     
+    private let networkConnectivityHelper = NetworkConnectivityHelper()
+    
     private lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
@@ -44,28 +46,35 @@ final class GroupsDisplayViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureTableViewProperties()
-        configureNavigationItemProperties()
-        checkForLastZipCodeEntered()
-        setUpEmptyStateView()
-        setUpActivityIndicator()
+        checkForNetworkConnection()
     }
     
+    private func checkForNetworkConnection() {
+        if networkConnectivityHelper.isReachable {
+            configureTableViewProperties()
+            configureNavigationItemProperties()
+            checkForLastZipCodeEntered()
+            setUpActivityIndicator()
+            setUpEmptyStateView(image: UIImage.noGroupsFound, prompt: "No Groups Found, Try searchin for another interest")
+        } else {
+            setUpEmptyStateView(image: UIImage.noInternetConnection, prompt: "No Internet Connection Detected")
+        }
+    }
     private func configureNavigationItemProperties() {
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         definesPresentationContext = true
     }
     
-    private func setUpEmptyStateView() {
+    private func setUpEmptyStateView(image: UIImage?, prompt: String) {
         view.addSubview(emptyStateView)
-        setUpEmptyStateConstraints()
-        emptyStateView.viewModel = EmptyStateView.ViewModel(emptyStateImage: UIImage.noGroupsFound, emptyStatePrompt: "No groups were found try searching for your interest")
+        constrainViewToScreen(view: emptyStateView)
+        emptyStateView.viewModel = EmptyStateView.ViewModel(emptyStateImage: image, emptyStatePrompt: prompt)
     }
     
     private func setUpActivityIndicator() {
         view.addSubview(activityIndicatorView)
-        setActivityIndicatorConstraints()
+        constrainViewToScreen(view: activityIndicatorView)
     }
     
     private func configureTableViewProperties() {
@@ -124,13 +133,7 @@ final class GroupsDisplayViewController: UIViewController {
             }
         }
     }
-    private func checkForNetworkConnection() {
-        if networkConnectivityHelper.isReachable {
-            print("network is reachable")
-        } else {
-          
-        }
-    }
+    
     private func checkForLastZipCodeEntered() {
         let userDefaults = UserDefaults.standard
         if let zipCode = userDefaults.object(forKey: UserDefaultConstants.zipCode.rawValue) as? String,
@@ -235,25 +238,5 @@ extension GroupsDisplayViewController: UITableViewDelegate {
         
         viewController.urlName = chosenGroup.urlName
         navigationController?.pushViewController(viewController, animated: true)
-    }
-}
-extension GroupsDisplayViewController {
-    private func setUpEmptyStateConstraints() {
-        emptyStateView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            emptyStateView.topAnchor.constraint(equalTo: view.topAnchor),
-            emptyStateView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            emptyStateView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            emptyStateView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-            ])
-    }
-    private func setActivityIndicatorConstraints() {
-        activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            activityIndicatorView.topAnchor.constraint(equalTo: view.topAnchor),
-            activityIndicatorView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            activityIndicatorView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            activityIndicatorView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-            ])
     }
 }
