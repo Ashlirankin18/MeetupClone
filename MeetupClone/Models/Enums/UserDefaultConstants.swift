@@ -9,17 +9,15 @@
 import Foundation
 
 /// Represents the UserDefaults constants of the application
+///
+/// - isLoggedIn: stores if oAuth token methods are loading.
+/// - accessToken: stores the accessToken.
+/// - searchText: stores the search text the user entered
+/// - zipCode: stores the zipcode the user entered
 enum UserDefaultConstants: String {
     
-    /// stores if oAuth token methods are loading.
     case isLoggedIn = "isLoggedIn"
-    
-    /// stores the accessToken.
     case accessToken = "accessToken"
-    
-    /// stores the search text the user entered
     case searchText = "searchText"
-    
-    ///stores the zipcode the user entered
     case zipCode = "zipCode"
 }

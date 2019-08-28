@@ -21,13 +21,19 @@ class EmptyStateView: UIView {
     lazy var emptyStatePromptLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.backgroundColor = .white
+        label.backgroundColor = .groupTableViewBackground
+        label.text = "Label"
+        label.font = UIFont(name: "AmericanTypewriter-Bold", size: 20)
+        label.numberOfLines = 0
+        label.textAlignment = .center
         return label
     }()
     
     lazy var emptyStateImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.image = UIImage(named: "maleek-berry-sisi-maria-770x433")
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     
@@ -36,6 +42,8 @@ class EmptyStateView: UIView {
         stackView.distribution = .fill
         stackView.axis = .vertical
         stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.alignment = .fill
+        stackView.spacing = 20
         return stackView
     }()
     
@@ -61,6 +69,7 @@ class EmptyStateView: UIView {
         verticalStackView.addArrangedSubview(emptyStatePromptLabel)
         addSubview(verticalStackView)
         setUpStackViewConstraints()
+        backgroundColor = .groupTableViewBackground
     }
 }
 extension EmptyStateView {
@@ -68,8 +77,8 @@ extension EmptyStateView {
         NSLayoutConstraint.activate([
             verticalStackView.centerXAnchor.constraint(equalTo: centerXAnchor),
             verticalStackView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            verticalStackView.widthAnchor.constraint(equalToConstant: 200),
-            verticalStackView.heightAnchor.constraint(equalToConstant: 200)
+            verticalStackView.widthAnchor.constraint(equalToConstant: 300),
+            verticalStackView.heightAnchor.constraint(equalToConstant: 150)
             ])
     }
 }

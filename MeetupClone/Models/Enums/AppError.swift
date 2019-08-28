@@ -9,20 +9,17 @@
 import Foundation
 
 /// Errors that may occur during asynchronous call
+///
+/// - decodingError: Could not decode JSON
+/// - encodingError: Could not encode model data
+/// - badURL: URL that was given is bad(not valid)
+/// - networkError: There is an error with the network
+/// - badStatusCode: Status code returned from the request is >200
 enum AppError: Error {
     
-    /// Could not decode JSON
     case decodingError(String)
-    
-    /// Could not encode model data
     case encodingError(String)
-    
-    /// URL that was given is bad(not valid)
     case badURL(String)
-    
-    /// There is an error with the network
     case networkError(Error)
-    
-    /// Status code returned from the request is >200
     case badStatusCode(String)
 }
