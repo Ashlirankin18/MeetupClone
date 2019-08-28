@@ -8,7 +8,9 @@
 
 import UIKit
 
-class EmptyStateView: UIView {
+/// `UIView` subclass which contains the object needed to display an empty state to the user.
+final class EmptyStateView: UIView {
+    
     /// Manages the data that is needed to populate the `EmptyStateView`
     struct ViewModel {
         
@@ -18,7 +20,16 @@ class EmptyStateView: UIView {
         /// The prompt that will be displayed on the cell
         let emptyStatePrompt: String
     }
-    lazy var emptyStatePromptLabel: UILabel = {
+    
+    /// The `EmptyStateView`'s viewModel
+    var viewModel: ViewModel? {
+        didSet {
+            emptyStateImageView.image = viewModel?.emptyStateImage
+            emptyStatePromptLabel.text = viewModel?.emptyStatePrompt
+        }
+    }
+    
+    private let emptyStatePromptLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.backgroundColor = .groupTableViewBackground
@@ -29,7 +40,7 @@ class EmptyStateView: UIView {
         return label
     }()
     
-    lazy var emptyStateImageView: UIImageView = {
+     private let emptyStateImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.image = UIImage(named: "maleek-berry-sisi-maria-770x433")
@@ -37,7 +48,7 @@ class EmptyStateView: UIView {
         return imageView
     }()
     
-    lazy var verticalStackView: UIStackView = {
+   private let verticalStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.distribution = .fill
         stackView.axis = .vertical
@@ -46,13 +57,6 @@ class EmptyStateView: UIView {
         stackView.spacing = 20
         return stackView
     }()
-    
-    var viewModel: ViewModel? {
-        didSet {
-            emptyStateImageView.image = viewModel?.emptyStateImage
-            emptyStatePromptLabel.text = viewModel?.emptyStatePrompt
-        }
-    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
