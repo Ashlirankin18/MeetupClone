@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,8 +19,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="f7V-iN-FN5">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="grouped" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="f7V-iN-FN5">
+                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <color key="separatorColor" red="0.99800962209701538" green="0.0051934742368757725" blue="0.13274317979812622" alpha="0.92407570419999996" colorSpace="custom" customColorSpace="sRGB"/>
                                 <inset key="separatorInset" minX="2" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -91,12 +92,12 @@
                                 </prototypes>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="ClayRed"/>
                         <constraints>
                             <constraint firstItem="9Th-iG-wCZ" firstAttribute="trailing" secondItem="f7V-iN-FN5" secondAttribute="trailing" id="4sF-p0-9PH"/>
                             <constraint firstItem="f7V-iN-FN5" firstAttribute="top" secondItem="9Th-iG-wCZ" secondAttribute="top" id="hFu-I9-lSd"/>
                             <constraint firstItem="f7V-iN-FN5" firstAttribute="leading" secondItem="9Th-iG-wCZ" secondAttribute="leading" id="ktb-b0-3BD"/>
-                            <constraint firstItem="9Th-iG-wCZ" firstAttribute="bottom" secondItem="f7V-iN-FN5" secondAttribute="bottom" id="nKF-u0-9gS"/>
+                            <constraint firstItem="f7V-iN-FN5" firstAttribute="bottom" secondItem="FfD-iP-Crp" secondAttribute="bottom" id="nKF-u0-9gS"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="9Th-iG-wCZ"/>
                     </view>
@@ -112,5 +113,8 @@
     </scenes>
     <resources>
         <image name="icons8-customer-25" width="25" height="25"/>
+        <namedColor name="ClayRed">
+            <color red="0.86400002241134644" green="0.20800000429153442" blue="0.26899999380111694" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

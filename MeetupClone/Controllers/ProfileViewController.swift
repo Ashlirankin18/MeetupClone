@@ -21,8 +21,11 @@ final class ProfileViewController: UIViewController {
         super.viewDidLoad()
         setUpProfileTableView()
         retrieveUserInformation()
+        setNeedsStatusBarAppearanceUpdate()
     }
-    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     private func setUpProfileTableView() {
         profileControllerTableView.delegate = self
         profileControllerTableView.dataSource = meetupCloneDataSource
