@@ -11,11 +11,6 @@ import UIKit
 /// A `UIViewController` subclass which displays a list of groups that the user searches for.
 final class GroupsDisplayViewController: UIViewController {
     
-    @IBOutlet private weak var zipCodeBarButtonItem: UIBarButtonItem!
-    @IBOutlet private weak var groupDisplayTableView: UITableView!
-    
-    private let networkConnectivityHelper = NetworkConnectivityHelper()
-    
     private lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
@@ -30,13 +25,104 @@ final class GroupsDisplayViewController: UIViewController {
     
     private var currentDataTask: Cancelable?
     
+    private var activityIndicatorView = ActivityIndicatorView()
+    
+    private var emptyStateView = EmptyStateView()
+    
+    private var loadingState: LoadingStates? {
+        didSet {
+            guard let loadingState = loadingState else {
+                print("No loading state found")
+                return
+            }
+            checksLoadingState(loadingState: loadingState)
+        }
+    }
+    
+    @IBOutlet private weak var zipCodeBarButtonItem: UIBarButtonItem!
+    @IBOutlet private weak var groupDisplayTableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableViewProperties()
+        configureNavigationItemProperties()
+        checkForLastZipCodeEntered()
+        setUpEmptyStateView()
+        setUpActivityIndicator()
+    }
+    
+    private func configureNavigationItemProperties() {
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         definesPresentationContext = true
-        checkForLastZipCodeEntered()
+    }
+    
+    private func setUpEmptyStateView() {
+        view.addSubview(emptyStateView)
+        setUpEmptyStateConstraints()
+        emptyStateView.viewModel = EmptyStateView.ViewModel(emptyStateImage: UIImage.noGroupsFound, emptyStatePrompt: "No groups were found try searching for your interest")
+    }
+    
+    private func setUpActivityIndicator() {
+        view.addSubview(activityIndicatorView)
+        setActivityIndicatorConstraints()
+    }
+    
+    private func configureTableViewProperties() {
+        groupDisplayTableView.dataSource = groupInfoDataSource
+        groupDisplayTableView.delegate = self
+        groupDisplayTableView.rowHeight = UITableView.automaticDimension
+        registerTableViewCells()
+    }
+    
+    private func registerTableViewCells() {
+        groupDisplayTableView.register(UINib(nibName: "GroupDisplayTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "GroupDisplayCell")
+        groupDisplayTableView.register(UINib(nibName: "EmptyStateTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "EmptyStateCell")
+    }
+    
+    private func showTableView() {
+        groupDisplayTableView.isHidden = false
+    }
+    
+    private func hideTableView() {
+        groupDisplayTableView.isHidden = true
+    }
+    
+    private func showEmptyState() {
+        emptyStateView.isHidden = false
+        hideTableView()
+        hideActivityIndicator()
+    }
+    
+    private func hideEmptyState() {
+        emptyStateView.isHidden = true
+    }
+    
+    private func hideActivityIndicator() {
+        activityIndicatorView.isHidden = true
+        activityIndicatorView.indicatorStopAnimating()    
+    }
+    
+    private func showActivityIndicator() {
+        activityIndicatorView.isHidden = false
+        activityIndicatorView.indicatorStartAnimating()
+        hideEmptyState()
+        hideTableView()
+    }
+    
+    func checksLoadingState(loadingState: LoadingStates) {
+        switch loadingState {
+        case .isLoading:
+            showActivityIndicator()
+        case .isFinishLoading:
+            hideActivityIndicator()
+            if groupInfoDataSource.groups.isEmpty {
+                showEmptyState()
+            } else {
+                showTableView()
+                hideEmptyState()
+            }
+        }
     }
     private func checkForNetworkConnection() {
         if networkConnectivityHelper.isReachable {
@@ -56,22 +142,15 @@ final class GroupsDisplayViewController: UIViewController {
         }
     }
     
-    private func configureTableViewProperties() {
-        groupDisplayTableView.dataSource = groupInfoDataSource
-        groupDisplayTableView.delegate = self
-        groupDisplayTableView.rowHeight = UITableView.automaticDimension
-        groupDisplayTableView.register(UINib(nibName: "GroupDisplayTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "GroupDisplayCell")
-        groupDisplayTableView.register(UINib(nibName: "EmptyStateTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "EmptyStateCell")
-}
-    
     @discardableResult private func retrieveGroups(searchText: String?, zipCode: String?) -> Cancelable? {
-        let dataTask = meetupDataHandler.retrieveMeetupGroups(searchText: searchText ?? "", zipCode: zipCode) { (results) in
+        let dataTask = meetupDataHandler.retrieveMeetupGroups(searchText: searchText ?? "", zipCode: zipCode) { [weak self] (results) in
             switch results {
             case .failure(let error):
                 print(error)
             case .success(let groups):
-                self.groupInfoDataSource.groups = groups
-                self.groupDisplayTableView.reloadData()
+                self?.groupInfoDataSource.groups = groups
+                self?.groupDisplayTableView.reloadData()
+                self?.loadingState = .isFinishLoading
             }
         }
         return dataTask
@@ -90,7 +169,7 @@ final class GroupsDisplayViewController: UIViewController {
             textfield.keyboardType = .numberPad
         }
         
-        let submitAction = UIAlertAction(title: NSLocalizedString("Submit", comment: "Submit Answer"), style: .default) { _ in
+        let submitAction = UIAlertAction(title: NSLocalizedString("Submit", comment: "Submit Answer"), style: .default) { [unowned self] _ in
             guard let zipCode = alertController.textFields?.first?.text else {
                 return
             }
@@ -105,7 +184,7 @@ final class GroupsDisplayViewController: UIViewController {
         let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel action"), style: .cancel, handler: nil)
         alertController.addAction(submitAction)
         alertController.addAction(cancelAction)
-        self.present(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
     
     private func isEnteredZipCodeValid(zipCode: String) -> Bool {
@@ -126,14 +205,15 @@ extension GroupsDisplayViewController: UISearchResultsUpdating {
         if let text = searchController.searchBar.text?.lowercased() {
             userDefaults.set(text, forKey: UserDefaultConstants.searchText.rawValue)
             if isSearchControllerInputValid() {
+                loadingState = .isLoading
                 if currentDataTask == nil {
                     let zipCode = userDefaults.object(forKey: UserDefaultConstants.zipCode.rawValue) as? String ?? ""
                     currentDataTask = retrieveGroups(searchText: text, zipCode: zipCode)
                 } else {
                     currentDataTask?.cancelTask()
                     let zipCode = userDefaults.object(forKey: UserDefaultConstants.zipCode.rawValue) as? String ?? ""
-                    let timer = Timer(timeInterval: 1.0, repeats: false) { _ in
-                        self.currentDataTask = self.retrieveGroups(searchText: text, zipCode: zipCode)
+                    let timer = Timer(timeInterval: 1.0, repeats: false) { [weak self] _ in
+                        self?.currentDataTask = self?.retrieveGroups(searchText: text, zipCode: zipCode)
                     }
                     
                     timer.fire()
@@ -155,5 +235,25 @@ extension GroupsDisplayViewController: UITableViewDelegate {
         
         viewController.urlName = chosenGroup.urlName
         navigationController?.pushViewController(viewController, animated: true)
+    }
+}
+extension GroupsDisplayViewController {
+    private func setUpEmptyStateConstraints() {
+        emptyStateView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            emptyStateView.topAnchor.constraint(equalTo: view.topAnchor),
+            emptyStateView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            emptyStateView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            emptyStateView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            ])
+    }
+    private func setActivityIndicatorConstraints() {
+        activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            activityIndicatorView.topAnchor.constraint(equalTo: view.topAnchor),
+            activityIndicatorView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            activityIndicatorView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            activityIndicatorView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            ])
     }
 }

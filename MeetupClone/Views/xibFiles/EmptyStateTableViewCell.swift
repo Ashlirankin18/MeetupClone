@@ -8,7 +8,7 @@
 
 import UIKit
 
-/// `UITableView` subclasss which will display a prompt to the user if the object array is empty.
+/// `UITableViewCell` subclasss which will display a prompt to the user if the object array is empty.
 class EmptyStateTableViewCell: UITableViewCell {
 
   /// Manages the data that is needed to populate the `EmptyStateTableViewCell`
