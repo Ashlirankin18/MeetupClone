@@ -44,13 +44,13 @@ final class EventsDisplayTableViewController: UITableViewController {
     }
     
     private func retrieveGroupEvents(urlName: String) {
-        meetupDataHandler.retrieveEvents(with: urlName) { result in
+        meetupDataHandler.retrieveEvents(with: urlName) { [weak self] result in
             switch result {
             case .failure(let error):
                 print(error)
             case .success(let events):
-                self.eventsDisplayTableViewControllerDataSource.events = events
-                self.tableView.reloadData()
+                self?.eventsDisplayTableViewControllerDataSource.events = events
+                self?.tableView.reloadData()
             }
         }
     }

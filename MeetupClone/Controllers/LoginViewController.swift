@@ -19,11 +19,11 @@ class LoginViewController: UIViewController {
     
     private func presentAlertController() {
         let alertController = UIAlertController(title: NSLocalizedString("Error", comment: "Error occured"), message: NSLocalizedString("Could not authenticate you account try again.", comment: "Tells the user there was a problem signing them in."), preferredStyle: .alert)
-        let tryAgainAction = UIAlertAction(title: NSLocalizedString("Try Again", comment: "Prompts the user to try thier request again"), style: .default) { _ in
-            self.meetupAuthenticationHandler?.startAuthorizationLogin()
+        let tryAgainAction = UIAlertAction(title: NSLocalizedString("Try Again", comment: "Prompts the user to try thier request again"), style: .default) { [weak self] _ in
+            self?.meetupAuthenticationHandler?.startAuthorizationLogin()
         }
         alertController.addAction(tryAgainAction)
-        self.present(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
     
     private func initiateLoginFlow() {
@@ -31,11 +31,11 @@ class LoginViewController: UIViewController {
             assertionFailure("The meetupAuthenticationHandler is nil")
             return }
         if !meetupAuthenticationHandler.hasOAuthToken() {
-            meetupAuthenticationHandler.oAuthTokenCompletionHandler = { error in
+            meetupAuthenticationHandler.oAuthTokenCompletionHandler = { [weak self] error in
                 if error != nil {
-                    self.presentAlertController()
+                    self?.presentAlertController()
                 } else {
-                    self.presentsUserInterfaceOnSuccess()
+                    self?.presentsUserInterfaceOnSuccess()
                 }
             }
             meetupAuthenticationHandler.startAuthorizationLogin()

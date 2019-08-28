@@ -30,13 +30,13 @@ final class ProfileViewController: UIViewController {
     }
     
     private func retrieveUserInformation() {
-        meetupDatatHandler.retrieveUserData { (result) in
+        meetupDatatHandler.retrieveUserData { [weak self] (result) in
             switch result {
             case .failure(let error):
                 print(error)
             case .success(let userInfo):
-                self.meetupCloneDataSource.meetupUserModel = userInfo
-                self.profileControllerTableView.reloadData()
+                self?.meetupCloneDataSource.meetupUserModel = userInfo
+                self?.profileControllerTableView.reloadData()
             }
         }
     }
