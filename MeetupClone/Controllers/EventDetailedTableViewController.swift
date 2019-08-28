@@ -73,8 +73,11 @@ final class EventDetailedTableViewController: UITableViewController {
             case .failure(let error):
                 print(error)
             case .success(let rsvps):
-                self?.eventDetailedControllerDataSource.rsvps = rsvps
-                self?.tableView.reloadData()
+                guard let self = self else {
+                    return
+                }
+                self.eventDetailedControllerDataSource.rsvps = rsvps
+                self.tableView.reloadData()
             }
         }
     }

@@ -35,8 +35,11 @@ final class ProfileViewController: UIViewController {
             case .failure(let error):
                 print(error)
             case .success(let userInfo):
-                self?.meetupCloneDataSource.meetupUserModel = userInfo
-                self?.profileControllerTableView.reloadData()
+                guard let self = self else {
+                    return
+                }
+                self.meetupCloneDataSource.meetupUserModel = userInfo
+                self.profileControllerTableView.reloadData()
             }
         }
     }

@@ -20,7 +20,10 @@ class LoginViewController: UIViewController {
     private func presentAlertController() {
         let alertController = UIAlertController(title: NSLocalizedString("Error", comment: "Error occured"), message: NSLocalizedString("Could not authenticate you account try again.", comment: "Tells the user there was a problem signing them in."), preferredStyle: .alert)
         let tryAgainAction = UIAlertAction(title: NSLocalizedString("Try Again", comment: "Prompts the user to try thier request again"), style: .default) { [weak self] _ in
-            self?.meetupAuthenticationHandler?.startAuthorizationLogin()
+            guard let self = self else {
+                return
+            }
+            self.meetupAuthenticationHandler?.startAuthorizationLogin()
         }
         alertController.addAction(tryAgainAction)
         present(alertController, animated: true, completion: nil)
@@ -32,10 +35,13 @@ class LoginViewController: UIViewController {
             return }
         if !meetupAuthenticationHandler.hasOAuthToken() {
             meetupAuthenticationHandler.oAuthTokenCompletionHandler = { [weak self] error in
+                guard let self = self else {
+                    return
+                }
                 if error != nil {
-                    self?.presentAlertController()
+                    self.presentAlertController()
                 } else {
-                    self?.presentsUserInterfaceOnSuccess()
+                    self.presentsUserInterfaceOnSuccess()
                 }
             }
             meetupAuthenticationHandler.startAuthorizationLogin()
