@@ -32,7 +32,7 @@ class MeetupAuthenticationHandler {
     
     /// Checks userDefaults for an accessToken returns a bool value based on the findings.
     func hasOAuthToken() -> Bool {
-        return (userDefaults.object(forKey: UserDefaultConstants.accessToken.rawValue) as? String) != nil ? true : false
+        return (userDefaults.object(forKey: UserDefaultConstants.accessToken.rawValue) as? String) != nil
     }
     
     /// Uses the API's authorization URL which takes the user to a page where they give authorization on the app.
