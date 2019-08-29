@@ -17,8 +17,10 @@ final class GroupsDisplayViewController: UIViewController {
     private lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
+        searchController.searchBar.barTintColor = .white
+        searchController.searchBar.tintColor = .white
+        searchController.searchBar.searchBarStyle = .prominent
         searchController.obscuresBackgroundDuringPresentation = false
-        
         return searchController
     }()
     
@@ -82,7 +84,7 @@ final class GroupsDisplayViewController: UIViewController {
             textfield.keyboardType = .numberPad
         }
         
-        let submitAction = UIAlertAction(title: NSLocalizedString("Submit", comment: "Submit Answer"), style: .default) { _ in
+        let okAction = UIAlertAction(title: NSLocalizedString("Ok", comment: "Submit Answer"), style: .default) { _ in
             guard let zipCode = alertController.textFields?.first?.text else {
                 return
             }
@@ -95,13 +97,14 @@ final class GroupsDisplayViewController: UIViewController {
             }
         }
         let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel action"), style: .cancel, handler: nil)
-        alertController.addAction(submitAction)
+        alertController.addAction(okAction)
         alertController.addAction(cancelAction)
         self.present(alertController, animated: true, completion: nil)
     }
     
     private func isEnteredZipCodeValid(zipCode: String) -> Bool {
         if Int(zipCode) != nil && zipCode.count == 5 {
+            zipCodeBarButtonItem.title = zipCode
             return true
         }
         return false
