@@ -8,16 +8,16 @@
 
 import UIKit
 
-/// `UIView` subclass which contains the object needed to display an empty state to the user.
+/// `UIView` subclass which contains the information needed to display an empty state to the user.
 final class EmptyStateView: UIView {
     
     /// Manages the data that is needed to populate the `EmptyStateView`
     struct ViewModel {
         
-        /// The image that will be displayed on the cell
+        /// The image that will be displayed on the view
         let emptyStateImage: UIImage?
         
-        /// The prompt that will be displayed on the cell
+        /// The prompt that will be displayed on the view
         let emptyStatePrompt: String
     }
     
@@ -32,15 +32,13 @@ final class EmptyStateView: UIView {
     private let emptyStatePromptLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.backgroundColor = .groupTableViewBackground
-        label.text = "Label"
         label.font = UIFont(name: "AmericanTypewriter-Bold", size: 20)
         label.numberOfLines = 0
         label.textAlignment = .center
         return label
     }()
     
-     private let emptyStateImageView: UIImageView = {
+    private let emptyStateImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.image = UIImage(named: "maleek-berry-sisi-maria-770x433")
@@ -48,7 +46,7 @@ final class EmptyStateView: UIView {
         return imageView
     }()
     
-   private let verticalStackView: UIStackView = {
+    private let verticalStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.distribution = .fill
         stackView.axis = .vertical
@@ -81,8 +79,7 @@ extension EmptyStateView {
         NSLayoutConstraint.activate([
             verticalStackView.centerXAnchor.constraint(equalTo: centerXAnchor),
             verticalStackView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            verticalStackView.widthAnchor.constraint(equalToConstant: 300),
-            verticalStackView.heightAnchor.constraint(equalToConstant: 150)
+            verticalStackView.widthAnchor.constraint(equalToConstant: 300)
             ])
     }
 }
