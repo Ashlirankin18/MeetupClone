@@ -1,20 +1,24 @@
 PODS:
   - Kingfisher (5.6.0)
+  - ReachabilitySwift (4.3.1)
   - SwiftLint (0.33.0)
 
 DEPENDENCIES:
   - Kingfisher
+  - ReachabilitySwift
   - SwiftLint
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Kingfisher
+    - ReachabilitySwift
     - SwiftLint
 
 SPEC CHECKSUMS:
   Kingfisher: 1a50df6880a60bae26f3e21a0df3d17b892f5e0b
+  ReachabilitySwift: 4032e2f59586e11e3b0ebe15b167abdd587a388b
   SwiftLint: fed9c66336e41fc74dc48a73678380718f0c8b0e
 
-PODFILE CHECKSUM: dae11414354c0b719827a30fbc87a211bbd3f1c8
+PODFILE CHECKSUM: 6f5eb1f08cb1d1f697ed6721ee2f78fcffa73af8
 
 COCOAPODS: 1.7.2
