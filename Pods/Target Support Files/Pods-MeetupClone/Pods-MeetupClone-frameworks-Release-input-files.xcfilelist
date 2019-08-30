@@ -1,2 +1,3 @@
 ${PODS_ROOT}/Target Support Files/Pods-MeetupClone/Pods-MeetupClone-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework
+${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework
