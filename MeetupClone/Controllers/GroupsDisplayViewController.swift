@@ -57,11 +57,14 @@ final class GroupsDisplayViewController: UIViewController {
 }
     
     @discardableResult private func retrieveGroups(searchText: String?, zipCode: String?) -> Cancelable? {
-        let dataTask = meetupDataHandler.retrieveMeetupGroups(searchText: searchText ?? "", zipCode: zipCode) { (results) in
+        let dataTask = meetupDataHandler.retrieveMeetupGroups(searchText: searchText ?? "", zipCode: zipCode) { [weak self] (results) in
             switch results {
             case .failure(let error):
                 print(error)
             case .success(let groups):
+                guard let self = self else {
+                    return
+                }
                 self.groupInfoDataSource.groups = groups
                 self.groupDisplayTableView.reloadData()
             }
@@ -82,7 +85,10 @@ final class GroupsDisplayViewController: UIViewController {
             textfield.keyboardType = .numberPad
         }
         
-        let submitAction = UIAlertAction(title: NSLocalizedString("Submit", comment: "Submit Answer"), style: .default) { _ in
+        let submitAction = UIAlertAction(title: NSLocalizedString("Submit", comment: "Submit Answer"), style: .default) { [weak self] _ in
+            guard let self = self else {
+                return
+            }
             guard let zipCode = alertController.textFields?.first?.text else {
                 return
             }
@@ -97,7 +103,7 @@ final class GroupsDisplayViewController: UIViewController {
         let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel action"), style: .cancel, handler: nil)
         alertController.addAction(submitAction)
         alertController.addAction(cancelAction)
-        self.present(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
     
     private func isEnteredZipCodeValid(zipCode: String) -> Bool {
@@ -124,7 +130,10 @@ extension GroupsDisplayViewController: UISearchResultsUpdating {
                 } else {
                     currentDataTask?.cancelTask()
                     let zipCode = userDefaults.object(forKey: UserDefaultConstants.zipCode.rawValue) as? String ?? ""
-                    let timer = Timer(timeInterval: 1.0, repeats: false) { _ in
+                    let timer = Timer(timeInterval: 1.0, repeats: false) { [weak self] _ in
+                        guard let self = self else {
+                            return
+                        }
                         self.currentDataTask = self.retrieveGroups(searchText: text, zipCode: zipCode)
                     }
                     
