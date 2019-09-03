@@ -145,9 +145,11 @@ final class GroupsDisplayViewController: UIViewController {
             case .failure(let error):
                 print(error)
             case .success(let groups):
-                self?.groupInfoDataSource.groups = groups
-                self?.groupDisplayTableView.reloadData()
-                self?.loadingState = .isFinishLoading
+                guard let self = self else {
+                    return
+                }
+                self.groupInfoDataSource.groups = groups
+                self.groupDisplayTableView.reloadData()
             }
         }
         return dataTask
@@ -165,8 +167,12 @@ final class GroupsDisplayViewController: UIViewController {
         alertController.addTextField { (textfield) in
             textfield.keyboardType = .numberPad
         }
-        
-        let submitAction = UIAlertAction(title: NSLocalizedString("Submit", comment: "Submit Answer"), style: .default) { [unowned self] _ in
+    
+        let submitAction = UIAlertAction(title: NSLocalizedString("Submit", comment: "Submit Answer"), style: .default) { [weak self] _ in
+            guard let self = self else {
+                return
+            }
+
             guard let zipCode = alertController.textFields?.first?.text else {
                 return
             }
@@ -210,7 +216,11 @@ extension GroupsDisplayViewController: UISearchResultsUpdating {
                     currentDataTask?.cancelTask()
                     let zipCode = userDefaults.object(forKey: UserDefaultConstants.zipCode.rawValue) as? String ?? ""
                     let timer = Timer(timeInterval: 1.0, repeats: false) { [weak self] _ in
-                        self?.currentDataTask = self?.retrieveGroups(searchText: text, zipCode: zipCode)
+
+                        guard let self = self else {
+                            return
+                        }
+                        self.currentDataTask = self.retrieveGroups(searchText: text, zipCode: zipCode)
                     }
                     
                     timer.fire()

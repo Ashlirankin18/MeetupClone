@@ -1,7 +1,7 @@
 PODS:
-  - Kingfisher (5.6.0)
+  - Kingfisher (5.7.1)
   - ReachabilitySwift (4.3.1)
-  - SwiftLint (0.33.0)
+  - SwiftLint (0.34.0)
 
 DEPENDENCIES:
   - Kingfisher
@@ -15,9 +15,9 @@ SPEC REPOS:
     - SwiftLint
 
 SPEC CHECKSUMS:
-  Kingfisher: 1a50df6880a60bae26f3e21a0df3d17b892f5e0b
+  Kingfisher: 176d377ad339113c99ad4980cbae687f807e20fe
   ReachabilitySwift: 4032e2f59586e11e3b0ebe15b167abdd587a388b
-  SwiftLint: fed9c66336e41fc74dc48a73678380718f0c8b0e
+  SwiftLint: 79d48a17c6565dc286c37efb8322c7b450f95c67
 
 PODFILE CHECKSUM: 6f5eb1f08cb1d1f697ed6721ee2f78fcffa73af8
 

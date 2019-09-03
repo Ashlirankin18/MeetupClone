@@ -65,14 +65,19 @@ final class EventsDisplayTableViewController: UITableViewController {
         tableView.register(UINib(nibName: "EmptyStateTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "EmptyStateCell")
     }
     private func retrieveGroupEvents(urlName: String) {
-        meetupDataHandler.retrieveEvents(with: urlName) { result in
+        meetupDataHandler.retrieveEvents(with: urlName) { [weak self] result in
+            
             switch result {
             case .failure(let error):
                 print(error)
             case .success(let events):
-                self.hideActivityIndicator()
+               
+                guard let self = self else {
+                    return
+                }
                 self.eventsDisplayTableViewControllerDataSource.events = events
                 self.tableView.reloadData()
+                self.hideActivityIndicator()
             }
         }
     }
