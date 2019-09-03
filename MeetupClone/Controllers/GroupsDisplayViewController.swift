@@ -235,7 +235,14 @@ extension GroupsDisplayViewController: UITableViewDelegate {
 }
 extension GroupsDisplayViewController: NetworkConnectivityHelperDelegate {
     func networkIsAvalible() {
-       showEmptyState()
+//        setUpEmptyStateView(image: UIImage.noGroupsFound, prompt: "No Groups Found, Try searchin for another interest")
+//
+//        if shouldPerformSearch {
+//            hideEmptyState()
+//            performSearch()
+//        } else {
+//            showEmptyState()
+//        }
     }
     
     func networkIsUnavalible() {
