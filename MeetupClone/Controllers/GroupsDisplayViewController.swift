@@ -168,6 +168,6 @@ extension GroupsDisplayViewController: UITableViewDelegate {
         viewController.headerInformationModel = HeaderInformationModel(imageURL: highResPhoto, name: chosenGroup.groupName)
         
         viewController.urlName = chosenGroup.urlName
-        navigationController?.pushViewController(viewController, animated: true)
+        navigationController?.show(viewController, sender: self)
     }
 }
