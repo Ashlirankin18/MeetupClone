@@ -234,17 +234,18 @@ extension GroupsDisplayViewController: UITableViewDelegate {
     }
 }
 extension GroupsDisplayViewController: NetworkConnectivityHelperDelegate {
-    func networkIsAvalible() {
-//        setUpEmptyStateView(image: UIImage.noGroupsFound, prompt: "No Groups Found, Try searchin for another interest")
-//
-//        if shouldPerformSearch {
-//            hideEmptyState()
-//            performSearch()
-//        } else {
-//            showEmptyState()
-//        }
-    }
     
+    func networkIsAvalible() {
+        if isSearchControllerInputValid() {
+            if let searchText = searchController.searchBar.text {
+                let zipCode = zipCodeBarButtonItem.title ?? ""
+                retrieveGroups(searchText: searchText, zipCode: zipCode)
+            }
+        } else {
+            setUpEmptyStateView(image: UIImage.noGroupsFound, prompt: "No Groups Found, Try searchin for another interest")
+            showEmptyState()
+        }
+    }
     func networkIsUnavalible() {
         setUpEmptyStateView(image: UIImage.noInternetConnection, prompt: "No Internet Connection Detected")
         showEmptyState()
