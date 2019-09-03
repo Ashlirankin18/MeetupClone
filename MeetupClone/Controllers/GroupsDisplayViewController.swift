@@ -35,7 +35,7 @@ final class GroupsDisplayViewController: UIViewController {
                 print("No loading state found")
                 return
             }
-            checksLoadingState(loadingState: loadingState)
+            updatesViewBasedOnLoadingState(loadingState: loadingState)
         }
     }
     
@@ -60,7 +60,7 @@ final class GroupsDisplayViewController: UIViewController {
     private func setUpEmptyStateView() {
         view.addSubview(emptyStateView)
         setUpEmptyStateConstraints()
-        emptyStateView.viewModel = EmptyStateView.ViewModel(emptyStateImage: .noGroupsFound, emptyStatePrompt: NSLocalizedString("No groups were found try searching for your interest", comment: "Prompts the user to search for their interest"))
+        emptyStateView.viewModel = EmptyStateView.ViewModel(emptyStateImage: .noGroupsFound, emptyStatePrompt: NSLocalizedString("No groups were found. Try searching for your interests", comment: "Prompts the user to search for their interests."))
     }
     
     private func setUpActivityIndicator() {
@@ -73,14 +73,6 @@ final class GroupsDisplayViewController: UIViewController {
         groupDisplayTableView.delegate = self
         groupDisplayTableView.rowHeight = UITableView.automaticDimension
         groupDisplayTableView.register(UINib(nibName: "GroupDisplayTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "GroupDisplayCell")
-    }
-    
-    private func showTableView() {
-        groupDisplayTableView.isHidden = false
-    }
-    
-    private func hideTableView() {
-        groupDisplayTableView.isHidden = true
     }
     
     private func showEmptyState() {
@@ -101,11 +93,15 @@ final class GroupsDisplayViewController: UIViewController {
         activityIndicatorView.indicatorStartAnimating()
     }
     
-    private func checksLoadingState(loadingState: LoadingState) {
+    private func showTableView() {
+        groupDisplayTableView.isHidden = false
+    }
+    
+    private func updatesViewBasedOnLoadingState(loadingState: LoadingState) {
         switch loadingState {
         case .isLoading:
             showActivityIndicator()
-        case .isFinishLoading:
+        case .isFinishedLoading:
             hideActivityIndicator()
             if groupInfoDataSource.groups.isEmpty {
                 showEmptyState()
@@ -122,7 +118,7 @@ final class GroupsDisplayViewController: UIViewController {
             let searchText = userDefaults.object(forKey: UserDefaultConstants.searchText.rawValue) as? String {
             zipCodeBarButtonItem.title = zipCode
             searchController.searchBar.text = searchText
-            loadingState = .isFinishLoading
+            loadingState = .isFinishedLoading
         } else {
             searchController.searchBar.placeholder = NSLocalizedString("Search for group", comment: "Prompts the user to search for a group.")
         }
@@ -136,7 +132,7 @@ final class GroupsDisplayViewController: UIViewController {
             case .success(let groups):
                 self?.groupInfoDataSource.groups = groups
                 self?.groupDisplayTableView.reloadData()
-                self?.loadingState = .isFinishLoading
+                self?.loadingState = .isFinishedLoading
             }
         }
         return dataTask

@@ -13,5 +13,5 @@ enum LoadingState {
     ///  isLoading: Represents the data is loading.
     case isLoading
     ///  isFinishLoading: Used when data has returned and network request has been completed.
-    case isFinishLoading
+    case isFinishedLoading
 }
