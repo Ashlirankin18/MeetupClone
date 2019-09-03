@@ -107,16 +107,14 @@ final class GroupsDisplayViewController: UIViewController {
             hideTableView()
             hideEmptyState()
         case .isFinishedLoading:
-            hideActivityIndicator()
             if groupInfoDataSource.groups.isEmpty {
                 showEmptyState()
                 hideTableView()
-                hideActivityIndicator()
             } else {
                 showTableView()
                 hideEmptyState()
-                hideActivityIndicator()
             }
+             hideActivityIndicator()
         }
     }
     
