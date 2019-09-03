@@ -38,7 +38,7 @@
                                     </label>
                                 </subviews>
                             </stackView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" image="download" translatesAutoresizingMaskIntoConstraints="NO" id="FXF-B8-rjN">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" image="download" translatesAutoresizingMaskIntoConstraints="NO" id="FXF-B8-rjN">
                                 <rect key="frame" x="0.0" y="67" width="400" height="492.5"/>
                             </imageView>
                         </subviews>
