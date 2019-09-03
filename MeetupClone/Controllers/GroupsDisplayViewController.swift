@@ -96,18 +96,26 @@ final class GroupsDisplayViewController: UIViewController {
     private func showTableView() {
         groupDisplayTableView.isHidden = false
     }
+    private func hideTableView() {
+        groupDisplayTableView.isHidden = true
+    }
     
     private func updatesViewBasedOnLoadingState(loadingState: LoadingState) {
         switch loadingState {
         case .isLoading:
             showActivityIndicator()
+            hideTableView()
+            hideEmptyState()
         case .isFinishedLoading:
             hideActivityIndicator()
             if groupInfoDataSource.groups.isEmpty {
                 showEmptyState()
+                hideTableView()
+                hideActivityIndicator()
             } else {
                 showTableView()
                 hideEmptyState()
+                hideActivityIndicator()
             }
         }
     }
