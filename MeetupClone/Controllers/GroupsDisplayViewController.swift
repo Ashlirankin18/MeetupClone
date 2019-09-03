@@ -16,8 +16,7 @@ final class GroupsDisplayViewController: UIViewController {
     private lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
-        searchController.obscuresBackgroundDuringPresentation = false
-        
+        searchController.obscuresBackgroundDuringPresentation = false      
         return searchController
     }()
     
@@ -46,20 +45,14 @@ final class GroupsDisplayViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        checkForNetworkConnection()
+        configureTableViewProperties()
+        configureNavigationItemProperties()
+        checkForLastZipCodeEntered()
+        setUpActivityIndicator()
+        setUpEmptyStateView(image: UIImage.noGroupsFound, prompt: "No Groups Found, Try searchin for another interest")
+        networkConnectivityHelper.delegate = self
     }
     
-    private func checkForNetworkConnection() {
-        if networkConnectivityHelper.isReachable {
-            configureTableViewProperties()
-            configureNavigationItemProperties()
-            checkForLastZipCodeEntered()
-            setUpActivityIndicator()
-            setUpEmptyStateView(image: UIImage.noGroupsFound, prompt: "No Groups Found, Try searchin for another interest")
-        } else {
-            setUpEmptyStateView(image: UIImage.noInternetConnection, prompt: "No Internet Connection Detected")
-        }
-    }
     private func configureNavigationItemProperties() {
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
@@ -105,6 +98,7 @@ final class GroupsDisplayViewController: UIViewController {
     
     private func hideEmptyState() {
         emptyStateView.isHidden = true
+        showTableView()
     }
     
     private func hideActivityIndicator() {
@@ -226,7 +220,6 @@ extension GroupsDisplayViewController: UISearchResultsUpdating {
     }
 }
 extension GroupsDisplayViewController: UITableViewDelegate {
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let viewController = UIStoryboard(name: "Events", bundle: nil).instantiateViewController(withIdentifier: "EventsDisplayController") as? EventsDisplayTableViewController else {
             assertionFailure("could not instantiate view controller")
@@ -238,5 +231,15 @@ extension GroupsDisplayViewController: UITableViewDelegate {
         
         viewController.urlName = chosenGroup.urlName
         navigationController?.pushViewController(viewController, animated: true)
+    }
+}
+extension GroupsDisplayViewController: NetworkConnectivityHelperDelegate {
+    func networkIsAvalible() {
+       showEmptyState()
+    }
+    
+    func networkIsUnavalible() {
+        setUpEmptyStateView(image: UIImage.noInternetConnection, prompt: "No Internet Connection Detected")
+        showEmptyState()
     }
 }

@@ -7,34 +7,41 @@
 //
 
 import Foundation
-import SystemConfiguration
-
+import Reachability
+protocol NetworkConnectivityHelperDelegate: AnyObject {
+    func networkIsAvalible()
+    func networkIsUnavalible()
+}
 /// Handles the tasks related to network connectivity
 final class NetworkConnectivityHelper {
     
-    private let reachability = SCNetworkReachabilityCreateWithName(nil, "www.google.com")
+    private var reachability: Reachability?
     
-    
-    /// Represents wether the network is reachable 
     private(set) var isReachable: Bool = true
     
-    init() {
-        checkForReachability()
-    }
+    weak var delegate: NetworkConnectivityHelperDelegate?
     
-    private func checkForReachability() {
-        var flags = SCNetworkReachabilityFlags()
-        if let reachability = self.reachability {
-            SCNetworkReachabilityGetFlags(reachability, &flags)
-            isReachable = isNetworkReachable(flags: flags)
+    init() {
+        reachability = Reachability()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(networkDidChange), name: .reachabilityChanged, object: reachability)
+        do {
+            try reachability?.startNotifier()
+        } catch {
+            print("could not start reachability notifier!")
         }
     }
     
-    private func isNetworkReachable(flags: SCNetworkReachabilityFlags) -> Bool {
-        let isReachable = flags.contains(.reachable)
-        let needsConnection = flags.contains(.connectionRequired)
-        let canConnectAutomatically = flags.contains(.connectionOnDemand)
-        let canConnectWithoutUserInteraction = canConnectAutomatically && !flags.contains(.interventionRequired)
-        return isReachable && (!needsConnection || canConnectWithoutUserInteraction)
+    @objc func networkDidChange(_ notification: Notification) {
+        guard let reachability = notification.object as? Reachability else {
+            assertionFailure("Could not cast object a Reachability")
+            return
+        }
+        switch reachability.connection {
+        case .none:
+            delegate?.networkIsUnavalible()
+        case .cellular, .wifi:
+            delegate?.networkIsAvalible()
+        }
     }
 }
