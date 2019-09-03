@@ -25,8 +25,6 @@ final class GroupsDisplayViewController: UIViewController {
     
     private var currentDataTask: Cancelable?
     
-    private var activityIndicatorView = ActivityIndicatorView()
-    
     private var emptyStateView = EmptyStateView()
     
     private var loadingState: LoadingState? {
@@ -39,6 +37,7 @@ final class GroupsDisplayViewController: UIViewController {
         }
     }
     
+    @IBOutlet private weak var activityIndicatorView: UIActivityIndicatorView!
     @IBOutlet private weak var zipCodeBarButtonItem: UIBarButtonItem!
     @IBOutlet private weak var groupDisplayTableView: UITableView!
     
@@ -59,13 +58,12 @@ final class GroupsDisplayViewController: UIViewController {
     
     private func setUpEmptyStateView() {
         view.addSubview(emptyStateView)
-        setUpEmptyStateConstraints()
         emptyStateView.viewModel = EmptyStateView.ViewModel(emptyStateImage: .noGroupsFound, emptyStatePrompt: NSLocalizedString("No groups were found. Try searching for your interests", comment: "Prompts the user to search for their interests."))
     }
     
     private func setUpActivityIndicator() {
         view.addSubview(activityIndicatorView)
-        setActivityIndicatorConstraints()
+        activityIndicatorView.startAnimating()
     }
     
     private func configureTableViewProperties() {
@@ -85,12 +83,12 @@ final class GroupsDisplayViewController: UIViewController {
     
     private func hideActivityIndicator() {
         activityIndicatorView.isHidden = true
-        activityIndicatorView.indicatorStopAnimating()    
+        activityIndicatorView.stopAnimating()
     }
     
     private func showActivityIndicator() {
         activityIndicatorView.isHidden = false
-        activityIndicatorView.indicatorStartAnimating()
+        activityIndicatorView.startAnimating()
     }
     
     private func showTableView() {
@@ -217,25 +215,5 @@ extension GroupsDisplayViewController: UITableViewDelegate {
         
         viewController.urlName = chosenGroup.urlName
         navigationController?.pushViewController(viewController, animated: true)
-    }
-}
-extension GroupsDisplayViewController {
-    private func setUpEmptyStateConstraints() {
-        emptyStateView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            emptyStateView.topAnchor.constraint(equalTo: view.topAnchor),
-            emptyStateView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            emptyStateView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            emptyStateView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-            ])
-    }
-    private func setActivityIndicatorConstraints() {
-        activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            activityIndicatorView.topAnchor.constraint(equalTo: view.topAnchor),
-            activityIndicatorView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            activityIndicatorView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            activityIndicatorView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-            ])
     }
 }
