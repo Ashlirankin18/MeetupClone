@@ -11,9 +11,6 @@ import UIKit
 /// A `UIViewController` subclass which displays a list of groups that the user searches for.
 final class GroupsDisplayViewController: UIViewController {
     
-    @IBOutlet private weak var zipCodeBarButtonItem: UIBarButtonItem!
-    @IBOutlet private weak var groupDisplayTableView: UITableView!
-    
     private lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
@@ -28,13 +25,98 @@ final class GroupsDisplayViewController: UIViewController {
     
     private var currentDataTask: Cancelable?
     
+    private var activityIndicatorView = ActivityIndicatorView()
+   
+    private var emptyStateView: EmptyStateView?
+    
+    private var loadingState: LoadingState? {
+        didSet {
+            guard let loadingState = loadingState else {
+                print("No loading state found")
+                return
+            }
+            updatesViewBasedOnLoadingState(loadingState: loadingState)
+        }
+    }
+    
+    @IBOutlet private weak var zipCodeBarButtonItem: UIBarButtonItem!
+    @IBOutlet private weak var groupDisplayTableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableViewProperties()
+        configureNavigationItemProperties()
+        checkForLastZipCodeEntered()
+        setUpActivityIndicator()
+        setUpEmptyStateView()
+    }
+    private func configureNavigationItemProperties() {
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         definesPresentationContext = true
-        checkForLastZipCodeEntered()
+    }
+    
+    private func setUpEmptyStateView() {
+        guard let emptyStateView = Bundle.main.loadNibNamed("EmptyStateView", owner: self, options: nil)?.first as? EmptyStateView else {
+            return
+        }
+        self.emptyStateView = emptyStateView
+        view.addSubview(emptyStateView)
+        emptyStateView.viewModel = EmptyStateView.ViewModel(emptyStateImage: .noGroupsFound, emptyStatePrompt: NSLocalizedString("No groups were found. Try searching for your interests", comment: "Prompts the user to search for their interests."))
+    }
+    
+    private func setUpActivityIndicator() {
+        view.addSubview(activityIndicatorView)
+        setActivityIndicatorConstraints()
+    }
+    
+    private func configureTableViewProperties() {
+        groupDisplayTableView.dataSource = groupInfoDataSource
+        groupDisplayTableView.delegate = self
+        groupDisplayTableView.rowHeight = UITableView.automaticDimension
+        groupDisplayTableView.register(UINib(nibName: "GroupDisplayTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "GroupDisplayCell")
+    }
+    
+    private func showEmptyState() {
+        emptyStateView?.isHidden = false
+    }
+
+    private func hideEmptyState() {
+        emptyStateView?.isHidden = true
+    }
+
+    private func hideActivityIndicator() {
+        activityIndicatorView.isHidden = true
+        activityIndicatorView.indicatorStopAnimating()    
+    }
+    
+    private func showActivityIndicator() {
+        activityIndicatorView.isHidden = false
+        activityIndicatorView.indicatorStartAnimating()
+    }
+    
+    private func showTableView() {
+        groupDisplayTableView.isHidden = false
+    }
+    private func hideTableView() {
+        groupDisplayTableView.isHidden = true
+    }
+    
+    private func updatesViewBasedOnLoadingState(loadingState: LoadingState) {
+        switch loadingState {
+        case .isLoading:
+            showActivityIndicator()
+            hideTableView()
+            hideEmptyState()
+        case .isFinishedLoading:
+            if groupInfoDataSource.groups.isEmpty {
+                setUpEmptyStateView()
+            } else {
+                showTableView()
+                hideEmptyState()
+            }
+             hideActivityIndicator()
+        }
     }
     
     private func checkForLastZipCodeEntered() {
@@ -43,6 +125,7 @@ final class GroupsDisplayViewController: UIViewController {
             let searchText = userDefaults.object(forKey: UserDefaultConstants.searchText.rawValue) as? String {
             zipCodeBarButtonItem.title = zipCode
             searchController.searchBar.text = searchText
+            loadingState = .isFinishedLoading
         } else {
             searchController.searchBar.placeholder = NSLocalizedString("Search for group", comment: "Prompts the user to search for a group.")
         }
@@ -124,6 +207,7 @@ extension GroupsDisplayViewController: UISearchResultsUpdating {
         if let text = searchController.searchBar.text?.lowercased() {
             userDefaults.set(text, forKey: UserDefaultConstants.searchText.rawValue)
             if isSearchControllerInputValid() {
+                loadingState = .isLoading
                 if currentDataTask == nil {
                     let zipCode = userDefaults.object(forKey: UserDefaultConstants.zipCode.rawValue) as? String ?? ""
                     currentDataTask = retrieveGroups(searchText: text, zipCode: zipCode)
@@ -156,5 +240,16 @@ extension GroupsDisplayViewController: UITableViewDelegate {
         
         viewController.urlName = chosenGroup.urlName
         navigationController?.show(viewController, sender: self)
+    }
+}
+extension GroupsDisplayViewController {
+    private func setActivityIndicatorConstraints() {
+        activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            activityIndicatorView.topAnchor.constraint(equalTo: view.topAnchor),
+            activityIndicatorView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            activityIndicatorView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            activityIndicatorView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            ])
     }
 }
