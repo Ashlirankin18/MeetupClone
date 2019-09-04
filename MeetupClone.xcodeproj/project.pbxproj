@@ -303,11 +303,11 @@
 			children = (
 				5BEFBB6123071C3F008466F8 /* TableView+Extension.swift */,
 				5B3ADD072314D1470051A2D4 /* UIColor+Extension.swift */,
+				5BEFBB552306DF59008466F8 /* UIImageView+Extension.swift */,
 				5B526C0C22FCB2AE00F77EAC /* EventDetailedControllerDataSource.swift */,
 				5BEFBB66230B173A008466F8 /* EventsDisplayTableViewControllerDataSource.swift */,
 				5BD475D922F9DCF000F091AA /* GroupInfoDataSource.swift */,
 				5BEFBB64230B169A008466F8 /* FavoritesTableViewControllerDatasource.swift */,
-				5BEFBB552306DF59008466F8 /* UIImageView+Extension.swift */,
 				5B9DECD222E8F03500321359 /* UserProfileDataSource.swift */,
 			);
 			path = DataSource;
