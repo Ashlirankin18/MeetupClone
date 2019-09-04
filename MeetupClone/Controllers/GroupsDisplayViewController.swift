@@ -26,8 +26,8 @@ final class GroupsDisplayViewController: UIViewController {
     private var currentDataTask: Cancelable?
     
     private var activityIndicatorView = ActivityIndicatorView()
-    
-    private var emptyStateView = EmptyStateView()
+   
+    private var emptyStateView: EmptyStateView?
     
     private var loadingState: LoadingState? {
         didSet {
@@ -47,10 +47,9 @@ final class GroupsDisplayViewController: UIViewController {
         configureTableViewProperties()
         configureNavigationItemProperties()
         checkForLastZipCodeEntered()
-        setUpEmptyStateView()
         setUpActivityIndicator()
+        setUpEmptyStateView()
     }
-    
     private func configureNavigationItemProperties() {
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
@@ -58,8 +57,11 @@ final class GroupsDisplayViewController: UIViewController {
     }
     
     private func setUpEmptyStateView() {
+        guard let emptyStateView = Bundle.main.loadNibNamed("EmptyStateView", owner: self, options: nil)?.first as? EmptyStateView else {
+            return
+        }
+        self.emptyStateView = emptyStateView
         view.addSubview(emptyStateView)
-        setUpEmptyStateConstraints()
         emptyStateView.viewModel = EmptyStateView.ViewModel(emptyStateImage: .noGroupsFound, emptyStatePrompt: NSLocalizedString("No groups were found. Try searching for your interests", comment: "Prompts the user to search for their interests."))
     }
     
@@ -76,13 +78,13 @@ final class GroupsDisplayViewController: UIViewController {
     }
     
     private func showEmptyState() {
-        emptyStateView.isHidden = false
+        emptyStateView?.isHidden = false
     }
-    
+
     private func hideEmptyState() {
-        emptyStateView.isHidden = true
+        emptyStateView?.isHidden = true
     }
-    
+
     private func hideActivityIndicator() {
         activityIndicatorView.isHidden = true
         activityIndicatorView.indicatorStopAnimating()    
@@ -108,8 +110,7 @@ final class GroupsDisplayViewController: UIViewController {
             hideEmptyState()
         case .isFinishedLoading:
             if groupInfoDataSource.groups.isEmpty {
-                showEmptyState()
-                hideTableView()
+                setUpEmptyStateView()
             } else {
                 showTableView()
                 hideEmptyState()
@@ -234,15 +235,6 @@ extension GroupsDisplayViewController: UITableViewDelegate {
     }
 }
 extension GroupsDisplayViewController {
-    private func setUpEmptyStateConstraints() {
-        emptyStateView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            emptyStateView.topAnchor.constraint(equalTo: view.topAnchor),
-            emptyStateView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            emptyStateView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            emptyStateView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-            ])
-    }
     private func setActivityIndicatorConstraints() {
         activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
