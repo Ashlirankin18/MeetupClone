@@ -16,6 +16,8 @@
 		5B1AD6CE22DE22910008E4EC /* MeetupCloneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1AD6CD22DE22910008E4EC /* MeetupCloneTests.swift */; };
 		5B3ADD082314D1470051A2D4 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3ADD072314D1470051A2D4 /* UIColor+Extension.swift */; };
 		5B3ADD0A23156AEA0051A2D4 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3ADD0923156AEA0051A2D4 /* ActivityIndicatorView.swift */; };
+		5B3ADD0E231582BE0051A2D4 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3ADD0D231582BE0051A2D4 /* EmptyStateView.swift */; };
+		5B3ADD112315AD940051A2D4 /* LoadingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3ADD102315AD940051A2D4 /* LoadingState.swift */; };
 		5B526C0322FCAC7000F77EAC /* EventHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B526C0222FCAC7000F77EAC /* EventHeaderView.swift */; };
 		5B526C0522FCACAD00F77EAC /* EventHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5B526C0422FCACAD00F77EAC /* EventHeaderView.xib */; };
 		5B526C0822FCAEA600F77EAC /* MeetupMemberDisplayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B526C0622FCAEA600F77EAC /* MeetupMemberDisplayTableViewCell.swift */; };
@@ -99,6 +101,8 @@
 		5B1AD6CF22DE22910008E4EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5B3ADD072314D1470051A2D4 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		5B3ADD0923156AEA0051A2D4 /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
+		5B3ADD0D231582BE0051A2D4 /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
+		5B3ADD102315AD940051A2D4 /* LoadingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingState.swift; sourceTree = "<group>"; };
 		5B526C0222FCAC7000F77EAC /* EventHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventHeaderView.swift; sourceTree = "<group>"; };
 		5B526C0422FCACAD00F77EAC /* EventHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventHeaderView.xib; sourceTree = "<group>"; };
 		5B526C0622FCAEA600F77EAC /* MeetupMemberDisplayTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetupMemberDisplayTableViewCell.swift; sourceTree = "<group>"; };
@@ -257,6 +261,7 @@
 		5B8932C022E643C400BF9876 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				5B3ADD0D231582BE0051A2D4 /* EmptyStateView.swift */,
 				5B3ADD0923156AEA0051A2D4 /* ActivityIndicatorView.swift */,
 				5BB306EE2302F68D007119E3 /* IBDesignableImageView.swift */,
 				5BA9164F22F32150000AF2E8 /* xibFiles */,
@@ -352,6 +357,7 @@
 				5B8932CE22E64E5800BF9876 /* AppError.swift */,
 				5BF41FF422E7637D00ECA928 /* UserDefaultConstants.swift */,
 				5BF41FF622E781E700ECA928 /* HTTPMethods.swift */,
+				5B3ADD102315AD940051A2D4 /* LoadingState.swift */,
 			);
 			name = Enums;
 			path = MeetupClone/Models/Enums;
@@ -593,9 +599,11 @@
 				5BEFBB67230B173A008466F8 /* EventsDisplayTableViewControllerDataSource.swift in Sources */,
 				5B9DECD122E8EF5000321359 /* UserBioTableViewCell.swift in Sources */,
 				5BA9165522F34E69000AF2E8 /* EventsDisplayTableViewController.swift in Sources */,
+				5B3ADD0E231582BE0051A2D4 /* EmptyStateView.swift in Sources */,
 				5B8932C722E645C200BF9876 /* MeetupUserModel.swift in Sources */,
 				5B0B688022F090E3004FDBFA /* MeetupVenueModel.swift in Sources */,
 				5B8932CF22E64E5800BF9876 /* AppError.swift in Sources */,
+				5B3ADD112315AD940051A2D4 /* LoadingState.swift in Sources */,
 				5BB306EF2302F68D007119E3 /* IBDesignableImageView.swift in Sources */,
 				5B9251DD22FB69450053B768 /* HeaderInformationModel.swift in Sources */,
 				5B8932C222E643E400BF9876 /* AccessTokenSuccessModel.swift in Sources */,

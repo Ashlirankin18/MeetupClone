@@ -8,7 +8,7 @@
 
 import UIKit
 
-/// Represents the cell that will display the user's bio information.
+/// `UITableViewCell` subclass representing the cell that will display the user's bio information.
 final class UserBioTableViewCell: UITableViewCell {
     
     /// Holds the data and logic needed to populate the `UserBioTableViewCell`

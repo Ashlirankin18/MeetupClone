@@ -31,6 +31,8 @@ final class EventsDisplayTableViewController: UITableViewController {
     
     private let meetupDataHandler = MeetupDataHandler(networkHelper: NetworkHelper())
     
+    private var isAnimating = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableViewProperties()
@@ -45,10 +47,12 @@ final class EventsDisplayTableViewController: UITableViewController {
     private func showActivityIndicator() {
         tableView.backgroundView = activityIndicatorView
         activityIndicatorView.indicatorStartAnimating()
+        isAnimating = true
     }
     private func hideActivityIndicator() {
         tableView.backgroundView = nil
         activityIndicatorView.indicatorStopAnimating()
+         isAnimating = false
     }
     private func configureTableViewProperties() {
         registerTableViewCells()
@@ -70,7 +74,7 @@ final class EventsDisplayTableViewController: UITableViewController {
                 guard let self = self else {
                     return
                 }
-                self.hideActivityIndicator()
+                 self.hideActivityIndicator()
                 self.eventsDisplayTableViewControllerDataSource.events = events
                 self.tableView.reloadData()
             }

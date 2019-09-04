@@ -11,9 +11,6 @@ import UIKit
 /// A `UIViewController` subclass which displays a list of groups that the user searches for.
 final class GroupsDisplayViewController: UIViewController {
     
-    @IBOutlet private weak var zipCodeBarButtonItem: UIBarButtonItem!
-    @IBOutlet private weak var groupDisplayTableView: UITableView!
-    
     private lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
@@ -30,27 +27,95 @@ final class GroupsDisplayViewController: UIViewController {
     
     private var activityIndicatorView = ActivityIndicatorView()
     
+    private var emptyStateView = EmptyStateView()
+    
+    private var loadingState: LoadingState? {
+        didSet {
+            guard let loadingState = loadingState else {
+                print("No loading state found")
+                return
+            }
+            updatesViewBasedOnLoadingState(loadingState: loadingState)
+        }
+    }
+    
+    @IBOutlet private weak var zipCodeBarButtonItem: UIBarButtonItem!
+    @IBOutlet private weak var groupDisplayTableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableViewProperties()
+        configureNavigationItemProperties()
+        checkForLastZipCodeEntered()
+        setUpEmptyStateView()
+        setUpActivityIndicator()
+    }
+    
+    private func configureNavigationItemProperties() {
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         definesPresentationContext = true
-        checkForLastZipCodeEntered()
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        activityIndicatorView.frame = CGRect(x: 0, y: 0, width: groupDisplayTableView.bounds.width, height: groupDisplayTableView.bounds.height)
     }
     
-    private func showActivityIndicator() {
-        groupDisplayTableView.backgroundView = activityIndicatorView
-        activityIndicatorView.indicatorStartAnimating()
+    private func setUpEmptyStateView() {
+        view.addSubview(emptyStateView)
+        setUpEmptyStateConstraints()
+        emptyStateView.viewModel = EmptyStateView.ViewModel(emptyStateImage: .noGroupsFound, emptyStatePrompt: NSLocalizedString("No groups were found. Try searching for your interests", comment: "Prompts the user to search for their interests."))
+    }
+    
+    private func setUpActivityIndicator() {
+        view.addSubview(activityIndicatorView)
+        setActivityIndicatorConstraints()
+    }
+    
+    private func configureTableViewProperties() {
+        groupDisplayTableView.dataSource = groupInfoDataSource
+        groupDisplayTableView.delegate = self
+        groupDisplayTableView.rowHeight = UITableView.automaticDimension
+        groupDisplayTableView.register(UINib(nibName: "GroupDisplayTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "GroupDisplayCell")
+    }
+    
+    private func showEmptyState() {
+        emptyStateView.isHidden = false
+    }
+    
+    private func hideEmptyState() {
+        emptyStateView.isHidden = true
     }
     
     private func hideActivityIndicator() {
-        groupDisplayTableView.backgroundView = nil
-        activityIndicatorView.indicatorStopAnimating()
+        activityIndicatorView.isHidden = true
+        activityIndicatorView.indicatorStopAnimating()    
+    }
+    
+    private func showActivityIndicator() {
+        activityIndicatorView.isHidden = false
+        activityIndicatorView.indicatorStartAnimating()
+    }
+    
+    private func showTableView() {
+        groupDisplayTableView.isHidden = false
+    }
+    private func hideTableView() {
+        groupDisplayTableView.isHidden = true
+    }
+    
+    private func updatesViewBasedOnLoadingState(loadingState: LoadingState) {
+        switch loadingState {
+        case .isLoading:
+            showActivityIndicator()
+            hideTableView()
+            hideEmptyState()
+        case .isFinishedLoading:
+            if groupInfoDataSource.groups.isEmpty {
+                showEmptyState()
+                hideTableView()
+            } else {
+                showTableView()
+                hideEmptyState()
+            }
+             hideActivityIndicator()
+        }
     }
     
     private func checkForLastZipCodeEntered() {
@@ -59,21 +124,12 @@ final class GroupsDisplayViewController: UIViewController {
             let searchText = userDefaults.object(forKey: UserDefaultConstants.searchText.rawValue) as? String {
             zipCodeBarButtonItem.title = zipCode
             searchController.searchBar.text = searchText
+            loadingState = .isFinishedLoading
         } else {
             searchController.searchBar.placeholder = NSLocalizedString("Search for group", comment: "Prompts the user to search for a group.")
         }
     }
     
-    private func configureTableViewProperties() {
-        groupDisplayTableView.dataSource = groupInfoDataSource
-        groupDisplayTableView.delegate = self
-        groupDisplayTableView.rowHeight = UITableView.automaticDimension
-        registerTableViewCells()
-    }
-    private func registerTableViewCells() {
-        groupDisplayTableView.register(UINib(nibName: "GroupDisplayTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "GroupDisplayCell")
-        groupDisplayTableView.register(UINib(nibName: "EmptyStateTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "EmptyStateCell")
-    }
     @discardableResult private func retrieveGroups(searchText: String?, zipCode: String?) -> Cancelable? {
         let dataTask = meetupDataHandler.retrieveMeetupGroups(searchText: searchText ?? "", zipCode: zipCode) { [weak self] (results) in
             switch results {
@@ -84,7 +140,6 @@ final class GroupsDisplayViewController: UIViewController {
                     return
                 }
                 self.groupInfoDataSource.groups = groups
-                self.hideActivityIndicator()
                 self.groupDisplayTableView.reloadData()
             }
         }
@@ -143,7 +198,7 @@ extension GroupsDisplayViewController: UISearchResultsUpdating {
         if let text = searchController.searchBar.text?.lowercased() {
             userDefaults.set(text, forKey: UserDefaultConstants.searchText.rawValue)
             if isSearchControllerInputValid() {
-                showActivityIndicator()
+                loadingState = .isLoading
                 if currentDataTask == nil {
                     let zipCode = userDefaults.object(forKey: UserDefaultConstants.zipCode.rawValue) as? String ?? ""
                     currentDataTask = retrieveGroups(searchText: text, zipCode: zipCode)
@@ -176,5 +231,25 @@ extension GroupsDisplayViewController: UITableViewDelegate {
         
         viewController.urlName = chosenGroup.urlName
         navigationController?.pushViewController(viewController, animated: true)
+    }
+}
+extension GroupsDisplayViewController {
+    private func setUpEmptyStateConstraints() {
+        emptyStateView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            emptyStateView.topAnchor.constraint(equalTo: view.topAnchor),
+            emptyStateView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            emptyStateView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            emptyStateView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            ])
+    }
+    private func setActivityIndicatorConstraints() {
+        activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            activityIndicatorView.topAnchor.constraint(equalTo: view.topAnchor),
+            activityIndicatorView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            activityIndicatorView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            activityIndicatorView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            ])
     }
 }
