@@ -75,7 +75,7 @@ final class EventsDisplayTableViewController: UITableViewController {
                 guard let self = self else {
                     return
                 }
-                self.hideActivityIndicator()
+                 self.hideActivityIndicator()
                 self.eventsDisplayTableViewControllerDataSource.events = events
                 self.tableView.reloadData()
                 self.hideActivityIndicator()

@@ -8,10 +8,11 @@
 
 import UIKit
 
-/// `UITableViewCell` subclasss which will display a prompt to the user if the object array is empty.
-class EmptyStateTableViewCell: UITableViewCell {
+/// `UITableViewCell` subclass which will display a prompt to the user if the object array is empty.
 
-  /// Manages the data that is needed to populate the `EmptyStateTableViewCell`
+class EmptyStateTableViewCell: UITableViewCell {
+    
+    /// Manages the data that is needed to populate the `EmptyStateTableViewCell`
     struct ViewModel {
         
         /// The image that will be displayed on the cell
@@ -31,6 +32,7 @@ class EmptyStateTableViewCell: UITableViewCell {
             emptyStatePromptLabel.text = viewModel.emptyStatePrompt
         }
     }
+  
     @IBOutlet private weak var emptyStateImageView: UIImageView!
     @IBOutlet private weak var emptyStatePromptLabel: UILabel!
 }

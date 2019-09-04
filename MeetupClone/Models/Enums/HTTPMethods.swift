@@ -9,10 +9,9 @@
 import Foundation
 
 /// Represents the different HTTPMethods that the application uses
-///
-/// - Post: Sending a POST Request to the server
-/// - Get: Sending a GET Request to the server
 enum HTTPMethods: String {
+    ///  Post: Sending a POST Request to the server
     case Post = "POST"
+    ///  Get: Sending a GET Request to the server
     case Get = "GET"
 }
