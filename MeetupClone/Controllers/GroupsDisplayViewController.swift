@@ -98,20 +98,24 @@ final class GroupsDisplayViewController: UIViewController {
     private func showTableView() {
         groupDisplayTableView.isHidden = false
     }
+    private func hideTableView() {
+        groupDisplayTableView.isHidden = true
+    }
     
     private func updatesViewBasedOnLoadingState(loadingState: LoadingState) {
         switch loadingState {
         case .isLoading:
             showActivityIndicator()
+            hideTableView()
+            hideEmptyState()
         case .isFinishedLoading:
-            hideActivityIndicator()
             if groupInfoDataSource.groups.isEmpty {
-                showEmptyState()
                 setUpEmptyStateView()
             } else {
                 showTableView()
                 hideEmptyState()
             }
+             hideActivityIndicator()
         }
     }
     
@@ -133,9 +137,11 @@ final class GroupsDisplayViewController: UIViewController {
             case .failure(let error):
                 print(error)
             case .success(let groups):
-                self?.groupInfoDataSource.groups = groups
-                self?.groupDisplayTableView.reloadData()
-                self?.loadingState = .isFinishedLoading
+                guard let self = self else {
+                    return
+                }
+                self.groupInfoDataSource.groups = groups
+                self.groupDisplayTableView.reloadData()
             }
         }
         return dataTask
@@ -154,7 +160,10 @@ final class GroupsDisplayViewController: UIViewController {
             textfield.keyboardType = .numberPad
         }
         
-        let submitAction = UIAlertAction(title: NSLocalizedString("Submit", comment: "Submit Answer"), style: .default) { [unowned self] _ in
+        let submitAction = UIAlertAction(title: NSLocalizedString("Submit", comment: "Submit Answer"), style: .default) { [weak self] _ in
+            guard let self = self else {
+                return
+            }
             guard let zipCode = alertController.textFields?.first?.text else {
                 return
             }
@@ -198,7 +207,10 @@ extension GroupsDisplayViewController: UISearchResultsUpdating {
                     currentDataTask?.cancelTask()
                     let zipCode = userDefaults.object(forKey: UserDefaultConstants.zipCode.rawValue) as? String ?? ""
                     let timer = Timer(timeInterval: 1.0, repeats: false) { [weak self] _ in
-                        self?.currentDataTask = self?.retrieveGroups(searchText: text, zipCode: zipCode)
+                        guard let self = self else {
+                            return
+                        }
+                        self.currentDataTask = self.retrieveGroups(searchText: text, zipCode: zipCode)
                     }
                     
                     timer.fire()
