@@ -75,6 +75,7 @@ final class EventsDisplayTableViewController: UITableViewController {
                 guard let self = self else {
                     return
                 }
+                self.hideActivityIndicator()
                 self.eventsDisplayTableViewControllerDataSource.events = events
                 self.tableView.reloadData()
                 self.hideActivityIndicator()
@@ -88,7 +89,8 @@ final class EventsDisplayTableViewController: UITableViewController {
         guard let headerInformationModel = headerInformationModel else {
             return nil
         }
-        if isAnimating {
+
+        if activityIndicatorView.isAnimating {
             headerView?.isHidden = true
         } else {
             headerView?.isHidden = false

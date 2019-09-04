@@ -14,11 +14,12 @@ final class ActivityIndicatorView: UIView {
     /// Indicator view which will be displayed when network data is being retrieved.
     lazy var activityIndicatorView: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView()
-        activityIndicator.color = UIColor.clayRed
+        activityIndicator.color = .clayRed
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         return activityIndicator
     }()
-    
+    var isAnimating = true
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
@@ -33,6 +34,7 @@ final class ActivityIndicatorView: UIView {
         addSubview(activityIndicatorView)
         setUpActivityIndicatorConstraints()
         backgroundColor = .groupTableViewBackground
+        isAnimating = activityIndicatorView.isAnimating
     }
     
     func indicatorStartAnimating() {

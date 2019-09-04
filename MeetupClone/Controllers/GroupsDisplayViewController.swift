@@ -127,6 +127,20 @@ final class GroupsDisplayViewController: UIViewController {
             }
         }
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        activityIndicatorView.frame = CGRect(x: 0, y: 0, width: groupDisplayTableView.bounds.width, height: groupDisplayTableView.bounds.height)
+    }
+    
+    private func showActivityIndicator() {
+        groupDisplayTableView.backgroundView = activityIndicatorView
+        activityIndicatorView.indicatorStartAnimating()
+    }
+    
+    private func hideActivityIndicator() {
+        groupDisplayTableView.backgroundView = nil
+        activityIndicatorView.indicatorStopAnimating()
+    }
     
     private func checkForLastZipCodeEntered() {
         let userDefaults = UserDefaults.standard
@@ -138,7 +152,17 @@ final class GroupsDisplayViewController: UIViewController {
             searchController.searchBar.placeholder = NSLocalizedString("Search for group", comment: "Prompts the user to search for a group.")
         }
     }
-    
+
+    private func configureTableViewProperties() {
+        groupDisplayTableView.dataSource = groupInfoDataSource
+        groupDisplayTableView.delegate = self
+        groupDisplayTableView.rowHeight = UITableView.automaticDimension
+        registerTableViewCells()
+    }
+    private func registerTableViewCells() {
+        groupDisplayTableView.register(UINib(nibName: "GroupDisplayTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "GroupDisplayCell")
+        groupDisplayTableView.register(UINib(nibName: "EmptyStateTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "EmptyStateCell")
+    }
     @discardableResult private func retrieveGroups(searchText: String?, zipCode: String?) -> Cancelable? {
         let dataTask = meetupDataHandler.retrieveMeetupGroups(searchText: searchText ?? "", zipCode: zipCode) { [weak self] (results) in
             switch results {
@@ -149,6 +173,7 @@ final class GroupsDisplayViewController: UIViewController {
                     return
                 }
                 self.groupInfoDataSource.groups = groups
+                self.hideActivityIndicator()
                 self.groupDisplayTableView.reloadData()
             }
         }
@@ -208,7 +233,7 @@ extension GroupsDisplayViewController: UISearchResultsUpdating {
         if let text = searchController.searchBar.text?.lowercased() {
             userDefaults.set(text, forKey: UserDefaultConstants.searchText.rawValue)
             if isSearchControllerInputValid() {
-                loadingState = .isLoading
+                showActivityIndicator()
                 if currentDataTask == nil {
                     let zipCode = userDefaults.object(forKey: UserDefaultConstants.zipCode.rawValue) as? String ?? ""
                     currentDataTask = retrieveGroups(searchText: text, zipCode: zipCode)
