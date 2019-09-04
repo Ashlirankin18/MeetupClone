@@ -27,7 +27,9 @@ final class EmptyStateView: UIView {
             emptyStateImageView.image = viewModel?.emptyStateImage
             emptyStatePromptLabel.text = viewModel?.emptyStatePrompt
         }
-      
+    }
+    
     @IBOutlet private weak var emptyStateImageView: UIImageView!
     @IBOutlet private weak var emptyStatePromptLabel: UILabel!
 }
+

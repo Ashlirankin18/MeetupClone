@@ -353,6 +353,7 @@ extension GroupsDisplayViewController: NetworkConnectivityHelperDelegate {
         setUpEmptyStateView(image: UIImage.noInternetConnection, prompt: "No Internet Connection Detected")
         showEmptyState()
     }
+}
 extension GroupsDisplayViewController {
     private func setActivityIndicatorConstraints() {
         activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
