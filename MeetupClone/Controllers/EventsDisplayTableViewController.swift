@@ -19,12 +19,7 @@ final class EventsDisplayTableViewController: UITableViewController {
     }
     
     /// The model representing the infoprmation a headerView need it be initilized
-    var headerInformationModel: HeaderInformationModel? {
-        didSet {
-            title = headerInformationModel?.name
-        }
-    }
-    
+    var headerInformationModel: HeaderInformationModel? 
     private lazy var activityIndicator: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView()
         activityIndicator.hidesWhenStopped = true

@@ -33,16 +33,14 @@ final class EventDisplayTableViewCell: UITableViewCell {
             guard let viewModel = viewModel else {
                 return
             }
-            let locationFormat = NSLocalizedString("Event Location: %@", comment: "The location of an event")
-            let rsvpFormat = NSLocalizedString("Number of persons Attending: %d", comment: "Indicates to the user how many persons are attending an event")
             eventNameLabel.text = viewModel.eventName
-            eventDescriptionTextView.text = viewModel.eventDescription
-            eventLocationLabel.text = String.localizedStringWithFormat(locationFormat, viewModel.eventLocation ?? NSLocalizedString("This group has no description currently", comment: "Indicates to the user there is no description"))
-            rsvpLabel.text = String.localizedStringWithFormat(rsvpFormat, viewModel.rsvpCount)
+            eventDescriptionLabel.text = viewModel.eventDescription
+            eventLocationLabel.text = viewModel.eventLocation
+            rsvpLabel.text = viewModel.rsvpCount.description
         }
     }
     @IBOutlet private weak var eventNameLabel: UILabel!
-    @IBOutlet private weak var eventDescriptionTextView: UITextView!
     @IBOutlet private weak var eventLocationLabel: UILabel!
     @IBOutlet private weak var rsvpLabel: UILabel!
+    @IBOutlet private weak var eventDescriptionLabel: UILabel!
 }

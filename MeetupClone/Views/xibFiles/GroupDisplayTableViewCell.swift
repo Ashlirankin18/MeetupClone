@@ -42,14 +42,12 @@ final class GroupDisplayTableViewCell: UITableViewCell {
             groupImageView.kf.setImage(with: self.viewModel?.groupImage, placeholder: UIImage(named: "group-placeholder"))
             let memberFormat = NSLocalizedString("%d Members", comment: "The people who are members of the group")
             let nextEventFormat = NSLocalizedString("Next Event: %@", comment: "The group's next event")
+            groupNameLabel.text = self.viewModel?.groupName
             if let members = self.viewModel?.members,
                 let nextEventName = self.viewModel?.nextEventName {
-                groupNameLabel.isHidden = false
-                groupNameLabel.text = self.viewModel?.groupName
                 nextEventLabel.isHidden = false
                 nextEventLabel.text = "\(String.localizedStringWithFormat(memberFormat, members)) • \(String.localizedStringWithFormat(nextEventFormat, nextEventName)) \(convertDateToString(date: viewModel?.date))"
             } else {
-                groupNameLabel.isHidden = true
                 nextEventLabel.isHidden = true
             }
         }
