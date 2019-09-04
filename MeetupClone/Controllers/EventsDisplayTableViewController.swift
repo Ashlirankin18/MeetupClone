@@ -87,7 +87,7 @@ final class EventsDisplayTableViewController: UITableViewController {
         guard let headerInformationModel = headerInformationModel else {
             return nil
         }
-        if isAnimating {
+        if activityIndicatorView.isAnimating {
             headerView?.isHidden = true
         } else {
             headerView?.isHidden = false
