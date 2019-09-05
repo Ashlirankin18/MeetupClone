@@ -27,6 +27,8 @@ final class UserProfileDataSource: NSObject, UITableViewDataSource {
             guard let meetupUserModel = meetupUserModel else {
                 return UITableViewCell()
             }
+            cell.textLabel?.font = UIFont.systemFont(ofSize: 17, weight: .bold)
+            cell.detailTextLabel?.textColor = .black
             cell.textLabel?.text = NSLocalizedString("Name", comment: "Username")
             cell.detailTextLabel?.text = meetupUserModel.name
             return cell
