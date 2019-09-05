@@ -110,7 +110,9 @@ final class GroupsDisplayViewController: UIViewController {
             hideEmptyState()
         case .isFinishedLoading:
             if groupInfoDataSource.groups.isEmpty {
-                setUpEmptyStateView()
+                showEmptyState()
+                hideTableView()
+                hideActivityIndicator()
             } else {
                 showTableView()
                 hideEmptyState()
@@ -131,14 +133,6 @@ final class GroupsDisplayViewController: UIViewController {
         }
     }
     
-    private func configureTableViewProperties() {
-        groupDisplayTableView.dataSource = groupInfoDataSource
-        groupDisplayTableView.delegate = self
-        groupDisplayTableView.rowHeight = UITableView.automaticDimension
-        groupDisplayTableView.register(UINib(nibName: "GroupDisplayTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "GroupDisplayCell")
-        groupDisplayTableView.register(UINib(nibName: "EmptyStateTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "EmptyStateCell")
-    }
-    
     @discardableResult private func retrieveGroups(searchText: String?, zipCode: String?) -> Cancelable? {
         let dataTask = meetupDataHandler.retrieveMeetupGroups(searchText: searchText ?? "", zipCode: zipCode) { [weak self] (results) in
             switch results {
@@ -150,6 +144,7 @@ final class GroupsDisplayViewController: UIViewController {
                 }
                 self.groupInfoDataSource.groups = groups
                 self.groupDisplayTableView.reloadData()
+                self.loadingState = .isFinishedLoading
             }
         }
         return dataTask

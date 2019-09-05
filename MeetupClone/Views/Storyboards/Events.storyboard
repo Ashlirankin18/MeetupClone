@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -13,10 +14,11 @@
         <scene sceneID="cR1-CN-MYT">
             <objects>
                 <tableViewController storyboardIdentifier="EventsDisplayController" id="bcI-Zp-T7n" customClass="EventsDisplayTableViewController" customModule="MeetupClone" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="D98-k1-ybc">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="D98-k1-ybc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="separatorColor" name="ClayRed"/>
                         <connections>
                             <outlet property="dataSource" destination="bcI-Zp-T7n" id="Syh-1d-Ne9"/>
                             <outlet property="delegate" destination="bcI-Zp-T7n" id="XwU-vO-6wK"/>
@@ -28,4 +30,9 @@
             <point key="canvasLocation" x="-47" y="-60"/>
         </scene>
     </scenes>
+    <resources>
+        <namedColor name="ClayRed">
+            <color red="0.86400002241134644" green="0.20800000429153442" blue="0.26899999380111694" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>
