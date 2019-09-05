@@ -62,6 +62,7 @@ final class GroupsDisplayViewController: UIViewController {
         }
         self.emptyStateView = emptyStateView
         view.addSubview(emptyStateView)
+        emptyStateView.frame = view.frame
         emptyStateView.viewModel = EmptyStateView.ViewModel(emptyStateImage: .noGroupsFound, emptyStatePrompt: NSLocalizedString("No groups were found. Try searching for your interests", comment: "Prompts the user to search for their interests."))
     }
     
@@ -110,7 +111,7 @@ final class GroupsDisplayViewController: UIViewController {
             hideEmptyState()
         case .isFinishedLoading:
             if groupInfoDataSource.groups.isEmpty {
-                setUpEmptyStateView()
+                showEmptyState()
             } else {
                 showTableView()
                 hideEmptyState()
@@ -125,7 +126,6 @@ final class GroupsDisplayViewController: UIViewController {
             let searchText = userDefaults.object(forKey: UserDefaultConstants.searchText.rawValue) as? String {
             zipCodeBarButtonItem.title = zipCode
             searchController.searchBar.text = searchText
-            loadingState = .isFinishedLoading
         } else {
             searchController.searchBar.placeholder = NSLocalizedString("Search for group", comment: "Prompts the user to search for a group.")
         }
@@ -142,6 +142,7 @@ final class GroupsDisplayViewController: UIViewController {
                 }
                 self.groupInfoDataSource.groups = groups
                 self.groupDisplayTableView.reloadData()
+                self.loadingState = .isFinishedLoading
             }
         }
         return dataTask

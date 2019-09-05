@@ -22,12 +22,11 @@ final class EmptyStateView: UIView {
     /// The `EmptyStateView`'s viewModel
     var viewModel: ViewModel? {
         didSet {
-          emptyStateImageView.image = viewModel?.emptyStateImage
+            emptyStateImageView.image = viewModel?.emptyStateImage
             emptyStatePromptLabel.text = viewModel?.emptyStatePrompt
         }
     }
     
     @IBOutlet private weak var emptyStateImageView: UIImageView!
-    
     @IBOutlet private weak var emptyStatePromptLabel: UILabel!
 }
