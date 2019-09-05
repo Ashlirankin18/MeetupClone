@@ -61,7 +61,6 @@ final class GroupsDisplayViewController: UIViewController {
     
     private func setUpActivityIndicator() {
         view.addSubview(activityIndicatorView)
-        constrainViewToScreen(view: activityIndicatorView)
         activityIndicatorView.isAnimating = true
     }
     
