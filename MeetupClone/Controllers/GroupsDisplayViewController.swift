@@ -43,61 +43,28 @@ final class GroupsDisplayViewController: UIViewController {
     @IBOutlet private weak var zipCodeBarButtonItem: UIBarButtonItem!
     @IBOutlet private weak var groupDisplayTableView: UITableView!
     
-    private var emptyStateView = EmptyStateView()
-    
-    private var loadingState: LoadingStates? {
-        didSet {
-            guard let loadingState = loadingState else {
-                print("No loading state found")
-                return
-            }
-            checksLoadingState(loadingState: loadingState)
-        }
-    }
-    
-    @IBOutlet private weak var zipCodeBarButtonItem: UIBarButtonItem!
-    @IBOutlet private weak var groupDisplayTableView: UITableView!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableViewProperties()
         configureNavigationItemProperties()
         checkForLastZipCodeEntered()
         setUpActivityIndicator()
-        setUpEmptyStateView(image: UIImage.noGroupsFound, prompt: "No Groups Found, Try searchin for another interest")
+        setUpEmptyStateView()
         networkConnectivityHelper.delegate = self
     }
     
-
     private func configureNavigationItemProperties() {
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         definesPresentationContext = true
     }
     
-    private func setUpEmptyStateView(image: UIImage?, prompt: String) {
-        view.addSubview(emptyStateView)
-        constrainViewToScreen(view: emptyStateView)
-        emptyStateView.viewModel = EmptyStateView.ViewModel(emptyStateImage: image, emptyStatePrompt: prompt)
-    }
-    
     private func setUpActivityIndicator() {
         view.addSubview(activityIndicatorView)
         constrainViewToScreen(view: activityIndicatorView)
+        activityIndicatorView.isAnimating = true
     }
-    
-    private func configureTableViewProperties() {
-        groupDisplayTableView.dataSource = groupInfoDataSource
-        groupDisplayTableView.delegate = self
-        groupDisplayTableView.rowHeight = UITableView.automaticDimension
-        registerTableViewCells()
-    }
-    
-    private func registerTableViewCells() {
-        groupDisplayTableView.register(UINib(nibName: "GroupDisplayTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "GroupDisplayCell")
-        groupDisplayTableView.register(UINib(nibName: "EmptyStateTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "EmptyStateCell")
-    }
-    
+
     private func showTableView() {
         groupDisplayTableView.isHidden = false
     }
@@ -105,16 +72,9 @@ final class GroupsDisplayViewController: UIViewController {
     private func hideTableView() {
         groupDisplayTableView.isHidden = true
     }
-    
-    private func showEmptyState() {
-        emptyStateView.isHidden = false
-        hideTableView()
-        hideActivityIndicator()
-    }
-    
+  
     private func hideEmptyState() {
-        emptyStateView.isHidden = true
-        showTableView()
+        emptyStateView?.isHidden = true
     }
     
     private func hideActivityIndicator() {
@@ -125,23 +85,6 @@ final class GroupsDisplayViewController: UIViewController {
     private func showActivityIndicator() {
         activityIndicatorView.isHidden = false
         activityIndicatorView.indicatorStartAnimating()
-        hideEmptyState()
-        hideTableView()
-    }
-    
-    func checksLoadingState(loadingState: LoadingStates) {
-        switch loadingState {
-        case .isLoading:
-            showActivityIndicator()
-        case .isFinishLoading:
-            hideActivityIndicator()
-            if groupInfoDataSource.groups.isEmpty {
-                showEmptyState()
-            } else {
-                showTableView()
-                hideEmptyState()
-            }
-        }
     }
     
     private func setUpEmptyStateView() {
@@ -153,11 +96,6 @@ final class GroupsDisplayViewController: UIViewController {
         emptyStateView.viewModel = EmptyStateView.ViewModel(emptyStateImage: .noGroupsFound, emptyStatePrompt: NSLocalizedString("No groups were found. Try searching for your interests", comment: "Prompts the user to search for their interests."))
     }
     
-    private func setUpActivityIndicator() {
-        view.addSubview(activityIndicatorView)
-        setActivityIndicatorConstraints()
-    }
-    
     private func configureTableViewProperties() {
         groupDisplayTableView.dataSource = groupInfoDataSource
         groupDisplayTableView.delegate = self
@@ -165,43 +103,18 @@ final class GroupsDisplayViewController: UIViewController {
         groupDisplayTableView.register(UINib(nibName: "GroupDisplayTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "GroupDisplayCell")
     }
     
-    private func showEmptyState() {
-        emptyStateView?.isHidden = false
-    }
-
-    private func hideEmptyState() {
-        emptyStateView?.isHidden = true
-    }
-
-    private func hideActivityIndicator() {
-        activityIndicatorView.isHidden = true
-        activityIndicatorView.indicatorStopAnimating()    
-    }
-    
-    private func showActivityIndicator() {
-        activityIndicatorView.isHidden = false
-        activityIndicatorView.indicatorStartAnimating()
-    }
-    
-    private func showTableView() {
-        groupDisplayTableView.isHidden = false
-    }
-    private func hideTableView() {
-        groupDisplayTableView.isHidden = true
-    }
-    
     private func updatesViewBasedOnLoadingState(loadingState: LoadingState) {
         switch loadingState {
         case .isLoading:
             showActivityIndicator()
-            hideTableView()
-            hideEmptyState()
+             groupDisplayTableView.isHidden = true
+            emptyStateView?.isHidden = true
         case .isFinishedLoading:
             if groupInfoDataSource.groups.isEmpty {
                 setUpEmptyStateView()
             } else {
-                showTableView()
-                hideEmptyState()
+                groupDisplayTableView.isHidden = false
+                emptyStateView?.isHidden = true
             }
              hideActivityIndicator()
         }
@@ -213,26 +126,14 @@ final class GroupsDisplayViewController: UIViewController {
             let searchText = userDefaults.object(forKey: UserDefaultConstants.searchText.rawValue) as? String {
             zipCodeBarButtonItem.title = zipCode
             searchController.searchBar.text = searchText
-            loadingState = .isFinishedLoading
         } else {
             searchController.searchBar.placeholder = NSLocalizedString("Search for group", comment: "Prompts the user to search for a group.")
         }
     }
 
-    private func configureTableViewProperties() {
-        groupDisplayTableView.dataSource = groupInfoDataSource
-        groupDisplayTableView.delegate = self
-        groupDisplayTableView.rowHeight = UITableView.automaticDimension
-        registerTableViewCells()
-    }
-  
-    private func registerTableViewCells() {
-        groupDisplayTableView.register(UINib(nibName: "GroupDisplayTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "GroupDisplayCell")
-        groupDisplayTableView.register(UINib(nibName: "EmptyStateTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "EmptyStateCell")
-    }
-
     @discardableResult private func retrieveGroups(searchText: String?, zipCode: String?) -> Cancelable? {
         let dataTask = meetupDataHandler.retrieveMeetupGroups(searchText: searchText ?? "", zipCode: zipCode) { [weak self] (results) in
+           
             switch results {
             case .failure(let error):
                 print(error)
@@ -242,6 +143,7 @@ final class GroupsDisplayViewController: UIViewController {
                 }
                 self.groupInfoDataSource.groups = groups
                 self.groupDisplayTableView.reloadData()
+                self.loadingState = .isFinishedLoading
             }
         }
         return dataTask
@@ -345,13 +247,12 @@ extension GroupsDisplayViewController: NetworkConnectivityHelperDelegate {
                 retrieveGroups(searchText: searchText, zipCode: zipCode)
             }
         } else {
-            setUpEmptyStateView(image: UIImage.noGroupsFound, prompt: "No Groups Found, Try searchin for another interest")
-            showEmptyState()
+            emptyStateView?.isHidden = false
         }
     }
     func networkIsUnavalible() {
-        setUpEmptyStateView(image: UIImage.noInternetConnection, prompt: "No Internet Connection Detected")
-        showEmptyState()
+        emptyStateView?.viewModel = EmptyStateView.ViewModel(emptyStateImage: .noInternetConnection, emptyStatePrompt: "No Internet Connection Detected")
+        emptyStateView?.isHidden = false
     }
 }
 extension GroupsDisplayViewController {

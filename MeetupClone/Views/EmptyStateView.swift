@@ -32,4 +32,3 @@ final class EmptyStateView: UIView {
     @IBOutlet private weak var emptyStateImageView: UIImageView!
     @IBOutlet private weak var emptyStatePromptLabel: UILabel!
 }
-
