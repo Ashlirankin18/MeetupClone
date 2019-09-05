@@ -84,17 +84,16 @@ final class GroupsDisplayViewController: UIViewController {
         switch loadingState {
         case .isLoading:
             showActivityIndicator()
-            emptyStateView.isHidden = true
+            emptyStateView?.isHidden = true
             groupDisplayTableView.isHidden = true
 
         case .isFinishedLoading:
             if groupInfoDataSource.groups.isEmpty {
-                emptyStateView.isHidden = false
+                emptyStateView?.isHidden = false
                 groupDisplayTableView.isHidden = true
- 
             } else {
                 groupDisplayTableView.isHidden = false
-                emptyStateView.isHidden = true
+                emptyStateView?.isHidden = true
             }
              hideActivityIndicator()
         }

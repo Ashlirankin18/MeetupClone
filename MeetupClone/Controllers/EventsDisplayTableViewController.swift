@@ -10,7 +10,7 @@ import UIKit
 
 /// `UITableViewController` which will display a list of events
 final class EventsDisplayTableViewController: UITableViewController {
-    
+
     /// The URLName of the event 
     var urlName = "" {
         didSet {
@@ -29,14 +29,13 @@ final class EventsDisplayTableViewController: UITableViewController {
     
     private let meetupDataHandler = MeetupDataHandler(networkHelper: NetworkHelper())
     
-    private var isAnimating = false
-    
+    @IBOutlet private weak var activityIndicatorView: UIActivityIndicatorView!
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableViewProperties()
         navigationItem.largeTitleDisplayMode = .never
     }
-
+    
     private func configureTableViewProperties() {
         registerTableViewCells()
         tableView.dataSource = eventsDisplayTableViewControllerDataSource
@@ -57,7 +56,6 @@ final class EventsDisplayTableViewController: UITableViewController {
                 guard let self = self else {
                     return
                 }
-                self.hideActivityIndicator()
                 self.eventsDisplayTableViewControllerDataSource.events = events
                 self.tableView.reloadData()
             }
