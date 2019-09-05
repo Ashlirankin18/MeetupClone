@@ -13,6 +13,10 @@ class LoginViewController: UIViewController {
     
     var meetupAuthenticationHandler: MeetupAuthenticationHandler?
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     @IBAction private func loginButtonPressed(_ sender: UIButton) {
         initiateLoginFlow()
     }
