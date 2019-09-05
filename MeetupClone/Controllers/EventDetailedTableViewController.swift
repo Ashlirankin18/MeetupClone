@@ -68,11 +68,14 @@ final class EventDetailedTableViewController: UITableViewController {
             assertionFailure("Event Id could not be found")
             return
         }
-        meetupDataHandler.retrieveEventRSVP(eventId: eventId, eventURLName: eventURLName) { (result) in
+        meetupDataHandler.retrieveEventRSVP(eventId: eventId, eventURLName: eventURLName) { [weak self] (result) in
             switch result {
             case .failure(let error):
                 print(error)
             case .success(let rsvps):
+                guard let self = self else {
+                    return
+                }
                 self.eventDetailedControllerDataSource.rsvps = rsvps
                 self.tableView.reloadData()
             }
