@@ -25,8 +25,6 @@ final class EventsDisplayTableViewController: UITableViewController {
         }
     }
     
-    private var activityIndicatorView = ActivityIndicatorView()
-    
     private let eventsDisplayTableViewControllerDataSource = EventsDisplayTableViewControllerDataSource()
     
     private let meetupDataHandler = MeetupDataHandler(networkHelper: NetworkHelper())
@@ -38,22 +36,7 @@ final class EventsDisplayTableViewController: UITableViewController {
         configureTableViewProperties()
         navigationItem.largeTitleDisplayMode = .never
     }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        activityIndicatorView.frame = CGRect(x: 0, y: 0, width: tableView.bounds.width, height: tableView.bounds.height)
-        showActivityIndicator()
-    }
-    
-    private func showActivityIndicator() {
-        tableView.backgroundView = activityIndicatorView
-        activityIndicatorView.indicatorStartAnimating()
-        isAnimating = true
-    }
-    private func hideActivityIndicator() {
-        tableView.backgroundView = nil
-        activityIndicatorView.indicatorStopAnimating()
-         isAnimating = false
-    }
+
     private func configureTableViewProperties() {
         registerTableViewCells()
         tableView.dataSource = eventsDisplayTableViewControllerDataSource
@@ -70,8 +53,7 @@ final class EventsDisplayTableViewController: UITableViewController {
             case .failure(let error):
                 print(error)
             case .success(let events):
-                self.hideActivityIndicator()
-                self.eventsDisplayTableViewControllerDataSource.events = events
+            self.eventsDisplayTableViewControllerDataSource.events = events
                 self.tableView.reloadData()
             }
         }

@@ -47,7 +47,6 @@ final class GroupsDisplayViewController: UIViewController {
         configureNavigationItemProperties()
         checkForLastZipCodeEntered()
         setUpEmptyStateView()
-        setUpActivityIndicator()
     }
     
     private func configureNavigationItemProperties() {
@@ -61,24 +60,11 @@ final class GroupsDisplayViewController: UIViewController {
         emptyStateView.viewModel = EmptyStateView.ViewModel(emptyStateImage: .noGroupsFound, emptyStatePrompt: NSLocalizedString("No groups were found. Try searching for your interests", comment: "Prompts the user to search for their interests."))
     }
     
-    private func setUpActivityIndicator() {
-        view.addSubview(activityIndicatorView)
-        activityIndicatorView.startAnimating()
-    }
-    
     private func configureTableViewProperties() {
         groupDisplayTableView.dataSource = groupInfoDataSource
         groupDisplayTableView.delegate = self
         groupDisplayTableView.rowHeight = UITableView.automaticDimension
         groupDisplayTableView.register(UINib(nibName: "GroupDisplayTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "GroupDisplayCell")
-    }
-    
-    private func showEmptyState() {
-        emptyStateView.isHidden = false
-    }
-    
-    private func hideEmptyState() {
-        emptyStateView.isHidden = true
     }
     
     private func hideActivityIndicator() {
@@ -91,21 +77,20 @@ final class GroupsDisplayViewController: UIViewController {
         activityIndicatorView.startAnimating()
     }
     
-    private func showTableView() {
-        groupDisplayTableView.isHidden = false
-    }
-    
     private func updatesViewBasedOnLoadingState(loadingState: LoadingState) {
         switch loadingState {
         case .isLoading:
             showActivityIndicator()
+            emptyStateView.isHidden = true
+            groupDisplayTableView.isHidden = true
         case .isFinishedLoading:
             hideActivityIndicator()
             if groupInfoDataSource.groups.isEmpty {
-                showEmptyState()
+                emptyStateView.isHidden = false
+                groupDisplayTableView.isHidden = true
             } else {
-                showTableView()
-                hideEmptyState()
+                groupDisplayTableView.isHidden = false
+                emptyStateView.isHidden = true
             }
         }
     }

@@ -15,7 +15,6 @@
 		5B1AD6C022DE22910008E4EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B1AD6BF22DE22910008E4EC /* Assets.xcassets */; };
 		5B1AD6CE22DE22910008E4EC /* MeetupCloneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1AD6CD22DE22910008E4EC /* MeetupCloneTests.swift */; };
 		5B3ADD082314D1470051A2D4 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3ADD072314D1470051A2D4 /* UIColor+Extension.swift */; };
-		5B3ADD0A23156AEA0051A2D4 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3ADD0923156AEA0051A2D4 /* ActivityIndicatorView.swift */; };
 		5B3ADD0E231582BE0051A2D4 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3ADD0D231582BE0051A2D4 /* EmptyStateView.swift */; };
 		5B3ADD112315AD940051A2D4 /* LoadingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3ADD102315AD940051A2D4 /* LoadingState.swift */; };
 		5B526C0322FCAC7000F77EAC /* EventHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B526C0222FCAC7000F77EAC /* EventHeaderView.swift */; };
@@ -100,7 +99,6 @@
 		5B1AD6CD22DE22910008E4EC /* MeetupCloneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetupCloneTests.swift; sourceTree = "<group>"; };
 		5B1AD6CF22DE22910008E4EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5B3ADD072314D1470051A2D4 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
-		5B3ADD0923156AEA0051A2D4 /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
 		5B3ADD0D231582BE0051A2D4 /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
 		5B3ADD102315AD940051A2D4 /* LoadingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingState.swift; sourceTree = "<group>"; };
 		5B526C0222FCAC7000F77EAC /* EventHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventHeaderView.swift; sourceTree = "<group>"; };
@@ -262,7 +260,6 @@
 			isa = PBXGroup;
 			children = (
 				5B3ADD0D231582BE0051A2D4 /* EmptyStateView.swift */,
-				5B3ADD0923156AEA0051A2D4 /* ActivityIndicatorView.swift */,
 				5BB306EE2302F68D007119E3 /* IBDesignableImageView.swift */,
 				5BA9164F22F32150000AF2E8 /* xibFiles */,
 				5BA9164E22F32091000AF2E8 /* Storyboards */,
@@ -588,7 +585,6 @@
 				5BEFBB5F2306EC53008466F8 /* EmptyStateTableViewCell.swift in Sources */,
 				5B8932C522E6450F00BF9876 /* AccessTokenFailureModel.swift in Sources */,
 				5B8932D222E650C000BF9876 /* NetworkHelper.swift in Sources */,
-				5B3ADD0A23156AEA0051A2D4 /* ActivityIndicatorView.swift in Sources */,
 				5B884C8122EB7FB40062F4AF /* GroupDisplayTableViewCell.swift in Sources */,
 				5B8932C922E645EC00BF9876 /* MeetupGroupModel.swift in Sources */,
 				5B8932D622E653E800BF9876 /* MeetupAuthenticationHandler.swift in Sources */,
