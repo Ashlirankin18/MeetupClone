@@ -142,6 +142,7 @@ final class GroupsDisplayViewController: UIViewController {
                 }
                 self.groupInfoDataSource.groups = groups
                 self.groupDisplayTableView.reloadData()
+                self.loadingState = .isFinishedLoading
             }
         }
         return dataTask

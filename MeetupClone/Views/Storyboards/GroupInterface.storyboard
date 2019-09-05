@@ -22,7 +22,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="88E-sW-CAd">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="756"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <color key="separatorColor" name="ClayRed"/>
+                                <color key="separatorColor" name="Red"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -61,7 +61,7 @@
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="barTintColor" name="ClayRed"/>
+                        <color key="barTintColor" name="Red"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </textAttributes>
@@ -82,8 +82,8 @@
     <resources>
         <image name="icons8-user-groups-25" width="25" height="25"/>
         <image name="icons8-zip-code-35" width="35" height="35"/>
-        <namedColor name="ClayRed">
-            <color red="0.86400002241134644" green="0.20800000429153442" blue="0.26899999380111694" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="Red">
+            <color red="0.99800002574920654" green="0.004999999888241291" blue="0.13300000131130219" alpha="0.92400002479553223" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

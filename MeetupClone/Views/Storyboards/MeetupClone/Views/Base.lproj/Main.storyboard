@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -41,7 +42,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.99800962209701538" green="0.0051934742368757725" blue="0.13274317979812622" alpha="0.92407570419999996" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" name="Red"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="sum-KL-oDw" secondAttribute="trailing" constant="20" id="GOA-d9-d6N"/>
                             <constraint firstItem="sum-KL-oDw" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Roq-Zf-UdY"/>
@@ -58,4 +59,9 @@
             <point key="canvasLocation" x="-1055.072463768116" y="123.88392857142857"/>
         </scene>
     </scenes>
+    <resources>
+        <namedColor name="Red">
+            <color red="0.99800002574920654" green="0.004999999888241291" blue="0.13300000131130219" alpha="0.92400002479553223" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>

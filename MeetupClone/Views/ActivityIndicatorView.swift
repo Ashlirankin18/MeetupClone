@@ -14,7 +14,7 @@ final class ActivityIndicatorView: UIView {
     /// Indicator view which will be displayed when network data is being retrieved.
     lazy var activityIndicatorView: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView()
-        activityIndicator.color = .clayRed
+        activityIndicator.color = #colorLiteral(red: 0.9980096221, green: 0.005193474237, blue: 0.1327431798, alpha: 0.9240757042)
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         return activityIndicator
     }()

@@ -38,6 +38,7 @@ final class EventDetailedTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableViewProperties()
+        tableView.separatorColor = .red
     }
     
     override func viewWillAppear(_ animated: Bool) {
