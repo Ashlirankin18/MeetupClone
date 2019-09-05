@@ -8,21 +8,20 @@
 
 import Foundation
 import Reachability
+
+/// Informs subscribers about network avalibility.
 protocol NetworkConnectivityHelperDelegate: AnyObject {
-    func networkIsAvalible()
-    func networkIsUnavalible()
+    func networkIsAvailable()
+    func networkIsUnavailable()
 }
 /// Handles the tasks related to network connectivity
 final class NetworkConnectivityHelper {
     
-    private var reachability: Reachability?
-    
-    private(set) var isReachable: Bool = true
+    private var reachability = Reachability()
     
     weak var delegate: NetworkConnectivityHelperDelegate?
     
     init() {
-        reachability = Reachability()
         
         NotificationCenter.default.addObserver(self, selector: #selector(networkDidChange), name: .reachabilityChanged, object: reachability)
         do {
@@ -32,16 +31,16 @@ final class NetworkConnectivityHelper {
         }
     }
     
-    @objc func networkDidChange(_ notification: Notification) {
+    @objc private func networkDidChange(_ notification: Notification) {
         guard let reachability = notification.object as? Reachability else {
             assertionFailure("Could not cast object a Reachability")
             return
         }
         switch reachability.connection {
         case .none:
-            delegate?.networkIsUnavalible()
+            delegate?.networkIsUnavailable()
         case .cellular, .wifi:
-            delegate?.networkIsAvalible()
+            delegate?.networkIsAvailable()
         }
     }
 }

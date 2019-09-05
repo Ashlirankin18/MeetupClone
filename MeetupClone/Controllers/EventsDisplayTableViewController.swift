@@ -52,7 +52,7 @@ final class EventsDisplayTableViewController: UITableViewController {
     private func hideActivityIndicator() {
         tableView.backgroundView = nil
         activityIndicatorView.indicatorStopAnimating()
-         isAnimating = false
+        isAnimating = false
     }
     private func configureTableViewProperties() {
         registerTableViewCells()
@@ -66,19 +66,16 @@ final class EventsDisplayTableViewController: UITableViewController {
     }
     private func retrieveGroupEvents(urlName: String) {
         meetupDataHandler.retrieveEvents(with: urlName) { [weak self] result in
-            
+            guard let self = self else {
+                return
+            }
+            self.hideActivityIndicator()
             switch result {
             case .failure(let error):
                 print(error)
             case .success(let events):
-               
-                guard let self = self else {
-                    return
-                }
-                 self.hideActivityIndicator()
                 self.eventsDisplayTableViewControllerDataSource.events = events
                 self.tableView.reloadData()
-                self.hideActivityIndicator()
             }
         }
     }
