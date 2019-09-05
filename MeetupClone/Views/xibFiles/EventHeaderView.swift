@@ -24,6 +24,7 @@ final class EventHeaderView: UIView {
         /// The string representation of the event location
         let eventLocation: String?
         
+        /// The description of the event 
         let eventDescription: String?
     }
     

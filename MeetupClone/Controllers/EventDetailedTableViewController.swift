@@ -23,8 +23,8 @@ final class EventDetailedTableViewController: UITableViewController {
     var meetupEventModel: MeetupEventModel? {
         didSet {
             guard let meetupEventModel = meetupEventModel else {
-                    assertionFailure("No eventModel found")
-                    return
+                assertionFailure("No eventModel found")
+                return
             }
             let urlName = meetupEventModel.group.urlName
             retrieveRSVPData(eventId: meetupEventModel.eventId, eventURLName: urlName)
