@@ -109,7 +109,7 @@ final class GroupsDisplayViewController: UIViewController {
             if groupInfoDataSource.groups.isEmpty {
                 emptyStateView?.isHidden = false
                 groupDisplayTableView.isHidden = true
-                else {
+            } else {
                     groupDisplayTableView.isHidden = false
                     emptyStateView?.isHidden = true
                 }

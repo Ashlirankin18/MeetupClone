@@ -30,6 +30,7 @@ final class EventsDisplayTableViewController: UITableViewController {
     private let meetupDataHandler = MeetupDataHandler(networkHelper: NetworkHelper())
     
     @IBOutlet private weak var activityIndicatorView: UIActivityIndicatorView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableViewProperties()
@@ -46,12 +47,13 @@ final class EventsDisplayTableViewController: UITableViewController {
         tableView.register(UINib(nibName: "EventDisplayTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "EventDisplayCell")
         tableView.register(UINib(nibName: "EmptyStateTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "EmptyStateCell")
     }
+    
     private func retrieveGroupEvents(urlName: String) {
         meetupDataHandler.retrieveEvents(with: urlName) { [weak self] result in
             guard let self = self else {
                 return
             }
-            self.hideActivityIndicator()
+            self.activityIndicatorView.isHidden = true
             switch result {
             case .failure(let error):
                 print(error)
