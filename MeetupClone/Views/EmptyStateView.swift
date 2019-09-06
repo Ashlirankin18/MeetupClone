@@ -7,6 +7,7 @@
 //
 
 import UIKit
+
 /// `UIView` subclass which contains the information needed to display an empty state to the user.
 final class EmptyStateView: UIView {
     /// Manages the data that is needed to populate the `EmptyStateView`
@@ -16,6 +17,7 @@ final class EmptyStateView: UIView {
         let emptyStateImage: UIImage?
         
         /// The prompt that will be displayed on the view
+
         let emptyStatePrompt: String
     }
     

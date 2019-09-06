@@ -19,7 +19,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="756"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="88E-sW-CAd">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="88E-sW-CAd">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="756"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <color key="separatorColor" name="ClayRed"/>
@@ -35,7 +35,7 @@
                         <viewLayoutGuide key="safeArea" id="5dh-uy-7Gr"/>
                     </view>
                     <navigationItem key="navigationItem" title="Groups" id="L6c-pj-WlY">
-                        <barButtonItem key="rightBarButtonItem" image="icons8-zip-code-35" id="BFG-yH-ClM">
+                        <barButtonItem key="rightBarButtonItem" title="Zip Code" id="BFG-yH-ClM">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="zipCodeBarButtonPressed:" destination="lM0-ys-K5t" id="M7t-d4-l4h"/>
@@ -57,10 +57,9 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="yxr-mK-uvH" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Groups" image="icons8-user-groups-25" id="Tbe-b8-s7S"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" largeTitles="YES" id="aeT-PL-IkS">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" translucent="NO" largeTitles="YES" id="aeT-PL-IkS">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="barTintColor" name="ClayRed"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -81,7 +80,6 @@
     </scenes>
     <resources>
         <image name="icons8-user-groups-25" width="25" height="25"/>
-        <image name="icons8-zip-code-35" width="35" height="35"/>
         <namedColor name="ClayRed">
             <color red="0.86400002241134644" green="0.20800000429153442" blue="0.26899999380111694" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
