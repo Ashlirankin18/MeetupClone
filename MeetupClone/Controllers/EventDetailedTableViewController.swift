@@ -23,8 +23,8 @@ final class EventDetailedTableViewController: UITableViewController {
     var meetupEventModel: MeetupEventModel? {
         didSet {
             guard let meetupEventModel = meetupEventModel else {
-                    assertionFailure("No eventModel found")
-                    return
+                assertionFailure("No eventModel found")
+                return
             }
             let urlName = meetupEventModel.group.urlName
             retrieveRSVPData(eventId: meetupEventModel.eventId, eventURLName: urlName)
@@ -41,7 +41,7 @@ final class EventDetailedTableViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+        super.viewWillAppear(animated)
         configureRightBarButtonItem()
     }
     
@@ -68,12 +68,15 @@ final class EventDetailedTableViewController: UITableViewController {
             assertionFailure("Event Id could not be found")
             return
         }
-        meetupDataHandler.retrieveEventRSVP(eventId: eventId, eventURLName: eventURLName) { (result) in
+        meetupDataHandler.retrieveEventRSVP(eventId: eventId, eventURLName: eventURLName) { [weak self] (result) in
+            guard let self = self else {
+                return
+            }
             switch result {
             case .failure(let error):
                 print(error)
             case .success(let rsvps):
-                self.eventDetailedControllerDataSource.rsvps = rsvps
+            self.eventDetailedControllerDataSource.rsvps = rsvps
                 self.tableView.reloadData()
             }
         }

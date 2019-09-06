@@ -21,13 +21,15 @@ final class PersistenceHelper {
     private(set) lazy var favoriteEvents: [MeetupEventModel] = retrieveFavoriteEventsFromDocumentsDirectory()
     
     private func retrieveFavoriteEventsFromDocumentsDirectory() -> [MeetupEventModel] {
-        var newFavoriteEvent = [MeetupEventModel]()
+
+        var newFavoriteEvents = [MeetupEventModel]()
         
         if let path = DataPersistenceManager().filepathToDocumentsDiretory(filename: fileName)?.path {
             if FileManager.default.fileExists(atPath: path),
                 let data = FileManager.default.contents(atPath: path) {
                 do {
-                    newFavoriteEvent = try PropertyListDecoder().decode([MeetupEventModel].self, from: data)
+                    newFavoriteEvents = try PropertyListDecoder().decode([MeetupEventModel].self, from: data)
+
                 } catch {
                     assertionFailure("could not decode favorite events from data")
                 }
@@ -37,7 +39,8 @@ final class PersistenceHelper {
         } else {
             print("No path was found")
         }
-        return newFavoriteEvent
+
+        return newFavoriteEvents
     }
     /// Saves objects added of removed from the documents directory
     func saveFavoriteEventsToDocumentsDirectory() {

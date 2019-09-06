@@ -71,5 +71,4 @@ final class GroupDisplayTableViewCell: UITableViewCell {
     @IBOutlet private weak var groupImageView: UIImageView!
     @IBOutlet private weak var groupNameLabel: UILabel!
     @IBOutlet private weak var nextEventLabel: UILabel!
-    @IBOutlet private weak var tintedView: UIView!
 }
