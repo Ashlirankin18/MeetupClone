@@ -11,16 +11,39 @@ import UIKit
 /// Displays the users profile information.
 final class ProfileViewController: UIViewController {
     
-    @IBOutlet private weak var profileControllerTableView: UITableView!
-    
     private let meetupCloneDataSource = UserProfileDataSource()
     
     private let meetupDatatHandler = MeetupDataHandler(networkHelper: NetworkHelper())
+    
+    private var emptyStateView: EmptyStateView?
+    
+    private let networkConnectivityHelper = NetworkConnectivityHelper()
+    
+    private var loadingState: LoadingState?
+    
+    @IBOutlet private weak var profileControllerTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpProfileTableView()
         retrieveUserInformation()
+        networkConnectivityHelper.delegate = self
+    }
+    
+    private func loadEmptyStateView() -> EmptyStateView? {
+        guard let emptyStateView = Bundle.main.loadNibNamed("EmptyStateView", owner: self, options: nil)?.first as? EmptyStateView else {
+            return nil
+        }
+        self.emptyStateView = emptyStateView
+        view.addSubview(emptyStateView)
+        return emptyStateView
+    }
+    
+    private func setUpEmptyStateView(image: UIImage?, prompt: String) {
+        guard let emptyStateView = loadEmptyStateView() else {
+            return
+        }
+        emptyStateView.viewModel = EmptyStateView.ViewModel(emptyStateImage: image, emptyStatePrompt: prompt)
     }
     
     private func setUpProfileTableView() {
@@ -40,12 +63,12 @@ final class ProfileViewController: UIViewController {
                 }
                 self.meetupCloneDataSource.meetupUserModel = userInfo
                 self.profileControllerTableView.reloadData()
+                self.loadingState = .isFinishedLoading
             }
         }
     }
 }
 extension ProfileViewController: UITableViewDelegate {
-    
     // MARK: - UITableViewDelegate 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let headerView = Bundle.main.loadNibNamed("UserImageView", owner: self, options: nil)?.first as? UserImageView else {
@@ -59,5 +82,17 @@ extension ProfileViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 300
+    }
+}
+extension ProfileViewController: NetworkConnectivityHelperDelegate {
+    func networkIsAvailable() {
+        emptyStateView?.isHidden = true
+        profileControllerTableView.isHidden = false
+    }
+    
+    func networkIsUnavailable() {
+        setUpEmptyStateView(image: UIImage.noInternetConnection, prompt: "No Internet Connection detected")
+        emptyStateView?.isHidden = false
+        profileControllerTableView.isHidden = true
     }
 }

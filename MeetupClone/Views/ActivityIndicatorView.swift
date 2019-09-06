@@ -19,7 +19,7 @@ final class ActivityIndicatorView: UIView {
         return activityIndicator
     }()
     var isAnimating = true
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
