@@ -18,7 +18,7 @@ final class EventsDisplayTableViewController: UITableViewController {
         }
     }
     
-    /// The model representing the information the headerView needs to be initilized
+    /// The model representing the information the headerView needs to be initialized
     var headerInformationModel: HeaderInformationModel? 
   
     private lazy var activityIndicator: UIActivityIndicatorView = {
