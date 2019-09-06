@@ -23,9 +23,9 @@ class LoginViewController: UIViewController {
     
     @IBOutlet private weak var loginButton: RoundedButton!
    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        pusleAnimation()
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        startPulseAnimation()
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -42,7 +42,7 @@ class LoginViewController: UIViewController {
         alertController.addAction(tryAgainAction)
         present(alertController, animated: true, completion: nil)
     }
-    private func pusleAnimation() {
+    private func startPulseAnimation() {
         let pulseAnimation: CABasicAnimation = CABasicAnimation(keyPath: "transform.scale")
         pulseAnimation.duration = 2.0
         pulseAnimation.toValue = NSNumber(value: 0.9)
@@ -75,7 +75,6 @@ class LoginViewController: UIViewController {
         guard let interfaceController = UIStoryboard(name: "MeetupInfoInterface", bundle: nil).instantiateViewController(withIdentifier: "MeetupInfoTabbarController") as? UITabBarController else {
             return }
         interfaceController.modalTransitionStyle = .crossDissolve
-        present(interfaceController, animated: true, completion: nil)
-        
+        present(interfaceController, animated: true, completion: nil)        
     }
 }

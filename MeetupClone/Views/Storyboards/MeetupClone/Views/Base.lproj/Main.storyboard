@@ -19,22 +19,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleAspectFill" axis="vertical" distribution="equalCentering" spacing="180" translatesAutoresizingMaskIntoConstraints="NO" id="zC4-PT-knx">
-                                <rect key="frame" x="111" y="314" width="192" height="268"/>
+                                <rect key="frame" x="111" y="313" width="192" height="270"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gFl-nc-7RB">
-                                        <rect key="frame" x="0.0" y="0.0" width="192" height="46"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="46" id="3Zz-ga-ZNc"/>
-                                        </constraints>
+                                        <rect key="frame" x="0.0" y="0.0" width="192" height="54"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="45"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="sum-KL-oDw" customClass="RoundedButton" customModule="MeetupClone" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="226" width="192" height="42"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="42" id="O0M-gb-bz4"/>
-                                        </constraints>
+                                        <rect key="frame" x="0.0" y="234" width="192" height="36"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="Login with Meetup">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -60,7 +60,7 @@
 		5BB306FD23032E6F007119E3 /* PersistenceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB306FC23032E6F007119E3 /* PersistenceHelper.swift */; };
 		5BB3070023033CE8007119E3 /* Events.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BB306FE23033C76007119E3 /* Events.storyboard */; };
 		5BD475DA22F9DCF000F091AA /* GroupInfoDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD475D922F9DCF000F091AA /* GroupInfoDataSource.swift */; };
-		5BDC83082321931900F5F531 /* IBDesignableRoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BDC83072321931900F5F531 /* IBDesignableRoundedButton.swift */; };
+		5BDC83082321931900F5F531 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BDC83072321931900F5F531 /* RoundedButton.swift */; };
 		5BE8470D22E75DC700B8E8FC /* MeetupPhotoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE8470C22E75DC700B8E8FC /* MeetupPhotoModel.swift */; };
 		5BEFBB562306DF59008466F8 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BEFBB552306DF59008466F8 /* UIImageView+Extension.swift */; };
 		5BEFBB5F2306EC53008466F8 /* EmptyStateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BEFBB5D2306EC53008466F8 /* EmptyStateTableViewCell.swift */; };
@@ -146,7 +146,7 @@
 		5BB306FC23032E6F007119E3 /* PersistenceHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceHelper.swift; sourceTree = "<group>"; };
 		5BB306FE23033C76007119E3 /* Events.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Events.storyboard; sourceTree = "<group>"; };
 		5BD475D922F9DCF000F091AA /* GroupInfoDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupInfoDataSource.swift; sourceTree = "<group>"; };
-		5BDC83072321931900F5F531 /* IBDesignableRoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IBDesignableRoundedButton.swift; sourceTree = "<group>"; };
+		5BDC83072321931900F5F531 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		5BE8470C22E75DC700B8E8FC /* MeetupPhotoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetupPhotoModel.swift; sourceTree = "<group>"; };
 		5BEFBB552306DF59008466F8 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		5BEFBB5D2306EC53008466F8 /* EmptyStateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateTableViewCell.swift; sourceTree = "<group>"; };
@@ -269,7 +269,7 @@
 				5B1AB792231DF9650092903E /* EmptyStateView.xib */,
 				5B3ADD0923156AEA0051A2D4 /* ActivityIndicatorView.swift */,
 				5BB306EE2302F68D007119E3 /* IBDesignableImageView.swift */,
-				5BDC83072321931900F5F531 /* IBDesignableRoundedButton.swift */,
+				5BDC83072321931900F5F531 /* RoundedButton.swift */,
 				5BA9164F22F32150000AF2E8 /* xibFiles */,
 				5BA9164E22F32091000AF2E8 /* Storyboards */,
 			);
@@ -624,7 +624,7 @@
 				5B526C0822FCAEA600F77EAC /* MeetupMemberDisplayTableViewCell.swift in Sources */,
 				5BA9165A22F35043000AF2E8 /* EventDisplayTableViewCell.swift in Sources */,
 				5BF41FF322E7609500ECA928 /* MeetupMemberModel.swift in Sources */,
-				5BDC83082321931900F5F531 /* IBDesignableRoundedButton.swift in Sources */,
+				5BDC83082321931900F5F531 /* RoundedButton.swift in Sources */,
 				5B526C0B22FCB20500F77EAC /* EventDetailedTableViewController.swift in Sources */,
 				5BB306FD23032E6F007119E3 /* PersistenceHelper.swift in Sources */,
 			);
