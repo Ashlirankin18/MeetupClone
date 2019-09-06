@@ -27,7 +27,6 @@ final class EventsDisplayTableViewController: UITableViewController {
         activityIndicator.color = UIColor(named: "ClayRed", in: Bundle.main, compatibleWith: .none)
         return activityIndicator
     }()
-
     
     private let eventsDisplayTableViewControllerDataSource = EventsDisplayTableViewControllerDataSource()
     
@@ -42,18 +41,18 @@ final class EventsDisplayTableViewController: UITableViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        activityIndicatorView.frame = CGRect(x: 0, y: 0, width: tableView.bounds.width, height: tableView.bounds.height)
+        activityIndicator.frame = CGRect(x: 0, y: 0, width: tableView.bounds.width, height: tableView.bounds.height)
         showActivityIndicator()
     }
     
     private func showActivityIndicator() {
-        tableView.backgroundView = activityIndicatorView
-        activityIndicatorView.indicatorStartAnimating()
+        tableView.backgroundView = activityIndicator
+        activityIndicator.startAnimating()
         isAnimating = true
     }
     private func hideActivityIndicator() {
         tableView.backgroundView = nil
-        activityIndicatorView.indicatorStopAnimating()
+        activityIndicator.stopAnimating()
         isAnimating = false
     }
     private func configureTableViewProperties() {
@@ -89,7 +88,7 @@ final class EventsDisplayTableViewController: UITableViewController {
             return nil
         }
 
-        if activityIndicatorView.isAnimating {
+        if activityIndicator.isAnimating {
             headerView?.isHidden = true
         } else {
             headerView?.isHidden = false

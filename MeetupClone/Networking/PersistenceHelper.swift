@@ -29,7 +29,6 @@ final class PersistenceHelper {
                 let data = FileManager.default.contents(atPath: path) {
                 do {
                     newFavoriteEvents = try PropertyListDecoder().decode([MeetupEventModel].self, from: data)
-
                 } catch {
                     assertionFailure("could not decode favorite events from data")
                 }
