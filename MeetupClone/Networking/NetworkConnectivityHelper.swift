@@ -9,7 +9,7 @@
 import Foundation
 import Reachability
 
-/// Informs subscribers about network avalibility.
+/// Informs subscribers about network availability.
 protocol NetworkConnectivityHelperDelegate: AnyObject {
     func networkIsAvailable()
     func networkIsUnavailable()
