@@ -27,6 +27,12 @@ final class ProfileViewController: UIViewController {
         super.viewDidLoad()
         setUpProfileTableView()
         retrieveUserInformation()
+        setNeedsStatusBarAppearanceUpdate()
+    }
+  
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+
         networkConnectivityHelper.delegate = self
     }
     
@@ -44,8 +50,8 @@ final class ProfileViewController: UIViewController {
             return
         }
         emptyStateView.viewModel = EmptyStateView.ViewModel(emptyStateImage: image, emptyStatePrompt: prompt)
+
     }
-    
     private func setUpProfileTableView() {
         profileControllerTableView.delegate = self
         profileControllerTableView.dataSource = meetupCloneDataSource

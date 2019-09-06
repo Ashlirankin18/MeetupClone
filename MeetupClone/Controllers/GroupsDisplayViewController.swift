@@ -14,7 +14,10 @@ final class GroupsDisplayViewController: UIViewController {
     private lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
-        searchController.obscuresBackgroundDuringPresentation = false      
+        searchController.searchBar.barTintColor = .white
+        searchController.searchBar.tintColor = .white
+        searchController.searchBar.searchBarStyle = .prominent
+        searchController.obscuresBackgroundDuringPresentation = false
         return searchController
     }()
     
@@ -51,6 +54,12 @@ final class GroupsDisplayViewController: UIViewController {
         setUpActivityIndicator()
         setUpEmptyStateView()
         networkConnectivityHelper.delegate = self
+        addKeyboardNotificationObservers()
+    }
+    private func addKeyboardNotificationObservers() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(willHideKeyboard(notification:)), name: UIResponder.keyboardDidHideNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(willShowKeyboard(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
     }
     
     private func configureNavigationItemProperties() {
@@ -105,7 +114,8 @@ final class GroupsDisplayViewController: UIViewController {
             emptyStateView?.isHidden = true
         case .isFinishedLoading:
             if groupInfoDataSource.groups.isEmpty {
-                setUpEmptyStateView()
+               emptyStateView?.isHidden = false
+               groupDisplayTableView.isHidden = true
             } else {
                 groupDisplayTableView.isHidden = false
                 emptyStateView?.isHidden = true
@@ -124,7 +134,7 @@ final class GroupsDisplayViewController: UIViewController {
             searchController.searchBar.placeholder = NSLocalizedString("Search for group", comment: "Prompts the user to search for a group.")
         }
     }
-
+  
     @discardableResult private func retrieveGroups(searchText: String?, zipCode: String?) -> Cancelable? {
         let dataTask = meetupDataHandler.retrieveMeetupGroups(searchText: searchText ?? "", zipCode: zipCode) { [weak self] (results) in
             switch results {
@@ -154,8 +164,8 @@ final class GroupsDisplayViewController: UIViewController {
         alertController.addTextField { (textfield) in
             textfield.keyboardType = .numberPad
         }
-
-        let submitAction = UIAlertAction(title: NSLocalizedString("Submit", comment: "Submit Answer"), style: .default) { [weak self] _ in
+        
+        let okAction = UIAlertAction(title: NSLocalizedString("Ok", comment: "Submit Answer"), style: .default) { _ in
             guard let self = self else {
                 return
             }
@@ -172,16 +182,33 @@ final class GroupsDisplayViewController: UIViewController {
             }
         }
         let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel action"), style: .cancel, handler: nil)
-        alertController.addAction(submitAction)
+        alertController.addAction(okAction)
         alertController.addAction(cancelAction)
         present(alertController, animated: true, completion: nil)
     }
     
     private func isEnteredZipCodeValid(zipCode: String) -> Bool {
         if Int(zipCode) != nil && zipCode.count == 5 {
+            zipCodeBarButtonItem.title = zipCode
             return true
         }
         return false
+    }
+    
+    @objc func willHideKeyboard(notification: Notification) {
+        groupDisplayTableView.scrollIndicatorInsets = .zero
+        groupDisplayTableView.contentInset = .zero
+    }
+    
+    @objc func willShowKeyboard(notification: Notification) {
+        guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {
+            return
+        }
+        let keyboardScreenEndFrame = keyboardValue.cgRectValue
+        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
+        
+        groupDisplayTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height - view.safeAreaInsets.bottom, right: 0)
+        groupDisplayTableView.scrollIndicatorInsets = groupDisplayTableView.contentInset
     }
     
     @IBAction private func zipCodeBarButtonPressed(_ sender: UIBarButtonItem) {
