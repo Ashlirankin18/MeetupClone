@@ -8,6 +8,7 @@ target 'MeetupClone' do
   # Pods for MeetupClone
   pod 'SwiftLint'
   pod 'Kingfisher'
+  pod 'ReachabilitySwift'
   
   target 'MeetupCloneTests' do
     inherit! :search_paths
