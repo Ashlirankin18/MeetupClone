@@ -274,6 +274,5 @@ extension GroupsDisplayViewController: NetworkConnectivityHelperDelegate {
     func networkIsUnavailable() {
         emptyStateView?.viewModel = EmptyStateView.ViewModel(emptyStateImage: .noInternetConnection, emptyStatePrompt: "No Internet Connection Detected")
         emptyStateView?.isHidden = false
-
   }
 }
