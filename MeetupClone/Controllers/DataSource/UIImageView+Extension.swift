@@ -21,4 +21,7 @@ extension UIImage {
     
     /// The image representing no groups found
     static let noGroupsFound = UIImage(named: "noGroups")
+   
+    /// The image representing no internet connection.
+    static let noInternetConnection = UIImage(named: "noInternet")
 }
