@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,18 +16,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <activityIndicatorView key="tableFooterView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="kV7-zh-JX8">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="20"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        </activityIndicatorView>
                         <connections>
                             <outlet property="dataSource" destination="bcI-Zp-T7n" id="Syh-1d-Ne9"/>
                             <outlet property="delegate" destination="bcI-Zp-T7n" id="XwU-vO-6wK"/>
                         </connections>
                     </tableView>
-                    <connections>
-                        <outlet property="activityIndicatorView" destination="kV7-zh-JX8" id="NFU-dz-moI"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cJq-p0-DqM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

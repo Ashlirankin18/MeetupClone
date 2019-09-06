@@ -18,7 +18,7 @@ final class EventsDisplayTableViewController: UITableViewController {
         }
     }
     
-    /// The model representing the infoprmation a headerView need it be initilized
+    /// The model representing the information a headerView needs to be initilized
     var headerInformationModel: HeaderInformationModel? {
         didSet {
             title = headerInformationModel?.name
@@ -28,8 +28,6 @@ final class EventsDisplayTableViewController: UITableViewController {
     private let eventsDisplayTableViewControllerDataSource = EventsDisplayTableViewControllerDataSource()
     
     private let meetupDataHandler = MeetupDataHandler(networkHelper: NetworkHelper())
-    
-    @IBOutlet private weak var activityIndicatorView: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,7 +51,6 @@ final class EventsDisplayTableViewController: UITableViewController {
             guard let self = self else {
                 return
             }
-            self.activityIndicatorView.isHidden = true
             switch result {
             case .failure(let error):
                 print(error)
@@ -70,13 +67,8 @@ final class EventsDisplayTableViewController: UITableViewController {
         guard let headerInformationModel = headerInformationModel else {
             return nil
         }
-
-        if activityIndicatorView.isAnimating {
-            headerView?.isHidden = true
-        } else {
-            headerView?.isHidden = false
-            headerView?.viewModel = GroupDisplayTableViewCell.ViewModel(groupName: headerInformationModel.name, groupImage: headerInformationModel.imageURL, members: nil, nextEventName: nil, date: nil)
-        }
+        headerView?.isHidden = false
+        headerView?.viewModel = GroupDisplayTableViewCell.ViewModel(groupName: headerInformationModel.name, groupImage: headerInformationModel.imageURL, members: nil, nextEventName: nil, date: nil)
         return headerView
     }
     
