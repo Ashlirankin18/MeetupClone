@@ -27,9 +27,18 @@ final class GroupsDisplayViewController: UIViewController {
     
     private var currentDataTask: Cancelable?
     
-    private var activityIndicatorView = ActivityIndicatorView()
-
-    private var emptyStateView: EmptyStateView?
+    private var activityIndicatorView = UIActivityIndicatorView()
+    
+    private var emptyStateView: EmptyStateView? {
+        didSet {
+            guard let emptyStateView = emptyStateView else {
+                return
+            }
+            emptyStateView.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview(emptyStateView)
+            constrainEmptyStateView(emptyStateView: emptyStateView)
+        }
+    }
     
     private let networkConnectivityHelper = NetworkConnectivityHelper()
     
@@ -52,7 +61,7 @@ final class GroupsDisplayViewController: UIViewController {
         configureNavigationItemProperties()
         checkForLastZipCodeEntered()
         setUpActivityIndicator()
-        setUpEmptyStateView()
+        loadEmptyState()
         networkConnectivityHelper.delegate = self
         addKeyboardNotificationObservers()
     }
@@ -70,33 +79,23 @@ final class GroupsDisplayViewController: UIViewController {
     
     private func setUpActivityIndicator() {
         view.addSubview(activityIndicatorView)
-        activityIndicatorView.isAnimating = true
     }
     
     private func hideActivityIndicator() {
         activityIndicatorView.isHidden = true
-        activityIndicatorView.indicatorStopAnimating()    
+        activityIndicatorView.stopAnimating()
     }
     
     private func showActivityIndicator() {
         activityIndicatorView.isHidden = false
-        activityIndicatorView.indicatorStartAnimating()
+        activityIndicatorView.startAnimating()
     }
     
-    private func loadEmptyState() -> EmptyStateView? {
+    private func loadEmptyState() {
         guard let emptyStateView = Bundle.main.loadNibNamed("EmptyStateView", owner: self, options: nil)?.first as? EmptyStateView else {
-            return nil
-        }
-        self.emptyStateView = emptyStateView
-        view.addSubview(emptyStateView)
-        return emptyStateView
-    }
-    
-    private func setUpEmptyStateView() {
-        guard let emptyStateView = loadEmptyState() else {
             return
         }
-        emptyStateView.viewModel = EmptyStateView.ViewModel(emptyStateImage: .noGroupsFound, emptyStatePrompt: NSLocalizedString("No groups were found. Try searching for your interests", comment: "Prompts the user to search for their interests."))
+        self.emptyStateView = emptyStateView
     }
     
     private func configureTableViewProperties() {
@@ -114,8 +113,8 @@ final class GroupsDisplayViewController: UIViewController {
             emptyStateView?.isHidden = true
         case .isFinishedLoading:
             if groupInfoDataSource.groups.isEmpty {
-               emptyStateView?.isHidden = false
-               groupDisplayTableView.isHidden = true
+                emptyStateView?.isHidden = false
+                groupDisplayTableView.isHidden = true
             } else {
                 groupDisplayTableView.isHidden = false
                 emptyStateView?.isHidden = true
@@ -134,7 +133,7 @@ final class GroupsDisplayViewController: UIViewController {
             searchController.searchBar.placeholder = NSLocalizedString("Search for group", comment: "Prompts the user to search for a group.")
         }
     }
-  
+    
     @discardableResult private func retrieveGroups(searchText: String?, zipCode: String?) -> Cancelable? {
         let dataTask = meetupDataHandler.retrieveMeetupGroups(searchText: searchText ?? "", zipCode: zipCode) { [weak self] (results) in
             switch results {
@@ -169,7 +168,7 @@ final class GroupsDisplayViewController: UIViewController {
             guard let self = self else {
                 return
             }
-
+            
             guard let zipCode = alertController.textFields?.first?.text else {
                 return
             }
@@ -230,7 +229,7 @@ extension GroupsDisplayViewController: UISearchResultsUpdating {
                     currentDataTask?.cancelTask()
                     let zipCode = userDefaults.object(forKey: UserDefaultConstants.zipCode.rawValue) as? String ?? ""
                     let timer = Timer(timeInterval: 1.0, repeats: false) { [weak self] _ in
-
+                        
                         guard let self = self else {
                             return
                         }
@@ -267,12 +266,23 @@ extension GroupsDisplayViewController: NetworkConnectivityHelperDelegate {
                 retrieveGroups(searchText: searchText, zipCode: zipCode)
             }
         } else {
-            emptyStateView?.viewModel = EmptyStateView.ViewModel(emptyStateImage: .noGroupsFound, emptyStatePrompt: NSLocalizedString("No groups were found. Try searching for your interests", comment: "Prompts the user to search for their interests."))
+            emptyStateView?.viewModel = EmptyStateView.ViewModel(emptyStateImage: .noGroupsFound, emptyStatePrompt: NSLocalizedString("No groups were found. Try searching for your interests.", comment: "Prompts the user to search for their interests."))
             emptyStateView?.isHidden = false
         }
     }
     func networkIsUnavailable() {
         emptyStateView?.viewModel = EmptyStateView.ViewModel(emptyStateImage: .noInternetConnection, emptyStatePrompt: "No Internet Connection Detected")
         emptyStateView?.isHidden = false
+    }
+}
+extension GroupsDisplayViewController {
+    
+    private func constrainEmptyStateView(emptyStateView: EmptyStateView) {
+        NSLayoutConstraint.activate([
+            emptyStateView.topAnchor.constraint(equalTo: view.topAnchor),
+            emptyStateView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            emptyStateView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            emptyStateView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            ])
     }
 }

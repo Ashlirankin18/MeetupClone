@@ -25,7 +25,7 @@ final class EventsDisplayTableViewController: UITableViewController {
         }
     }
     
-    private var activityIndicatorView = ActivityIndicatorView()
+    private var activityIndicatorView = UIActivityIndicatorView()
     
     private let eventsDisplayTableViewControllerDataSource = EventsDisplayTableViewControllerDataSource()
     
@@ -46,12 +46,12 @@ final class EventsDisplayTableViewController: UITableViewController {
     
     private func showActivityIndicator() {
         tableView.backgroundView = activityIndicatorView
-        activityIndicatorView.indicatorStartAnimating()
+        activityIndicatorView.startAnimating()
         isAnimating = true
     }
     private func hideActivityIndicator() {
         tableView.backgroundView = nil
-        activityIndicatorView.indicatorStopAnimating()
+        activityIndicatorView.stopAnimating()
         isAnimating = false
     }
     private func configureTableViewProperties() {
