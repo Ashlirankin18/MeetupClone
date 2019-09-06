@@ -27,13 +27,12 @@ final class ProfileViewController: UIViewController {
         super.viewDidLoad()
         setUpProfileTableView()
         retrieveUserInformation()
+        networkConnectivityHelper.delegate = self
         setNeedsStatusBarAppearanceUpdate()
     }
   
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
-
-        networkConnectivityHelper.delegate = self
     }
     
     private func loadEmptyStateView() -> EmptyStateView? {
@@ -50,7 +49,6 @@ final class ProfileViewController: UIViewController {
             return
         }
         emptyStateView.viewModel = EmptyStateView.ViewModel(emptyStateImage: image, emptyStatePrompt: prompt)
-
     }
     private func setUpProfileTableView() {
         profileControllerTableView.delegate = self
