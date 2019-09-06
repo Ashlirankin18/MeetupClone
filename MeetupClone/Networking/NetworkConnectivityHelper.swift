@@ -17,7 +17,7 @@ protocol NetworkConnectivityHelperDelegate: AnyObject {
 /// Handles the tasks related to network connectivity
 final class NetworkConnectivityHelper {
     
-    private var reachability = Reachability()
+    private let reachability = Reachability()
     
     weak var delegate: NetworkConnectivityHelperDelegate?
     
