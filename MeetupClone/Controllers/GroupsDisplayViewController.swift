@@ -14,8 +14,10 @@ final class GroupsDisplayViewController: UIViewController {
     private lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
+        searchController.searchBar.barTintColor = .white
+        searchController.searchBar.tintColor = .white
+        searchController.searchBar.searchBarStyle = .prominent
         searchController.obscuresBackgroundDuringPresentation = false
-        
         return searchController
     }()
     
@@ -25,9 +27,9 @@ final class GroupsDisplayViewController: UIViewController {
     
     private var currentDataTask: Cancelable?
     
-    private var activityIndicatorView = ActivityIndicatorView()
-   
     private var emptyStateView: EmptyStateView?
+    
+    private let networkConnectivityHelper = NetworkConnectivityHelper()
     
     private var loadingState: LoadingState? {
         didSet {
@@ -39,7 +41,10 @@ final class GroupsDisplayViewController: UIViewController {
         }
     }
     
+    @IBOutlet private weak var activityIndicatorView: UIActivityIndicatorView!
+    
     @IBOutlet private weak var zipCodeBarButtonItem: UIBarButtonItem!
+    
     @IBOutlet private weak var groupDisplayTableView: UITableView!
     
     override func viewDidLoad() {
@@ -47,27 +52,46 @@ final class GroupsDisplayViewController: UIViewController {
         configureTableViewProperties()
         configureNavigationItemProperties()
         checkForLastZipCodeEntered()
-        setUpActivityIndicator()
         setUpEmptyStateView()
+        networkConnectivityHelper.delegate = self
+        addKeyboardNotificationObservers()
     }
+    private func addKeyboardNotificationObservers() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(willHideKeyboard(notification:)), name: UIResponder.keyboardDidHideNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(willShowKeyboard(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+    }
+    
     private func configureNavigationItemProperties() {
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         definesPresentationContext = true
     }
     
-    private func setUpEmptyStateView() {
+    private func hideActivityIndicator() {
+        activityIndicatorView.isHidden = true
+        activityIndicatorView.stopAnimating()
+    }
+    
+    private func showActivityIndicator() {
+        activityIndicatorView.isHidden = false
+        activityIndicatorView.startAnimating()
+    }
+    
+    private func loadEmptyState() -> EmptyStateView? {
         guard let emptyStateView = Bundle.main.loadNibNamed("EmptyStateView", owner: self, options: nil)?.first as? EmptyStateView else {
-            return
+            return nil
         }
         self.emptyStateView = emptyStateView
         view.addSubview(emptyStateView)
-        emptyStateView.viewModel = EmptyStateView.ViewModel(emptyStateImage: .noGroupsFound, emptyStatePrompt: NSLocalizedString("No groups were found. Try searching for your interests", comment: "Prompts the user to search for their interests."))
+        return emptyStateView
     }
     
-    private func setUpActivityIndicator() {
-        view.addSubview(activityIndicatorView)
-        setActivityIndicatorConstraints()
+    private func setUpEmptyStateView() {
+        guard let emptyStateView = loadEmptyState() else {
+            return
+        }
+        emptyStateView.viewModel = EmptyStateView.ViewModel(emptyStateImage: .noGroupsFound, emptyStatePrompt: NSLocalizedString("No groups were found. Try searching for your interests", comment: "Prompts the user to search for their interests."))
     }
     
     private func configureTableViewProperties() {
@@ -77,47 +101,21 @@ final class GroupsDisplayViewController: UIViewController {
         groupDisplayTableView.register(UINib(nibName: "GroupDisplayTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "GroupDisplayCell")
     }
     
-    private func showEmptyState() {
-        emptyStateView?.isHidden = false
-    }
-
-    private func hideEmptyState() {
-        emptyStateView?.isHidden = true
-    }
-
-    private func hideActivityIndicator() {
-        activityIndicatorView.isHidden = true
-        activityIndicatorView.indicatorStopAnimating()    
-    }
-    
-    private func showActivityIndicator() {
-        activityIndicatorView.isHidden = false
-        activityIndicatorView.indicatorStartAnimating()
-    }
-    
-    private func showTableView() {
-        groupDisplayTableView.isHidden = false
-    }
-    private func hideTableView() {
-        groupDisplayTableView.isHidden = true
-    }
-    
     private func updatesViewBasedOnLoadingState(loadingState: LoadingState) {
         switch loadingState {
         case .isLoading:
             showActivityIndicator()
-            hideTableView()
-            hideEmptyState()
+            emptyStateView?.isHidden = true
+            groupDisplayTableView.isHidden = true
         case .isFinishedLoading:
             if groupInfoDataSource.groups.isEmpty {
-                showEmptyState()
-                hideTableView()
-                hideActivityIndicator()
+                emptyStateView?.isHidden = false
+                groupDisplayTableView.isHidden = true
             } else {
-                showTableView()
-                hideEmptyState()
+                groupDisplayTableView.isHidden = false
+                emptyStateView?.isHidden = true
             }
-             hideActivityIndicator()
+            hideActivityIndicator()
         }
     }
     
@@ -127,7 +125,6 @@ final class GroupsDisplayViewController: UIViewController {
             let searchText = userDefaults.object(forKey: UserDefaultConstants.searchText.rawValue) as? String {
             zipCodeBarButtonItem.title = zipCode
             searchController.searchBar.text = searchText
-            loadingState = .isFinishedLoading
         } else {
             searchController.searchBar.placeholder = NSLocalizedString("Search for group", comment: "Prompts the user to search for a group.")
         }
@@ -163,10 +160,11 @@ final class GroupsDisplayViewController: UIViewController {
             textfield.keyboardType = .numberPad
         }
         
-        let submitAction = UIAlertAction(title: NSLocalizedString("Submit", comment: "Submit Answer"), style: .default) { [weak self] _ in
+        let okAction = UIAlertAction(title: NSLocalizedString("Ok", comment: "Submit Answer"), style: .default) { [weak self] _ in
             guard let self = self else {
                 return
             }
+            
             guard let zipCode = alertController.textFields?.first?.text else {
                 return
             }
@@ -179,16 +177,33 @@ final class GroupsDisplayViewController: UIViewController {
             }
         }
         let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel action"), style: .cancel, handler: nil)
-        alertController.addAction(submitAction)
+        alertController.addAction(okAction)
         alertController.addAction(cancelAction)
         present(alertController, animated: true, completion: nil)
     }
     
     private func isEnteredZipCodeValid(zipCode: String) -> Bool {
         if Int(zipCode) != nil && zipCode.count == 5 {
+            zipCodeBarButtonItem.title = zipCode
             return true
         }
         return false
+    }
+    
+    @objc func willHideKeyboard(notification: Notification) {
+        groupDisplayTableView.scrollIndicatorInsets = .zero
+        groupDisplayTableView.contentInset = .zero
+    }
+    
+    @objc func willShowKeyboard(notification: Notification) {
+        guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {
+            return
+        }
+        let keyboardScreenEndFrame = keyboardValue.cgRectValue
+        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
+        
+        groupDisplayTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height - view.safeAreaInsets.bottom, right: 0)
+        groupDisplayTableView.scrollIndicatorInsets = groupDisplayTableView.contentInset
     }
     
     @IBAction private func zipCodeBarButtonPressed(_ sender: UIBarButtonItem) {
@@ -210,6 +225,7 @@ extension GroupsDisplayViewController: UISearchResultsUpdating {
                     currentDataTask?.cancelTask()
                     let zipCode = userDefaults.object(forKey: UserDefaultConstants.zipCode.rawValue) as? String ?? ""
                     let timer = Timer(timeInterval: 1.0, repeats: false) { [weak self] _ in
+                        
                         guard let self = self else {
                             return
                         }
@@ -223,7 +239,6 @@ extension GroupsDisplayViewController: UISearchResultsUpdating {
     }
 }
 extension GroupsDisplayViewController: UITableViewDelegate {
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let viewController = UIStoryboard(name: "Events", bundle: nil).instantiateViewController(withIdentifier: "EventsDisplayController") as? EventsDisplayTableViewController else {
             assertionFailure("could not instantiate view controller")
@@ -234,17 +249,26 @@ extension GroupsDisplayViewController: UITableViewDelegate {
         viewController.headerInformationModel = HeaderInformationModel(imageURL: highResPhoto, name: chosenGroup.groupName)
         
         viewController.urlName = chosenGroup.urlName
-        navigationController?.show(viewController, sender: self)
+        searchController.searchBar.resignFirstResponder()
+        show(viewController, sender: nil)
     }
 }
-extension GroupsDisplayViewController {
-    private func setActivityIndicatorConstraints() {
-        activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            activityIndicatorView.topAnchor.constraint(equalTo: view.topAnchor),
-            activityIndicatorView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            activityIndicatorView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            activityIndicatorView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-            ])
+
+extension GroupsDisplayViewController: NetworkConnectivityHelperDelegate {
+    
+    func networkIsAvailable() {
+        if isSearchControllerInputValid() {
+            if let searchText = searchController.searchBar.text {
+                let zipCode = zipCodeBarButtonItem.title ?? ""
+                retrieveGroups(searchText: searchText, zipCode: zipCode)
+            }
+        } else {
+            emptyStateView?.viewModel = EmptyStateView.ViewModel(emptyStateImage: .noGroupsFound, emptyStatePrompt: NSLocalizedString("No groups were found. Try searching for your interests", comment: "Prompts the user to search for their interests."))
+            emptyStateView?.isHidden = false
+        }
+    }
+    func networkIsUnavailable() {
+        emptyStateView?.viewModel = EmptyStateView.ViewModel(emptyStateImage: .noInternetConnection, emptyStatePrompt: "No Internet Connection Detected")
+        emptyStateView?.isHidden = false
     }
 }

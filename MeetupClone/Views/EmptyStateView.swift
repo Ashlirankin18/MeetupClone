@@ -7,6 +7,7 @@
 //
 
 import UIKit
+
 /// `UIView` subclass which contains the information needed to display an empty state to the user.
 final class EmptyStateView: UIView {
     /// Manages the data that is needed to populate the `EmptyStateView`
@@ -16,18 +17,18 @@ final class EmptyStateView: UIView {
         let emptyStateImage: UIImage?
         
         /// The prompt that will be displayed on the view
+
         let emptyStatePrompt: String
     }
     
     /// The `EmptyStateView`'s viewModel
     var viewModel: ViewModel? {
         didSet {
-          emptyStateImageView.image = viewModel?.emptyStateImage
+            emptyStateImageView.image = viewModel?.emptyStateImage
             emptyStatePromptLabel.text = viewModel?.emptyStatePrompt
         }
     }
     
     @IBOutlet private weak var emptyStateImageView: UIImageView!
-    
     @IBOutlet private weak var emptyStatePromptLabel: UILabel!
 }
