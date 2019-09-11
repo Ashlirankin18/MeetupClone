@@ -27,8 +27,6 @@ final class GroupsDisplayViewController: UIViewController {
     
     private var currentDataTask: Cancelable?
     
-    private var activityIndicatorView = ActivityIndicatorView()
-
     private var emptyStateView: EmptyStateView?
     
     private let networkConnectivityHelper = NetworkConnectivityHelper()
@@ -43,7 +41,10 @@ final class GroupsDisplayViewController: UIViewController {
         }
     }
     
+    @IBOutlet private weak var activityIndicatorView: UIActivityIndicatorView!
+    
     @IBOutlet private weak var zipCodeBarButtonItem: UIBarButtonItem!
+    
     @IBOutlet private weak var groupDisplayTableView: UITableView!
     
     override func viewDidLoad() {
@@ -51,7 +52,6 @@ final class GroupsDisplayViewController: UIViewController {
         configureTableViewProperties()
         configureNavigationItemProperties()
         checkForLastZipCodeEntered()
-        setUpActivityIndicator()
         setUpEmptyStateView()
         networkConnectivityHelper.delegate = self
         addKeyboardNotificationObservers()
@@ -68,19 +68,14 @@ final class GroupsDisplayViewController: UIViewController {
         definesPresentationContext = true
     }
     
-    private func setUpActivityIndicator() {
-        view.addSubview(activityIndicatorView)
-        activityIndicatorView.isAnimating = true
-    }
-    
     private func hideActivityIndicator() {
         activityIndicatorView.isHidden = true
-        activityIndicatorView.indicatorStopAnimating()    
+        activityIndicatorView.stopAnimating()
     }
     
     private func showActivityIndicator() {
         activityIndicatorView.isHidden = false
-        activityIndicatorView.indicatorStartAnimating()
+        activityIndicatorView.startAnimating()
     }
     
     private func loadEmptyState() -> EmptyStateView? {
@@ -110,12 +105,12 @@ final class GroupsDisplayViewController: UIViewController {
         switch loadingState {
         case .isLoading:
             showActivityIndicator()
-            groupDisplayTableView.isHidden = true
             emptyStateView?.isHidden = true
+            groupDisplayTableView.isHidden = true
         case .isFinishedLoading:
             if groupInfoDataSource.groups.isEmpty {
-               emptyStateView?.isHidden = false
-               groupDisplayTableView.isHidden = true
+                emptyStateView?.isHidden = false
+                groupDisplayTableView.isHidden = true
             } else {
                 groupDisplayTableView.isHidden = false
                 emptyStateView?.isHidden = true
@@ -134,7 +129,7 @@ final class GroupsDisplayViewController: UIViewController {
             searchController.searchBar.placeholder = NSLocalizedString("Search for group", comment: "Prompts the user to search for a group.")
         }
     }
-  
+    
     @discardableResult private func retrieveGroups(searchText: String?, zipCode: String?) -> Cancelable? {
         let dataTask = meetupDataHandler.retrieveMeetupGroups(searchText: searchText ?? "", zipCode: zipCode) { [weak self] (results) in
             switch results {
@@ -165,11 +160,11 @@ final class GroupsDisplayViewController: UIViewController {
             textfield.keyboardType = .numberPad
         }
         
-        let okAction = UIAlertAction(title: NSLocalizedString("Ok", comment: "Submit Answer"), style: .default) { [weak self] _ in 
+        let okAction = UIAlertAction(title: NSLocalizedString("Ok", comment: "Submit Answer"), style: .default) { [weak self] _ in
             guard let self = self else {
                 return
             }
-
+            
             guard let zipCode = alertController.textFields?.first?.text else {
                 return
             }
@@ -230,7 +225,7 @@ extension GroupsDisplayViewController: UISearchResultsUpdating {
                     currentDataTask?.cancelTask()
                     let zipCode = userDefaults.object(forKey: UserDefaultConstants.zipCode.rawValue) as? String ?? ""
                     let timer = Timer(timeInterval: 1.0, repeats: false) { [weak self] _ in
-
+                        
                         guard let self = self else {
                             return
                         }
@@ -254,6 +249,7 @@ extension GroupsDisplayViewController: UITableViewDelegate {
         viewController.headerInformationModel = HeaderInformationModel(imageURL: highResPhoto, name: chosenGroup.groupName)
         
         viewController.urlName = chosenGroup.urlName
+        searchController.searchBar.resignFirstResponder()
         show(viewController, sender: nil)
     }
 }
