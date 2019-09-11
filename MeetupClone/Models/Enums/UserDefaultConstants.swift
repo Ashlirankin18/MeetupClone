@@ -18,4 +18,6 @@ enum UserDefaultConstants: String {
     case searchText = "searchText"
     ///  zipCode: stores the zipcode the user entered
     case zipCode = "zipCode"
+    ///  isFirstLaunch: stores the first launch of the state of the application.
+    case isFirstLaunch = "isFirstLaunch"
 }
