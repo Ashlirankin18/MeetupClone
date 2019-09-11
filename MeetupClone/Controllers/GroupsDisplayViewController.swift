@@ -27,8 +27,6 @@ final class GroupsDisplayViewController: UIViewController {
     
     private var currentDataTask: Cancelable?
     
-    private var activityIndicatorView = UIActivityIndicatorView()
-    
     private var emptyStateView: EmptyStateView? {
         didSet {
             guard let emptyStateView = emptyStateView else {
@@ -52,7 +50,10 @@ final class GroupsDisplayViewController: UIViewController {
         }
     }
     
+    @IBOutlet private weak var activityIndicatorView: UIActivityIndicatorView!
+    
     @IBOutlet private weak var zipCodeBarButtonItem: UIBarButtonItem!
+    
     @IBOutlet private weak var groupDisplayTableView: UITableView!
     
     override func viewDidLoad() {
@@ -60,7 +61,6 @@ final class GroupsDisplayViewController: UIViewController {
         configureTableViewProperties()
         configureNavigationItemProperties()
         checkForLastZipCodeEntered()
-        setUpActivityIndicator()
         loadEmptyState()
         networkConnectivityHelper.delegate = self
         addKeyboardNotificationObservers()
@@ -76,11 +76,8 @@ final class GroupsDisplayViewController: UIViewController {
         navigationItem.hidesSearchBarWhenScrolling = false
         definesPresentationContext = true
     }
-    
-    private func setUpActivityIndicator() {
-        view.addSubview(activityIndicatorView)
-    }
-    
+
+
     private func hideActivityIndicator() {
         activityIndicatorView.isHidden = true
         activityIndicatorView.stopAnimating()
@@ -109,8 +106,8 @@ final class GroupsDisplayViewController: UIViewController {
         switch loadingState {
         case .isLoading:
             showActivityIndicator()
-            groupDisplayTableView.isHidden = true
             emptyStateView?.isHidden = true
+            groupDisplayTableView.isHidden = true
         case .isFinishedLoading:
             if groupInfoDataSource.groups.isEmpty {
                 emptyStateView?.isHidden = false
@@ -164,7 +161,7 @@ final class GroupsDisplayViewController: UIViewController {
             textfield.keyboardType = .numberPad
         }
         
-        let okAction = UIAlertAction(title: NSLocalizedString("Ok", comment: "Submit Answer"), style: .default) { [weak self] _ in 
+        let okAction = UIAlertAction(title: NSLocalizedString("Ok", comment: "Submit Answer"), style: .default) { [weak self] _ in
             guard let self = self else {
                 return
             }
@@ -253,6 +250,7 @@ extension GroupsDisplayViewController: UITableViewDelegate {
         viewController.headerInformationModel = HeaderInformationModel(imageURL: highResPhoto, name: chosenGroup.groupName)
         
         viewController.urlName = chosenGroup.urlName
+        searchController.searchBar.resignFirstResponder()
         show(viewController, sender: nil)
     }
 }
