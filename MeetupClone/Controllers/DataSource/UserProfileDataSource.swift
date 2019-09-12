@@ -23,18 +23,17 @@ final class UserProfileDataSource: NSObject, UITableViewDataSource {
         
         switch indexPath.row {
         case 0 :
-            let cell = UITableViewCell(style: .value1, reuseIdentifier: "UserInfoCell")
+            guard let cell = Bundle.main.loadNibNamed("UserNameTableViewCell", owner: self, options: nil)?.first as? UserNameTableViewCell else {
+                fatalError("No userNameCell found")
+            }
             guard let meetupUserModel = meetupUserModel else {
                 return UITableViewCell()
             }
-            cell.textLabel?.font = UIFont.systemFont(ofSize: 17, weight: .bold)
-            cell.detailTextLabel?.textColor = .black
-            cell.textLabel?.text = NSLocalizedString("Name", comment: "Username")
-            cell.detailTextLabel?.text = meetupUserModel.name
+            cell.viewModel = UserNameTableViewCell.ViewModel(userName: meetupUserModel.name)
             return cell
             
         default:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "UserBioCell", for: indexPath) as? UserBioTableViewCell else {
+            guard let cell = Bundle.main.loadNibNamed("UserBioTableViewCell", owner: self, options: nil)?.first as? UserBioTableViewCell else {
                 return UITableViewCell() }
             guard let meetupUserModel = meetupUserModel else {
                 return UITableViewCell()
