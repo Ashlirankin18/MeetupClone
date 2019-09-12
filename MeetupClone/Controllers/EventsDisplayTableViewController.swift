@@ -33,10 +33,19 @@ final class EventsDisplayTableViewController: UITableViewController {
             updatesViewBasedOnLoadingState(loadingState: loadingState)
         }
     }
-    
     private let eventsDisplayTableViewControllerDataSource = EventsDisplayTableViewControllerDataSource()
     
     private let meetupDataHandler = MeetupDataHandler(networkHelper: NetworkHelper())
+    
+    private var emptyStateView: EmptyStateView? {
+        didSet {
+            guard let emptyStateView = emptyStateView else {
+                return
+            }
+            view.addSubview(emptyStateView)
+            constrainEmptyStateView(emptyStateView: emptyStateView)
+        }
+    }
     
     @IBOutlet private weak var activityIndicatorView: UIActivityIndicatorView!
     
@@ -44,13 +53,15 @@ final class EventsDisplayTableViewController: UITableViewController {
         super.viewDidLoad()
         configureTableViewProperties()
         navigationItem.largeTitleDisplayMode = .never
-          self.loadingState = .isLoading
+        loadNib()
+        self.loadingState = .isLoading
     }
     
     private func updatesViewBasedOnLoadingState(loadingState: LoadingState) {
         switch loadingState {
         case .isLoading:
-           showActivityIndicator()
+            showActivityIndicator()
+            emptyStateView?.isHidden = true
         case .isFinishedLoading:
             hideActivityIndicator()
         }
@@ -64,6 +75,19 @@ final class EventsDisplayTableViewController: UITableViewController {
     private func hideActivityIndicator() {
         activityIndicatorView.isHidden = true
         activityIndicatorView.stopAnimating()
+    }
+    
+    private func showEmptyStateView() {
+        emptyStateView?.viewModel = EmptyStateView.ViewModel(emptyStateImage: .noEventsFound, emptyStatePrompt: NSLocalizedString("This group has no upcoming events", comment: "Indicates to the user that they have no upcoming events"))
+        self.emptyStateView?.isHidden = false
+    }
+    
+    private func loadNib () {
+        guard let emptyStateView = Bundle.main.loadNibNamed("EmptyStateView", owner: self, options: nil)?.first as? EmptyStateView else {
+            assertionFailure("Could not load nib")
+            return
+        }
+        self.emptyStateView = emptyStateView
     }
     private func configureTableViewProperties() {
         tableView.dataSource = eventsDisplayTableViewControllerDataSource
@@ -81,8 +105,14 @@ final class EventsDisplayTableViewController: UITableViewController {
             case .failure(let error):
                 print(error)
             case .success(let events):
-                self.eventsDisplayTableViewControllerDataSource.events = events
-                self.tableView.reloadData()
+                if events.isEmpty {
+                    self.showEmptyStateView()
+                } else {
+                    self.tableView.isHidden = false
+                    self.eventsDisplayTableViewControllerDataSource.events = events
+                    self.tableView.reloadData()
+                    self.emptyStateView?.isHidden = true
+                }
                 self.loadingState = .isFinishedLoading
             }
         }
@@ -90,19 +120,32 @@ final class EventsDisplayTableViewController: UITableViewController {
     
     // MARK: - UITableViewDelegate
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = Bundle.main.loadNibNamed("GroupDisplayTableViewCell", owner: self, options: nil)?.first as? GroupDisplayTableViewCell
-        guard let headerInformationModel = headerInformationModel else {
+        if eventsDisplayTableViewControllerDataSource.events.isEmpty {
             return nil
+        } else {
+            let headerView = Bundle.main.loadNibNamed("GroupDisplayTableViewCell", owner: self, options: nil)?.first as? GroupDisplayTableViewCell
+            guard let headerInformationModel = headerInformationModel else {
+                return nil
+            }
+            headerView?.viewModel = GroupDisplayTableViewCell.ViewModel(groupName: headerInformationModel.name, groupImage: headerInformationModel.imageURL, members: nil, nextEventName: nil, date: nil)
+            
+            return headerView
         }
-        headerView?.isHidden = false
-        headerView?.viewModel = GroupDisplayTableViewCell.ViewModel(groupName: headerInformationModel.name, groupImage: headerInformationModel.imageURL, members: nil, nextEventName: nil, date: nil)
-        return headerView
     }
-    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) { 
         let detailedController = EventDetailedTableViewController(style: .grouped)
         let event = eventsDisplayTableViewControllerDataSource.events[indexPath.row]
         detailedController.meetupEventModel = event
         show(detailedController, sender: self)
+    }
+}
+extension EventsDisplayTableViewController {
+    func constrainEmptyStateView(emptyStateView: EmptyStateView) {
+        NSLayoutConstraint.activate([
+            emptyStateView.topAnchor.constraint(equalTo: view.topAnchor),
+            emptyStateView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            emptyStateView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            emptyStateView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            ])
     }
 }

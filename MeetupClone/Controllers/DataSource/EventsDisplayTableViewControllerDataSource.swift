@@ -36,4 +36,3 @@ final class EventsDisplayTableViewControllerDataSource: NSObject, UITableViewDat
             return cell
         }
     }
-
