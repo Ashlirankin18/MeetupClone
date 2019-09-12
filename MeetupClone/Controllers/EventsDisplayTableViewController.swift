@@ -24,27 +24,54 @@ final class EventsDisplayTableViewController: UITableViewController {
             title = headerInformationModel?.name
         }
     }
-
+    
+    var loadingState: LoadingState? {
+        didSet {
+            guard let loadingState = loadingState else {
+                return
+            }
+            updatesViewBasedOnLoadingState(loadingState: loadingState)
+        }
+    }
+    
     private let eventsDisplayTableViewControllerDataSource = EventsDisplayTableViewControllerDataSource()
     
     private let meetupDataHandler = MeetupDataHandler(networkHelper: NetworkHelper())
     
-    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
+    @IBOutlet private weak var activityIndicatorView: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableViewProperties()
         navigationItem.largeTitleDisplayMode = .never
+          self.loadingState = .isLoading
     }
     
+    private func updatesViewBasedOnLoadingState(loadingState: LoadingState) {
+        switch loadingState {
+        case .isLoading:
+           showActivityIndicator()
+        case .isFinishedLoading:
+            hideActivityIndicator()
+        }
+    }
+    
+    private func showActivityIndicator() {
+        activityIndicatorView.isHidden = false
+        activityIndicatorView.startAnimating()
+    }
+    
+    private func hideActivityIndicator() {
+        activityIndicatorView.isHidden = true
+        activityIndicatorView.stopAnimating()
+    }
     private func configureTableViewProperties() {
-        registerTableViewCells()
         tableView.dataSource = eventsDisplayTableViewControllerDataSource
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderHeight = UITableView.automaticDimension
-         tableView.register(UINib(nibName: "EventDisplayTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "EventDisplayCell")
+        tableView.register(UINib(nibName: "EventDisplayTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "EventDisplayCell")
     }
-
+    
     private func retrieveGroupEvents(urlName: String) {
         meetupDataHandler.retrieveEvents(with: urlName) { [weak self] result in
             guard let self = self else {
@@ -55,7 +82,8 @@ final class EventsDisplayTableViewController: UITableViewController {
                 print(error)
             case .success(let events):
                 self.eventsDisplayTableViewControllerDataSource.events = events
-                self.tableView.reloadData() 
+                self.tableView.reloadData()
+                self.loadingState = .isFinishedLoading
             }
         }
     }
