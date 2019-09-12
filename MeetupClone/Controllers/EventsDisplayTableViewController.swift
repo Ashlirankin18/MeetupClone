@@ -10,7 +10,7 @@ import UIKit
 
 /// `UITableViewController` which will display a list of events
 final class EventsDisplayTableViewController: UITableViewController {
-
+    
     /// The URLName of the event 
     var urlName = "" {
         didSet {
@@ -140,7 +140,7 @@ final class EventsDisplayTableViewController: UITableViewController {
     }
 }
 extension EventsDisplayTableViewController {
-    func constrainEmptyStateView(emptyStateView: EmptyStateView) {
+    private func constrainEmptyStateView(emptyStateView: EmptyStateView) {
         NSLayoutConstraint.activate([
             emptyStateView.topAnchor.constraint(equalTo: view.topAnchor),
             emptyStateView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
