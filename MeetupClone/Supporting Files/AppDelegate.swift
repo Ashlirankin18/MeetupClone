@@ -13,14 +13,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     private let meetupAuthenticationHandler = MeetupAuthenticationHandler(userDefaults: UserDefaults.standard, networkHelper: NetworkHelper())
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         let isFirstLaunch = UserDefaults.standard.object(forKey: UserDefaultConstants.isFirstLaunch.rawValue) as? Bool ?? true
-    if !isFirstLaunch {
+        if !isFirstLaunch {
             UserDefaults.standard.set(false, forKey: UserDefaultConstants.isFirstLaunch.rawValue)
             guard let meetupUserInterface = UIStoryboard(name: "MeetupInfoInterface", bundle: nil).instantiateViewController(withIdentifier: "MeetupInfoTabbarController") as? UITabBarController else {
                 return false                
-        }
+            }
             window?.rootViewController = meetupUserInterface
             window?.makeKeyAndVisible()
         } else {

@@ -22,7 +22,7 @@ class LoginViewController: UIViewController {
     }
     
     @IBOutlet private weak var loginButton: RoundedButton!
-
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         startPulseAnimation()
