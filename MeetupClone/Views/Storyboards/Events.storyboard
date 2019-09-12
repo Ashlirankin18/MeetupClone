@@ -18,11 +18,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <color key="separatorColor" name="Red"/>
+                        <activityIndicatorView key="tableFooterView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" id="1wS-mn-Zhi">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="20"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </activityIndicatorView>
                         <connections>
                             <outlet property="dataSource" destination="bcI-Zp-T7n" id="Syh-1d-Ne9"/>
                             <outlet property="delegate" destination="bcI-Zp-T7n" id="XwU-vO-6wK"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="activityIndicatorView" destination="1wS-mn-Zhi" id="yfo-eI-d1z"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cJq-p0-DqM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

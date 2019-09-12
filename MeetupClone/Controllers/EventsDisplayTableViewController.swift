@@ -29,6 +29,8 @@ final class EventsDisplayTableViewController: UITableViewController {
     
     private let meetupDataHandler = MeetupDataHandler(networkHelper: NetworkHelper())
     
+    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableViewProperties()
@@ -40,12 +42,9 @@ final class EventsDisplayTableViewController: UITableViewController {
         tableView.dataSource = eventsDisplayTableViewControllerDataSource
         tableView.rowHeight = UITableView.automaticDimension
         tableView.sectionHeaderHeight = UITableView.automaticDimension
+         tableView.register(UINib(nibName: "EventDisplayTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "EventDisplayCell")
     }
-    private func registerTableViewCells() {
-        tableView.register(UINib(nibName: "EventDisplayTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "EventDisplayCell")
-        tableView.register(UINib(nibName: "EmptyStateTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "EmptyStateCell")
-    }
-    
+
     private func retrieveGroupEvents(urlName: String) {
         meetupDataHandler.retrieveEvents(with: urlName) { [weak self] result in
             guard let self = self else {
