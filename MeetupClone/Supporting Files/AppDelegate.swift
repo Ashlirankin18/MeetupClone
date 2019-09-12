@@ -19,8 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     if !isFirstLaunch {
             UserDefaults.standard.set(false, forKey: UserDefaultConstants.isFirstLaunch.rawValue)
             guard let meetupUserInterface = UIStoryboard(name: "MeetupInfoInterface", bundle: nil).instantiateViewController(withIdentifier: "MeetupInfoTabbarController") as? UITabBarController else {
-                return false }
-            
+                return false                
+        }
             window?.rootViewController = meetupUserInterface
             window?.makeKeyAndVisible()
         } else {
@@ -31,7 +31,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window?.rootViewController = loginViewController
             window?.makeKeyAndVisible()
         }
-    
         return true
     }
     

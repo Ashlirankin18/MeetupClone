@@ -280,12 +280,13 @@ extension GroupsDisplayViewController: NetworkConnectivityHelperDelegate {
                     retrieveGroups(searchText: searchText, zipCode: zipCode)
                 }
             } else {
-                emptyStateView?.viewModel = EmptyStateView.ViewModel(emptyStateImage: .noGroupsFound, emptyStatePrompt: NSLocalizedString("Search for groups the interest you!", comment: "Prompts the user to search for their interests."))
+                emptyStateView?.viewModel = EmptyStateView.ViewModel(emptyStateImage: .noGroupsFound, emptyStatePrompt: NSLocalizedString("Search for groups that interest you!", comment: "Prompts the user to search for their interests."))
                 emptyStateView?.isHidden = false
             }
         } else {
-            emptyStateView?.viewModel = EmptyStateView.ViewModel(emptyStateImage: .noGroupsFound, emptyStatePrompt: NSLocalizedString("Welcome! Search for the groups the groups you like.", comment: "Indicates to the user no groups were found"))
+            emptyStateView?.viewModel = EmptyStateView.ViewModel(emptyStateImage: .noGroupsFound, emptyStatePrompt: NSLocalizedString("Welcome! Search for the groups you like.", comment: "Indicates to the user no groups were found"))
             userDefaults.set(false, forKey: UserDefaultConstants.isFirstLaunch.rawValue)
+            emptyStateView?.isHidden = false
         }
     }
     func networkIsUnavailable() {
