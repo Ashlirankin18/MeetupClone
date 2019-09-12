@@ -155,7 +155,7 @@ final class GroupsDisplayViewController: UIViewController {
                 self.groupInfoDataSource.groups = groups
                 self.groupDisplayTableView.reloadData()
                 if self.groupInfoDataSource.groups.isEmpty {
-                    self.emptyStateView?.viewModel = EmptyStateView.ViewModel(emptyStateImage: .noGroupsFound, emptyStatePrompt: "No groups were found")
+                    self.emptyStateView?.viewModel = EmptyStateView.ViewModel(emptyStateImage: .noGroupsFound, emptyStatePrompt: NSLocalizedString("No groups were found", comment: "Indicates to the user that no groups were found."))
                 }
                 self.loadingState = .isFinishedLoading
             }
@@ -176,7 +176,7 @@ final class GroupsDisplayViewController: UIViewController {
             textfield.keyboardType = .numberPad
         }
         
-        let okAction = UIAlertAction(title: NSLocalizedString("Ok", comment: "Submit Answer"), style: .default) { [weak self] _ in
+        let okAction = UIAlertAction(title: NSLocalizedString("Ok", comment: "Submits Answer"), style: .default) { [weak self] _ in
             guard let self = self else {
                 return
             }
@@ -259,7 +259,7 @@ extension GroupsDisplayViewController: UISearchResultsUpdating {
 extension GroupsDisplayViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let viewController = UIStoryboard(name: "Events", bundle: nil).instantiateViewController(withIdentifier: "EventsDisplayController") as? EventsDisplayTableViewController else {
-            assertionFailure("could not instantiate view controller")
+            assertionFailure("Could not instantiate view controller")
             return
         }
         let chosenGroup = groupInfoDataSource.groups[indexPath.row]
