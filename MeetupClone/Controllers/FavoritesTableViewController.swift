@@ -46,8 +46,10 @@ final class FavoritesTableViewController: UITableViewController {
         if PersistenceHelper.shared.favoriteEvents.isEmpty {
             emptyStateView?.viewModel = EmptyStateView.ViewModel(emptyStateImage: .noFavoritesFound, emptyStatePrompt: NSLocalizedString("You have no favorite events", comment: "Indicates to the user that they have no favorite events."))
             emptyStateView?.isHidden = false
+            tableView.isScrollEnabled = false
         } else {
             emptyStateView?.isHidden = true
+            tableView.isScrollEnabled = true
         }
     }
     private func configureTableViewProperties() {
