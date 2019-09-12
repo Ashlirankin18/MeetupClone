@@ -19,8 +19,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="f7V-iN-FN5">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="grouped" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="f7V-iN-FN5">
+                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <color key="separatorColor" name="Red"/>
                                 <inset key="separatorInset" minX="2" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -97,7 +97,7 @@
                             <constraint firstItem="9Th-iG-wCZ" firstAttribute="trailing" secondItem="f7V-iN-FN5" secondAttribute="trailing" id="4sF-p0-9PH"/>
                             <constraint firstItem="f7V-iN-FN5" firstAttribute="top" secondItem="9Th-iG-wCZ" secondAttribute="top" id="hFu-I9-lSd"/>
                             <constraint firstItem="f7V-iN-FN5" firstAttribute="leading" secondItem="9Th-iG-wCZ" secondAttribute="leading" id="ktb-b0-3BD"/>
-                            <constraint firstItem="9Th-iG-wCZ" firstAttribute="bottom" secondItem="f7V-iN-FN5" secondAttribute="bottom" id="nKF-u0-9gS"/>
+                            <constraint firstItem="f7V-iN-FN5" firstAttribute="bottom" secondItem="FfD-iP-Crp" secondAttribute="bottom" id="nKF-u0-9gS"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="9Th-iG-wCZ"/>
                     </view>

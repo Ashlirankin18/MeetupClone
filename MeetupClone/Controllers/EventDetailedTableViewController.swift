@@ -23,8 +23,8 @@ final class EventDetailedTableViewController: UITableViewController {
     var meetupEventModel: MeetupEventModel? {
         didSet {
             guard let meetupEventModel = meetupEventModel else {
-                    assertionFailure("No eventModel found")
-                    return
+                assertionFailure("No eventModel found")
+                return
             }
             let urlName = meetupEventModel.group.urlName
             retrieveRSVPData(eventId: meetupEventModel.eventId, eventURLName: urlName)
@@ -70,14 +70,14 @@ final class EventDetailedTableViewController: UITableViewController {
             return
         }
         meetupDataHandler.retrieveEventRSVP(eventId: eventId, eventURLName: eventURLName) { [weak self] (result) in
+            guard let self = self else {
+                return
+            }
             switch result {
             case .failure(let error):
                 print(error)
             case .success(let rsvps):
-                guard let self = self else {
-                    return
-                }
-                self.eventDetailedControllerDataSource.rsvps = rsvps
+            self.eventDetailedControllerDataSource.rsvps = rsvps
                 self.tableView.reloadData()
             }
         }

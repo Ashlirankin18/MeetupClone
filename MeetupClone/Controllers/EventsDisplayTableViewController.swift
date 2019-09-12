@@ -10,7 +10,7 @@ import UIKit
 
 /// `UITableViewController` which will display a list of events
 final class EventsDisplayTableViewController: UITableViewController {
-    
+
     /// The URLName of the event 
     var urlName = "" {
         didSet {
@@ -18,42 +18,23 @@ final class EventsDisplayTableViewController: UITableViewController {
         }
     }
     
-    /// The model representing the infoprmation a headerView need it be initilized
+    /// The model representing the information a headerView needs to be initilized
     var headerInformationModel: HeaderInformationModel? {
         didSet {
             title = headerInformationModel?.name
         }
     }
-    
-    private var activityIndicatorView = ActivityIndicatorView()
-    
+
     private let eventsDisplayTableViewControllerDataSource = EventsDisplayTableViewControllerDataSource()
     
     private let meetupDataHandler = MeetupDataHandler(networkHelper: NetworkHelper())
-    
-    private var isAnimating = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableViewProperties()
         navigationItem.largeTitleDisplayMode = .never
     }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        activityIndicatorView.frame = CGRect(x: 0, y: 0, width: tableView.bounds.width, height: tableView.bounds.height)
-        showActivityIndicator()
-    }
     
-    private func showActivityIndicator() {
-        tableView.backgroundView = activityIndicatorView
-        activityIndicatorView.indicatorStartAnimating()
-        isAnimating = true
-    }
-    private func hideActivityIndicator() {
-        tableView.backgroundView = nil
-        activityIndicatorView.indicatorStopAnimating()
-         isAnimating = false
-    }
     private func configureTableViewProperties() {
         registerTableViewCells()
         tableView.dataSource = eventsDisplayTableViewControllerDataSource
@@ -64,19 +45,18 @@ final class EventsDisplayTableViewController: UITableViewController {
         tableView.register(UINib(nibName: "EventDisplayTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "EventDisplayCell")
         tableView.register(UINib(nibName: "EmptyStateTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "EmptyStateCell")
     }
+    
     private func retrieveGroupEvents(urlName: String) {
         meetupDataHandler.retrieveEvents(with: urlName) { [weak self] result in
-            
+            guard let self = self else {
+                return
+            }
             switch result {
             case .failure(let error):
                 print(error)
             case .success(let events):
-                guard let self = self else {
-                    return
-                }
-                 self.hideActivityIndicator()
                 self.eventsDisplayTableViewControllerDataSource.events = events
-                self.tableView.reloadData()
+                self.tableView.reloadData() 
             }
         }
     }
@@ -87,12 +67,8 @@ final class EventsDisplayTableViewController: UITableViewController {
         guard let headerInformationModel = headerInformationModel else {
             return nil
         }
-        if activityIndicatorView.isAnimating {
-            headerView?.isHidden = true
-        } else {
-            headerView?.isHidden = false
-            headerView?.viewModel = GroupDisplayTableViewCell.ViewModel(groupName: headerInformationModel.name, groupImage: headerInformationModel.imageURL, members: nil, nextEventName: nil, date: nil)
-        }
+        headerView?.isHidden = false
+        headerView?.viewModel = GroupDisplayTableViewCell.ViewModel(groupName: headerInformationModel.name, groupImage: headerInformationModel.imageURL, members: nil, nextEventName: nil, date: nil)
         return headerView
     }
     
