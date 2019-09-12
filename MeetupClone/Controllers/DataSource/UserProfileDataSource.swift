@@ -23,18 +23,19 @@ final class UserProfileDataSource: NSObject, UITableViewDataSource {
         
         switch indexPath.row {
         case 0 :
-            guard let cell = Bundle.main.loadNibNamed("UserNameTableViewCell", owner: self, options: nil)?.first as? UserNameTableViewCell else {
-                fatalError("No userNameCell found")
-            }
-            guard let meetupUserModel = meetupUserModel else {
-                return UITableViewCell()
+            guard let cell = Bundle.main.loadNibNamed("UserNameTableViewCell", owner: self, options: nil)?.first as? UserNameTableViewCell,
+                let meetupUserModel = meetupUserModel else {
+                    assertionFailure("Could not load nib / no meetupUserModel found")
+                    return UITableViewCell()
             }
             cell.viewModel = UserNameTableViewCell.ViewModel(userName: meetupUserModel.name)
             return cell
             
         default:
             guard let cell = Bundle.main.loadNibNamed("UserBioTableViewCell", owner: self, options: nil)?.first as? UserBioTableViewCell else {
-                return UITableViewCell() }
+                return UITableViewCell()
+                
+            }
             guard let meetupUserModel = meetupUserModel else {
                 return UITableViewCell()
             }
