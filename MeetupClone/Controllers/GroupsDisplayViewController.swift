@@ -63,15 +63,17 @@ final class GroupsDisplayViewController: UIViewController {
         configureTableViewProperties()
         configureNavigationItemProperties()
         checkForLastZipCodeEntered()
-        hideActivityIndicator()
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         networkConnectivityHelper.delegate = self
         addKeyboardNotificationObservers()
         loadEmptyState()
+        hideActivityIndicator()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         showActivityIndicator()
     }
+    
     private func isFirstLaunch() -> Bool {
         return userDefaults.bool(forKey: UserDefaultConstants.isFirstLaunch.rawValue)
     }
