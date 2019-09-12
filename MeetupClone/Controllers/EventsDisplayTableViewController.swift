@@ -24,7 +24,7 @@ final class EventsDisplayTableViewController: UITableViewController {
             title = headerInformationModel?.name
         }
     }
-    
+
     private let eventsDisplayTableViewControllerDataSource = EventsDisplayTableViewControllerDataSource()
     
     private let meetupDataHandler = MeetupDataHandler(networkHelper: NetworkHelper())
