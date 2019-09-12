@@ -25,7 +25,7 @@ final class EventsDisplayTableViewController: UITableViewController {
         }
     }
     
-    var loadingState: LoadingState? {
+    private var loadingState: LoadingState? {
         didSet {
             guard let loadingState = loadingState else {
                 return
