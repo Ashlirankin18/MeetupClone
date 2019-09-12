@@ -23,7 +23,7 @@ final class UserProfileDataSource: NSObject, UITableViewDataSource {
         
         switch indexPath.row {
         case 0 :
-            guard let cell = Bundle.main.loadNibNamed("UserNameTableViewCell", owner: self, options: nil)?.first as? UserNameTableViewCell else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "UserNameCell")  as? UserNameTableViewCell else {
                     assertionFailure("Could not load nib")
                     return UITableViewCell()
             }
@@ -34,7 +34,7 @@ final class UserProfileDataSource: NSObject, UITableViewDataSource {
             return cell
             
         default:
-            guard let cell = Bundle.main.loadNibNamed("UserBioTableViewCell", owner: self, options: nil)?.first as? UserBioTableViewCell else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "UserBioCell") as? UserBioTableViewCell else {
                 return UITableViewCell()
             }
             guard let meetupUserModel = meetupUserModel else {
