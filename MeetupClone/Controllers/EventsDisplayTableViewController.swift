@@ -103,9 +103,9 @@ final class EventsDisplayTableViewController: UITableViewController {
                 if events.isEmpty {
                     self.showEmptyStateView()
                 } else {
-            self.eventsDisplayTableViewControllerDataSource.events = events
-                self.tableView.reloadData()
-                self.emptyStateView?.isHidden = true
+self.eventsDisplayTableViewControllerDataSource.events = events
+                    self.tableView.reloadData()
+                    self.emptyStateView?.isHidden = true
                 }
                 self.loadingState = .isFinishedLoading
             }
