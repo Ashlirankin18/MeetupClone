@@ -36,7 +36,7 @@ final class EventDisplayTableViewCell: UITableViewCell {
             eventNameLabel.text = viewModel.eventName
             eventDescriptionLabel.text = viewModel.eventDescription
             eventLocationLabel.text = viewModel.eventLocation
-            rsvpLabel.text = viewModel.rsvpCount.description
+            rsvpLabel.text = String(viewModel.rsvpCount)
         }
     }
     @IBOutlet private weak var eventNameLabel: UILabel!
