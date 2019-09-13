@@ -244,7 +244,7 @@ extension GroupsDisplayViewController: UITableViewDelegate {
         
         viewController.urlName = chosenGroup.urlName
         searchController.searchBar.resignFirstResponder()
-        show(viewController, sender: self)
+        show(viewController, sender: nil)
     }
 }
 
