@@ -113,11 +113,9 @@ final class EventDetailedTableViewController: UITableViewController {
         if let lattitude = meetupEventModel.venue?.lattitude,
             let longitude = meetupEventModel.venue?.longitude {
             do {
-                let description = try meetupEventModel.description?.asHTMLAttributedString().string
+                let description = meetupEventModel.description?.asHTMLAttributedString().string
                 headerView.viewModel = EventHeaderView.ViewModel(eventCoordinates: CLLocationCoordinate2D(latitude: lattitude, longitude: longitude), eventName: meetupEventModel.eventName, eventLocation: meetupEventModel.venue?.city, eventDescription: description)
-            } catch {
-                assertionFailure("Could not create attributed string")
-            }
+            } 
         } else {
             headerView.viewModel = EventHeaderView.ViewModel(eventCoordinates: nil, eventName: meetupEventModel.eventName, eventLocation: meetupEventModel.venue?.city, eventDescription: nil)
         }
