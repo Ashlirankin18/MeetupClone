@@ -266,7 +266,7 @@ extension GroupsDisplayViewController: UITableViewDelegate {
 extension GroupsDisplayViewController: NetworkConnectivityHelperDelegate {
     
     func networkIsAvailable() {
-        if !isFirstLaunch() {
+        if !preferences.isFirstLaunch {
             if isSearchControllerInputValid() {
                 if let searchText = searchController.searchBar.text {
                     let zipCode = zipCodeBarButtonItem.title ?? ""
