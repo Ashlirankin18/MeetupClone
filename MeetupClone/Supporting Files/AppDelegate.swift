@@ -24,12 +24,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window?.rootViewController = loginViewController
             window?.makeKeyAndVisible()
         } else {
-
+            
             guard let meetupUserInterface = UIStoryboard(name: "MeetupInfoInterface", bundle: nil).instantiateViewController(withIdentifier: "MeetupInfoTabbarController") as? UITabBarController else {
                 return false
             }
             window?.rootViewController = meetupUserInterface
-            window?.makeKeyAndVisible()        }
+            window?.makeKeyAndVisible()
+            
+        }
         return true
     }
     

@@ -74,9 +74,6 @@ final class GroupsDisplayViewController: UIViewController {
         showActivityIndicator()
     }
     
-    private func isFirstLaunch() -> Bool {
-        return preferences.isFirstLaunch
-    }
     private func addKeyboardNotificationObservers() {
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(willHideKeyboard(notification:)), name: UIResponder.keyboardDidHideNotification, object: nil)
