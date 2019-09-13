@@ -23,10 +23,11 @@
                             <outlet property="delegate" destination="bcI-Zp-T7n" id="XwU-vO-6wK"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="Q4q-EI-zxt"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cJq-p0-DqM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-47" y="-60"/>
+            <point key="canvasLocation" x="-817" y="-32"/>
         </scene>
     </scenes>
     <resources>
