@@ -56,7 +56,6 @@ final class EventsDisplayTableViewController: UITableViewController {
             emptyStateView?.isHidden = true
         case .isFinishedLoading:
             hideActivityIndicator()
-            emptyStateView?.isHidden = false
         }
     }
     
@@ -72,6 +71,7 @@ final class EventsDisplayTableViewController: UITableViewController {
     
     private func showEmptyStateView() {
         emptyStateView?.viewModel = EmptyStateView.ViewModel(emptyStateImage: .noEventsFound, emptyStatePrompt: NSLocalizedString("This group has no upcoming events", comment: "Indicates to the user that they have no upcoming events"))
+        emptyStateView?.isHidden = false
     }
     
     private func loadEmptyState() {
@@ -103,9 +103,9 @@ final class EventsDisplayTableViewController: UITableViewController {
                 if events.isEmpty {
                     self.showEmptyStateView()
                 } else {
-                    self.eventsDisplayTableViewControllerDataSource.events = events
-                    self.tableView.reloadData()
-                    self.emptyStateView?.isHidden = true
+            self.eventsDisplayTableViewControllerDataSource.events = events
+                self.tableView.reloadData()
+                self.emptyStateView?.isHidden = true
                 }
                 self.loadingState = .isFinishedLoading
             }
