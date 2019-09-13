@@ -44,8 +44,8 @@ final class EventsDisplayTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableViewProperties()
-        navigationItem.largeTitleDisplayMode = .never
         loadEmptyState()
+        navigationItem.largeTitleDisplayMode = .never
         self.loadingState = .isLoading
     }
     
@@ -56,6 +56,7 @@ final class EventsDisplayTableViewController: UITableViewController {
             emptyStateView?.isHidden = true
         case .isFinishedLoading:
             hideActivityIndicator()
+            emptyStateView?.isHidden = false
         }
     }
     
@@ -71,7 +72,6 @@ final class EventsDisplayTableViewController: UITableViewController {
     
     private func showEmptyStateView() {
         emptyStateView?.viewModel = EmptyStateView.ViewModel(emptyStateImage: .noEventsFound, emptyStatePrompt: NSLocalizedString("This group has no upcoming events", comment: "Indicates to the user that they have no upcoming events"))
-        self.emptyStateView?.isHidden = false
     }
     
     private func loadEmptyState() {
@@ -79,9 +79,9 @@ final class EventsDisplayTableViewController: UITableViewController {
             assertionFailure("Could not load nib")
             return
         }
+        emptyStateView.translatesAutoresizingMaskIntoConstraints = false
         self.emptyStateView = emptyStateView
         view.addSubview(emptyStateView)
-        emptyStateView.frame = view.frame 
         constrainEmptyStateView(emptyStateView: emptyStateView)
     }
     private func configureTableViewProperties() {
@@ -137,10 +137,8 @@ final class EventsDisplayTableViewController: UITableViewController {
 extension EventsDisplayTableViewController {
     private func constrainEmptyStateView(emptyStateView: EmptyStateView) {
         NSLayoutConstraint.activate([
-            emptyStateView.topAnchor.constraint(equalTo: view.topAnchor),
-            emptyStateView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            emptyStateView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            emptyStateView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            emptyStateView.centerXAnchor.constraint(equalTo: tableView.centerXAnchor),
+            emptyStateView.centerYAnchor.constraint(equalTo: tableView.centerYAnchor)
             ])
     }
 }

@@ -87,7 +87,6 @@
     </scenes>
     <resources>
         <image name="icons8-user-groups-25" width="25" height="25"/>
-        <image name="icons8-zip-code-35" width="35" height="35"/>
         <namedColor name="Red">
             <color red="0.99800002574920654" green="0.004999999888241291" blue="0.13300000131130219" alpha="0.92400002479553223" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
