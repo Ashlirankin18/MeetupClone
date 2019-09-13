@@ -77,7 +77,6 @@ final class GroupsDisplayViewController: UIViewController {
         definesPresentationContext = true
     }
 
-
     private func hideActivityIndicator() {
         activityIndicatorView.isHidden = true
         activityIndicatorView.stopAnimating()

@@ -13,19 +13,13 @@ final class FavoritesTableViewController: UITableViewController {
     
     private let favoritesTableViewControllerDataSource = FavoritesTableViewControllerDataSource()
     
-    private var emptyStateView: EmptyStateView? {
-        didSet {
-            guard let emptyStateView = emptyStateView else {
-                return
-            }
-            view.addSubview(emptyStateView)
-        }
-    }
+    private var emptyStateView: EmptyStateView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableViewProperties()
-        loadNib()
+        loadEmptyView()
+        setEmptyStateViewModel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -34,23 +28,24 @@ final class FavoritesTableViewController: UITableViewController {
         configureAndDisplayEmptyStateView()
     }
     
-    private func loadNib() {
+    private func loadEmptyView() {
         guard let emptyStateView = Bundle.main.loadNibNamed("EmptyStateView", owner: self, options: nil)?.first as? EmptyStateView else {
             assertionFailure("Could not load nib.")
             return
         }
         self.emptyStateView = emptyStateView
+        view.addSubview(emptyStateView)
         constrainEmptyStateView(emptyStateView: emptyStateView)
     }
+    
     private func configureAndDisplayEmptyStateView() {
-        if PersistenceHelper.shared.favoriteEvents.isEmpty {
-            emptyStateView?.viewModel = EmptyStateView.ViewModel(emptyStateImage: .noFavoritesFound, emptyStatePrompt: NSLocalizedString("You have no favorite events", comment: "Indicates to the user that they have no favorite events."))
-            emptyStateView?.isHidden = false
-            tableView.isScrollEnabled = false
-        } else {
-            emptyStateView?.isHidden = true
-            tableView.isScrollEnabled = true
-        }
+        let isEmpty = PersistenceHelper.shared.favoriteEvents.isEmpty
+        emptyStateView?.isHidden = !isEmpty
+        tableView.isScrollEnabled = !isEmpty
+    }
+    
+    private func setEmptyStateViewModel() {
+        emptyStateView?.viewModel = EmptyStateView.ViewModel(emptyStateImage: .noFavoritesFound, emptyStatePrompt: NSLocalizedString("You have no favorite events", comment: "Indicates to the user that they have no favorite events."))
     }
     private func configureTableViewProperties() {
         tableView.register(UINib(nibName: "EventDisplayTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "EventDisplayCell")
@@ -66,7 +61,7 @@ final class FavoritesTableViewController: UITableViewController {
     }
 } 
 extension FavoritesTableViewController {
-   private func constrainEmptyStateView(emptyStateView: EmptyStateView) {
+    private func constrainEmptyStateView(emptyStateView: EmptyStateView) {
         NSLayoutConstraint.activate([
             emptyStateView.topAnchor.constraint(equalTo: view.topAnchor),
             emptyStateView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
