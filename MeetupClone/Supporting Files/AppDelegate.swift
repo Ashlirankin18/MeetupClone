@@ -12,7 +12,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
-    private let meetupAuthenticationHandler = MeetupAuthenticationHandler(preferences: Preferences(userDefaults: UserDefaults.standard), networkHelper: NetworkHelper())
+    private lazy var meetupAuthenticationHandler = MeetupAuthenticationHandler(preferences: self.preferences, networkHelper: NetworkHelper())
     private let preferences = Preferences(userDefaults: UserDefaults.standard)
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
