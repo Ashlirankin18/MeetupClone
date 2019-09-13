@@ -23,7 +23,7 @@ final class GroupsDisplayViewController: UIViewController {
     
     private let groupInfoDataSource = GroupInfoDataSource()
     
-    private let meetupDataHandler = MeetupDataHandler(networkHelper: NetworkHelper())
+    private let meetupDataHandler = MeetupDataHandler(networkHelper: NetworkHelper(), preferences: Preferences(userDefaults: UserDefaults.standard))
     
     private var currentDataTask: Cancelable?
     
@@ -50,7 +50,7 @@ final class GroupsDisplayViewController: UIViewController {
         }
     }
     
-    private var userDefaults = UserDefaults.standard
+    private var preferences = Preferences(userDefaults: UserDefaults.standard)
     
     @IBOutlet private weak var activityIndicatorView: UIActivityIndicatorView!
     
@@ -75,7 +75,7 @@ final class GroupsDisplayViewController: UIViewController {
     }
     
     private func isFirstLaunch() -> Bool {
-        return userDefaults.bool(forKey: UserDefaultConstants.isFirstLaunch.rawValue)
+        return preferences.isFirstLaunch
     }
     private func addKeyboardNotificationObservers() {
         let notificationCenter = NotificationCenter.default
@@ -133,14 +133,10 @@ final class GroupsDisplayViewController: UIViewController {
     }
     
     private func checkForLastZipCodeEntered() {
-        let userDefaults = UserDefaults.standard
-        let zipCode = userDefaults.object(forKey: UserDefaultConstants.zipCode.rawValue) as? String ?? NSLocalizedString("Zip Code", comment: "Represents a zip code")
-        if let searchText = userDefaults.object(forKey: UserDefaultConstants.searchText.rawValue) as? String {
-            zipCodeBarButtonItem.title = zipCode
-            searchController.searchBar.text = searchText
-        } else {
-            searchController.searchBar.placeholder = NSLocalizedString("Search for group", comment: "Prompts the user to search for a group.")
-        }
+        let zipCode = preferences.zipCode
+        let searchText = preferences.serarchText
+        zipCodeBarButtonItem.title = zipCode
+        searchController.searchBar.text = searchText
     }
     
     @discardableResult private func retrieveGroups(searchText: String?, zipCode: String?) -> Cancelable? {
@@ -229,25 +225,23 @@ final class GroupsDisplayViewController: UIViewController {
 extension GroupsDisplayViewController: UISearchResultsUpdating {
     
     func updateSearchResults(for searchController: UISearchController) {
-        let userDefaults = UserDefaults.standard
         if let text = searchController.searchBar.text?.lowercased() {
             if isSearchControllerInputValid() {
                 loadingState = .isLoading
                 if currentDataTask == nil {
-                    let zipCode = userDefaults.object(forKey: UserDefaultConstants.zipCode.rawValue) as? String ?? ""
+                    let zipCode = preferences.zipCode
                     currentDataTask = retrieveGroups(searchText: text, zipCode: zipCode)
-                    userDefaults.set(text, forKey: UserDefaultConstants.searchText.rawValue)
+                    preferences.serarchText = text
                 } else {
                     currentDataTask?.cancelTask()
-                    let zipCode = userDefaults.object(forKey: UserDefaultConstants.zipCode.rawValue) as? String ?? ""
-                    
+                    let zipCode = preferences.zipCode
                     let timer = Timer(timeInterval: 1.0, repeats: false) { [weak self] _ in
                         
                         guard let self = self else {
                             return
                         }
+                        self.preferences.serarchText = text
                         self.currentDataTask = self.retrieveGroups(searchText: text, zipCode: zipCode)
-                        userDefaults.set(text, forKey: UserDefaultConstants.searchText.rawValue)
                     }
                     
                     timer.fire()
@@ -286,8 +280,9 @@ extension GroupsDisplayViewController: NetworkConnectivityHelperDelegate {
                 emptyStateView?.isHidden = false
             }
         } else {
+            
             emptyStateView?.viewModel = EmptyStateView.ViewModel(emptyStateImage: .noGroupsFound, emptyStatePrompt: NSLocalizedString("Welcome! Search for the groups you like.", comment: "Indicates to the user no groups were found"))
-            userDefaults.set(false, forKey: UserDefaultConstants.isFirstLaunch.rawValue)
+            preferences.isFirstLaunch = !preferences.isFirstLaunch
             emptyStateView?.isHidden = false
         }
     }

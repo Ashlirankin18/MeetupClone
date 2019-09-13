@@ -12,25 +12,24 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
-    private let meetupAuthenticationHandler = MeetupAuthenticationHandler(userDefaults: UserDefaults.standard, networkHelper: NetworkHelper())
+    private let meetupAuthenticationHandler = MeetupAuthenticationHandler(preferences: Preferences(userDefaults: UserDefaults.standard), networkHelper: NetworkHelper())
+    private let preferences = Preferences(userDefaults: UserDefaults.standard)
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        let isFirstLaunch = UserDefaults.standard.object(forKey: UserDefaultConstants.isFirstLaunch.rawValue) as? Bool ?? true
-        if !isFirstLaunch {
-            UserDefaults.standard.set(false, forKey: UserDefaultConstants.isFirstLaunch.rawValue)
-            guard let meetupUserInterface = UIStoryboard(name: "MeetupInfoInterface", bundle: nil).instantiateViewController(withIdentifier: "MeetupInfoTabbarController") as? UITabBarController else {
-                return false                
-            }
-            window?.rootViewController = meetupUserInterface
-            window?.makeKeyAndVisible()
-        } else {
-            UserDefaults.standard.set(true, forKey: UserDefaultConstants.isFirstLaunch.rawValue)
+        
+        if preferences.isFirstLaunch {
             guard let loginViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController else {
                 return false }
             loginViewController.meetupAuthenticationHandler = meetupAuthenticationHandler
             window?.rootViewController = loginViewController
             window?.makeKeyAndVisible()
-        }
+        } else {
+
+            guard let meetupUserInterface = UIStoryboard(name: "MeetupInfoInterface", bundle: nil).instantiateViewController(withIdentifier: "MeetupInfoTabbarController") as? UITabBarController else {
+                return false
+            }
+            window?.rootViewController = meetupUserInterface
+            window?.makeKeyAndVisible()        }
         return true
     }
     

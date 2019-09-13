@@ -14,7 +14,7 @@ final class EventDetailedTableViewController: UITableViewController {
     
     private let eventDetailedControllerDataSource = EventDetailedControllerDataSource()
     
-    private let meetupDataHandler = MeetupDataHandler(networkHelper: NetworkHelper())
+    private let meetupDataHandler = MeetupDataHandler(networkHelper: NetworkHelper(), preferences: Preferences(userDefaults: UserDefaults.standard))
     
     /// The URL Name of the meetup group
     var urlName: String?
