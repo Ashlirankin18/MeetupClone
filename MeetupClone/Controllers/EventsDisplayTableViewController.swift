@@ -20,7 +20,7 @@ final class EventsDisplayTableViewController: UITableViewController {
     
     /// The model representing the information the headerView needs to be initialized
     var headerInformationModel: HeaderInformationModel? 
-  
+    
     private lazy var activityIndicator: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView()
         activityIndicator.hidesWhenStopped = true
@@ -32,13 +32,12 @@ final class EventsDisplayTableViewController: UITableViewController {
     
     private let meetupDataHandler = MeetupDataHandler(networkHelper: NetworkHelper())
     
-    private var isAnimating = false
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableViewProperties()
         navigationItem.largeTitleDisplayMode = .never
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         activityIndicator.frame = CGRect(x: 0, y: 0, width: tableView.bounds.width, height: tableView.bounds.height)
@@ -48,13 +47,12 @@ final class EventsDisplayTableViewController: UITableViewController {
     private func showActivityIndicator() {
         tableView.backgroundView = activityIndicator
         activityIndicator.startAnimating()
-        isAnimating = true
     }
     private func hideActivityIndicator() {
         tableView.backgroundView = nil
         activityIndicator.stopAnimating()
-        isAnimating = false
     }
+    
     private func configureTableViewProperties() {
         registerTableViewCells()
         tableView.dataSource = eventsDisplayTableViewControllerDataSource
@@ -65,18 +63,18 @@ final class EventsDisplayTableViewController: UITableViewController {
         tableView.register(UINib(nibName: "EventDisplayTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "EventDisplayCell")
         tableView.register(UINib(nibName: "EmptyStateTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "EmptyStateCell")
     }
+    
     private func retrieveGroupEvents(urlName: String) {
         meetupDataHandler.retrieveEvents(with: urlName) { [weak self] result in
             guard let self = self else {
                 return
             }
-            self.hideActivityIndicator()
             switch result {
             case .failure(let error):
                 print(error)
             case .success(let events):
                 self.eventsDisplayTableViewControllerDataSource.events = events
-                self.tableView.reloadData()
+                self.tableView.reloadData() 
             }
         }
     }
@@ -87,13 +85,8 @@ final class EventsDisplayTableViewController: UITableViewController {
         guard let headerInformationModel = headerInformationModel else {
             return nil
         }
-
-        if activityIndicator.isAnimating {
-            headerView?.isHidden = true
-        } else {
-            headerView?.isHidden = false
-            headerView?.viewModel = GroupDisplayTableViewCell.ViewModel(groupName: headerInformationModel.name, groupImage: headerInformationModel.imageURL, members: nil, nextEventName: nil, date: nil)
-        }
+        headerView?.viewModel = GroupDisplayTableViewCell.ViewModel(groupName: headerInformationModel.name, groupImage: headerInformationModel.imageURL, members: nil, nextEventName: nil, date: nil)
+        
         return headerView
     }
     
