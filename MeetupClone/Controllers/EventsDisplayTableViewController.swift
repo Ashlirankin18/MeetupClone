@@ -30,22 +30,14 @@ final class EventsDisplayTableViewController: UITableViewController {
             guard let loadingState = loadingState else {
                 return
             }
-            updatesViewBasedOnLoadingState(loadingState: loadingState)
+            updateViewBasedOnLoadingState(loadingState: loadingState)
         }
     }
     private let eventsDisplayTableViewControllerDataSource = EventsDisplayTableViewControllerDataSource()
     
     private let meetupDataHandler = MeetupDataHandler(networkHelper: NetworkHelper())
     
-    private var emptyStateView: EmptyStateView? {
-        didSet {
-            guard let emptyStateView = emptyStateView else {
-                return
-            }
-            view.addSubview(emptyStateView)
-            constrainEmptyStateView(emptyStateView: emptyStateView)
-        }
-    }
+    private var emptyStateView: EmptyStateView?
     
     @IBOutlet private weak var activityIndicatorView: UIActivityIndicatorView!
     
@@ -53,11 +45,11 @@ final class EventsDisplayTableViewController: UITableViewController {
         super.viewDidLoad()
         configureTableViewProperties()
         navigationItem.largeTitleDisplayMode = .never
-        loadNib()
+        loadEmptyState()
         self.loadingState = .isLoading
     }
     
-    private func updatesViewBasedOnLoadingState(loadingState: LoadingState) {
+    private func updateViewBasedOnLoadingState(loadingState: LoadingState) {
         switch loadingState {
         case .isLoading:
             showActivityIndicator()
@@ -82,12 +74,15 @@ final class EventsDisplayTableViewController: UITableViewController {
         self.emptyStateView?.isHidden = false
     }
     
-    private func loadNib () {
+    private func loadEmptyState() {
         guard let emptyStateView = Bundle.main.loadNibNamed("EmptyStateView", owner: self, options: nil)?.first as? EmptyStateView else {
             assertionFailure("Could not load nib")
             return
         }
         self.emptyStateView = emptyStateView
+        view.addSubview(emptyStateView)
+        emptyStateView.frame = view.frame 
+        constrainEmptyStateView(emptyStateView: emptyStateView)
     }
     private func configureTableViewProperties() {
         tableView.dataSource = eventsDisplayTableViewControllerDataSource
