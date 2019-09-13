@@ -54,6 +54,8 @@ final class ProfileViewController: UIViewController {
         profileControllerTableView.delegate = self
         profileControllerTableView.dataSource = meetupCloneDataSource
         profileControllerTableView.rowHeight = UITableView.automaticDimension
+        profileControllerTableView.register(UINib(nibName: "UserNameTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "UserNameCell")
+        profileControllerTableView.register(UINib(nibName: "UserBioTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "UserBioCell")
     }
     
     private func retrieveUserInformation() {
