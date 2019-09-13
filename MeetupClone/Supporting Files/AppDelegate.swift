@@ -10,6 +10,7 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+
     var window: UIWindow?
     
     private lazy var meetupAuthenticationHandler = MeetupAuthenticationHandler(preferences: self.preferences, networkHelper: NetworkHelper())
@@ -32,6 +33,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window?.makeKeyAndVisible()
             
         }
+
+        let navigationBarAppearance = UINavigationBar.appearance()
+        navigationBarAppearance.tintColor = .white
+        navigationBarAppearance.barStyle = .black
         return true
     }
     

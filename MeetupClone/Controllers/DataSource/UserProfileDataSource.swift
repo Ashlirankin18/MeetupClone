@@ -23,17 +23,20 @@ final class UserProfileDataSource: NSObject, UITableViewDataSource {
         
         switch indexPath.row {
         case 0 :
-            let cell = UITableViewCell(style: .value1, reuseIdentifier: "UserInfoCell")
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "UserNameCell")  as? UserNameTableViewCell else {
+                    assertionFailure("Could not load nib")
+                    return UITableViewCell()
+            }
             guard let meetupUserModel = meetupUserModel else {
                 return UITableViewCell()
             }
-            cell.textLabel?.text = NSLocalizedString("Name", comment: "Username")
-            cell.detailTextLabel?.text = meetupUserModel.name
+            cell.viewModel = UserNameTableViewCell.ViewModel(userName: meetupUserModel.name)
             return cell
             
         default:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "UserBioCell", for: indexPath) as? UserBioTableViewCell else {
-                return UITableViewCell() }
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "UserBioCell") as? UserBioTableViewCell else {
+                return UITableViewCell()
+            }
             guard let meetupUserModel = meetupUserModel else {
                 return UITableViewCell()
             }

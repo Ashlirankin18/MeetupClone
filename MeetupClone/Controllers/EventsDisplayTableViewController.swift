@@ -10,7 +10,7 @@ import UIKit
 
 /// `UITableViewController` which will display a list of events
 final class EventsDisplayTableViewController: UITableViewController {
-
+    
     /// The URLName of the event 
     var urlName = "" {
         didSet {
@@ -18,13 +18,16 @@ final class EventsDisplayTableViewController: UITableViewController {
         }
     }
     
-    /// The model representing the information a headerView needs to be initilized
-    var headerInformationModel: HeaderInformationModel? {
-        didSet {
-            title = headerInformationModel?.name
-        }
-    }
-
+    /// The model representing the information the headerView needs to be initialized
+    var headerInformationModel: HeaderInformationModel? 
+    
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.color = UIColor(named: "ClayRed", in: Bundle.main, compatibleWith: .none)
+        return activityIndicator
+    }()
+    
     private let eventsDisplayTableViewControllerDataSource = EventsDisplayTableViewControllerDataSource()
     
     private let meetupDataHandler = MeetupDataHandler(networkHelper: NetworkHelper(), preferences: Preferences(userDefaults: UserDefaults.standard))
@@ -33,6 +36,21 @@ final class EventsDisplayTableViewController: UITableViewController {
         super.viewDidLoad()
         configureTableViewProperties()
         navigationItem.largeTitleDisplayMode = .never
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        activityIndicator.frame = CGRect(x: 0, y: 0, width: tableView.bounds.width, height: tableView.bounds.height)
+        showActivityIndicator()
+    }
+    
+    private func showActivityIndicator() {
+        tableView.backgroundView = activityIndicator
+        activityIndicator.startAnimating()
+    }
+    private func hideActivityIndicator() {
+        tableView.backgroundView = nil
+        activityIndicator.stopAnimating()
     }
     
     private func configureTableViewProperties() {
@@ -67,8 +85,8 @@ final class EventsDisplayTableViewController: UITableViewController {
         guard let headerInformationModel = headerInformationModel else {
             return nil
         }
-        headerView?.isHidden = false
         headerView?.viewModel = GroupDisplayTableViewCell.ViewModel(groupName: headerInformationModel.name, groupImage: headerInformationModel.imageURL, members: nil, nextEventName: nil, date: nil)
+        
         return headerView
     }
     
