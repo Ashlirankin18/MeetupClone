@@ -15,12 +15,13 @@ final class PersistenceHelper {
     /// The instance of the `PersistenceHelper` class that will be shared 
     static let shared = PersistenceHelper()
     
-    private let fileName = "newFavoriteEvents.plist"
+    private let fileName = "FavoriteEvents.plist"
     
     /// An array of events which are calculated lazily. It has a private setter which is set only in the `Persistence Helper`, but the contents of this array can be accessed outside the class.
     private(set) lazy var favoriteEvents: [MeetupEventModel] = retrieveFavoriteEventsFromDocumentsDirectory()
     
     private func retrieveFavoriteEventsFromDocumentsDirectory() -> [MeetupEventModel] {
+
         var newFavoriteEvents = [MeetupEventModel]()
         
         if let path = DataPersistenceManager().filepathToDocumentsDiretory(filename: fileName)?.path {
@@ -37,6 +38,7 @@ final class PersistenceHelper {
         } else {
             print("No path was found")
         }
+
         return newFavoriteEvents
     }
     /// Saves objects added of removed from the documents directory

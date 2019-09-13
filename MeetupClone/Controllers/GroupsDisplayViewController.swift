@@ -67,7 +67,7 @@ final class GroupsDisplayViewController: UIViewController {
         navigationItem.hidesSearchBarWhenScrolling = false
         definesPresentationContext = true
     }
-    
+
     private func hideActivityIndicator() {
         activityIndicatorView.isHidden = true
         activityIndicatorView.stopAnimating()
@@ -264,7 +264,7 @@ extension GroupsDisplayViewController: NetworkConnectivityHelperDelegate {
     func networkIsUnavailable() {
         emptyStateView?.viewModel = EmptyStateView.ViewModel(emptyStateImage: .noInternetConnection, emptyStatePrompt: "No Internet Connection Detected")
         emptyStateView?.isHidden = false
-    }
+  }
 }
 extension GroupsDisplayViewController {
     

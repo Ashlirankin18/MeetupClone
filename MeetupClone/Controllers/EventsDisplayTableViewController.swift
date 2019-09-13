@@ -33,6 +33,7 @@ final class EventsDisplayTableViewController: UITableViewController {
             updateViewBasedOnLoadingState(loadingState: loadingState)
         }
     }
+
     private let eventsDisplayTableViewControllerDataSource = EventsDisplayTableViewControllerDataSource()
     
     private let meetupDataHandler = MeetupDataHandler(networkHelper: NetworkHelper())
@@ -84,6 +85,7 @@ final class EventsDisplayTableViewController: UITableViewController {
         view.addSubview(emptyStateView)
         constrainEmptyStateView(emptyStateView: emptyStateView)
     }
+
     private func configureTableViewProperties() {
         tableView.dataSource = eventsDisplayTableViewControllerDataSource
         tableView.rowHeight = UITableView.automaticDimension
