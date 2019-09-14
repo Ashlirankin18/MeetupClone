@@ -27,16 +27,7 @@ final class GroupsDisplayViewController: UIViewController {
     
     private var currentDataTask: Cancelable?
     
-    private var emptyStateView: EmptyStateView? {
-        didSet {
-            guard let emptyStateView = emptyStateView else {
-                return
-            }
-            emptyStateView.translatesAutoresizingMaskIntoConstraints = false
-            view.addSubview(emptyStateView)
-            constrainEmptyStateView(emptyStateView: emptyStateView)
-        }
-    }
+    private var emptyStateView: EmptyStateView?
     
     private let networkConnectivityHelper = NetworkConnectivityHelper()
     
@@ -92,6 +83,9 @@ final class GroupsDisplayViewController: UIViewController {
             return
         }
         self.emptyStateView = emptyStateView
+        emptyStateView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(emptyStateView)
+        constrainEmptyStateView(emptyStateView: emptyStateView)
     }
     
     private func configureTableViewProperties() {
