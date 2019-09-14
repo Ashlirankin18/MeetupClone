@@ -13,17 +13,24 @@
         <scene sceneID="cR1-CN-MYT">
             <objects>
                 <tableViewController storyboardIdentifier="EventsDisplayController" id="bcI-Zp-T7n" customClass="EventsDisplayTableViewController" customModule="MeetupClone" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="D98-k1-ybc">
+                    <tableView key="view" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="D98-k1-ybc">r
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <color key="separatorColor" name="Red"/>
+                        <activityIndicatorView key="tableFooterView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" id="1wS-mn-Zhi">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="37"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="color" name="Red"/>
+                        </activityIndicatorView>
                         <connections>
                             <outlet property="dataSource" destination="bcI-Zp-T7n" id="Syh-1d-Ne9"/>
                             <outlet property="delegate" destination="bcI-Zp-T7n" id="XwU-vO-6wK"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="Q4q-EI-zxt"/>
+                    <connections>
+                        <outlet property="activityIndicatorView" destination="1wS-mn-Zhi" id="z7R-kO-7J2"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cJq-p0-DqM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
