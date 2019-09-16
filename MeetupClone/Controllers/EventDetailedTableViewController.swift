@@ -14,7 +14,7 @@ final class EventDetailedTableViewController: UITableViewController {
     
     private let eventDetailedControllerDataSource = EventDetailedControllerDataSource()
     
-    private let meetupDataHandler = MeetupDataHandler(networkHelper: NetworkHelper())
+    private let meetupDataHandler = MeetupDataHandler(networkHelper: NetworkHelper(), preferences: Preferences(userDefaults: UserDefaults.standard))
     
     /// Model representing an event object.
     var meetupEventModel: MeetupEventModel? {

@@ -10,27 +10,29 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    
+
     var window: UIWindow?
     
-    private let meetupAuthenticationHandler = MeetupAuthenticationHandler(userDefaults: UserDefaults.standard, networkHelper: NetworkHelper())
+    private lazy var meetupAuthenticationHandler = MeetupAuthenticationHandler(preferences: self.preferences, networkHelper: NetworkHelper())
+    private let preferences = Preferences(userDefaults: UserDefaults.standard)
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        let userLoggedIn = UserDefaults.standard.object(forKey: UserDefaultConstants.isLoggedIn.rawValue) as? Bool ?? false
-        if userLoggedIn {
-            guard let meetupUserInterface = UIStoryboard(name: "MeetupInfoInterface", bundle: nil).instantiateViewController(withIdentifier: "MeetupInfoTabbarController") as? UITabBarController else {
-                return false }
-            window?.rootViewController = meetupUserInterface
-            window?.makeKeyAndVisible()
-        } else {
-            UserDefaults.standard.set(false, forKey: UserDefaultConstants.isLoggedIn.rawValue)
+        if preferences.isFirstLaunch {
             guard let loginViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController else {
                 return false }
             loginViewController.meetupAuthenticationHandler = meetupAuthenticationHandler
             window?.rootViewController = loginViewController
             window?.makeKeyAndVisible()
+        } else {
+            
+            guard let meetupUserInterface = UIStoryboard(name: "MeetupInfoInterface", bundle: nil).instantiateViewController(withIdentifier: "MeetupInfoTabbarController") as? UITabBarController else {
+                return false
+            }
+            window?.rootViewController = meetupUserInterface
+            window?.makeKeyAndVisible()
         }
+
         let navigationBarAppearance = UINavigationBar.appearance()
         navigationBarAppearance.tintColor = .white
         navigationBarAppearance.barStyle = .black
