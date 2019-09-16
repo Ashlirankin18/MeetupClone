@@ -28,12 +28,8 @@ final class EventHeaderView: UIView {
     /// The header's View Model
     var viewModel: ViewModel? {
         didSet {
-            guard let viewModel = viewModel else {
-                assertionFailure("could not initilize viewModel")
-                return
-            }
-            eventNameLabel.text = viewModel.eventName
-            eventLocationLabel.text = viewModel.eventLocation
+            eventNameLabel.text = viewModel?.eventName
+            eventLocationLabel.text = viewModel?.eventLocation
             handleMapAnnotations()
         }
     }

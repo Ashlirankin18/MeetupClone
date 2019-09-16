@@ -16,9 +16,6 @@ final class EventDetailedTableViewController: UITableViewController {
     
     private let meetupDataHandler = MeetupDataHandler(networkHelper: NetworkHelper())
     
-    /// The URL Name of the meetup group
-    var urlName: String?
-    
     /// Model representing an event object.
     var meetupEventModel: MeetupEventModel? {
         didSet {
@@ -30,26 +27,74 @@ final class EventDetailedTableViewController: UITableViewController {
             retrieveRSVPData(eventId: meetupEventModel.eventId, eventURLName: urlName)
         }
     }
+    private weak var emptyStateView: EmptyStateView?
+    
+    @IBOutlet private weak var activityIndicatorView: UIActivityIndicatorView!
     
     private lazy var rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "icons8-heart-26"), style: .done, target: self, action: #selector(favoriteButtonPressed))
     
     private var persistenceHelper = PersistenceHelper.shared
     
+    private var loadingState: LoadingState? {
+        didSet {
+            guard let loadingState = self.loadingState else {
+                return
+            }
+            checksLoadingState(loadingState: loadingState)
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableViewProperties()
-        tableView.separatorColor = .red
+        loadEmptyStateView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         configureRightBarButtonItem()
+        loadingState = .isLoading
+    }
+    
+    private func checksLoadingState(loadingState: LoadingState) {
+        switch loadingState {
+        case .isLoading:
+            showActivityIndicator()
+        case .isFinishedLoading:
+            hideActivityIndicator()
+        }
+    }
+    
+    private func showActivityIndicator() {
+        activityIndicatorView.startAnimating()
+        activityIndicatorView.isHidden = false
+    }
+    
+    private func hideActivityIndicator() {
+        activityIndicatorView.stopAnimating()
+        activityIndicatorView.isHidden = true
+    }
+    private func loadEmptyStateView() {
+        guard let emptyStateView = Bundle.main.loadNibNamed("EmptyStateView", owner: self, options: nil)?.first as? EmptyStateView else {
+            return
+        }
+        self.emptyStateView = emptyStateView
+        emptyStateView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(emptyStateView)
+        constrainEmptyStateView(emptyStateView: emptyStateView)
+        emptyStateView.isHidden = true
+    }
+    private func setupEmptyStateView() {
+        guard let emptyStateView = emptyStateView else {
+            return
+        }
+        emptyStateView.viewModel = EmptyStateView.ViewModel(emptyStateImage: .notAGroupMember, emptyStatePrompt: "You are not a member of this group")
+        emptyStateView.isHidden = false
     }
     
     private func configureTableViewProperties() {
         tableView.register(UINib(nibName: "MeetupMemberDisplayTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "MemberCell")
-        tableView.register(UINib(nibName: "EmptyStateTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "EmptyStateCell")
         tableView.dataSource = eventDetailedControllerDataSource
+        tableView.delegate = self
         tableView.rowHeight = 80
         tableView.sectionHeaderHeight = UITableView.automaticDimension
     }
@@ -73,11 +118,13 @@ final class EventDetailedTableViewController: UITableViewController {
             guard let self = self else {
                 return
             }
+            self.loadingState = .isFinishedLoading
             switch result {
             case .failure(let error):
                 print(error)
+                self.setupEmptyStateView()
             case .success(let rsvps):
-            self.eventDetailedControllerDataSource.rsvps = rsvps
+                self.eventDetailedControllerDataSource.rsvps = rsvps
                 self.tableView.reloadData()
             }
         }
@@ -113,9 +160,17 @@ final class EventDetailedTableViewController: UITableViewController {
         if let lattitude = meetupEventModel.venue?.lattitude,
             let longitude = meetupEventModel.venue?.longitude {
             headerView.viewModel = EventHeaderView.ViewModel(eventCoordinates: CLLocationCoordinate2D(latitude: lattitude, longitude: longitude), eventName: meetupEventModel.eventName, eventLocation: meetupEventModel.venue?.city)
+            return headerView
         } else {
-            headerView.viewModel = EventHeaderView.ViewModel(eventCoordinates: nil, eventName: meetupEventModel.eventName, eventLocation: meetupEventModel.venue?.city)
-        }
-        return headerView
+            return nil
+        }       
+    }
+}
+extension EventDetailedTableViewController {
+    func constrainEmptyStateView(emptyStateView: EmptyStateView) {
+        NSLayoutConstraint.activate([
+            emptyStateView.centerXAnchor.constraint(equalTo: tableView.centerXAnchor),
+            emptyStateView.centerYAnchor.constraint(equalTo: tableView.centerYAnchor)
+            ])
     }
 }
