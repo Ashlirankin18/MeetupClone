@@ -25,30 +25,34 @@ final class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpProfileTableView()
         retrieveUserInformation()
+        loadEmptyStateView()
         networkConnectivityHelper.delegate = self
+        setUpProfileTableView()
         setNeedsStatusBarAppearanceUpdate()
     }
-  
+
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
     
-    private func loadEmptyStateView() -> EmptyStateView? {
+    private func loadEmptyStateView() {
         guard let emptyStateView = Bundle.main.loadNibNamed("EmptyStateView", owner: self, options: nil)?.first as? EmptyStateView else {
-            return nil
+            return
         }
         self.emptyStateView = emptyStateView
         view.addSubview(emptyStateView)
-        return emptyStateView
+        emptyStateView.translatesAutoresizingMaskIntoConstraints = false
+        constrainEmptyStateView(emptyStateView: emptyStateView)
+        emptyStateView.isHidden = true
     }
     
     private func setUpEmptyStateView(image: UIImage?, prompt: String) {
-        guard let emptyStateView = loadEmptyStateView() else {
+        guard let emptyStateView = emptyStateView else {
             return
         }
         emptyStateView.viewModel = EmptyStateView.ViewModel(emptyStateImage: image, emptyStatePrompt: prompt)
+        emptyStateView.isHidden = false
     }
     private func setUpProfileTableView() {
         profileControllerTableView.delegate = self
@@ -98,7 +102,16 @@ extension ProfileViewController: NetworkConnectivityHelperDelegate {
     
     func networkIsUnavailable() {
         setUpEmptyStateView(image: UIImage.noInternetConnection, prompt: "No Internet Connection detected")
-        emptyStateView?.isHidden = false
         profileControllerTableView.isHidden = true
+    }
+}
+extension ProfileViewController {
+    private func constrainEmptyStateView(emptyStateView: EmptyStateView) {
+        NSLayoutConstraint.activate([
+            emptyStateView.topAnchor.constraint(equalTo: view.topAnchor),
+            emptyStateView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            emptyStateView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            emptyStateView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            ])
     }
 }
