@@ -31,7 +31,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             window?.rootViewController = meetupUserInterface
             window?.makeKeyAndVisible()
-            
         }
 
         let navigationBarAppearance = UINavigationBar.appearance()
