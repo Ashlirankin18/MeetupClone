@@ -22,15 +22,17 @@ class LoginViewController: UIViewController {
     }
     
     @IBOutlet private weak var loginButton: RoundedButton!
-   
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         startPulseAnimation()
     }
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         loginButton.layer.removeAnimation(forKey: "layerAnimation")
     }
+    
     private func presentAlertController() {
         let alertController = UIAlertController(title: NSLocalizedString("Error", comment: "Error occured"), message: NSLocalizedString("Could not authenticate you account try again.", comment: "Tells the user there was a problem signing them in."), preferredStyle: .alert)
         let tryAgainAction = UIAlertAction(title: NSLocalizedString("Try Again", comment: "Prompts the user to try thier request again"), style: .default) { [weak self] _ in

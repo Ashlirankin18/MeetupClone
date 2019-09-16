@@ -17,7 +17,6 @@
 		5B1AD6C022DE22910008E4EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B1AD6BF22DE22910008E4EC /* Assets.xcassets */; };
 		5B1AD6CE22DE22910008E4EC /* MeetupCloneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1AD6CD22DE22910008E4EC /* MeetupCloneTests.swift */; };
 		5B3ADD082314D1470051A2D4 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3ADD072314D1470051A2D4 /* UIColor+Extension.swift */; };
-		5B3ADD0E231582BE0051A2D4 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3ADD0D231582BE0051A2D4 /* EmptyStateView.swift */; };
 		5B3ADD112315AD940051A2D4 /* LoadingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3ADD102315AD940051A2D4 /* LoadingState.swift */; };
 		5B3ADD3F2316F7AD0051A2D4 /* NetworkConnectivityHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3ADD3E2316F7AD0051A2D4 /* NetworkConnectivityHelper.swift */; };
 		5B526C0322FCAC7000F77EAC /* EventHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B526C0222FCAC7000F77EAC /* EventHeaderView.swift */; };
@@ -64,6 +63,7 @@
 		5BB306FD23032E6F007119E3 /* PersistenceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB306FC23032E6F007119E3 /* PersistenceHelper.swift */; };
 		5BB3070023033CE8007119E3 /* Events.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BB306FE23033C76007119E3 /* Events.storyboard */; };
 		5BD475DA22F9DCF000F091AA /* GroupInfoDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD475D922F9DCF000F091AA /* GroupInfoDataSource.swift */; };
+		5BD58619232BD5D0000C23BE /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD58618232BD5D0000C23BE /* Preferences.swift */; };
 		5BDC83082321931900F5F531 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BDC83072321931900F5F531 /* RoundedButton.swift */; };
 		5BE8470D22E75DC700B8E8FC /* MeetupPhotoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE8470C22E75DC700B8E8FC /* MeetupPhotoModel.swift */; };
 		5BEFBB562306DF59008466F8 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BEFBB552306DF59008466F8 /* UIImageView+Extension.swift */; };
@@ -154,6 +154,7 @@
 		5BB306FC23032E6F007119E3 /* PersistenceHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceHelper.swift; sourceTree = "<group>"; };
 		5BB306FE23033C76007119E3 /* Events.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Events.storyboard; sourceTree = "<group>"; };
 		5BD475D922F9DCF000F091AA /* GroupInfoDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupInfoDataSource.swift; sourceTree = "<group>"; };
+		5BD58618232BD5D0000C23BE /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 		5BDC83072321931900F5F531 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		5BE8470C22E75DC700B8E8FC /* MeetupPhotoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetupPhotoModel.swift; sourceTree = "<group>"; };
 		5BEFBB552306DF59008466F8 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
@@ -282,10 +283,8 @@
 		5B8932C022E643C400BF9876 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-
 				5B1AB794231DFED80092903E /* EmptyStateView.swift */,
 				5B1AB792231DF9650092903E /* EmptyStateView.xib */,
-				5B3ADD0923156AEA0051A2D4 /* ActivityIndicatorView.swift */,
 				5BB306EE2302F68D007119E3 /* IBDesignableImageView.swift */,
 				5BDC83072321931900F5F531 /* RoundedButton.swift */,
 				5BA9164F22F32150000AF2E8 /* xibFiles */,
@@ -316,6 +315,7 @@
 		5B8932D022E64E6100BF9876 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				5BD58618232BD5D0000C23BE /* Preferences.swift */,
 				5BB306FA23032E5E007119E3 /* DocumentsDirectory.swift */,
 				5BB306FC23032E6F007119E3 /* PersistenceHelper.swift */,
 				5B8932D522E653E800BF9876 /* MeetupAuthenticationHandler.swift */,
@@ -602,6 +602,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BD58619232BD5D0000C23BE /* Preferences.swift in Sources */,
 				5B526C0E22FCBBC500F77EAC /* LoginViewController.swift in Sources */,
 				5BD475DA22F9DCF000F091AA /* GroupInfoDataSource.swift in Sources */,
 				5B9DECC322E89F7600321359 /* AppDelegate.swift in Sources */,

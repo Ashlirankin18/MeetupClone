@@ -36,7 +36,7 @@ final class EventsDisplayTableViewController: UITableViewController {
 
     private let eventsDisplayTableViewControllerDataSource = EventsDisplayTableViewControllerDataSource()
     
-    private let meetupDataHandler = MeetupDataHandler(networkHelper: NetworkHelper())
+    private let meetupDataHandler = MeetupDataHandler(networkHelper: NetworkHelper(), preferences: Preferences(userDefaults: UserDefaults.standard))
     
     private var emptyStateView: EmptyStateView?
     

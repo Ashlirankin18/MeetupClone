@@ -13,7 +13,7 @@ final class ProfileViewController: UIViewController {
     
     private let meetupCloneDataSource = UserProfileDataSource()
     
-    private let meetupDatatHandler = MeetupDataHandler(networkHelper: NetworkHelper())
+    private let meetupDatatHandler = MeetupDataHandler(networkHelper: NetworkHelper(), preferences: Preferences(userDefaults: UserDefaults.standard))
     
     private var emptyStateView: EmptyStateView?
     
