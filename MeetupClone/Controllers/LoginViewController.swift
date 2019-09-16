@@ -52,6 +52,7 @@ class LoginViewController: UIViewController {
         pulseAnimation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
         pulseAnimation.autoreverses = true
         pulseAnimation.repeatCount = .greatestFiniteMagnitude
+        pulseAnimation.isRemovedOnCompletion = false
         loginButton.layer.add(pulseAnimation, forKey: "layerAnimation")
     }
     private func initiateLoginFlow() {
