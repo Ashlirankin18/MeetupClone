@@ -40,13 +40,14 @@ final class EventDetailedTableViewController: UITableViewController {
             guard let loadingState = self.loadingState else {
                 return
             }
-            checksLoadingState(loadingState: loadingState)
+            updateViewBasedOnLoadingState(loadingState: loadingState)
         }
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableViewProperties()
         loadEmptyStateView()
+        setupEmptyStateView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -55,10 +56,11 @@ final class EventDetailedTableViewController: UITableViewController {
         loadingState = .isLoading
     }
     
-    private func checksLoadingState(loadingState: LoadingState) {
+    private func updateViewBasedOnLoadingState(loadingState: LoadingState) {
         switch loadingState {
         case .isLoading:
             showActivityIndicator()
+            emptyStateView?.isHidden = true
         case .isFinishedLoading:
             hideActivityIndicator()
         }
@@ -94,7 +96,6 @@ final class EventDetailedTableViewController: UITableViewController {
     private func configureTableViewProperties() {
         tableView.register(UINib(nibName: "MeetupMemberDisplayTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "MemberCell")
         tableView.dataSource = eventDetailedControllerDataSource
-        tableView.delegate = self
         tableView.rowHeight = 80
         tableView.sectionHeaderHeight = UITableView.automaticDimension
     }
@@ -122,7 +123,6 @@ final class EventDetailedTableViewController: UITableViewController {
             switch result {
             case .failure(let error):
                 print(error)
-                self.setupEmptyStateView()
             case .success(let rsvps):
                 self.eventDetailedControllerDataSource.rsvps = rsvps
                 self.tableView.reloadData()
@@ -157,11 +157,13 @@ final class EventDetailedTableViewController: UITableViewController {
             let meetupEventModel = meetupEventModel else {
                 return UIView()
         }
+        
         if let lattitude = meetupEventModel.venue?.lattitude,
             let longitude = meetupEventModel.venue?.longitude {
             headerView.viewModel = EventHeaderView.ViewModel(eventCoordinates: CLLocationCoordinate2D(latitude: lattitude, longitude: longitude), eventName: meetupEventModel.eventName, eventLocation: meetupEventModel.venue?.city)
             return headerView
         } else {
+            emptyStateView?.isHidden = false
             return nil
         }       
     }
@@ -169,6 +171,7 @@ final class EventDetailedTableViewController: UITableViewController {
 extension EventDetailedTableViewController {
     func constrainEmptyStateView(emptyStateView: EmptyStateView) {
         NSLayoutConstraint.activate([
+            
             emptyStateView.centerXAnchor.constraint(equalTo: tableView.centerXAnchor),
             emptyStateView.centerYAnchor.constraint(equalTo: tableView.centerYAnchor)
             ])

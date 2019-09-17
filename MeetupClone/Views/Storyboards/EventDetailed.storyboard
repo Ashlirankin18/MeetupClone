@@ -21,6 +21,7 @@
                         <activityIndicatorView key="tableFooterView" hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" id="InV-7M-Ijc">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="37"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                             <color key="color" name="Red"/>
                         </activityIndicatorView>
                         <connections>
