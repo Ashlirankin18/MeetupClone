@@ -37,6 +37,7 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="leading" secondItem="hpl-t8-2rf" secondAttribute="leading" id="iwt-fx-N3t"/>
                 <constraint firstItem="hpl-t8-2rf" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="vLY-zL-j2a"/>
             </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="emptyStateImageView" destination="sY6-M0-OuZ" id="1nY-UI-aBU"/>

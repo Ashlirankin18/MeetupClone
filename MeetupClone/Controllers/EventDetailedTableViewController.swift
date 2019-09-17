@@ -153,27 +153,28 @@ final class EventDetailedTableViewController: UITableViewController {
     // MARK: - UITableViewDelegate
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let headerView = Bundle.main.loadNibNamed("EventHeaderView", owner: self, options: nil)?.first as? EventHeaderView,
-            let meetupEventModel = meetupEventModel else {
-                return UIView()
-        }
         
+        guard let meetupEventModel = meetupEventModel else {
+            return  nil
+        }
         if let lattitude = meetupEventModel.venue?.lattitude,
             let longitude = meetupEventModel.venue?.longitude {
+            guard let headerView = Bundle.main.loadNibNamed("EventHeaderView", owner: self, options: nil)?.first as? EventHeaderView else {
+                return UIView()
+            }
             headerView.viewModel = EventHeaderView.ViewModel(eventCoordinates: CLLocationCoordinate2D(latitude: lattitude, longitude: longitude), eventName: meetupEventModel.eventName, eventLocation: meetupEventModel.venue?.city)
             return headerView
         } else {
             emptyStateView?.isHidden = false
-            return nil
-        }       
+            return UIView()
+        }
     }
 }
 extension EventDetailedTableViewController {
     func constrainEmptyStateView(emptyStateView: EmptyStateView) {
         NSLayoutConstraint.activate([
-            
-            emptyStateView.centerXAnchor.constraint(equalTo: tableView.centerXAnchor),
-            emptyStateView.centerYAnchor.constraint(equalTo: tableView.centerYAnchor)
+            emptyStateView.centerYAnchor.constraint(equalTo: tableView.centerYAnchor),
+            emptyStateView.centerXAnchor.constraint(equalTo: tableView.centerXAnchor)
             ])
     }
 }
