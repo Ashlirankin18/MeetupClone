@@ -50,6 +50,8 @@ final class GroupDisplayTableViewCell: UITableViewCell {
             } else {
                 nextEventLabel.isHidden = true
             }
+            groupImageView.isAccessibilityElement = true
+            groupImageView.accessibilityLabel = NSLocalizedString("Group Display", comment: "Indicates to the user that this object displays an image ")
         }    
     }
     

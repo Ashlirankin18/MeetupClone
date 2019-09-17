@@ -87,6 +87,8 @@ extension ProfileViewController: UITableViewDelegate {
             return UIView()
         }
         headerView.viewModel = UserImageView.ViewModel(userImageLink: meetupUserModel.photo?.highresLink)
+        headerView.isAccessibilityElement = true
+        headerView.accessibilityLabel = NSLocalizedString("Profile Image", comment: "Indicates to the user that this object is a header.")
         return headerView
     }
     
