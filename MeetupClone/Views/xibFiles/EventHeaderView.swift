@@ -34,7 +34,7 @@ final class EventHeaderView: UIView {
             }
             eventNameLabel.text = viewModel.eventName
             eventLocationLabel.text = viewModel.eventLocation
-            handleMapAnnotations()
+            handleMapAnnotations()            
         }
     }
     
