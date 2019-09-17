@@ -14,9 +14,13 @@ final class GroupsDisplayViewController: UIViewController {
     private lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
-        searchController.searchBar.barTintColor = .white
         searchController.searchBar.tintColor = .white
         searchController.searchBar.searchBarStyle = .prominent
+        searchController.searchBar.backgroundColor = .red
+        searchController.isAccessibilityElement = true
+        searchController.searchBar.isAccessibilityElement = true
+        searchController.searchBar.accessibilityLabel = NSLocalizedString(  "Search Bar", comment: "Indicates to the user that this object is a search bar")
+        searchController.accessibilityLabel = NSLocalizedString( "Search Controller", comment: "Indicates to the user that this object is a search controller")
         searchController.obscuresBackgroundDuringPresentation = false
         return searchController
     }()
