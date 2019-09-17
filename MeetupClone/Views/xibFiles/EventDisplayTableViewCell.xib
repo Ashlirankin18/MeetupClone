@@ -91,7 +91,9 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="eventAttendeeImageView" destination="VXL-Wo-bUS" id="CFV-oz-YU7"/>
                 <outlet property="eventDescriptionLabel" destination="8AB-45-SQa" id="SKa-8g-cA3"/>
+                <outlet property="eventLocationImageView" destination="wTB-Re-YyM" id="Nte-gF-RpX"/>
                 <outlet property="eventLocationLabel" destination="BoN-cI-T0e" id="bUS-bB-QsK"/>
                 <outlet property="eventNameLabel" destination="5fC-Ky-C8Y" id="Nrx-9b-fCl"/>
                 <outlet property="rsvpLabel" destination="LXh-1z-Yk8" id="obR-rf-r50"/>

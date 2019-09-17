@@ -21,9 +21,9 @@
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="sY6-M0-OuZ">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="150"/>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3cY-yD-wDj">
-                            <rect key="frame" x="185" y="150" width="44.5" height="20.5"/>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3cY-yD-wDj">
+                            <rect key="frame" x="185.5" y="150" width="43.5" height="20.5"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
