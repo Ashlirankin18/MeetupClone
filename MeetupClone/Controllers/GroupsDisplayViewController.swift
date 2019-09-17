@@ -161,6 +161,7 @@ final class GroupsDisplayViewController: UIViewController {
         let alertController = UIAlertController(title: NSLocalizedString("Add Zip Code", comment: "The zip code the user desires"), message: message, preferredStyle: .alert)
         alertController.addTextField { (textfield) in
             textfield.keyboardType = .numberPad
+            textfield.placeholder = NSLocalizedString("Enter zip code", comment: "Prompts the user to enter their zip code.")
         }
         
         let okAction = UIAlertAction(title: NSLocalizedString("Ok", comment: "Submits Answer"), style: .default) { [weak self] _ in
@@ -180,8 +181,10 @@ final class GroupsDisplayViewController: UIViewController {
             }
         }
         let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel action"), style: .cancel, handler: nil)
+        
         alertController.addAction(okAction)
         alertController.addAction(cancelAction)
+        alertController.isAccessibilityElement = true
         present(alertController, animated: true, completion: nil)
     }
     
