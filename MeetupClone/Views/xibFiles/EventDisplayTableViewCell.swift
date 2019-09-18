@@ -37,10 +37,16 @@ final class EventDisplayTableViewCell: UITableViewCell {
             eventDescriptionLabel.text = viewModel.eventDescription
             eventLocationLabel.text = viewModel.eventLocation
             rsvpLabel.text = String(viewModel.rsvpCount)
+            eventLocationImageView.isAccessibilityElement = true
+            eventLocationImageView.accessibilityLabel = NSLocalizedString("Event Location", comment: "Indicates to the user that this object represents the event location")
+            eventAttendeeImageView.isAccessibilityElement = true
+            eventAttendeeImageView.accessibilityLabel = NSLocalizedString("Persons Attending", comment: "Indicates to the user that this object represents the number of persons attending the event.")
         }
     }
     @IBOutlet private weak var eventNameLabel: UILabel!
     @IBOutlet private weak var eventLocationLabel: UILabel!
     @IBOutlet private weak var rsvpLabel: UILabel!
     @IBOutlet private weak var eventDescriptionLabel: UILabel!
+    @IBOutlet private weak var eventLocationImageView: UIImageView!
+    @IBOutlet private weak var eventAttendeeImageView: UIImageView!
 }
