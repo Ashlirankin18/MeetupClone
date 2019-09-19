@@ -45,10 +45,10 @@ final class EventDetailedTableViewController: UITableViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadingState = .isLoading
         configureTableViewProperties()
         loadEmptyStateView()
         setupEmptyStateView()
-        loadingState = .isLoading
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,6 +57,9 @@ final class EventDetailedTableViewController: UITableViewController {
     }
     
     private func updateViewBasedOnLoadingState(loadingState: LoadingState) {
+        guard activityIndicatorView != nil else {
+            return
+        }
         switch loadingState {
         case .isLoading:
             showActivityIndicator()
@@ -107,7 +110,7 @@ final class EventDetailedTableViewController: UITableViewController {
         navigationItem.rightBarButtonItem = rightBarButtonItem
         if persistenceHelper.isEventFavorited(eventId: meetupEventModel.eventId) {
             rightBarButtonItem.image = UIImage(named: "icons8-heart-25")
-        }
+        } 
     }
     
     private func retrieveRSVPData(eventId: String?, eventURLName: String) {
