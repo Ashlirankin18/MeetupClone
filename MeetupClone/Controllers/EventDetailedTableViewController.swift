@@ -48,12 +48,12 @@ final class EventDetailedTableViewController: UITableViewController {
         configureTableViewProperties()
         loadEmptyStateView()
         setupEmptyStateView()
+        loadingState = .isLoading
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         configureRightBarButtonItem()
-        loadingState = .isLoading
     }
     
     private func updateViewBasedOnLoadingState(loadingState: LoadingState) {
