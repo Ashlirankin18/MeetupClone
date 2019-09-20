@@ -130,7 +130,10 @@ final class EventsDisplayTableViewController: UITableViewController {
         }
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) { 
-        let detailedController = EventDetailedTableViewController(style: .grouped)
+        guard let detailedController = UIStoryboard(name: "EventDetailed", bundle: Bundle.main).instantiateViewController(withIdentifier: "EventDetailedTableViewController") as? EventDetailedTableViewController else {
+            assertionFailure("Could no instantiate controller with identifier EventDetailedTableViewController")
+            return
+        }
         let event = eventsDisplayTableViewControllerDataSource.events[indexPath.row]
         detailedController.meetupEventModel = event
         show(detailedController, sender: self)

@@ -16,9 +16,6 @@ final class EventDetailedTableViewController: UITableViewController {
     
     private let meetupDataHandler = MeetupDataHandler(networkHelper: NetworkHelper(), preferences: Preferences(userDefaults: UserDefaults.standard))
     
-    /// The URL Name of the meetup group
-    var urlName: String?
-    
     /// Model representing an event object.
     var meetupEventModel: MeetupEventModel? {
         didSet {
@@ -30,15 +27,28 @@ final class EventDetailedTableViewController: UITableViewController {
             retrieveRSVPData(eventId: meetupEventModel.eventId, eventURLName: urlName)
         }
     }
+    private weak var emptyStateView: EmptyStateView?
+    
+    @IBOutlet private weak var activityIndicatorView: UIActivityIndicatorView!
     
     private lazy var rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "UnfilledHeart"), style: .done, target: self, action: #selector(favoriteButtonPressed))
     
     private var persistenceHelper = PersistenceHelper.shared
     
+    private var loadingState: LoadingState? {
+        didSet {
+            guard let loadingState = self.loadingState else {
+                return
+            }
+            updateViewBasedOnLoadingState(loadingState: loadingState)
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadingState = .isLoading
         configureTableViewProperties()
-        tableView.separatorColor = .red
+        loadEmptyStateView()
+        setupEmptyStateView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,9 +56,48 @@ final class EventDetailedTableViewController: UITableViewController {
         configureRightBarButtonItem()
     }
     
+    private func updateViewBasedOnLoadingState(loadingState: LoadingState) {
+        guard activityIndicatorView != nil else {
+            return
+        }
+        switch loadingState {
+        case .isLoading:
+            showActivityIndicator()
+            emptyStateView?.isHidden = true
+        case .isFinishedLoading:
+            hideActivityIndicator()
+        }
+    }
+    
+    private func showActivityIndicator() {
+        activityIndicatorView.startAnimating()
+        activityIndicatorView.isHidden = false
+    }
+    
+    private func hideActivityIndicator() {
+        activityIndicatorView.stopAnimating()
+        activityIndicatorView.isHidden = true
+    }
+    private func loadEmptyStateView() {
+        guard let emptyStateView = Bundle.main.loadNibNamed("EmptyStateView", owner: self, options: nil)?.first as? EmptyStateView else {
+            return
+        }
+        self.emptyStateView = emptyStateView
+        emptyStateView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(emptyStateView)
+        constrainEmptyStateView(emptyStateView: emptyStateView)
+        emptyStateView.isHidden = true
+    }
+    private func setupEmptyStateView() {
+        guard let emptyStateView = emptyStateView else {
+            return
+        }
+        emptyStateView.viewModel = EmptyStateView.ViewModel(emptyStateImage: .notAGroupMember, emptyStatePrompt: "You are not a member of this group")
+        emptyStateView.isHidden = false
+    }
+    
     private func configureTableViewProperties() {
         tableView.register(UINib(nibName: "MeetupMemberDisplayTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "MemberCell")
-        tableView.register(UINib(nibName: "EmptyStateTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "EmptyStateCell")
         tableView.dataSource = eventDetailedControllerDataSource
         tableView.rowHeight = 80
         tableView.sectionHeaderHeight = UITableView.automaticDimension
@@ -73,6 +122,7 @@ final class EventDetailedTableViewController: UITableViewController {
             guard let self = self else {
                 return
             }
+            self.loadingState = .isFinishedLoading
             switch result {
             case .failure(let error):
                 print(error)
@@ -106,18 +156,30 @@ final class EventDetailedTableViewController: UITableViewController {
     // MARK: - UITableViewDelegate
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let headerView = Bundle.main.loadNibNamed("EventHeaderView", owner: self, options: nil)?.first as? EventHeaderView,
-            let meetupEventModel = meetupEventModel else {
-                return UIView()
+        
+        guard let meetupEventModel = meetupEventModel else {
+            return  nil
         }
         if let lattitude = meetupEventModel.venue?.lattitude,
             let longitude = meetupEventModel.venue?.longitude {
-            
-            let description = meetupEventModel.description?.asHTMLAttributedString().string
-            headerView.viewModel = EventHeaderView.ViewModel(eventCoordinates: CLLocationCoordinate2D(latitude: lattitude, longitude: longitude), eventName: meetupEventModel.eventName, eventLocation: meetupEventModel.venue?.city, eventDescription: description)
+
+            guard let headerView = Bundle.main.loadNibNamed("EventHeaderView", owner: self, options: nil)?.first as? EventHeaderView else {
+                return UIView()
+            }
+            headerView.viewModel = EventHeaderView.ViewModel(eventCoordinates: CLLocationCoordinate2D(latitude: lattitude, longitude: longitude), eventName: meetupEventModel.eventName, eventLocation: meetupEventModel.venue?.city)
+            return headerView
         } else {
-            headerView.viewModel = EventHeaderView.ViewModel(eventCoordinates: nil, eventName: meetupEventModel.eventName, eventLocation: meetupEventModel.venue?.city, eventDescription: nil)
+            emptyStateView?.isHidden = false
+            return UIView()
+
         }
-        return headerView
+    }
+}
+extension EventDetailedTableViewController {
+    func constrainEmptyStateView(emptyStateView: EmptyStateView) {
+        NSLayoutConstraint.activate([
+            emptyStateView.centerYAnchor.constraint(equalTo: tableView.centerYAnchor),
+            emptyStateView.centerXAnchor.constraint(equalTo: tableView.centerXAnchor)
+            ])
     }
 }
