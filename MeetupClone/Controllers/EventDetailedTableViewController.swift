@@ -115,7 +115,6 @@ final class EventDetailedTableViewController: UITableViewController {
             
             let description = meetupEventModel.description?.asHTMLAttributedString().string
             headerView.viewModel = EventHeaderView.ViewModel(eventCoordinates: CLLocationCoordinate2D(latitude: lattitude, longitude: longitude), eventName: meetupEventModel.eventName, eventLocation: meetupEventModel.venue?.city, eventDescription: description)
-            
         } else {
             headerView.viewModel = EventHeaderView.ViewModel(eventCoordinates: nil, eventName: meetupEventModel.eventName, eventLocation: meetupEventModel.venue?.city, eventDescription: nil)
         }
