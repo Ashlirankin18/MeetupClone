@@ -34,6 +34,7 @@ final class FavoritesTableViewController: UITableViewController {
             return
         }
         self.emptyStateView = emptyStateView
+        emptyStateView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(emptyStateView)
         constrainEmptyStateView(emptyStateView: emptyStateView)
     }
@@ -63,10 +64,8 @@ final class FavoritesTableViewController: UITableViewController {
 extension FavoritesTableViewController {
     private func constrainEmptyStateView(emptyStateView: EmptyStateView) {
         NSLayoutConstraint.activate([
-            emptyStateView.topAnchor.constraint(equalTo: view.topAnchor),
-            emptyStateView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            emptyStateView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            emptyStateView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            emptyStateView.centerXAnchor.constraint(equalTo: tableView.centerXAnchor),
+            emptyStateView.centerYAnchor.constraint(equalTo: tableView.centerYAnchor)
             ])
     }
 }

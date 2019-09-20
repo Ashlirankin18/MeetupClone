@@ -15,18 +15,15 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="hpl-t8-2rf">
-                    <rect key="frame" x="30" y="363" width="354" height="170.5"/>
+                <stackView opaque="NO" contentMode="scaleAspectFit" preservesSuperviewLayoutMargins="YES" axis="vertical" distribution="equalCentering" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="hpl-t8-2rf">
+                    <rect key="frame" x="0.0" y="368" width="414" height="170.5"/>
                     <subviews>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sY6-M0-OuZ">
-                            <rect key="frame" x="0.0" y="0.0" width="354" height="150"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="150" placeholder="YES" id="fUe-WK-TZj"/>
-                            </constraints>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="sY6-M0-OuZ">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="150"/>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3cY-yD-wDj">
-                            <rect key="frame" x="0.0" y="150" width="354" height="20.5"/>
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3cY-yD-wDj">
+                            <rect key="frame" x="185.5" y="150" width="43.5" height="20.5"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -35,11 +32,11 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="hpl-t8-2rf" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="SoT-mB-OAL"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="hpl-t8-2rf" secondAttribute="trailing" constant="30" id="hEQ-5v-YcE"/>
-                <constraint firstItem="hpl-t8-2rf" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="30" id="iwt-fx-N3t"/>
+                <constraint firstItem="hpl-t8-2rf" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="BrZ-G1-6Aj"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="hpl-t8-2rf" secondAttribute="trailing" id="hEQ-5v-YcE"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="leading" secondItem="hpl-t8-2rf" secondAttribute="leading" id="iwt-fx-N3t"/>
+                <constraint firstItem="hpl-t8-2rf" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="vLY-zL-j2a"/>
             </constraints>
-            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="emptyStateImageView" destination="sY6-M0-OuZ" id="1nY-UI-aBU"/>

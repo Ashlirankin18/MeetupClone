@@ -35,6 +35,8 @@ final class EventHeaderView: UIView {
             eventLocationLabel.text = viewModel?.eventLocation
             eventDescriptionTextView.text = viewModel?.eventDescription
             handleMapAnnotations()
+            eventLocationMapView.isAccessibilityElement = true
+            eventLocationMapView.accessibilityLabel = NSLocalizedString("Event Location Map View", comment: "Indicates to the user that this is a map view.")
         }
     }
     
@@ -73,6 +75,7 @@ final class EventHeaderView: UIView {
         let locationAnnotation = MKPointAnnotation()
         locationAnnotation.coordinate = CLLocationCoordinate2D(latitude: lattitude, longitude: longitude)
         locationAnnotation.title = viewModel.eventName
+        locationAnnotation.isAccessibilityElement = true
         eventLocationMapView.addAnnotation(locationAnnotation)
         eventLocationMapView.showAnnotations([locationAnnotation], animated: true)
     }

@@ -13,12 +13,12 @@ class MeetupDataHandler {
     
     private var networkHelper: NetworkHelper
     
-    private var meetupAuthenticatiorHandler = MeetupAuthenticationHandler(userDefaults: UserDefaults.standard, networkHelper: NetworkHelper())
-    private let accessToken = UserDefaults.standard.object(forKey: UserDefaultConstants.accessToken.rawValue) as? String
+    private let accessToken: String?
     
     /// Initializes the class with networkHelper.
-    init(networkHelper: NetworkHelper) {
+    init(networkHelper: NetworkHelper, preferences: Preferences) {
         self.networkHelper = networkHelper
+        self.accessToken = preferences.accessToken
     }
     
     /// Represent the types that are expected to escape when the asynchrnous func completes.

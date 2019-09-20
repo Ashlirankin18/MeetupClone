@@ -14,7 +14,7 @@ final class EventDetailedTableViewController: UITableViewController {
     
     private let eventDetailedControllerDataSource = EventDetailedControllerDataSource()
     
-    private let meetupDataHandler = MeetupDataHandler(networkHelper: NetworkHelper())
+    private let meetupDataHandler = MeetupDataHandler(networkHelper: NetworkHelper(), preferences: Preferences(userDefaults: UserDefaults.standard))
     
     /// The URL Name of the meetup group
     var urlName: String?
@@ -31,7 +31,7 @@ final class EventDetailedTableViewController: UITableViewController {
         }
     }
     
-    private lazy var rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "icons8-heart-26"), style: .done, target: self, action: #selector(favoriteButtonPressed))
+    private lazy var rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "UnfilledHeart"), style: .done, target: self, action: #selector(favoriteButtonPressed))
     
     private var persistenceHelper = PersistenceHelper.shared
     
@@ -60,7 +60,7 @@ final class EventDetailedTableViewController: UITableViewController {
         }
         navigationItem.rightBarButtonItem = rightBarButtonItem
         if persistenceHelper.isEventFavorited(eventId: meetupEventModel.eventId) {
-            rightBarButtonItem.image = UIImage(named: "icons8-heart-25")
+            rightBarButtonItem.image = UIImage(named: "FilledHeart")
         }
     }
     
@@ -95,10 +95,10 @@ final class EventDetailedTableViewController: UITableViewController {
             return
         }
         if !persistenceHelper.isEventFavorited(eventId: eventId) {
-            rightBarButtonItem.image = UIImage(named: "icons8-heart-25")
+            rightBarButtonItem.image = UIImage(named: "FilledHeart")
             persistenceHelper.addFavoriteEventToDocumentsDirectory(favoriteEvent: meetupEventModel)
         } else {
-            rightBarButtonItem.image = UIImage(named: "icons8-heart-26")
+            rightBarButtonItem.image = UIImage(named: "UnfilledHeart")
             persistenceHelper.deleteItemFromDocumentsDirectory(favoriteEvent: meetupEventModel)
         }
     }

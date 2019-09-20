@@ -26,6 +26,9 @@ final class EmptyStateView: UIView {
         didSet {
             emptyStateImageView.image = viewModel?.emptyStateImage
             emptyStatePromptLabel.text = viewModel?.emptyStatePrompt
+            emptyStatePromptLabel.adjustsFontForContentSizeCategory = true
+            emptyStatePromptLabel.isAccessibilityElement = true
+            emptyStateImageView.isAccessibilityElement = true
         }
     }
     
