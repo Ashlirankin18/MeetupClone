@@ -23,17 +23,17 @@ final class EventHeaderView: UIView {
         
         /// The string representation of the event location
         let eventLocation: String?
+        
+        /// The description of the event 
+        let eventDescription: String?
     }
     
     /// The header's View Model
     var viewModel: ViewModel? {
         didSet {
-            guard let viewModel = viewModel else {
-                assertionFailure("could not initilize viewModel")
-                return
-            }
-            eventNameLabel.text = viewModel.eventName
-            eventLocationLabel.text = viewModel.eventLocation
+            eventNameLabel.text = viewModel?.eventName
+            eventLocationLabel.text = viewModel?.eventLocation
+            eventDescriptionTextView.text = viewModel?.eventDescription
             handleMapAnnotations()
             eventLocationMapView.isAccessibilityElement = true
             eventLocationMapView.accessibilityLabel = NSLocalizedString("Event Location Map View", comment: "Indicates to the user that this is a map view.")
@@ -46,17 +46,21 @@ final class EventHeaderView: UIView {
     
     @IBOutlet private weak var eventLocationLabel: UILabel!
     
+    @IBOutlet private weak var eventDescriptionTextView: UITextView!
+    
     private func handleMapAnnotations() {
         guard let viewModel = viewModel else {
             assertionFailure("could not initilize viewModel")
             return
         }
-        
+        eventLocationMapView.isHidden = false
+        eventDescriptionTextView.isHidden = false
         if let lattitude = viewModel.eventCoordinates?.latitude,
             let longitude = viewModel.eventCoordinates?.longitude {
             checksForExistingAnnotations(viewModel: viewModel, lattitude: lattitude, longitude: longitude)
         } else {
             eventLocationMapView.isHidden = true
+            eventDescriptionTextView.isHidden = true
         }
     }
     
