@@ -23,24 +23,6 @@
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <color key="separatorColor" name="Red"/>
                                 <inset key="separatorInset" minX="2" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="UserInfoCell" rowHeight="59" id="Lcs-UW-fEc">
-                                        <rect key="frame" x="0.0" y="55.5" width="414" height="59"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Lcs-UW-fEc" id="AO9-Mg-tg0">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="58.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="UserBioCell" rowHeight="107" id="j0n-Ly-3jT" customClass="UserBioTableViewCell" customModule="MeetupClone" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="114.5" width="414" height="107"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="j0n-Ly-3jT" id="tOb-g6-8IM">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="106.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.99800962209999999" green="0.0051934742370000004" blue="0.1327431798" alpha="0.92407570419999996" colorSpace="custom" customColorSpace="sRGB"/>
@@ -52,7 +34,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="9Th-iG-wCZ"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Profile" image="icons8-customer-25" id="3DO-eS-mT0"/>
+                    <tabBarItem key="tabBarItem" title="Profile" image="Profile" id="3DO-eS-mT0"/>
                     <connections>
                         <outlet property="profileControllerTableView" destination="f7V-iN-FN5" id="YTX-1H-5cd"/>
                     </connections>
@@ -63,7 +45,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="icons8-customer-25" width="25" height="25"/>
+        <image name="Profile" width="25" height="25"/>
         <namedColor name="Red">
             <color red="0.99800002574920654" green="0.004999999888241291" blue="0.13300000131130219" alpha="0.92400002479553223" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

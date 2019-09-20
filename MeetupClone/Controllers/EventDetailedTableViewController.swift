@@ -31,7 +31,7 @@ final class EventDetailedTableViewController: UITableViewController {
     
     @IBOutlet private weak var activityIndicatorView: UIActivityIndicatorView!
     
-    private lazy var rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "icons8-heart-26"), style: .done, target: self, action: #selector(favoriteButtonPressed))
+    private lazy var rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "UnfilledHeart"), style: .done, target: self, action: #selector(favoriteButtonPressed))
     
     private var persistenceHelper = PersistenceHelper.shared
     
@@ -109,8 +109,8 @@ final class EventDetailedTableViewController: UITableViewController {
         }
         navigationItem.rightBarButtonItem = rightBarButtonItem
         if persistenceHelper.isEventFavorited(eventId: meetupEventModel.eventId) {
-            rightBarButtonItem.image = UIImage(named: "icons8-heart-25")
-        } 
+            rightBarButtonItem.image = UIImage(named: "FilledHeart")
+        }
     }
     
     private func retrieveRSVPData(eventId: String?, eventURLName: String) {
@@ -145,10 +145,10 @@ final class EventDetailedTableViewController: UITableViewController {
             return
         }
         if !persistenceHelper.isEventFavorited(eventId: eventId) {
-            rightBarButtonItem.image = UIImage(named: "icons8-heart-25")
+            rightBarButtonItem.image = UIImage(named: "FilledHeart")
             persistenceHelper.addFavoriteEventToDocumentsDirectory(favoriteEvent: meetupEventModel)
         } else {
-            rightBarButtonItem.image = UIImage(named: "icons8-heart-26")
+            rightBarButtonItem.image = UIImage(named: "UnfilledHeart")
             persistenceHelper.deleteItemFromDocumentsDirectory(favoriteEvent: meetupEventModel)
         }
     }

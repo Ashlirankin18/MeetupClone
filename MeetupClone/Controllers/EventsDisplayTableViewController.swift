@@ -84,6 +84,7 @@ final class EventsDisplayTableViewController: UITableViewController {
         self.emptyStateView = emptyStateView
         view.addSubview(emptyStateView)
         constrainEmptyStateView(emptyStateView: emptyStateView)
+        emptyStateView.isAccessibilityElement = true
     }
 
     private func configureTableViewProperties() {

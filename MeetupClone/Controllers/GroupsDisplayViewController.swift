@@ -14,9 +14,13 @@ final class GroupsDisplayViewController: UIViewController {
     private lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
-        searchController.searchBar.barTintColor = .white
         searchController.searchBar.tintColor = .white
         searchController.searchBar.searchBarStyle = .prominent
+        searchController.searchBar.backgroundColor = .red
+        searchController.isAccessibilityElement = true
+        searchController.searchBar.isAccessibilityElement = true
+        searchController.searchBar.accessibilityLabel = NSLocalizedString(  "Search Bar", comment: "Indicates to the user that this object is a search bar")
+        searchController.accessibilityLabel = NSLocalizedString( "Search Controller", comment: "Indicates to the user that this object is a search controller")
         searchController.obscuresBackgroundDuringPresentation = false
         return searchController
     }()
@@ -161,6 +165,7 @@ final class GroupsDisplayViewController: UIViewController {
         let alertController = UIAlertController(title: NSLocalizedString("Add Zip Code", comment: "The zip code the user desires"), message: message, preferredStyle: .alert)
         alertController.addTextField { (textfield) in
             textfield.keyboardType = .numberPad
+            textfield.placeholder = NSLocalizedString("Enter zip code", comment: "Prompts the user to enter their zip code.")
         }
         
         let okAction = UIAlertAction(title: NSLocalizedString("Ok", comment: "Submits Answer"), style: .default) { [weak self] _ in
@@ -180,8 +185,10 @@ final class GroupsDisplayViewController: UIViewController {
             }
         }
         let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel action"), style: .cancel, handler: nil)
+        
         alertController.addAction(okAction)
         alertController.addAction(cancelAction)
+        alertController.isAccessibilityElement = true
         present(alertController, animated: true, completion: nil)
     }
     
