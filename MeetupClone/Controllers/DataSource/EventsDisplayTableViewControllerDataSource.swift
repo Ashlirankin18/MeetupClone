@@ -21,17 +21,12 @@ final class EventsDisplayTableViewControllerDataSource: NSObject, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "EventDisplayCell", for: indexPath) as? EventDisplayTableViewCell else {
                 return UITableViewCell()
             }
             let event = events[indexPath.row]
-            do {
-                let description = try event.description?.asHTMLAttributedString()
+                let description = event.description?.asHTMLAttributedString()
                 cell.viewModel = EventDisplayTableViewCell.ViewModel(eventName: event.eventName, eventDescription: description?.string ?? NSLocalizedString("This event does not have a description at this time", comment: "Lets the user know there is no current description for the event."), eventLocation: event.venue?.venueName ?? NSLocalizedString("This event does not have a location at this time", comment: "Lets the user know there is no current location for the event."), rsvpCount: event.yesRSVPCount)
-            } catch {
-                assertionFailure("Could not create NSAttributedString")
-            }
             
             return cell
         }

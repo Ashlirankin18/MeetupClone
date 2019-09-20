@@ -162,6 +162,7 @@ final class EventDetailedTableViewController: UITableViewController {
         }
         if let lattitude = meetupEventModel.venue?.lattitude,
             let longitude = meetupEventModel.venue?.longitude {
+
             guard let headerView = Bundle.main.loadNibNamed("EventHeaderView", owner: self, options: nil)?.first as? EventHeaderView else {
                 return UIView()
             }
@@ -170,6 +171,7 @@ final class EventDetailedTableViewController: UITableViewController {
         } else {
             emptyStateView?.isHidden = false
             return UIView()
+
         }
     }
 }

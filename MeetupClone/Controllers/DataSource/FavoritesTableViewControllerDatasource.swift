@@ -25,10 +25,8 @@ final class FavoritesTableViewControllerDataSource: NSObject, UITableViewDataSou
             }
             let event = favorites[indexPath.row]
             do {
-                let description = try event.description?.asHTMLAttributedString().string
-                cell.viewModel = EventDisplayTableViewCell.ViewModel(eventName: event.eventName, eventDescription: description ?? NSLocalizedString("This event does not have a description", comment: "Informs the user the event has no description currently."), eventLocation: event.venue?.city, rsvpCount: event.yesRSVPCount)
-            } catch {
-                assertionFailure("Could not create NSAttributedString")
+                let description = event.description?.asHTMLAttributedString()
+                cell.viewModel = EventDisplayTableViewCell.ViewModel(eventName: event.eventName, eventDescription: description?.string ?? NSLocalizedString("This event does not have a description", comment: "Informs the user the event has no description currently."), eventLocation: event.venue?.city, rsvpCount: event.yesRSVPCount)
             }
             return cell
         }
