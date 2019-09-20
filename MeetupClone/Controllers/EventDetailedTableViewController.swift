@@ -77,7 +77,7 @@ final class EventDetailedTableViewController: UITableViewController {
             case .failure(let error):
                 print(error)
             case .success(let rsvps):
-            self.eventDetailedControllerDataSource.rsvps = rsvps
+                self.eventDetailedControllerDataSource.rsvps = rsvps
                 self.tableView.reloadData()
             }
         }
@@ -112,10 +112,10 @@ final class EventDetailedTableViewController: UITableViewController {
         }
         if let lattitude = meetupEventModel.venue?.lattitude,
             let longitude = meetupEventModel.venue?.longitude {
-            do {
-                let description = meetupEventModel.description?.asHTMLAttributedString().string
-                headerView.viewModel = EventHeaderView.ViewModel(eventCoordinates: CLLocationCoordinate2D(latitude: lattitude, longitude: longitude), eventName: meetupEventModel.eventName, eventLocation: meetupEventModel.venue?.city, eventDescription: description)
-            } 
+            
+            let description = meetupEventModel.description?.asHTMLAttributedString().string
+            headerView.viewModel = EventHeaderView.ViewModel(eventCoordinates: CLLocationCoordinate2D(latitude: lattitude, longitude: longitude), eventName: meetupEventModel.eventName, eventLocation: meetupEventModel.venue?.city, eventDescription: description)
+            
         } else {
             headerView.viewModel = EventHeaderView.ViewModel(eventCoordinates: nil, eventName: meetupEventModel.eventName, eventLocation: meetupEventModel.venue?.city, eventDescription: nil)
         }
